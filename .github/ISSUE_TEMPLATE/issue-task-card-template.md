@@ -2,7 +2,7 @@
 name: Issue Task Card Template
 about: Issue Task Card
 title: "[Issue Task Card] 제목을 입력하세요."
-labels: issue card, template
+labels: issue card
 assignees: ''
 
 ---

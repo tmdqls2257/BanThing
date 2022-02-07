@@ -2,7 +2,7 @@
 name: Error Handling Log Template
 about: Error Handling Log
 title: "[Error Handling] 제목을 입력하세요."
-labels: error, template
+labels: error
 assignees: ''
 
 ---

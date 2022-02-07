@@ -2,7 +2,7 @@
 name: KPT Retrospect Template
 about: KPT Retrospect
 title: "[KPT] 제목을 입력하세요."
-labels: kpt, retrospect, template
+labels: kpt, retrospect
 assignees: ''
 
 ---
