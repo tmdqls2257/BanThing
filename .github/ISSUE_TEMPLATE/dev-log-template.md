@@ -1,7 +1,7 @@
 ---
 name: Dev-Log Template
 about: Dev-Log
-title: "[Sample] Dev-Log Template"
+title: "[Dev-Log] 제목을 입력하세요."
 labels: devlog, template
 assignees: ''
 
