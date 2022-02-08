@@ -1,7 +1,7 @@
 ---
 name: Dev-Log Template
 about: Dev-Log
-title: "[Dev-Log] 제목을 입력하세요."
+title: "[Dev-Log] 2022-MM-DD 이름"
 labels: devlog
 assignees: ''
 
