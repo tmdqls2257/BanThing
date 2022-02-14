@@ -52,7 +52,7 @@
 
 # Team Introduction
 
-|ROLE|NAME|POSITION|GITHUB|
+|ROLE|NAME|POSITION|GITHUB ID|
 |:---:|:---:|:---:|:---:|
 |팀장|윤녹두|Front-End ▶︎ Back-End|[![github](https://img.shields.io/badge/shren207-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/shren207)|
 |팀원|정윤석|Front-End|[![github](https://img.shields.io/badge/forcoding97-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/forcoding97)|
