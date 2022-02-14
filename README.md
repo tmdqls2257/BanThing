@@ -15,6 +15,9 @@
 
 # BanThing Wiki
 
+### BanThing 의 자세한 Work Log 를 확인해보고 싶으시다면 아래 링크를 클릭해주세요 :)
+▶︎ [BanThing](https://github.com/codestates/BanThing/wiki)
+
 <br/> &nbsp;
 
 # Used Stack
