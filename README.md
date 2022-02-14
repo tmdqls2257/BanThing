@@ -2,7 +2,7 @@
 
 # Contents
 1. [About 'BanThing'](#About-'BanThing')
-2. Used Stack
+2. [Used Stack](#Used-Stack)
 3. Team Introduction
 
 # About 'BanThing'
