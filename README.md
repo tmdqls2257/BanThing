@@ -7,6 +7,7 @@
 4. [Team Introduction](#Team-Introduction)
 
 # About BanThing
+<img src="https://cdn.discordapp.com/attachments/890401766724751370/942605419359117363/LoGo_1.png" width=30% height="auto" />
 
 # BanThing Wiki
 
