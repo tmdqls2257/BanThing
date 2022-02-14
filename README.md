@@ -57,6 +57,6 @@
 |팀장|윤녹두|Front-End ▶︎ Back-End|[![github](https://img.shields.io/badge/shren207-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/shren207)|
 |팀원|정윤석|Front-End|[![github](https://img.shields.io/badge/forcoding97-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/forcoding97)|
 |팀원|홍승빈|Front-End|[![github](https://img.shields.io/badge/tmdqls2257-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/tmdqls2257)|
-|팀원|이민호|Back-End|[![github](https://img.shields.io/badge/minho6474-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/minho6474)|
+|팀원|이민호|Back-End|[![github](https://img.shields.io/badge/minho0513-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/minho0513)|
 
 
