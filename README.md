@@ -38,7 +38,7 @@ BanThing 의 자세한 Work Log 를 확인해보고 싶으시다면 아래 링�
 
 # Used Stack
 
-<img src="https://cdn.discordapp.com/attachments/890401766724751370/941695091989438474/2022-02-11_10.59.46.png" width=90% height="auto" />
+<img src="https://cdn.discordapp.com/attachments/890401766724751370/942667399122018364/2022-02-14_3.23.21.png" width=90% height="auto" />
 
 ### Front-End
 <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Next.js" src ="https://img.shields.io/badge/Next.js-000000.svg?&style=for-the-badge&logo=Next.js&logoColor=white"/>
