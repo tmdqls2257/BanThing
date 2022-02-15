@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const Main: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -13,12 +13,12 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="http://localhost:3000/">index.js!</a>
+          Welcome to <a href="http://localhost:3000/main">main.js!</a>
         </h1>
 
         <p className={styles.description}>
           Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
+          <code className={styles.code}>pages/main.tsx</code>
         </p>
       </main>
 
@@ -38,4 +38,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Main;

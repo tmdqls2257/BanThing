@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  background-color: gray;
+}
+
+.logo {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  padding: 0 0 0 1rem;
+  justify-content: flex-start;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  list-style-type: none;
+  justify-content: flex-end;
+}
+
+.nav_menu {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0 1rem 0 0;
+  text-decoration: none;
+}
