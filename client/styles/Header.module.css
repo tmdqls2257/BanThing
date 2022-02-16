@@ -1,17 +1,21 @@
 .header {
-  width: 100%;
-  position: fixed;
   display: flex;
-  font-weight: 450;
+  position: fixed;
+  width: 100%;
+  height: 4rem;
+  font-size: 18px;
   text-align: center;
-  padding: 0 1.5rem 0 1.5rem;
-  background-color: #f1f1f1;
+  padding: 0 1.8rem 0 0.2rem;
+  background-color: #f8f8f8;
+  opacity: 0.9;
 }
 
 .logo {
   display: flex;
+  height: 5.4rem;
+  width: 100%;
   justify-content: flex-start;
-  padding: 1rem 0 1rem 0;
+  padding: 0.1rem 0 1.4rem 0;
 }
 
 .nav {
@@ -23,6 +27,7 @@
 
 .nav_menu {
   display: flex;
-  padding-left: 1.5rem;
+  padding-top: 0.1rem;
+  padding-left: 2.5rem;
   text-decoration: none;
 }

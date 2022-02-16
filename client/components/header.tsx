@@ -6,7 +6,9 @@ export default function NavBar() {
     <>
       <div className={styles.header}>
         <Link href="/main">
-          <a className={styles.logo}>LOGO</a>
+          <a className={styles.logo}>
+            <img src="Logo.png" alt="Vercel Logo" />
+          </a>
         </Link>
 
         <ul className={styles.nav}>
