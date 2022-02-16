@@ -29,7 +29,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #ff8a3c;
   text-decoration: none;
 }
 
@@ -114,3 +114,25 @@
     flex-direction: column;
   }
 }
+
+/* ▼▼▼▼▼ 테스트용 CSS 반드시 삭제하기 ▼▼▼▼▼ */
+
+.test_title {
+  height: 500px;
+}
+
+.progress_container {
+  margin-top: 3.1rem;
+  position: fixed;
+  width: 100%;
+  height: 4px;
+}
+
+.progress_bar {
+  position: fixed;
+  height: 4px;
+  background: #ff8a3c;
+  width: 0%;
+}
+
+/* ▲▲▲▲▲ 테스트용 CSS 반드시 삭제하기 ▲▲▲▲▲*/

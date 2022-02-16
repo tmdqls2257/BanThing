@@ -20,6 +20,9 @@ export default function NavBar() {
               <a className={styles.nav_menu}>MAIN</a>
             </Link>
           </li>
+          <li>
+            <a className={styles.nav_menu}>LOGIN</a>
+          </li>
         </ul>
 
         {/* <nav className={styles.nav}>
