@@ -29,7 +29,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #ff8a3c;
   text-decoration: none;
 }
 
@@ -114,3 +114,11 @@
     flex-direction: column;
   }
 }
+
+/* ▼▼▼▼▼ 테스트용 CSS 반드시 삭제하기 ▼▼▼▼▼ */
+
+.test_title {
+  height: 500px;
+}
+
+/* ▲▲▲▲▲ 테스트용 CSS 반드시 삭제하기 ▲▲▲▲▲*/
