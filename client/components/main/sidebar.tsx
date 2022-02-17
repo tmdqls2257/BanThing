@@ -11,17 +11,74 @@ const CreateRoom = styled.div`
     color: #8e8e8e;
   }
 `
-const JoinRoom = styled.div`
+const MakeRoom = styled.div`
   display: flex;
   flex-direction: column;
   width: 30vw;
   header {
+    position: relative;
     display: flex;
     justify-content: center;
     text-align: center;
+
+    height: 32px;
+    div {
+      display: flex;
+      text-align: center;
+    }
+    h1 {
+      font-size: 16px;
+      margin: auto;
+    }
+    i {
+      position: absolute;
+      top: 30%;
+      left: 16px;
+    }
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    width: 332px;
+    justify-content: space-between;
+    margin: auto;
+  }
+  .flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    input,
+    select {
+      display: flex;
+      width: 200px;
+      font-size: 16px;
+    }
+  }
+  .radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-direction: flex-start;
+    input {
+      margin-right: 16px;
+    }
+  }
+  .content {
+    border: none;
+    border-radius: 25px;
+    background-color: #f4f4f4;
+    width: 332px;
+    height: 380px;
   }
 `
 
+const JoinRoom = styled.div``
+
+const ButtonContainer = styled.div`
+  display: flex;
+  margin: auto;
+`
 const Sidebar = () => {
   return (
     <>
@@ -33,7 +90,7 @@ const Sidebar = () => {
         <p>원하는 마크를 선택하거나 방을 만들어주세요.</p>
         <Button disabled>방 만들기</Button>
       </CreateRoom>
-      <JoinRoom>
+      <MakeRoom>
         <header>
           <div>
             <i className="fa-solid fa-angle-left"></i>
@@ -41,31 +98,40 @@ const Sidebar = () => {
           <div>
             <h1>방 만들기</h1>
           </div>
-          <div>1</div>
         </header>
         <main>
-          <section>
+          <section className="flex">
             <p>제목</p>
             <input type="text" />
           </section>
-          <section>
+          <section className="flex">
             <p>카테고리</p>
-            <input type="text" />
+            <select id="choise-foods">
+              <option value=""></option>
+              <option value="치킨">치킨</option>
+              <option value="햄버거">햄버거</option>
+              <option value="피자">피자</option>
+            </select>
           </section>
-          <section>
-            <p>역할</p>
+          <p>역할</p>
+          <section className="radio">
             <input type="radio" />
             <p>받는 사람</p>
+          </section>
+          <section className="radio">
             <input type="radio" />
             <p>가지러 가는 사람</p>
           </section>
           <section>
             <p>내용</p>
-            <input type="text" />
+            <input className="content" type="text" />
           </section>
-          <Button disabled>생성하기</Button>
         </main>
-      </JoinRoom>
+        <ButtonContainer>
+          <Button disabled>생성하기</Button>
+        </ButtonContainer>
+      </MakeRoom>
+      <JoinRoom></JoinRoom>
     </>
   )
 }

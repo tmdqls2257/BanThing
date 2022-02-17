@@ -16,7 +16,7 @@ const Container = styled.div`
   height: 100vh;
 `
 
-const main: NextPage = () => {
+const Main: NextPage = () => {
   return (
     <>
       <Script
@@ -30,4 +30,4 @@ const main: NextPage = () => {
     </>
   )
 }
-export default main
+export default Main

@@ -18,6 +18,7 @@ const StyledButton = styled.button`
   padding: 12px 16px;
   border-radius: 50px;
   color: #ffffff;
+  width: 181px;
   background-color: #ff8a3d;
 `
 
