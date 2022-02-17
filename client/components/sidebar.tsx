@@ -11,17 +11,18 @@ const CreateRoom = styled.div`
   }
 `
 const JoinRoom = styled.div`
+  display: flex;
   margin: 0 auto;
   width: 30vw;
   justify-content: space-between;
+  position: relative;
   header {
     display: flex;
     justify-content: center;
   }
   i {
-    position: relative;
+    position: absolute;
     left: 8px;
-    z-index: 11;
     margin: auto;
   }
 `
