@@ -9,7 +9,7 @@ import {
   JackInTheBox,
   Roll,
   Rotate,
-} from "react-awesome-reveal";
+} from 'react-awesome-reveal'
 
 export default function test() {
   return (
@@ -45,5 +45,5 @@ export default function test() {
         <h1>Rotate</h1>
       </Rotate>
     </>
-  );
+  )
 }

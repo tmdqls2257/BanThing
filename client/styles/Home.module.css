@@ -81,7 +81,7 @@
 }
 
 .title_button span:after {
-  content: "\00bb";
+  content: '\00bb';
   position: absolute;
   color: white;
   font-size: 2.2rem;

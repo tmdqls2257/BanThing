@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Button from './button'
 
 const CreateRoom = styled.div`
-  display: none;
+  display: flex;
   flex-direction: column;
   margin: auto;
   p {
@@ -11,7 +11,7 @@ const CreateRoom = styled.div`
   }
 `
 const JoinRoom = styled.div`
-  display: flex;
+  display: none;
   margin: 0 auto;
   width: 30vw;
   justify-content: space-between;

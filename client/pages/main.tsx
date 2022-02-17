@@ -9,8 +9,10 @@ declare global {
   }
 }
 const Container = styled.div`
+  padding-top: 4rem;
   display: flex;
   flex-direction: row;
+  height: 100vh;
 `
 const main: NextPage = () => {
   return (

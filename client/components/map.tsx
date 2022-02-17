@@ -6,8 +6,9 @@ interface MapProps {
   longitude: number
 }
 const MapContainer = styled.div`
+  display: flex;
   width: 70vw;
-  height: 100vh;
+  height: auto;
 `
 
 function Map({ latitude, longitude }: MapProps) {
