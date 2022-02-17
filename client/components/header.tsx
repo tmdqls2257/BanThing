@@ -1,5 +1,5 @@
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import Link from 'next/link'
+import styles from '../styles/Home.module.css'
 
 export default function NavBar() {
   return (
@@ -10,7 +10,6 @@ export default function NavBar() {
             <img src="Logo.png" alt="Vercel Logo" />
           </a>
         </Link>
-
         <ul className={styles.nav}>
           <li>
             <Link href="/">
@@ -38,5 +37,5 @@ export default function NavBar() {
         </nav> */}
       </div>
     </>
-  );
+  )
 }

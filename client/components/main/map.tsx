@@ -16,7 +16,7 @@ function Map({ latitude, longitude }: MapProps) {
     const mapScript = document.createElement('script')
 
     mapScript.async = true
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b016fe9afbd6ea131434b96cd099e6d0&autoload=false`
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`
     document.head.appendChild(mapScript)
 
     const onLoadKakaoMap = () => {
