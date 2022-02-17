@@ -1,4 +1,4 @@
-import styles from "../../styles/Progress.module.css";
+import styles from "../../styles/Home.module.css";
 
 export default function Progress() {
   if (typeof window !== "undefined") {
