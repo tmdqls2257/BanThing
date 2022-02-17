@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Button from './button'
+import SidebarHeader from './sidebarHeader'
 
 const CreateRoom = styled.div`
   display: none;
@@ -15,27 +16,7 @@ const MakeRoom = styled.div`
   display: flex;
   flex-direction: column;
   width: 30vw;
-  header {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    text-align: center;
 
-    height: 32px;
-    div {
-      display: flex;
-      text-align: center;
-    }
-    h1 {
-      font-size: 16px;
-      margin: auto;
-    }
-    i {
-      position: absolute;
-      top: 30%;
-      left: 16px;
-    }
-  }
   main {
     display: flex;
     flex-direction: column;
@@ -91,14 +72,7 @@ const Sidebar = () => {
         <Button disabled>방 만들기</Button>
       </CreateRoom>
       <MakeRoom>
-        <header>
-          <div>
-            <i className="fa-solid fa-angle-left"></i>
-          </div>
-          <div>
-            <h1>방 만들기</h1>
-          </div>
-        </header>
+        <SidebarHeader>방 만들기</SidebarHeader>
         <main>
           <section className="flex">
             <p>제목</p>
