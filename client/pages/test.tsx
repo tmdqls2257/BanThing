@@ -9,7 +9,7 @@ import {
   JackInTheBox,
   Roll,
   Rotate,
-} from "react-awesome-reveal";
+} from 'react-awesome-reveal';
 
 export default function test() {
   return (
