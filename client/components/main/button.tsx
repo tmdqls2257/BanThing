@@ -1,12 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface buttonType {
-  disabled?: boolean
-  children: string
+  disabled?: boolean;
+  children: string;
 }
 
 function Button({ disabled, children }: buttonType) {
-  return <StyledButton disabled={disabled}>{children}</StyledButton>
+  return <StyledButton disabled={disabled}>{children}</StyledButton>;
 }
 
 const StyledButton = styled.button`
@@ -19,6 +19,6 @@ const StyledButton = styled.button`
   border-radius: 50px;
   color: #ffffff;
   background-color: #ff8a3d;
-`
+`;
 
-export default Button
+export default Button;

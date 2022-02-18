@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import Button from './button'
+import styled from 'styled-components';
+import Button from './button';
 
 const CreateRoom = styled.div`
   display: none;
@@ -9,7 +9,7 @@ const CreateRoom = styled.div`
     font-size: 16px;
     color: #8e8e8e;
   }
-`
+`;
 const JoinRoom = styled.div`
   display: flex;
   margin: 0 auto;
@@ -25,7 +25,7 @@ const JoinRoom = styled.div`
     left: 8px;
     margin: auto;
   }
-`
+`;
 
 const Sidebar = () => {
   return (
@@ -45,7 +45,7 @@ const Sidebar = () => {
         </header>
       </JoinRoom>
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
