@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import Link from 'next/link'
-import styles from '../styles/Home.module.css'
-=======
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
->>>>>>> 46b3f07e5c3d32d052f19fb4141510dc693707ca
 
 export default function NavBar() {
   return (
