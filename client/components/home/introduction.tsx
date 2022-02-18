@@ -1,6 +1,6 @@
-import Link from "next/link";
-import styles from "../../styles/Home.module.css";
-import { Zoom, Fade } from "react-awesome-reveal";
+import Link from 'next/link';
+import styles from '../../styles/Home.module.css';
+import { Zoom, Fade } from 'react-awesome-reveal';
 
 interface propsType {
   imagePosition: string;
@@ -10,7 +10,7 @@ interface propsType {
 }
 
 export default function Introduction(props: propsType): JSX.Element {
-  if (props.imagePosition === "left") {
+  if (props.imagePosition === 'left') {
     return (
       <>
         <div className={styles.introduction_container_right}>
@@ -41,7 +41,7 @@ export default function Introduction(props: propsType): JSX.Element {
         </div>
       </>
     );
-  } else if (props.imagePosition === "right") {
+  } else if (props.imagePosition === 'right') {
     return (
       <>
         <div className={styles.introduction_container_left}>

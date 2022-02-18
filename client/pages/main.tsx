@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Script from "next/script";
-import { NextPage } from "next";
-import Map from "../components/main/map";
-import Sidebar from "../components/main/sidebar";
+import styled from 'styled-components';
+import Script from 'next/script';
+import { NextPage } from 'next';
+import Map from '../components/main/map';
+import Sidebar from '../components/main/sidebar';
 
 declare global {
   interface Window {

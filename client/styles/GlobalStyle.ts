@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 // 변수명 앞에 두 개의 대시(--)를 붙여서 사용합니다.
 // :root 의사 클래스는 문서 트리의 루트 요소를 선택합니다. <html> 요소와 동일합니다.
 const GlobalStyle = createGlobalStyle`
@@ -34,5 +34,5 @@ const GlobalStyle = createGlobalStyle`
     --font-weight-bold: 800;
     --font-weight-normal: 400;
   }
-`
-export default GlobalStyle
+`;
+export default GlobalStyle;
