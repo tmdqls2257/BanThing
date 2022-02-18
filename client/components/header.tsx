@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import logo from "../public/banthing.svg";
 
 export default function NavBar() {
   return (

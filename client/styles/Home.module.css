@@ -3,7 +3,7 @@
 }
 
 .main {
-  min-height: 95vh;
+  min-height: 55vw;
   display: flex;
   width: 40vw;
   margin: 0 4.6% 0 0;
@@ -12,8 +12,8 @@
   align-items: center;
 }
 
-.home_component_container {
-  width: 90vw;
+.title_container {
+  width: 95vw;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,8 +29,7 @@
 }
 
 .title_title {
-  line-height: 1.5;
-  font-size: 5.5vw;
+  font-size: 6vw;
   font-weight: 700;
 }
 
@@ -43,14 +42,15 @@
 }
 
 .title_description {
+  line-height: 1.4;
   width: 20vw;
+  margin: 1.5vw auto 3vw auto;
   font-size: 2vw;
   font-weight: 800;
   text-align: center;
 }
 
 .title_button {
-  margin-top: 2vw;
   padding-top: 0.3vw;
   width: 13vw;
   height: 5vw;
@@ -110,6 +110,83 @@
     flex-direction: column;
   }
 }
+
+/* --------------------introduction.tsx CSS-------------------- */
+
+.introduction_main_right {
+  min-height: 55vw;
+  display: flex;
+  width: 40vw;
+  margin: 0 8% 0 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.introduction_main_left {
+  min-height: 55vw;
+  display: flex;
+  width: 40vw;
+  margin: 0 0 0 8%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.introduction_container_right {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: auto;
+}
+
+.introduction_container_left {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
+}
+
+.introduction_title_right {
+  display: flex;
+  font-size: 2.7vw;
+  font-weight: 900;
+  justify-content: flex-end;
+}
+
+.introduction_title_left {
+  display: flex;
+  font-size: 2.7vw;
+  font-weight: 900;
+  justify-content: flex-start;
+}
+
+.introduction_image {
+  display: flex;
+  width: 40vw;
+}
+
+.introduction_description_right {
+  line-height: 1.5;
+  width: 39.5vw;
+  margin: 3vw 0 0 0;
+  font-size: 1.5vw;
+  font-weight: 500;
+  text-align: end;
+}
+
+.introduction_description_left {
+  line-height: 1.5;
+  width: 39.5vw;
+  margin: 3vw 0 0 0;
+  font-size: 1.5vw;
+  font-weight: 500;
+  text-align: start;
+}
+
+/* ------------------------------------------------------------ */
 
 /* -----------------------header.tsx CSS----------------------- */
 

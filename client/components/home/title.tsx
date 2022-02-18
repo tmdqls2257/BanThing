@@ -5,7 +5,7 @@ import { Zoom, Fade } from "react-awesome-reveal";
 export default function Title() {
   return (
     <>
-      <div className={styles.home_component_container}>
+      <div className={styles.title_container}>
         <main className={styles.main}>
           <Zoom triggerOnce={true} delay={150}>
             <div className={styles.title_title}>
@@ -15,9 +15,10 @@ export default function Title() {
           </Zoom>
           <Fade triggerOnce={true} delay={1100}>
             <div className={styles.title_description}>
+              <div>함께하는 배달 주문으로</div>
               <span>부담을 </span>
               <span className={styles.orange}>반띵</span>
-              <span>하세요.</span>
+              <span>해보세요.</span>
             </div>
           </Fade>
           <Fade triggerOnce={true} delay={1800}>
