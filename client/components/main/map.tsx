@@ -9,6 +9,10 @@ const MapContainer = styled.div`
   display: flex;
   width: 70vw;
   height: auto;
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    height: auto;
+  }
 `
 
 function Map({ latitude, longitude }: MapProps) {

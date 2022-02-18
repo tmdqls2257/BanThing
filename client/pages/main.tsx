@@ -3,17 +3,20 @@ import Script from 'next/script'
 import { NextPage } from 'next'
 import Map from '../components/main/map'
 import Sidebar from '../components/main/sidebar'
+
 declare global {
   interface Window {
     kakao: any
   }
 }
 const Container = styled.div`
-  padding-top: 4rem;
+  padding-top: var(--padding-large);
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  @media screen and (max-width: 768px) {
+  }
 `
 
 const Main: NextPage = () => {
