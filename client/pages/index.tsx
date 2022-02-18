@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Title from "../components/home/title";
-import Progress from "../components/home/progress";
-import Introduction from "../components/home/introduction";
-import styles from "../styles/Home.module.css";
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Title from '../components/home/title';
+import Progress from '../components/home/progress';
+import Introduction from '../components/home/introduction';
+import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   return (
@@ -20,45 +20,45 @@ const Home: NextPage = () => {
         <Title />
 
         <Introduction
-          imagePosition={"left"}
-          image={"/worry.png"}
-          title={"혼자는 부담스러운 배달음식"}
+          imagePosition={'left'}
+          image={'/worry.png'}
+          title={'혼자는 부담스러운 배달음식'}
           description={[
-            "1인분을 시키자니 최저금액을 맞춰야하고,",
-            "2인분을 시키자니 양이 너무 많고,",
-            "배달음식을 시켜먹기가 망설여지신다구요?",
+            '1인분을 시키자니 최저금액을 맞춰야하고,',
+            '2인분을 시키자니 양이 너무 많고,',
+            '배달음식을 시켜먹기가 망설여지신다구요?',
           ]}
         />
         <Introduction
-          imagePosition={"right"}
-          image={"/foodmate.png"}
-          title={"내 주변의 배달메이트 찾기"}
+          imagePosition={'right'}
+          image={'/foodmate.png'}
+          title={'내 주변의 배달메이트 찾기'}
           description={[
-            "마침 배달음식을 시켜먹고 싶은데",
-            "배달비도 최저금액도 함께 나눌 배달메이트를 찾으신다면",
-            "지금 바로 반띵에서 확인해보세요!",
+            '마침 배달음식을 시켜먹고 싶은데',
+            '배달비도 최저금액도 함께 나눌 배달메이트를 찾으신다면',
+            '지금 바로 반띵에서 확인해보세요!',
           ]}
         />
         <Introduction
-          imagePosition={"left"}
-          image={"/chatting.png"}
-          title={"메이트와의 실시간 메뉴선정"}
+          imagePosition={'left'}
+          image={'/chatting.png'}
+          title={'메이트와의 실시간 메뉴선정'}
           description={[
-            "어떤 햄버거를 먹을지, 어떤 치킨을 먹을지",
-            "배달메이트와 실시간으로 상의하여 메뉴를 결정해보세요.",
-            "마음이 잘 통한다면 주문하기만 하면 됩니다!",
+            '어떤 햄버거를 먹을지, 어떤 치킨을 먹을지',
+            '배달메이트와 실시간으로 상의하여 메뉴를 결정해보세요.',
+            '마음이 잘 통한다면 주문하기만 하면 됩니다!',
           ]}
         />
         <Introduction
-          imagePosition={"right"}
-          image={"/rating.png"}
-          title={"레이팅 시스템"}
+          imagePosition={'right'}
+          image={'/rating.png'}
+          title={'레이팅 시스템'}
           description={[
-            "모든 합의가 끝나면 평가하기를 통해",
-            "배달메이트에게 점수를 주세요!",
-            "         ",
-            "해당 점수는 배달메이트의 평점에 반영되며,",
-            "평점은 다른 이용자들에게 노출됩니다.",
+            '모든 합의가 끝나면 평가하기를 통해',
+            '배달메이트에게 점수를 주세요!',
+            '         ',
+            '해당 점수는 배달메이트의 평점에 반영되며,',
+            '평점은 다른 이용자들에게 노출됩니다.',
           ]}
         />
 
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Powered by{" "}
+            Powered by{' '}
             <span className={styles.logo}>
               <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
             </span>

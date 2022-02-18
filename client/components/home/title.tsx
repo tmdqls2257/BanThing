@@ -1,6 +1,6 @@
-import Link from "next/link";
-import styles from "../../styles/Home.module.css";
-import { Zoom, Fade } from "react-awesome-reveal";
+import Link from 'next/link';
+import styles from '../../styles/Home.module.css';
+import { Zoom, Fade } from 'react-awesome-reveal';
 
 export default function Title() {
   return (
