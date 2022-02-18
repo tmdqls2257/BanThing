@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-banthingclient-dev-131056-authRole",
+      "UnauthRoleArn": "arn:aws:iam::971490215356:role/amplify-banthingclient-dev-131056-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::971490215356:role/amplify-banthingclient-dev-131056-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-banthingclient-dev-131056-deployment",
+      "UnauthRoleName": "amplify-banthingclient-dev-131056-unauthRole",
+      "StackName": "amplify-banthingclient-dev-131056",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:971490215356:stack/amplify-banthingclient-dev-131056/c7985970-9070-11ec-83d7-0ecabed51147",
+      "AmplifyAppId": "d37dd59cixyrp5"
+    }
+  }
+}

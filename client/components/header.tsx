@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import Image from "next/image";
 
 export default function NavBar() {
   return (
@@ -7,7 +8,7 @@ export default function NavBar() {
       <div className={styles.header}>
         <Link href="/main">
           <a className={styles.logo}>
-            <img src="Logo.png" alt="Vercel Logo" />
+            <Image src="Logo.png" alt="Vercel Logo" />
           </a>
         </Link>
 
