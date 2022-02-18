@@ -12,4 +12,7 @@ phases:
 artifacts:
   files:
     - "**/*"
-  base-directory: client/.next
+  base-directory: .next
+cache:
+  paths:
+    - node_modules/**/*
