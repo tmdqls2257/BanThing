@@ -1,7 +1,7 @@
-import styles from "../../styles/Progress.module.css";
+import styles from '../../styles/Home.module.css';
 
 export default function Progress() {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     window.onscroll = function () {
       myFunction();
     };
@@ -14,9 +14,9 @@ export default function Progress() {
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
     var scrolled = (winScroll / height) * 100;
-    const myBar = document.getElementById("myBar") as HTMLParagraphElement;
+    const myBar = document.getElementById('myBar') as HTMLParagraphElement;
     if (myBar !== null) {
-      myBar.style.width = scrolled + "%";
+      myBar.style.width = scrolled + '%';
     }
   }
 
