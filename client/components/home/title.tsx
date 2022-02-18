@@ -23,14 +23,14 @@ export default function Title() {
               <span className={styles.black}>Thing</span>
             </div>
           </Zoom>
-          <Fade triggerOnce={true} delay={1000}>
+          <Fade triggerOnce={true} delay={800}>
             <div className={styles.title_description}>
               <span>부담을 </span>
               <span className={styles.orange}>나눠 </span>
               <span>드세요.</span>
             </div>
           </Fade>
-          <Fade triggerOnce={true} delay={2000}>
+          <Fade triggerOnce={true} delay={1500}>
             <Link href="/main">
               <button className={styles.title_button}>
                 <span>시작하기 </span>
