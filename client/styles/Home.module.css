@@ -247,3 +247,46 @@
 }
 
 /* ------------------------------------------------------------ */
+
+/* -----------------------footer.tsx CSS----------------------- */
+
+.footer {
+  display: flex;
+  width: 100%;
+  height: 15vw;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffffff;
+  background-color: #1b1b1b;
+}
+
+.team_title {
+  font-size: 1.6vw;
+  font-weight: 600;
+}
+
+.team_members {
+  display: flex;
+  flex-direction: row;
+  margin: 2.5vw 0 2.5vw 0;
+}
+
+.member {
+  margin: 0 1.8vw 0 1.8vw;
+}
+
+.member_name {
+  font-size: 1.3vw;
+}
+
+.member_position {
+  font-size: 0.8vw;
+}
+
+.copyright {
+  font-size: 0.9vw;
+}
+
+/* ------------------------------------------------------------ */
