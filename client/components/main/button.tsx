@@ -1,16 +1,16 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export interface BasicButtonProp {
-  children: string
-  containerName: string
+  children: string;
+  containerName: string;
 }
 
 const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  event.preventDefault()
+  event.preventDefault();
 
-  const button: HTMLButtonElement = event.currentTarget
-  console.log(button.value)
-}
+  const button: HTMLButtonElement = event.currentTarget;
+  console.log(button.value);
+};
 
 function Button({ containerName, children }: BasicButtonProp) {
   return (
@@ -19,7 +19,7 @@ function Button({ containerName, children }: BasicButtonProp) {
         {children}
       </button>
     </StyledButton>
-  )
+  );
 }
 
 const StyledButton = styled.div`
@@ -33,9 +33,12 @@ const StyledButton = styled.div`
     padding: 12px 16px;
     border-radius: 50px;
     color: #ffffff;
-    max-width: 181px;
+    width: 181px;
     background-color: #ff8a3d;
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
   }
-`
+`;
 
-export default Button
+export default Button;
