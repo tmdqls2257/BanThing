@@ -32,8 +32,8 @@ export default function Introduction(props: propsType): JSX.Element {
             </Zoom>
             <Fade triggerOnce={true} delay={1100}>
               <div className={styles.introduction_description_right}>
-                {props.description.map((list) => {
-                  return <div>{list}</div>;
+                {props.description.map((list, index) => {
+                  return <div key={index}>{list}</div>;
                 })}
               </div>
             </Fade>
@@ -53,8 +53,8 @@ export default function Introduction(props: propsType): JSX.Element {
             </Zoom>
             <Fade triggerOnce={true} delay={1100}>
               <div className={styles.introduction_description_left}>
-                {props.description.map((list) => {
-                  return <div>{list}</div>;
+                {props.description.map((list, index) => {
+                  return <div key={index}>{list}</div>;
                 })}
               </div>
             </Fade>
