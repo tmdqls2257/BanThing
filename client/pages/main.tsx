@@ -13,10 +13,8 @@ const Container = styled.div`
   padding-top: 4.6vw;
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100;
   height: 100vh;
-  @media screen and (max-width: 768px) {
-  }
 `;
 
 const Main: NextPage = () => {
