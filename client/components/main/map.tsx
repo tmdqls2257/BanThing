@@ -6,8 +6,13 @@ interface MapProps {
   longitude: number
 }
 const MapContainer = styled.div`
+  display: flex;
   width: 70vw;
-  height: 100vh;
+  height: auto;
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    height: auto;
+  }
 `
 
 function Map({ latitude, longitude }: MapProps) {
@@ -15,7 +20,7 @@ function Map({ latitude, longitude }: MapProps) {
     const mapScript = document.createElement('script')
 
     mapScript.async = true
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b016fe9afbd6ea131434b96cd099e6d0&autoload=false`
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`
     document.head.appendChild(mapScript)
 
     const onLoadKakaoMap = () => {

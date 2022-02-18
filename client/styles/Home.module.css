@@ -1,39 +1,36 @@
-.container {
+.home_container {
   padding: 0;
 }
 
 .main {
-  min-height: 95vh;
-  flex: 1;
+  min-height: 55vw;
   display: flex;
+  width: 40vw;
+  margin: 0 4.6% 0 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.title {
+.title_container {
+  width: 95vw;
   display: flex;
   flex-direction: row;
-  width: 100%;
-}
-
-.title_image_container {
-  display: flex;
-  width: 50rem;
-  height: 100%;
-  right: 0;
-  padding-top: 9.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .title_image {
-  width: 45rem;
-  height: auto;
+  display: flex;
+  width: 48vw;
+  box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
+  margin-right: 5vw;
 }
 
 .title_title {
-  margin: 0;
-  line-height: 1.5;
-  font-size: 7rem;
+  font-size: 6vw;
+  font-weight: 700;
 }
 
 .orange {
@@ -45,17 +42,20 @@
 }
 
 .title_description {
-  font-size: 3rem;
+  line-height: 1.4;
+  width: 20vw;
+  margin: 1.5vw auto 3vw auto;
+  font-size: 2vw;
   font-weight: 800;
+  text-align: center;
 }
 
 .title_button {
-  margin-top: 2.5rem;
-  padding-top: 0.2rem;
-  width: 13rem;
-  height: 5rem;
+  padding-top: 0.3vw;
+  width: 13vw;
+  height: 5vw;
   color: #ffffff;
-  font-size: 30px;
+  font-size: 2vw;
   font-weight: 700;
   border-radius: 50px;
   background-color: #ff8a3c;
@@ -81,10 +81,10 @@
 }
 
 .title_button span:after {
-  content: "\00bb";
+  content: '\00bb';
   position: absolute;
   color: white;
-  font-size: 2.2rem;
+  font-size: 2.4vw;
   opacity: 0;
   top: -9px;
   right: -20px;
@@ -104,85 +104,6 @@
   transition: 0.3s ease;
 }
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
-
 @media (max-width: 600px) {
   .grid {
     width: 100%;
@@ -190,16 +111,92 @@
   }
 }
 
+/* --------------------introduction.tsx CSS-------------------- */
+
+.introduction_main_right {
+  min-height: 55vw;
+  display: flex;
+  width: 40vw;
+  margin: 0 8% 0 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.introduction_main_left {
+  min-height: 55vw;
+  display: flex;
+  width: 40vw;
+  margin: 0 0 0 8%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.introduction_container_right {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: auto;
+}
+
+.introduction_container_left {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
+}
+
+.introduction_title_right {
+  display: flex;
+  font-size: 2.7vw;
+  font-weight: 900;
+  justify-content: flex-end;
+}
+
+.introduction_title_left {
+  display: flex;
+  font-size: 2.7vw;
+  font-weight: 900;
+  justify-content: flex-start;
+}
+
+.introduction_image {
+  display: flex;
+  width: 40vw;
+}
+
+.introduction_description_right {
+  line-height: 1.5;
+  width: 39.5vw;
+  margin: 3vw 0 0 0;
+  font-size: 1.5vw;
+  font-weight: 500;
+  text-align: end;
+}
+
+.introduction_description_left {
+  line-height: 1.5;
+  width: 39.5vw;
+  margin: 3vw 0 0 0;
+  font-size: 1.5vw;
+  font-weight: 500;
+  text-align: start;
+}
+
+/* ------------------------------------------------------------ */
+
 /* -----------------------header.tsx CSS----------------------- */
 
 .header {
   display: flex;
   position: fixed;
   width: 100%;
-  height: 4rem;
-  font-size: 18px;
+  height: 4.6vw;
   text-align: center;
-  padding: 0 1.8rem 0 0.2rem;
+  padding: 0 2.5% 0 0.5%;
   background-color: #fafafa;
   opacity: 0.9;
   z-index: 1;
@@ -207,10 +204,10 @@
 
 .logo {
   display: flex;
-  height: 5.4rem;
+  height: 4.4vw;
   width: 100%;
   justify-content: flex-start;
-  padding: 0.1rem 0 1.4rem 0;
+  padding: 0.4% 0 0.2% 0.7%;
 }
 
 .nav {
@@ -218,12 +215,13 @@
   width: 100%;
   list-style-type: none;
   justify-content: flex-end;
+  font-size: 1.3vw;
 }
 
 .nav_menu {
   display: flex;
-  padding-top: 0.1rem;
-  padding-left: 2.5rem;
+  padding-top: 3%;
+  padding-left: 3vw;
   text-decoration: none;
 }
 
@@ -232,19 +230,20 @@
 /* ----------------------progress.tsx CSS---------------------- */
 
 .progress_container {
-  margin-top: 4rem;
+  margin-top: 4.6vw;
   position: fixed;
   width: 100%;
+  z-index: 1;
 }
 
 .progress_bar {
-  position: fixed;
-  height: 4px;
+  height: 0.3vw;
   background: #ff8a3c;
   width: 0%;
   border-radius: 25px;
   transition: width 0.1s ease;
   opacity: 0.9;
+  /* z-index: 1; */
 }
 
 /* ------------------------------------------------------------ */
