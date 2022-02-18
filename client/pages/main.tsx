@@ -1,23 +1,21 @@
-import styled from "styled-components";
-import Script from "next/script";
-import { NextPage } from "next";
-import Map from "../components/main/map";
-import Sidebar from "../components/main/sidebar";
+import styled from 'styled-components'
+import Script from 'next/script'
+import { NextPage } from 'next'
+import Map from '../components/main/map'
+import Sidebar from '../components/main/sidebar'
 
 declare global {
   interface Window {
-    kakao: any;
+    kakao: any
   }
 }
 const Container = styled.div`
   padding-top: var(--padding-large);
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100;
   height: 100vh;
-  @media screen and (max-width: 768px) {
-  }
-`;
+`
 
 const Main: NextPage = () => {
   return (
@@ -31,6 +29,6 @@ const Main: NextPage = () => {
         <Sidebar />
       </Container>
     </>
-  );
-};
-export default Main;
+  )
+}
+export default Main
