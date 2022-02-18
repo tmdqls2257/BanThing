@@ -10,7 +10,7 @@ declare global {
   }
 }
 const Container = styled.div`
-  padding-top: var(--padding-large);
+  padding-top: 4.6vw;
   display: flex;
   flex-direction: row;
   width: 100%;
