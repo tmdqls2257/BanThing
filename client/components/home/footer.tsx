@@ -9,6 +9,7 @@ export default function Footer() {
           <a
             href="https://github.com/shren207"
             target="_blank"
+            rel="noreferrer"
             className={styles.member}
           >
             <div className={styles.member_name}>윤녹두</div>
@@ -17,6 +18,7 @@ export default function Footer() {
           <a
             href="https://github.com/forcoding97"
             target="_blank"
+            rel="noreferrer"
             className={styles.member}
           >
             <div className={styles.member_name}>정윤석</div>
@@ -25,6 +27,7 @@ export default function Footer() {
           <a
             href="https://github.com/tmdqls2257"
             target="_blank"
+            rel="noreferrer"
             className={styles.member}
           >
             <div className={styles.member_name}>홍승빈</div>
@@ -33,6 +36,7 @@ export default function Footer() {
           <a
             href="https://github.com/minho0513"
             target="_blank"
+            rel="noreferrer"
             className={styles.member}
           >
             <div className={styles.member_name}>이민호</div>

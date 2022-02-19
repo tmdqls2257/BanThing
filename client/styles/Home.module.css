@@ -43,7 +43,7 @@
 
 .title_description {
   line-height: 1.4;
-  width: 20vw;
+  width: 35vw;
   margin: 1.5vw auto 3vw auto;
   font-size: 2vw;
   font-weight: 800;
@@ -220,7 +220,7 @@
 
 .nav_menu {
   display: flex;
-  padding-top: 3%;
+  padding-top: 2.7%;
   padding-left: 3vw;
   text-decoration: none;
 }
