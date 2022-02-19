@@ -9,6 +9,7 @@ const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
   event.preventDefault();
 
   const button: HTMLButtonElement = event.currentTarget;
+  const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
   const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
   const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
   const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
@@ -21,6 +22,9 @@ const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
   } else if (button.value === '나가기') {
     chatRoom.style.display = 'none';
     createElement.style.display = 'flex';
+  } else if (button.value === 'JoinRoom') {
+    joinRoom.style.display = 'none';
+    chatRoom.style.display = 'flex';
   }
   console.log(button.value);
 };

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { createElement, joinRoom } from './querySelector';
 
 const MapContainer = styled.div`
   display: flex;
@@ -30,7 +29,10 @@ function Map() {
 
   useEffect(() => {
     const mapScript = document.createElement('script');
-
+    const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
+    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+    const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     mapScript.async = true;
     mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`;
     document.head.appendChild(mapScript);
@@ -53,6 +55,7 @@ function Map() {
           marker.setMap(map);
           window.kakao.maps.event.addListener(marker, 'click', function () {
             createElement.style.display = 'none';
+
             joinRoom.style.display = 'flex';
           });
           window.kakao.maps.event.addListener(
@@ -60,6 +63,8 @@ function Map() {
             'click',
             function (mouseEvent: React.MouseEvent) {
               joinRoom.style.display = 'none';
+              makeRoom.style.display = 'none';
+              chatRoom.style.display = 'none';
               createElement.style.display = 'flex';
             },
           );
