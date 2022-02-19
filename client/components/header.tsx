@@ -7,7 +7,7 @@ export default function NavBar() {
       <div className={styles.header}>
         <Link href="/main">
           <a className={styles.logo}>
-            <img src="banthing.svg" alt="BanThing Logo" />
+            <img src="/banthing.svg" alt="BanThing Logo" />
           </a>
         </Link>
 
