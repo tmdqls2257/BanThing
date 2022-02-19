@@ -1,7 +1,15 @@
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
+import Login from './login';
+import React, { useState } from 'react';
 
 export default function NavBar() {
+  const [loginModal, setLoginModal] = useState(false);
+
+  const openLoginModal = () => {
+    setLoginModal(true);
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -18,9 +26,17 @@ export default function NavBar() {
           <Link href="/main">
             <a className={styles.nav_menu}>MAIN</a>
           </Link>
-          <a className={styles.nav_menu}>LOGIN</a>
+          <a className={styles.nav_menu} onClick={() => openLoginModal()}>
+            LOGIN
+          </a>
         </nav>
       </div>
+
+      {loginModal ? (
+        <Login loginModal={loginModal} setLoginModal={setLoginModal} />
+      ) : (
+        <></>
+      )}
     </>
   );
 }
