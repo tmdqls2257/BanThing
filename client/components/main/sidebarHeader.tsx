@@ -14,23 +14,49 @@ const Header = styled.div`
     font-size: var(--font-size-base);
     margin: auto;
   }
-  i {
+
+  button {
+    font-size: var(--font-size-base);
+    size: var(--font-size-base);
+    background-color: var(--white-color);
+    border: none;
     position: absolute;
     top: 30%;
     left: 16px;
+  }
+  button:hover {
+    cursor: pointer;
   }
 `;
 
 type SidebarHeaderType = {
   children: string;
+  containerName: string;
 };
 
-const SidebarHeader = ({ children }: SidebarHeaderType) => {
+const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  event.preventDefault();
+
+  const button: HTMLButtonElement = event.currentTarget;
+  const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
+  const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+  const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+  const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
+  if (button.value === 'gotoJoinRoom') {
+    joinRoom.style.display = 'flex';
+    chatRoom.style.display = 'none';
+  } else if (button.value === 'gotoCreateRoom') {
+    createElement.style.display = 'flex';
+    makeRoom.style.display = 'none';
+  }
+};
+
+const SidebarHeader = ({ containerName, children }: SidebarHeaderType) => {
   return (
     <Header>
-      <div>
+      <button onClick={handleClick} value={containerName}>
         <i className="fa-solid fa-angle-left"></i>
-      </div>
+      </button>
       <div>
         <h1>{children}</h1>
       </div>
