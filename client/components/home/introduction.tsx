@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styles from '../../styles/Home.module.css';
 import { Zoom, Fade, Slide } from 'react-awesome-reveal';
 
@@ -33,7 +32,15 @@ export default function Introduction(props: propsType): JSX.Element {
             <Fade triggerOnce={true} delay={1100}>
               <div className={styles.introduction_description_right}>
                 {props.description.map((list, index) => {
-                  return <div key={index}>{list}</div>;
+                  if (list === ' ') {
+                    return (
+                      <div key={index} className={styles.introduction_space}>
+                        _
+                      </div>
+                    );
+                  } else {
+                    return <div key={index}>{list}</div>;
+                  }
                 })}
               </div>
             </Fade>
@@ -54,7 +61,15 @@ export default function Introduction(props: propsType): JSX.Element {
             <Fade triggerOnce={true} delay={1100}>
               <div className={styles.introduction_description_left}>
                 {props.description.map((list, index) => {
-                  return <div key={index}>{list}</div>;
+                  if (list === ' ') {
+                    return (
+                      <div key={index} className={styles.introduction_space}>
+                        _
+                      </div>
+                    );
+                  } else {
+                    return <div key={index}>{list}</div>;
+                  }
                 })}
               </div>
             </Fade>

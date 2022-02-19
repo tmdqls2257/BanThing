@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-
-export interface BasicButtonProp {
-  children: string;
-  containerName: string;
-}
+import { BasicButtonProp } from '../type';
 
 const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
   event.preventDefault();
@@ -26,7 +22,6 @@ const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     joinRoom.style.display = 'none';
     chatRoom.style.display = 'flex';
   }
-  console.log(button.value);
 };
 
 function Button({ containerName, children }: BasicButtonProp) {
