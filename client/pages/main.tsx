@@ -25,7 +25,7 @@ const Main: NextPage = () => {
         crossOrigin="anonymous"
       ></Script>
       <Container>
-        <Map latitude={33.450701} longitude={126.570667} />
+        <Map />
         <Sidebar />
       </Container>
     </>

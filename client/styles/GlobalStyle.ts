@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     --margine-small:0.5rem;
     --margine-base: 1rem;
     --margine-large: 1.5rem;
+    --margine-4rem: 4rem;
 
     --border-radius-base: 25px;
     --border-radius-small: 10px;
