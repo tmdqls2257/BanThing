@@ -151,14 +151,16 @@
 
 .introduction_title_right {
   display: flex;
-  font-size: 2.7vw;
+  width: 40vw;
+  font-size: 3.1vw;
   font-weight: 900;
   justify-content: flex-end;
 }
 
 .introduction_title_left {
   display: flex;
-  font-size: 2.7vw;
+  width: 40vw;
+  font-size: 3.1vw;
   font-weight: 900;
   justify-content: flex-start;
 }
@@ -172,7 +174,7 @@
   line-height: 1.5;
   width: 39.5vw;
   margin: 3vw 0 0 0;
-  font-size: 1.5vw;
+  font-size: 1.8vw;
   font-weight: 500;
   text-align: end;
 }
@@ -181,9 +183,14 @@
   line-height: 1.5;
   width: 39.5vw;
   margin: 3vw 0 0 0;
-  font-size: 1.5vw;
+  font-size: 1.8vw;
   font-weight: 500;
   text-align: start;
+}
+
+.introduction_space {
+  opacity: 0;
+  font-size: 1.2vw;
 }
 
 /* ------------------------------------------------------------ */
@@ -248,7 +255,20 @@
 
 /* ------------------------------------------------------------ */
 
-/* ----------------------caption.tsx CSS---------------------- */
+/* ------------------------text.tsx CSS------------------------ */
+.text_container {
+  display: flex;
+  min-height: 40vw;
+  color: #ff8a3c;
+  font-size: 4vw;
+  font-weight: 800;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* ------------------------------------------------------------ */
+
+/* -----------------------caption.tsx CSS---------------------- */
 
 .caption_container {
   min-height: 55vw;
@@ -267,8 +287,8 @@
 
 .caption_description {
   width: 39.5vw;
-  margin: 3vw 0 3vw 0;
-  font-size: 2vw;
+  margin: 3.5vw 0 3.5vw 0;
+  font-size: 2.5vw;
   font-weight: 700;
   text-align: center;
 }
