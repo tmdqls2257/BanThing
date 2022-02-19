@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from '../../styles/Home.module.css';
-import { Zoom, Fade } from 'react-awesome-reveal';
+import { Zoom, Fade, Slide } from 'react-awesome-reveal';
 
 interface propsType {
   imagePosition: string;
@@ -25,11 +25,11 @@ export default function Introduction(props: propsType): JSX.Element {
           </Zoom>
 
           <main className={styles.introduction_main_right}>
-            <Zoom triggerOnce={true} delay={150}>
+            <Slide triggerOnce={true} delay={150} direction={'right'}>
               <div className={styles.introduction_title_right}>
                 <span className={styles.orange}>{props.title}</span>
               </div>
-            </Zoom>
+            </Slide>
             <Fade triggerOnce={true} delay={1100}>
               <div className={styles.introduction_description_right}>
                 {props.description.map((list, index) => {
@@ -46,11 +46,11 @@ export default function Introduction(props: propsType): JSX.Element {
       <>
         <div className={styles.introduction_container_left}>
           <main className={styles.introduction_main_left}>
-            <Zoom triggerOnce={true} delay={150}>
+            <Slide triggerOnce={true} delay={150} direction={'left'}>
               <div className={styles.introduction_title_left}>
                 <span className={styles.orange}>{props.title}</span>
               </div>
-            </Zoom>
+            </Slide>
             <Fade triggerOnce={true} delay={1100}>
               <div className={styles.introduction_description_left}>
                 {props.description.map((list, index) => {

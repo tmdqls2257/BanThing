@@ -248,6 +248,33 @@
 
 /* ------------------------------------------------------------ */
 
+/* ----------------------caption.tsx CSS---------------------- */
+
+.caption_container {
+  min-height: 55vw;
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto auto 7vw auto;
+}
+
+.caption_image {
+  display: flex;
+  width: 25vw;
+}
+
+.caption_description {
+  width: 39.5vw;
+  margin: 3vw 0 3vw 0;
+  font-size: 2vw;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ */
+
 /* -----------------------footer.tsx CSS----------------------- */
 
 .footer {
