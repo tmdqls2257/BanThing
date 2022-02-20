@@ -13,6 +13,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { UserInfoDTO } from 'src/dto/userInfo.dto';
+import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,22 +22,30 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  //회원가입
-  async signUp(newUser: SignUpDTO): Promise<object> {
-    const userFind: SignUpDTO = await this.userService.findByFields({
-      where: { user_id: newUser.user_id },
+  //아이디 중복확인
+  async idValidate(validate: SignUpValidateDTO): Promise<object> {
+    const userFind: SignUpValidateDTO = await this.userService.findByFields({
+      where: { user_id: validate.user_id },
     });
-    const nickFind: SignUpDTO = await this.userService.findByFields({
-      where: { nickname: newUser.nickname },
-    });
-
     if (userFind) {
       throw new HttpException('존재하는 아이디 입니다', HttpStatus.BAD_REQUEST);
     }
+    return { data: null, message: '사용 가능' };
+  }
+
+  //닉네임 중복확인
+  async nicknameValidate(validate: SignUpValidateDTO): Promise<object> {
+    const nickFind: SignUpDTO = await this.userService.findByFields({
+      where: { nickname: validate.nickname },
+    });
     if (nickFind) {
       throw new HttpException('존재하는 닉네임 입니다', HttpStatus.BAD_REQUEST);
     }
+    return { data: null, message: '사용 가능' };
+  }
 
+  //회원가입
+  async signUp(newUser: SignUpDTO): Promise<object> {
     newUser.rating_count = 0;
     newUser.rating_score = 0;
     await this.userService.save(newUser);

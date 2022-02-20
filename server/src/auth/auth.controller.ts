@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 import { LoginDTO } from '../dto/login.dto';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { AuthGuard } from '../token/auth.guard';
+import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
 
 @Controller('users')
 export class AuthController {
@@ -20,6 +21,16 @@ export class AuthController {
   @Post('/signup') //회원가입
   async signUp(@Body() userDTO: SignUpDTO): Promise<object> {
     return await this.authService.signUp(userDTO);
+  }
+
+  @Post('/signup/id') //아이디 중복확인
+  async idValidate(@Body() validate: SignUpValidateDTO): Promise<object> {
+    return await this.authService.idValidate(validate);
+  }
+
+  @Post('/signup/nickname') //닉네임 중복확인
+  async nicknameValidate(@Body() validate: SignUpValidateDTO): Promise<object> {
+    return await this.authService.nicknameValidate(validate);
   }
 
   @Delete('/signout') //회원탈퇴
