@@ -52,12 +52,12 @@
 
 .title_button {
   padding-top: 0.3vw;
-  width: 13vw;
+  width: 12vw;
   height: 5vw;
   color: #ffffff;
   font-size: 2vw;
   font-weight: 700;
-  border-radius: 50px;
+  border-radius: 12px;
   background-color: #ff8a3c;
   border: solid;
   border-width: 5px;
