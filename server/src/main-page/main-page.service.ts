@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RoomRepository } from 'src/room/room.repository';
-import { MarkDTO } from 'src/dto/mark.dto';
 
 @Injectable()
 export class MainPageService {
