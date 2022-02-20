@@ -8,6 +8,7 @@ import { Users } from './entity/users.entity';
 import { RoomModule } from './room/room.module';
 import { Rooms } from './entity/rooms.entity';
 import { ChatLogs } from './entity/chatLogs.entity';
+import { MypageModule } from './mypage/mypage.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ChatLogs } from './entity/chatLogs.entity';
     }),
     AuthModule,
     RoomModule,
+    MypageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
