@@ -1,30 +1,36 @@
 import styled from 'styled-components';
 import { BasicButtonProp } from '../type';
 
-const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  event.preventDefault();
-
-  const button: HTMLButtonElement = event.currentTarget;
-  const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-  const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
-  const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
-  const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
-  if (button.value === 'CreateRoom') {
-    createElement.style.display = 'none';
-    makeRoom.style.display = 'flex';
-  } else if (button.value === 'MakeRoom') {
-    makeRoom.style.display = 'none';
-    chatRoom.style.display = 'flex';
-  } else if (button.value === '나가기') {
-    chatRoom.style.display = 'none';
-    createElement.style.display = 'flex';
-  } else if (button.value === 'JoinRoom') {
-    joinRoom.style.display = 'none';
-    chatRoom.style.display = 'flex';
-  }
-};
-
 function Button({ containerName, children }: BasicButtonProp) {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const button: HTMLButtonElement = event.currentTarget;
+    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
+    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+    const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
+    const rate = document.querySelector('#rate')! as HTMLElement;
+
+    if (button.value === 'CreateRoom') {
+      createElement.style.display = 'none';
+      makeRoom.style.display = 'flex';
+    } else if (button.value === 'MakeRoom') {
+      makeRoom.style.display = 'none';
+      chatRoom.style.display = 'flex';
+    } else if (button.value === '나가기') {
+      chatRoom.style.display = 'none';
+      createElement.style.display = 'flex';
+    } else if (button.value === 'JoinRoom') {
+      joinRoom.style.display = 'none';
+      chatRoom.style.display = 'flex';
+    } else if (button.value === '평가하기') {
+      chatRoom.style.display = 'none';
+      createElement.style.display = 'flex';
+    } else if (button.value === '합의완료') {
+      rate.style.display = 'flex';
+    }
+  };
   return (
     <StyledButton>
       <button onClick={handleClick} value={containerName}>

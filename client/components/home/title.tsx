@@ -24,7 +24,7 @@ export default function Title() {
           <Fade triggerOnce={true} delay={1800}>
             <Link href="/main">
               <button className={styles.title_button}>
-                <span>시작하기 </span>
+                <span>시작하기</span>
               </button>
             </Link>
           </Fade>

@@ -51,6 +51,7 @@ function Map() {
       window.kakao.maps.event.addListener(marker, 'click', function () {
         createElement.style.display = 'none';
         chatRoom.style.display = 'none';
+        makeRoom.style.display = 'none';
         joinRoom.style.display = 'flex';
       });
       window.kakao.maps.event.addListener(map, 'click', function () {
