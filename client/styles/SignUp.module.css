@@ -48,7 +48,7 @@
   color: #686868;
   border: none;
   border-radius: 12px;
-  background-color: #ececec;
+  background-color: #f3f3f3;
 }
 
 .signup_input_box_1:focus {
@@ -64,7 +64,7 @@
   margin: 8px auto 2px auto;
   border: none;
   border-radius: 12px;
-  background-color: #ececec;
+  background-color: #f3f3f3;
 }
 
 .signup_input_box_2:focus {

@@ -22,7 +22,7 @@
   border-width: 5px;
   border-radius: 30px;
   box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
-  z-index: 1;
+  z-index: 2;
 }
 
 .login_times {
@@ -55,7 +55,7 @@
   margin: 5px auto 5px auto;
   border: none;
   border-radius: 12px;
-  background-color: #ececec;
+  background-color: #f3f3f3;
 }
 
 .login_input_box:focus {
