@@ -51,6 +51,10 @@
   background-color: #ececec;
 }
 
+.signup_input_box_1:focus {
+  outline: none;
+}
+
 .signup_input_box_2 {
   width: 210px;
   height: 35px;
@@ -61,6 +65,10 @@
   border: none;
   border-radius: 12px;
   background-color: #ececec;
+}
+
+.signup_input_box_2:focus {
+  outline: none;
 }
 
 .signup_double_check_button {

@@ -58,6 +58,10 @@
   background-color: #ececec;
 }
 
+.login_input_box:focus {
+  outline: none;
+}
+
 .login_button {
   width: 125px;
   height: 40px;

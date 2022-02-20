@@ -32,6 +32,7 @@ export default function Login(prop: propsType) {
           ></input>
           <input
             className={styles.login_input_box}
+            type="password"
             placeholder="비밀번호"
           ></input>
           <span className={styles.login_error}>
