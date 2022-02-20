@@ -12,6 +12,7 @@ import { AuthGuard } from 'src/token/auth.guard';
 import { CreateRoomDTO } from 'src/dto/createRoom.dto';
 import { Request } from 'express';
 import { ChatDTO } from 'src/dto/chat.dto';
+import { EvaluationDTO } from 'src/dto/evaluation.dto';
 
 @Controller('rooms')
 export class RoomController {
@@ -39,5 +40,14 @@ export class RoomController {
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
   async getChat(@Param('id') id: number): Promise<object> {
     return await this.roomService.getChat(id);
+  }
+
+  @Post('/evaluation') //평가하기
+  @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
+  async evaluation(
+    @Body() evaluationDTO: EvaluationDTO,
+    @Req() req: Request,
+  ): Promise<object> {
+    return await this.roomService.evaluation(evaluationDTO, req.user);
   }
 }
