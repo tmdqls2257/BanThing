@@ -1,0 +1,41 @@
+.rate_container {
+  display: flex;
+  width: 100vw;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+}
+@media screen and (max-width: 768px) {
+  .rate_container {
+    width: 100vw;
+    height: 85vh;
+  }
+}
+.rate_modal {
+  display: flex;
+  margin: auto;
+  width: 400px;
+  height: 562px;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff;
+  border-width: 5px;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
+  z-index: 1;
+}
+.rate_title {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.rate_p {
+  color: #aaaa;
+}
+.rate_button {
+  margin: 1rem 0;
+}

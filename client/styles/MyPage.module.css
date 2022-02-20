@@ -1,5 +1,5 @@
 .mypage_container {
-  padding-top: 4vw;
+  padding-top: 3vw;
   display: flex;
   width: 100%;
   min-height: 100vh;
@@ -63,7 +63,7 @@
   padding: 0.7vw;
   background-color: #d6d6d6;
   border: none;
-  border-radius: 7px;
+  border-radius: 12px;
 }
 
 .mypage_id_name::placeholder {
@@ -77,7 +77,11 @@
   padding: 0.7vw;
   border: none;
   background-color: #f5f5f5;
-  border-radius: 7px;
+  border-radius: 12px;
+}
+
+.mypage_password_change_check {
+  outline: none;
 }
 
 .mypage_button_container {
@@ -93,10 +97,10 @@
   height: 3.2vw;
   color: #ffffff;
   background-color: #ff8a3c;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   font-weight: 500;
   border: none;
-  border-radius: 25px;
+  border-radius: 12px;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
@@ -110,10 +114,10 @@
   height: 3.2vw;
   color: #ffffff;
   background-color: #ff6666;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   font-weight: 500;
   border: none;
-  border-radius: 25px;
+  border-radius: 12px;
   margin-top: 1vw;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;

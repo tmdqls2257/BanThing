@@ -56,7 +56,14 @@ export default function SignUp(prop: propsType) {
           비밀번호가 일치하지 않습니다.
           {/* <div className={styles.signup_space}>_</div> */}
         </span>
-        <button className={styles.signup_button}>회원가입</button>
+        <button className={styles.signup_button}>
+          <img
+            src="/signup.png"
+            alt="signup-icon"
+            className={styles.signup_icon}
+          />
+          <span>회원가입</span>
+        </button>
       </div>
     </>
   );
