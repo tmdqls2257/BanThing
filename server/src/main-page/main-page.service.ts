@@ -23,4 +23,13 @@ export class MainPageService {
 
     return { data: { roomList: list }, message: '모든 방 리스트' };
   }
+
+  //방 정보
+  async roomInfo(id: number): Promise<object> {
+    const room = await this.roomRepository.findOne(id);
+    room.host_user_id = undefined;
+    room.location_latitude = undefined;
+    room.location_longitude = undefined;
+    return { data: { room: room }, message: '방 정보' };
+  }
 }
