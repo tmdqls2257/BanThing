@@ -12,6 +12,7 @@ import { Users } from '../entity/users.entity';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { SignUpDTO } from 'src/dto/signup.dto';
+import { UserInfoDTO } from 'src/dto/userInfo.dto';
 
 @Injectable()
 export class AuthService {
@@ -64,5 +65,19 @@ export class AuthService {
     return res
       .cookie('set-cookie', token)
       .send({ data: null, message: '로그인 완료' });
+  }
+
+  //로그아웃
+  async logOut(res: Response): Promise<object> {
+    return res
+      .cookie('set-cookie', '', { maxAge: 1 })
+      .send({ data: null, message: '로그아웃' });
+  }
+
+  //토큰으로 사용자 정보 확인
+  async tokenValidateUser(payload: Payload): Promise<UserInfoDTO> {
+    return await this.userService.findByFields({
+      where: { id: payload.id },
+    });
   }
 }
