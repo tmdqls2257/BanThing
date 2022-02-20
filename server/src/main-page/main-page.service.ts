@@ -18,6 +18,8 @@ export class MainPageService {
       el.host_role = undefined;
       el.host_user_id = undefined;
       el.title = undefined;
+      el.host_rating_count = undefined;
+      el.host_rating_score = undefined;
     });
 
     return { data: { roomList: list }, message: '모든 방 리스트' };

@@ -5,7 +5,7 @@ export class CreateRoomDTO {
   content: string;
   location_latitude: string;
   location_longitude: string;
-  rating_score: number;
-  rating_count: number;
+  host_rating_score: number;
+  host_rating_count: number;
   host_role: number;
 }

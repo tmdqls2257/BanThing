@@ -23,6 +23,8 @@ export class RoomService {
   async create(roomDTO: CreateRoomDTO, user: any): Promise<object> {
     roomDTO.host_user_id = user.user_id;
     roomDTO.host_nickname = user.nickname;
+    roomDTO.host_rating_score = user.rating_score;
+    roomDTO.host_rating_count = user.rating_count;
     await this.roomRepository.save(roomDTO);
     return { data: null, message: '방 생성 완료' };
   }
