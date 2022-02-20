@@ -28,6 +28,11 @@ export class UserService {
     return await this.userRepository.save(userDTO);
   }
 
+  //회원탈퇴 함수
+  async delete(user_id: string): Promise<object> {
+    return await this.userRepository.delete({ user_id });
+  }
+
   //비밀번호 암호화
   async transformPassword(user: SignUpDTO | UserInfoDTO): Promise<string> {
     return await bcrypt.hash(user.password, 12);

@@ -43,6 +43,13 @@ export class AuthService {
     return { data: null, message: '회원가입 완료' };
   }
 
+  //회원탈퇴
+  //! any 존재
+  async signOut(user: any): Promise<object> {
+    await this.userService.delete(user.user_id);
+    return { data: null, message: '회원탈퇴 완료' };
+  }
+
   //로그인
   async logIn(loginDTO: LoginDTO, res: Response): Promise<object> {
     const userFind: Users = await this.userService.findByFields({
