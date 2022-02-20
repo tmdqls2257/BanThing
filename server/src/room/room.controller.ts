@@ -3,6 +3,7 @@ import { RoomService } from './room.service';
 import { AuthGuard } from 'src/token/auth.guard';
 import { CreateRoomDTO } from 'src/dto/createRoom.dto';
 import { Request } from 'express';
+import { ChatDTO } from 'src/dto/chat.dto';
 
 @Controller('rooms')
 export class RoomController {
@@ -15,5 +16,14 @@ export class RoomController {
     @Req() req: Request,
   ): Promise<object> {
     return await this.roomService.create(roomDTO, req.user);
+  }
+
+  @Post('/chat') //채팅로그 저장
+  @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
+  async chatLog(
+    @Body() chatDTO: ChatDTO,
+    @Req() req: Request,
+  ): Promise<object> {
+    return await this.roomService.chatLog(chatDTO, req.user);
   }
 }

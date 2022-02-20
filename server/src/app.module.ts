@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './entity/users.entity';
 import { RoomModule } from './room/room.module';
 import { Rooms } from './entity/rooms.entity';
+import { ChatLogs } from './entity/chatLogs.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { Rooms } from './entity/rooms.entity';
       username: process.env.DATABASE_USERNAME || 'root',
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME || 'BanThing',
-      entities: [Users, Rooms],
+      entities: [Users, Rooms, ChatLogs],
       //synchronize: true, //테이블을 자동으로 생성 개발모드일때만 사용 운영모드일때는 삭제
     }),
     AuthModule,
