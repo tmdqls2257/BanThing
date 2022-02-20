@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Req,
+  UseGuards,
+  Get,
+  Param,
+} from '@nestjs/common';
 import { RoomService } from './room.service';
 import { AuthGuard } from 'src/token/auth.guard';
 import { CreateRoomDTO } from 'src/dto/createRoom.dto';
@@ -25,5 +33,11 @@ export class RoomController {
     @Req() req: Request,
   ): Promise<object> {
     return await this.roomService.chatLog(chatDTO, req.user);
+  }
+
+  @Get('/chat/:id') //채팅로그 받기(방 입장)
+  @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
+  async getChat(@Param('id') id: number): Promise<object> {
+    return await this.roomService.getChat(id);
   }
 }

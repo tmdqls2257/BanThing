@@ -28,4 +28,12 @@ export class RoomService {
     await this.chatLogRepository.save(chatDTO);
     return { data: null, message: 'chatLog 저장 완료' };
   }
+
+  //채팅 받기(방입장)
+  async getChat(rooms_id: number): Promise<object> {
+    const list = await this.chatLogRepository.find({
+      where: { rooms_id: rooms_id },
+    });
+    return { data: { chatLog: list }, message: 'chatLog 리스트' };
+  }
 }
