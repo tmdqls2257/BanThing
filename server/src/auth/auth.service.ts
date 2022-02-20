@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { LoginDTO } from '../dto/login.dto';
 import * as bcrypt from 'bcrypt';
@@ -6,6 +11,7 @@ import { Payload } from '../token/payload';
 import { Users } from '../entity/users.entity';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
+import { SignUpDTO } from 'src/dto/signup.dto';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +19,28 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
   ) {}
+
+  //회원가입
+  async signUp(newUser: SignUpDTO): Promise<object> {
+    const userFind: SignUpDTO = await this.userService.findByFields({
+      where: { user_id: newUser.user_id },
+    });
+    const nickFind: SignUpDTO = await this.userService.findByFields({
+      where: { nickname: newUser.nickname },
+    });
+
+    if (userFind) {
+      throw new HttpException('존재하는 아이디 입니다', HttpStatus.BAD_REQUEST);
+    }
+    if (nickFind) {
+      throw new HttpException('존재하는 닉네임 입니다', HttpStatus.BAD_REQUEST);
+    }
+
+    newUser.rating_count = 0;
+    newUser.rating_score = 0;
+    await this.userService.save(newUser);
+    return { data: null, message: '회원가입 완료' };
+  }
 
   //로그인
   async logIn(loginDTO: LoginDTO, res: Response): Promise<object> {
