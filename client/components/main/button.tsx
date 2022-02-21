@@ -49,7 +49,7 @@ const StyledButton = styled.div`
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-bold);
     padding: 12px 16px;
-    border-radius: 50px;
+    border-radius: 6px;
     color: #ffffff;
     width: 181px;
     background-color: #ff8a3d;

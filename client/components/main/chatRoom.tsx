@@ -26,8 +26,10 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  margin: auto;
   margin: var(--margine-base) auto;
+  div {
+    margin: 0 4px;
+  }
 `;
 const ChatRoom = () => {
   const [error, setError] = useState<string>('');

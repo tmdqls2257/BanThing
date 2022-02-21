@@ -12,3 +12,7 @@ export interface loadingState {
   state: boolean;
 }
 export type Direction = 'up' | 'down';
+
+export interface setStateType {
+  setState: any;
+}

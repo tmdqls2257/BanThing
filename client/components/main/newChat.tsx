@@ -11,6 +11,8 @@ const Container = styled.div`
     height: 46px;
     width: 100%;
     border-radius: var(--border-radius-small);
+    outline: none;
+    border: none;
   }
   .input-button {
     color: var(--white-color);

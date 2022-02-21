@@ -1,6 +1,7 @@
-import Button from './button';
 import SidebarHeader from './sidebarHeader';
 import styled from 'styled-components';
+import { setStateType } from '../type';
+import Button from './button';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -40,12 +41,22 @@ const Container = styled.div`
     }
   }
   .MakeRoom-main-section-content {
+    padding: 32px;
+    line-height: 1.5;
     display: flex;
     border: none;
     border-radius: var(--border-radius-base);
     background-color: var(--gary-color);
     width: var(--sidebar-content-width);
     height: 30vh;
+    ::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+  textarea:focus,
+  input,
+  select {
+    outline: none;
   }
   h1 {
     font-size: 1rem;
@@ -62,12 +73,29 @@ const ButtonContainer = styled.div`
   div {
     margin: var(--margine-small);
   }
+  button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #ffffff;
+    width: 181px;
+    background-color: #ff8a3d;
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
+  }
 `;
 
 const MakeRoom = () => {
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
   };
+
   return (
     <Container id="MakeRoom">
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>
@@ -87,16 +115,16 @@ const MakeRoom = () => {
         </section>
         <h1>역할</h1>
         <section className="MakeRoom-main-section-radio">
-          <input type="radio" />
+          <input type="radio" name="category" />
           <p>받는 사람</p>
         </section>
         <section className="MakeRoom-main-section-radio">
-          <input type="radio" />
+          <input type="radio" name="category" />
           <p>가지러 가는 사람</p>
         </section>
         <section>
           <h1>내용</h1>
-          <input className="MakeRoom-main-section-content" type="text" />
+          <textarea className="MakeRoom-main-section-content" />
         </section>
       </main>
       <ButtonContainer>
