@@ -13,7 +13,7 @@ export default function Introduction(props: propsType): JSX.Element {
     return (
       <>
         <div className={styles.introduction_container_right}>
-          <Zoom triggerOnce={true} duration={2000}>
+          <Zoom triggerOnce={true} duration={1800}>
             <div>
               <img
                 src={props.image}
@@ -24,12 +24,17 @@ export default function Introduction(props: propsType): JSX.Element {
           </Zoom>
 
           <main className={styles.introduction_main_right}>
-            <Slide triggerOnce={true} delay={150} direction={'right'}>
+            <Slide
+              triggerOnce={true}
+              delay={200}
+              direction={'right'}
+              duration={900}
+            >
               <div className={styles.introduction_title_right}>
                 <span className={styles.orange}>{props.title}</span>
               </div>
             </Slide>
-            <Fade triggerOnce={true} delay={1100}>
+            <Fade triggerOnce={true} delay={900}>
               <div className={styles.introduction_description_right}>
                 {props.description.map((list, index) => {
                   if (list === ' ') {
@@ -53,12 +58,17 @@ export default function Introduction(props: propsType): JSX.Element {
       <>
         <div className={styles.introduction_container_left}>
           <main className={styles.introduction_main_left}>
-            <Slide triggerOnce={true} delay={150} direction={'left'}>
+            <Slide
+              triggerOnce={true}
+              delay={200}
+              direction={'left'}
+              duration={900}
+            >
               <div className={styles.introduction_title_left}>
                 <span className={styles.orange}>{props.title}</span>
               </div>
             </Slide>
-            <Fade triggerOnce={true} delay={1100}>
+            <Fade triggerOnce={true} delay={900}>
               <div className={styles.introduction_description_left}>
                 {props.description.map((list, index) => {
                   if (list === ' ') {
@@ -75,7 +85,7 @@ export default function Introduction(props: propsType): JSX.Element {
             </Fade>
           </main>
 
-          <Zoom triggerOnce={true} duration={2000}>
+          <Zoom triggerOnce={true} duration={1800}>
             <div>
               <img
                 src={props.image}
