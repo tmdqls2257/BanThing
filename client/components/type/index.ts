@@ -12,3 +12,10 @@ export interface loadingState {
   state: boolean;
 }
 export type Direction = 'up' | 'down';
+
+export interface setStateType {
+  setState: any;
+}
+export interface newchatType {
+  onCreated: (arg0: any) => void;
+}
