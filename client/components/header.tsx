@@ -11,7 +11,9 @@ export default function NavBar() {
     setLoginModal(true);
   };
 
-  const handleLogOut = () => {};
+  const handleLogOut = () => {
+    setIsLogin(false);
+  };
 
   return (
     <>
@@ -49,33 +51,34 @@ export default function NavBar() {
       ) : (
         // ----------- ▲ 로그인이 되어있는 경우 -----------
         // --------- ▼ 로그인이 되어있지 않은 경우 ---------
-        <div className={styles.header}>
-          <Link href="/main">
-            <a className={styles.logo}>
-              <img src="/banthing.svg" alt="BanThing Logo" />
-            </a>
-          </Link>
-
-          <nav className={styles.nav}>
-            <Link href="/">
-              <a className={styles.nav_menu}>HOME</a>
-            </Link>
-            <span className={styles.nav_divide}>|</span>
+        <>
+          <div className={styles.header}>
             <Link href="/main">
-              <a className={styles.nav_menu}>MAIN</a>
+              <a className={styles.logo}>
+                <img src="/banthing.svg" alt="BanThing Logo" />
+              </a>
             </Link>
-            <span className={styles.nav_divide}>|</span>
-            <a className={styles.nav_menu} onClick={() => openLoginModal()}>
-              LOGIN
-            </a>
-          </nav>
 
+            <nav className={styles.nav}>
+              <Link href="/">
+                <a className={styles.nav_menu}>HOME</a>
+              </Link>
+              <span className={styles.nav_divide}>|</span>
+              <Link href="/main">
+                <a className={styles.nav_menu}>MAIN</a>
+              </Link>
+              <span className={styles.nav_divide}>|</span>
+              <a className={styles.nav_menu} onClick={() => openLoginModal()}>
+                LOGIN
+              </a>
+            </nav>
+          </div>
           {loginModal ? (
             <Login loginModal={loginModal} setLoginModal={setLoginModal} />
           ) : (
             <></>
           )}
-        </div>
+        </>
       )}
     </>
   );

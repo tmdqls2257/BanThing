@@ -8,7 +8,6 @@
 
 .login_container {
   position: fixed;
-  overflow: hidden;
   display: flex;
   width: 100%;
   justify-content: center;
