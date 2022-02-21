@@ -3,8 +3,8 @@
   overflow: hidden;
   display: flex;
   width: 100%;
-  padding-top: 10vw;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   z-index: 3;
   backdrop-filter: blur(2px);
