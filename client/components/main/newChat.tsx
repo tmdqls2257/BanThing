@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
@@ -11,6 +12,8 @@ const Container = styled.div`
     height: 46px;
     width: 100%;
     border-radius: var(--border-radius-small);
+    outline: none;
+    border: none;
   }
   .input-button {
     color: var(--white-color);
@@ -27,26 +30,35 @@ const Container = styled.div`
     padding: 0;
   }
 `;
-const NewChat = ({ onError }: any) => {
-  const [tweet, setTweet] = useState('');
+const NewChat = ({ onCreated, onError }: any) => {
+  const [chat, setChat] = useState('');
 
-  // const onSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   chatService
-  //     .postTweet(tweet)
-  //     .then(() => {
-  //       setTweet('');
-  //     })
-  //     .catch(onError);
-  // };
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    // axios.post(
+    //   'http://localhost:80/rooms/chat',
+    //   {
+    //     rooms_id: 4,
+    //     chat: chat,
+    //   },
+    //   {
+    //     withCredentials: true,
+    //   },
+    // );
+    if (chat !== '') {
+      onCreated(chat);
+      console.log(chat);
+    }
+    setChat('');
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTweet(event.target.value);
+    setChat(event.target.value);
   };
   return (
     <Container>
-      <form className="reply__column">
-        <input type="text" onChange={onChange} />
+      <form className="reply__column" onSubmit={onSubmit}>
+        <input type="text" onChange={onChange} value={chat} />
         <button className="input-button">Enter</button>
       </form>
     </Container>
