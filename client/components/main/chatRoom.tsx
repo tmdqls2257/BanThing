@@ -47,7 +47,7 @@ const ChatRoom = () => {
           MakeRoom에서 받아온 제목
         </SidebarHeader>
         <main>
-          <Chats></Chats>
+          <Chats addable={true}></Chats>
         </main>
         <ButtonContainer>
           <div>

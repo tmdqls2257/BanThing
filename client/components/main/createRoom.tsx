@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-import { setStateType } from '../type';
 import Button from './button';
+import styled from 'styled-components';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -29,22 +28,6 @@ const ButtonContainer = styled.div`
   div {
     margin: var(--margine-small);
   }
-  button {
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: #ffffff;
-    width: 181px;
-    background-color: #ff8a3d;
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
-  }
 `;
 
 const CreateRoom = () => {
@@ -56,7 +39,7 @@ const CreateRoom = () => {
       />
       <p>원하는 마크를 선택하거나 방을 만들어주세요.</p>
       <ButtonContainer>
-        <Button containerName={'CreateRoom'}>방만들기</Button>
+        <Button containerName={'CreateRoom'}>방 만들기</Button>
       </ButtonContainer>
     </Container>
   );

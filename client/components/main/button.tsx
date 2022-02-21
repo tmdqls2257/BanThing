@@ -26,6 +26,7 @@ function Button({ containerName, children }: BasicButtonProp) {
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
       chatRoom.style.display = 'none';
+      rate.style.display = 'none';
       createElement.style.display = 'flex';
     } else if (button.value === '합의완료') {
       rate.style.display = 'flex';
