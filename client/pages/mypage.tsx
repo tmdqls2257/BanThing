@@ -9,7 +9,7 @@ const MyPage: NextPage = () => {
   const [changePassword, setChangePassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
 
-  const [correctChangePassword, setCorrectChangePassowrd] = useState(true);
+  const [correctChangePassword, setCorrectChangePassword] = useState(true);
   const [changeEqualCheck, setChangeEqualCheck] = useState(true);
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,21 +26,27 @@ const MyPage: NextPage = () => {
 
     if (type === 'change_password') {
       if (!value) {
-        setCorrectChangePassowrd(true);
+        setCorrectChangePassword(true);
       } else if (isSmallLetterAndNumber4to10.test(value)) {
-        setCorrectChangePassowrd(true);
+        setCorrectChangePassword(true);
       } else {
-        setCorrectChangePassowrd(false);
+        setCorrectChangePassword(false);
       }
     }
 
-    if (type === 'check_password') {
-      if (!value) {
+    if (!correctChangePassword) {
+      setChangeEqualCheck(true);
+    } else {
+      if (changePassword === '') {
         setChangeEqualCheck(true);
-      } else if (changePassword === checkPassword) {
-        setChangeEqualCheck(true);
-      } else {
-        setChangeEqualCheck(false);
+      } else if (type === 'check_password') {
+        if (!value) {
+          setChangeEqualCheck(true);
+        } else if (changePassword === checkPassword) {
+          setChangeEqualCheck(true);
+        } else {
+          setChangeEqualCheck(false);
+        }
       }
     }
   };
