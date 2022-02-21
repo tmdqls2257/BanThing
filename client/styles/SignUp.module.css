@@ -1,5 +1,3 @@
-/* 줄이기 */
-
 .signup_modal {
   display: flex;
   width: 278px;
@@ -31,13 +29,14 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 25px;
 }
 
 .signup_id_name_container {
   display: flex;
   width: 210px;
-  margin: 11px auto 5px auto;
+  margin: 8px auto 2px auto;
   flex-direction: row;
 }
 
@@ -48,8 +47,12 @@
   font-size: 14px;
   color: #686868;
   border: none;
-  border-radius: 10px;
-  background-color: #ececec;
+  border-radius: 12px;
+  background-color: #f3f3f3;
+}
+
+.signup_input_box_1:focus {
+  outline: none;
 }
 
 .signup_input_box_2 {
@@ -58,17 +61,21 @@
   padding-left: 15px;
   font-size: 14px;
   color: #686868;
-  margin: 11px auto 5px auto;
+  margin: 8px auto 2px auto;
   border: none;
-  border-radius: 10px;
-  background-color: #ececec;
+  border-radius: 12px;
+  background-color: #f3f3f3;
+}
+
+.signup_input_box_2:focus {
+  outline: none;
 }
 
 .signup_double_check_button {
   width: 60px;
   border: none;
   font-size: 12px;
-  border-radius: 5px;
+  border-radius: 12px;
   color: #ffffff;
   background-color: #ff8a3c;
   margin-left: 4px;
@@ -79,27 +86,32 @@
 }
 
 .signup_button {
-  width: 120px;
-  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 40px;
   font-size: 17px;
-  margin: 15px auto 0 auto;
+  margin: 25px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
   background-color: #ff8a3c;
-  border-radius: 30px;
+  border-radius: 12px;
 }
 
 .signup_button:hover {
   cursor: pointer;
 }
 
-.black {
-  color: black;
+.signup_icon {
+  width: 18px;
+  margin-top: -1.6px;
+  margin-right: 8px;
 }
 
-.signup_description {
-  font-size: 14px;
+.black {
+  color: black;
 }
 
 .signup_signup {
@@ -114,8 +126,6 @@
   font-size: 12px;
   padding-left: 45px;
   color: #ff6767;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .signup_space {
