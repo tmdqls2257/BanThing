@@ -1,9 +1,16 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import styles from '../styles/MyPage.module.css';
 
 const MyPage: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>BanThing</title>
+        <meta name="BanThing" content="Order with your foodmate" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <div className={styles.mypage_container}>
         <div className={styles.mypage_profile}>
           <img

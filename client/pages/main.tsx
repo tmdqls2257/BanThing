@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Head from 'next/head';
 import Script from 'next/script';
 import { NextPage } from 'next';
 import Map from '../components/main/map';
@@ -20,6 +21,12 @@ const Container = styled.div`
 const Main: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>BanThing</title>
+        <meta name="BanThing" content="Order with your foodmate" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <Script
         src="https://kit.fontawesome.com/026077c6cc.js"
         crossOrigin="anonymous"
