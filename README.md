@@ -50,7 +50,6 @@ BanThing 의 자세한 Work Log 를 확인해보고 싶으시다면 아래 링�
 <img alt="axios" src ="https://img.shields.io/badge/axios-8c4194.svg?&style=for-the-badge&logo=axios&logoColor=white"/>
 <img alt="styled-components" src ="https://img.shields.io/badge/styled components-DB7093.svg?&style=for-the-badge&logo=styled-components&logoColor=white"/>
 <img alt="Socket.io" src ="https://img.shields.io/badge/Socket.io-25c2a0.svg?&style=for-the-badge&logo=Socket.io&logoColor=white"/>
-<img alt="Redux" src ="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=Redux&logoColor=white"/>
 
 ### Back-End
 
