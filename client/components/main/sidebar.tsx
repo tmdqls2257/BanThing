@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Direction } from '../type';
 import ChatRoom from './chatRoom';
 import CreateRoom from './createRoom';
 import JoinRoom from './joinRoom';
@@ -27,8 +26,6 @@ const SidebarContainer = styled.div`
   }
 `;
 const Sidebar = () => {
-  const [mobile, setMobile] = useState<Direction>('down');
-
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />

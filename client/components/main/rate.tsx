@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import styles from '../../styles/main/Rate.module.css';
 import Button from './button';
-import RateButton from './rateButton';
 const Container = styled.div`
   display: none;
   width: 100vw;
@@ -13,10 +13,39 @@ const Container = styled.div`
   backdrop-filter: blur(2px);
 `;
 export default function Rate() {
+  const [rateNum, setRateNum] = useState<number>(0);
+  const rendering = () => {
+    const result = [];
+    for (let i = 1; i < 11; i++) {
+      result.push(
+        <button
+          onClick={onClick}
+          value={i}
+          className={styles.rate_button_number}
+          key={i}
+        >
+          {i}
+        </button>,
+      );
+    }
+    return result;
+  };
+
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const button = event.currentTarget;
+    setRateNum(Number(button.value));
+  };
+
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log(rateNum);
+  };
+
   return (
     <>
       <Container id="rate">
-        <div className={styles.rate_modal}>
+        <form className={styles.rate_modal} onSubmit={onSubmit}>
           <section className={styles.rate_title}>
             <h1>
               함께 주문한 배달메이트,
@@ -26,20 +55,9 @@ export default function Rate() {
               (평가된 점수는 상대방의 평점에 반영됩니다)
             </p>
           </section>
-          <section className={styles.rate_button}>
-            <RateButton containerName={1}>1</RateButton>
-            <RateButton containerName={2}>2</RateButton>
-            <RateButton containerName={3}>3</RateButton>
-            <RateButton containerName={4}>4</RateButton>
-            <RateButton containerName={5}>5</RateButton>
-            <RateButton containerName={6}>6</RateButton>
-            <RateButton containerName={7}>7</RateButton>
-            <RateButton containerName={8}>8</RateButton>
-            <RateButton containerName={9}>9</RateButton>
-            <RateButton containerName={10}>10</RateButton>
-          </section>
+          <section className={styles.rate_button}>{rendering()}</section>
           <Button containerName={'평가하기'}>평가하기</Button>
-        </div>
+        </form>
       </Container>
     </>
   );

@@ -26,8 +26,10 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  margin: auto;
   margin: var(--margine-base) auto;
+  div {
+    margin: 0 4px;
+  }
 `;
 const ChatRoom = () => {
   const [error, setError] = useState<string>('');
@@ -45,8 +47,7 @@ const ChatRoom = () => {
           MakeRoom에서 받아온 제목
         </SidebarHeader>
         <main>
-          <Chats></Chats>
-          <NewChat onError={onError} />
+          <Chats addable={true}></Chats>
         </main>
         <ButtonContainer>
           <div>
