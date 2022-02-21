@@ -43,7 +43,7 @@ BanThing 의 자세한 Work Log 를 확인해보고 싶으시다면 아래 링�
 
 # Used Stack
 
-<img src="https://cdn.discordapp.com/attachments/890401766724751370/942667399122018364/2022-02-14_3.23.21.png" width=90% height="auto" />
+<img src="https://cdn.discordapp.com/attachments/932457592247173125/945325417257115708/2022-02-21_11.png" width=90% height="auto" />
 
 ### Front-End
 <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Next.js" src ="https://img.shields.io/badge/Next.js-000000.svg?&style=for-the-badge&logo=Next.js&logoColor=white"/>
@@ -53,7 +53,7 @@ BanThing 의 자세한 Work Log 를 확인해보고 싶으시다면 아래 링�
 
 ### Back-End
 
-<img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Sequelize" src ="https://img.shields.io/badge/Sequelize-52B0E7.svg?&style=for-the-badge&logo=Sequelize&logoColor=white"/>
+<img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="TypeORM" src ="https://img.shields.io/badge/Type ORM-eb4734.svg?&style=for-the-badge&logo=TypeORM&logoColor=white"/>
 <img alt="BCrypt-HASH" src ="https://img.shields.io/badge/BCrypt HASH-575757.svg?&style=for-the-badge&logo=None&logoColor=white"/>
 <img alt="JSON-Web-Tokens" src ="https://img.shields.io/badge/JWT-d63aff.svg?&style=for-the-badge&logo=JSON Web Tokens&logoColor=white"/>
 <img alt="Nest.js" src ="https://img.shields.io/badge/Nest.js-E0234E.svg?&style=for-the-badge&logo=NestJS&logoColor=white"/>
