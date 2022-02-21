@@ -29,8 +29,8 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-top: 20px;
-  margin-bottom: 25px;
+  margin-top: 18px;
+  margin-bottom: 17px;
 }
 
 .signup_id_name_container {
@@ -42,33 +42,45 @@
 
 .signup_input_box_1 {
   width: 146px;
-  height: 35px;
-  padding-left: 15px;
+  height: 40px;
+  padding-left: 12px;
   font-size: 14px;
   color: #686868;
-  border: none;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  border-width: 1px;
   border-radius: 12px;
-  background-color: #f3f3f3;
+  background-color: #ffffff;
+}
+
+.signup_input_box_1::placeholder {
+  color: rgb(0 0 0 / 40%);
 }
 
 .signup_input_box_1:focus {
-  outline: none;
+  outline-color: #ffc49d;
 }
 
 .signup_input_box_2 {
   width: 210px;
-  height: 35px;
-  padding-left: 15px;
+  height: 40px;
+  padding-left: 12px;
   font-size: 14px;
   color: #686868;
   margin: 8px auto 2px auto;
-  border: none;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  border-width: 1px;
   border-radius: 12px;
-  background-color: #f3f3f3;
+  background-color: #ffffff;
+}
+
+.signup_input_box_2::placeholder {
+  color: rgb(0 0 0 / 40%);
 }
 
 .signup_input_box_2:focus {
-  outline: none;
+  outline-color: #ffc49d;
 }
 
 .signup_double_check_button {
@@ -92,7 +104,7 @@
   width: 125px;
   height: 40px;
   font-size: 17px;
-  margin: 25px auto 0 auto;
+  margin: 14px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
@@ -121,11 +133,12 @@
 }
 
 .signup_error {
-  /* display: none; */
   display: flex;
   font-size: 12px;
-  padding-left: 45px;
+  margin-top: 1px;
+  padding-left: 47px;
   color: #ff6767;
+  color: #ffffff;
 }
 
 .signup_space {

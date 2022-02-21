@@ -1,11 +1,11 @@
 .login_container {
+  position: fixed;
+  overflow: hidden;
   display: flex;
   width: 100%;
   padding-top: 10vw;
   justify-content: center;
-  position: fixed;
   height: 100vh;
-  overflow: hidden;
   z-index: 3;
   backdrop-filter: blur(2px);
 }
@@ -42,31 +42,37 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-top: 48px;
-  margin-bottom: 35px;
+  margin-top: 46px;
+  margin-bottom: 37px;
 }
 
 .login_input_box {
   width: 210px;
-  height: 35px;
-  padding-left: 15px;
+  height: 40px;
+  padding-left: 12px;
   font-size: 14px;
   color: #686868;
   margin: 5px auto 5px auto;
-  border: none;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  border-width: 1px;
   border-radius: 12px;
-  background-color: #f3f3f3;
+  background-color: #ffffff;
+}
+
+.login_input_box::placeholder {
+  color: rgb(0 0 0 / 40%);
 }
 
 .login_input_box:focus {
-  outline: none;
+  outline-color: #ffc49d;
 }
 
 .login_button {
   width: 125px;
   height: 40px;
   font-size: 17px;
-  margin: 45px auto 0 auto;
+  margin: 39px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
