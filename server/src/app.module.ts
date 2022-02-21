@@ -24,7 +24,7 @@ import { MainPageModule } from './main-page/main-page.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME || 'BanThing',
       entities: [Users, Rooms, ChatLogs],
-      //synchronize: true, //테이블을 자동으로 생성 개발모드일때만 사용 운영모드일때는 삭제
+      synchronize: true, //테이블을 자동으로 생성 개발모드일때만 사용 운영모드일때는 삭제
     }),
     AuthModule,
     RoomModule,
