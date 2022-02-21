@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { newchatType } from '../type';
 
 const Container = styled.div`
+  max-height: 40vh;
   ul {
     height: 100%;
     padding: 0;
@@ -49,7 +51,12 @@ const Container = styled.div`
     flex-direction: row-reverse;
   }
 `;
-const chat = () => {
+export interface chatType {
+  onCreated?: (arg0: string) => void;
+  chat: string;
+}
+
+const chat = ({ chat }: chatType) => {
   return (
     <Container>
       <div className="display-container">
@@ -71,7 +78,7 @@ const chat = () => {
           <li className="sent">
             <div className="message-row--own message-row__content message__info">
               <span className="message__time">18:13</span>
-              <span className="message__bubble">어제는 뭐 하셨나요?</span>
+              <span className="message__bubble">{chat}</span>
             </div>
           </li>
         </ul>

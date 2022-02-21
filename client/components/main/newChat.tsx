@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
@@ -32,22 +33,23 @@ const Container = styled.div`
 const NewChat = ({ onError }: any) => {
   const [tweet, setTweet] = useState('');
 
-  // const onSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   chatService
-  //     .postTweet(tweet)
-  //     .then(() => {
-  //       setTweet('');
-  //     })
-  //     .catch(onError);
-  // };
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    axios.post('http://localhost:80/rooms/chat', {
+      body: {
+        rooms_id: 4,
+        chat: tweet,
+      },
+    });
+    setTweet('');
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTweet(event.target.value);
   };
   return (
     <Container>
-      <form className="reply__column">
+      <form className="reply__column" onSubmit={onSubmit}>
         <input type="text" onChange={onChange} />
         <button className="input-button">Enter</button>
       </form>

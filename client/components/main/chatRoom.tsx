@@ -48,7 +48,6 @@ const ChatRoom = () => {
         </SidebarHeader>
         <main>
           <Chats></Chats>
-          <NewChat onError={onError} />
         </main>
         <ButtonContainer>
           <div>
