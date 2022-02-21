@@ -4,7 +4,7 @@ import styles from '../styles/MyPage.module.css';
 import { useState } from 'react';
 
 const MyPage: NextPage = () => {
-  const isEnglishAndNumber4to10 = /^[a-zA-z0-9]{4,10}$/;
+  const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
 
   const [changePassword, setChangePassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
@@ -27,7 +27,7 @@ const MyPage: NextPage = () => {
     if (type === 'change_password') {
       if (!value) {
         setCorrectChangePassword(true);
-      } else if (isEnglishAndNumber4to10.test(value)) {
+      } else if (isSmallLetterAndNumber4to10.test(value)) {
         setCorrectChangePassword(true);
       } else {
         setCorrectChangePassword(false);
@@ -95,11 +95,11 @@ const MyPage: NextPage = () => {
             />
             {correctChangePassword ? (
               <span className={styles.mypage_space}>
-                4~10자 영문, 숫자를 사용하였습니다.
+                4~10자 영어 소문자, 숫자를 사용하였습니다.
               </span>
             ) : (
               <span className={styles.mypage_error}>
-                4~10자 영문, 숫자를 사용하세요.
+                4~10자 영어 소문자, 숫자를 사용하세요.
               </span>
             )}
             <input
