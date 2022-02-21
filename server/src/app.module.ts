@@ -18,7 +18,7 @@ import { MainPageModule } from './main-page/main-page.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DATABASE_USERNAME || 'localhost',
       port: 3306,
       username: process.env.DATABASE_USERNAME || 'root',
       password: process.env.DATABASE_PASSWORD,
