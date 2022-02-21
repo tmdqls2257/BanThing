@@ -23,9 +23,11 @@ export default function NavBar() {
           <Link href="/">
             <a className={styles.nav_menu}>HOME</a>
           </Link>
+          <span className={styles.nav_divide}>|</span>
           <Link href="/main">
             <a className={styles.nav_menu}>MAIN</a>
           </Link>
+          <span className={styles.nav_divide}>|</span>
           <a className={styles.nav_menu} onClick={() => openLoginModal()}>
             LOGIN
           </a>
