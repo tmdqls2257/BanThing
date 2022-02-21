@@ -43,7 +43,7 @@
   font-weight: 700;
   color: #ff8a3c;
   margin-top: 46px;
-  margin-bottom: 37px;
+  margin-bottom: 35px;
 }
 
 .login_input_box {
@@ -135,8 +135,7 @@
   display: none;
   position: fixed;
   font-size: 12px;
-  margin-top: 99px;
+  margin-top: 29px;
   margin-left: 38px;
   color: #ff6767;
-  font-weight: bold;
 }
