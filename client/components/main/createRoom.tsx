@@ -1,4 +1,4 @@
-import Button from './button';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -21,7 +21,7 @@ const Container = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
+const Button = styled.div`
   display: flex;
   margin: auto;
   margin: var(--margine-base) auto;
@@ -31,6 +31,13 @@ const ButtonContainer = styled.div`
 `;
 
 const CreateRoom = () => {
+  const [visiable, setvisiable] = useState(true);
+  const onClick = () => {
+    setvisiable(false);
+  };
+  if (!visiable) {
+    return null;
+  }
   return (
     <Container id="CreateRoom">
       <img
@@ -38,9 +45,9 @@ const CreateRoom = () => {
         alt=""
       />
       <p>원하는 마크를 선택하거나 방을 만들어주세요.</p>
-      <ButtonContainer>
-        <Button containerName={'CreateRoom'}>방 만들기</Button>
-      </ButtonContainer>
+      <Button>
+        <button onClick={onClick}>방 만들기</button>
+      </Button>
     </Container>
   );
 };

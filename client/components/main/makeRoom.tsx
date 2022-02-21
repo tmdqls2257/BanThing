@@ -1,7 +1,6 @@
 import SidebarHeader from './sidebarHeader';
 import styled from 'styled-components';
 import { setStateType } from '../type';
-import Button from './button';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -66,7 +65,7 @@ const Container = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
+const Button = styled.div`
   display: flex;
   margin: auto;
   margin: var(--margine-base) auto;
@@ -127,9 +126,9 @@ const MakeRoom = () => {
           <textarea className="MakeRoom-main-section-content" />
         </section>
       </main>
-      <ButtonContainer>
-        <Button containerName={'MakeRoom'}>생성하기</Button>
-      </ButtonContainer>
+      <Button>
+        <button>생성하기</button>
+      </Button>
     </Container>
   );
 };
