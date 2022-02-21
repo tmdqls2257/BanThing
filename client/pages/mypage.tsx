@@ -4,7 +4,7 @@ import styles from '../styles/MyPage.module.css';
 import { useState } from 'react';
 
 const MyPage: NextPage = () => {
-  const isSmallLetterAndNumber4to10 = /^[a-zA-z0-9]{4,10}$/;
+  const isEnglishAndNumber4to10 = /^[a-zA-z0-9]{4,10}$/;
 
   const [changePassword, setChangePassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
@@ -27,7 +27,7 @@ const MyPage: NextPage = () => {
     if (type === 'change_password') {
       if (!value) {
         setCorrectChangePassword(true);
-      } else if (isSmallLetterAndNumber4to10.test(value)) {
+      } else if (isEnglishAndNumber4to10.test(value)) {
         setCorrectChangePassword(true);
       } else {
         setCorrectChangePassword(false);
