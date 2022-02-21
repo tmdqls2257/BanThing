@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from '../styles/SignUp.module.css';
 
 interface propsType {
@@ -6,6 +7,14 @@ interface propsType {
 }
 
 export default function SignUp(prop: propsType) {
+  const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
+  const isKorean = /^[\가-\힣+]*$/;
+
+  const [userId, setUserId] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
+
   return (
     <>
       <div className={styles.signup_modal}>
@@ -19,7 +28,11 @@ export default function SignUp(prop: propsType) {
           Ban<span className={styles.black}>Thing</span>
         </div>
         <div className={styles.signup_id_name_container}>
-          <input className={styles.signup_input_box_1} placeholder="아이디" />
+          <input
+            id="id"
+            className={styles.signup_input_box_1}
+            placeholder="아이디"
+          />
           <button className={styles.signup_double_check_button}>
             중복확인
           </button>
