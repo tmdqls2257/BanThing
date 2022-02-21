@@ -1,12 +1,12 @@
 .login_container {
+  position: fixed;
+  overflow: hidden;
   display: flex;
   width: 100%;
-  padding-top: 10vw;
   justify-content: center;
-  position: fixed;
+  align-items: center;
   height: 100vh;
-  overflow: hidden;
-  z-index: 1;
+  z-index: 3;
   backdrop-filter: blur(2px);
 }
 
@@ -30,7 +30,7 @@
   position: fixed;
   font-size: 22px;
   font-weight: 700;
-  margin-top: -400px;
+  margin-top: -450px;
   margin-left: 240px;
 }
 
@@ -42,35 +42,73 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 46px;
+  margin-bottom: 35px;
 }
 
 .login_input_box {
   width: 210px;
-  height: 35px;
-  padding-left: 15px;
+  height: 40px;
+  padding-left: 12px;
   font-size: 14px;
   color: #686868;
-  margin: 7px auto 7px auto;
-  border: none;
-  border-radius: 10px;
-  background-color: #ececec;
+  margin: 5px auto 5px auto;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  border-width: 1px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.login_input_box::placeholder {
+  color: rgb(0 0 0 / 40%);
+}
+
+.login_input_box:focus {
+  outline-color: #ffc49d;
 }
 
 .login_button {
-  width: 120px;
-  height: 45px;
+  width: 125px;
+  height: 40px;
   font-size: 17px;
-  margin: 30px auto 40px auto;
+  margin: 39px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
   background-color: #ff8a3c;
-  border-radius: 30px;
+  padding-top: 3px;
+  border-radius: 12px;
 }
 
 .login_button:hover {
+  cursor: pointer;
+}
+
+.login_icon {
+  width: 12px;
+  margin-right: 10px;
+}
+
+.login_kakao_button {
+  width: 125px;
+  height: 40px;
+  font-size: 17px;
+  margin: 10px auto 0px auto;
+  border: none;
+  color: #000000 85%;
+  font-weight: 500;
+  background-color: #fee500;
+  padding-top: 3px;
+  border-radius: 12px;
+}
+
+.login_kakao_logo {
+  width: 13.6px;
+  margin-right: 10px;
+}
+
+.login_kakao_button:hover {
   cursor: pointer;
 }
 
@@ -80,6 +118,7 @@
 
 .login_description {
   font-size: 13px;
+  margin: 50px auto 35px auto;
 }
 
 .login_signup {
@@ -96,8 +135,7 @@
   display: none;
   position: fixed;
   font-size: 12px;
-  margin-top: 99px;
+  margin-top: 29px;
   margin-left: 38px;
   color: #ff6767;
-  font-weight: bold;
 }

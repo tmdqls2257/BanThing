@@ -1,5 +1,3 @@
-/* 줄이기 */
-
 .signup_modal {
   display: flex;
   width: 278px;
@@ -31,44 +29,65 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-bottom: 20px;
+  margin-top: 18px;
+  margin-bottom: 17px;
 }
 
 .signup_id_name_container {
   display: flex;
   width: 210px;
-  margin: 11px auto 5px auto;
+  margin: 8px auto 2px auto;
   flex-direction: row;
 }
 
 .signup_input_box_1 {
   width: 146px;
-  height: 35px;
-  padding-left: 15px;
+  height: 40px;
+  padding-left: 12px;
   font-size: 14px;
   color: #686868;
-  border: none;
-  border-radius: 10px;
-  background-color: #ececec;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  border-width: 1px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.signup_input_box_1::placeholder {
+  color: rgb(0 0 0 / 40%);
+}
+
+.signup_input_box_1:focus {
+  outline-color: #ffc49d;
 }
 
 .signup_input_box_2 {
   width: 210px;
-  height: 35px;
-  padding-left: 15px;
+  height: 40px;
+  padding-left: 12px;
   font-size: 14px;
   color: #686868;
-  margin: 11px auto 5px auto;
-  border: none;
-  border-radius: 10px;
-  background-color: #ececec;
+  margin: 8px auto 2px auto;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  border-width: 1px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.signup_input_box_2::placeholder {
+  color: rgb(0 0 0 / 40%);
+}
+
+.signup_input_box_2:focus {
+  outline-color: #ffc49d;
 }
 
 .signup_double_check_button {
   width: 60px;
   border: none;
   font-size: 12px;
-  border-radius: 5px;
+  border-radius: 12px;
   color: #ffffff;
   background-color: #ff8a3c;
   margin-left: 4px;
@@ -79,27 +98,32 @@
 }
 
 .signup_button {
-  width: 120px;
-  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 40px;
   font-size: 17px;
-  margin: 15px auto 0 auto;
+  margin: 14px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
   background-color: #ff8a3c;
-  border-radius: 30px;
+  border-radius: 12px;
 }
 
 .signup_button:hover {
   cursor: pointer;
 }
 
-.black {
-  color: black;
+.signup_icon {
+  width: 18px;
+  margin-top: -1.6px;
+  margin-right: 8px;
 }
 
-.signup_description {
-  font-size: 14px;
+.black {
+  color: black;
 }
 
 .signup_signup {
@@ -109,13 +133,12 @@
 }
 
 .signup_error {
-  /* display: none; */
   display: flex;
   font-size: 12px;
-  padding-left: 45px;
+  margin-top: 1px;
+  padding-left: 47px;
   color: #ff6767;
-  margin-top: 0;
-  margin-bottom: 0;
+  color: #ffffff;
 }
 
 .signup_space {
