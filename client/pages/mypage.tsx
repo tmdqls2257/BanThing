@@ -33,6 +33,7 @@ const MyPage: NextPage = () => {
             <input
               className={styles.mypage_password_change_check}
               placeholder="변경할 비밀번호 입력"
+              type="password"
             />
             <span className={styles.mypage_error}>
               4~10자 영문, 숫자를 사용하세요.
@@ -41,6 +42,7 @@ const MyPage: NextPage = () => {
             <input
               className={styles.mypage_password_change_check}
               placeholder="변경할 비밀번호 확인"
+              type="password"
             />
             <span className={styles.mypage_error}>
               비밀번호가 일치하지 않습니다.

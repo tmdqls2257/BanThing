@@ -1,5 +1,5 @@
 .mypage_container {
-  padding-top: 3vw;
+  padding-top: 2vw;
   display: flex;
   width: 100%;
   min-height: 100vh;
@@ -66,8 +66,8 @@
   border-radius: 12px;
 }
 
-.mypage_id_name::placeholder {
-  color: #3f3f3f;
+.login_input_box::placeholder {
+  color: rgb(0 0 0 / 40%);
 }
 
 .mypage_password_change_check {
@@ -75,13 +75,20 @@
   height: 2.5vw;
   margin: 0.7vw auto auto auto;
   padding: 0.7vw;
-  border: none;
-  background-color: #f5f5f5;
+  color: #686868;
+  border: solid;
+  border-color: rgb(0 0 0 / 20%);
+  background-color: #ffffff;
+  border-width: 1px;
   border-radius: 12px;
 }
 
-.mypage_password_change_check {
-  outline: none;
+.mypage_password_change_check::placeholder {
+  color: rgb(0 0 0 / 40%);
+}
+
+.mypage_password_change_check:focus {
+  outline-color: #ffc49d;
 }
 
 .mypage_button_container {
@@ -130,7 +137,7 @@
 .mypage_error {
   display: flex;
   color: #ff6666;
-  margin-top: 0.3vw;
+  margin-top: 0.2vw;
   font-size: 0.8vw;
   padding-left: 0.6vw;
 }
