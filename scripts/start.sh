@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/test-for-ec2/server
+cd /home/ubuntu/banthing/server
 
 export DATABASE_HOST=$(aws ssm get-parameters --region ap-northeast-2 --names DATABASE_HOST --query Parameters[0].Value | sed 's/"//g')
 export DATABASE_PORT=$(aws ssm get-parameters --region ap-northeast-2 --names DATABASE_PORT --query Parameters[0].Value | sed 's/"//g')
