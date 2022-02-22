@@ -10,7 +10,7 @@ const MyPage: NextPage = () => {
   const [checkPassword, setCheckPassword] = useState('');
 
   const [correctChangePassword, setCorrectChangePassword] = useState(true);
-  const [changeEqualCheck, setChangeEqualCheck] = useState(true);
+  const [correctCheckPassword, setCorrectCheckPassword] = useState(true);
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChangePassword(event.target.value);
@@ -22,7 +22,7 @@ const MyPage: NextPage = () => {
 
   const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    const type = event.target.id;
+    const type: string = event.target.id;
 
     if (type === 'change_password') {
       if (!value) {
@@ -35,17 +35,17 @@ const MyPage: NextPage = () => {
     }
 
     if (!correctChangePassword) {
-      setChangeEqualCheck(true);
+      setCorrectCheckPassword(true);
     } else {
       if (changePassword === '') {
-        setChangeEqualCheck(true);
+        setCorrectCheckPassword(true);
       } else if (type === 'check_password') {
         if (!value) {
-          setChangeEqualCheck(true);
+          setCorrectCheckPassword(true);
         } else if (changePassword === checkPassword) {
-          setChangeEqualCheck(true);
+          setCorrectCheckPassword(true);
         } else {
-          setChangeEqualCheck(false);
+          setCorrectCheckPassword(false);
         }
       }
     }
@@ -110,7 +110,7 @@ const MyPage: NextPage = () => {
               onChange={handleCheckPassword}
               onBlur={handleBlur}
             />
-            {changeEqualCheck ? (
+            {correctCheckPassword ? (
               <span className={styles.mypage_space}>
                 비밀번호가 일치합니다.
               </span>

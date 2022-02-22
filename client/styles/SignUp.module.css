@@ -143,12 +143,18 @@
   display: flex;
   font-size: 12px;
   margin-top: 1px;
-  padding-left: 47px;
+  padding-left: 43px;
   color: #ff6767;
-  color: #ffffff;
 }
 
 .signup_space {
+  display: flex;
   font-size: 12px;
+  margin-top: 1px;
+  padding-left: 43px;
   opacity: 0;
+}
+
+.signup_space:hover {
+  cursor: default;
 }
