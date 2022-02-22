@@ -22,9 +22,9 @@ export class MypageService {
         .createQueryBuilder()
         .update(Users)
         .set({
-          user_id: user.user_id,
+          // user_id: user.user_id,
           password: transPassword,
-          nickname: user.nickname,
+          //nickname: user.nickname,
         })
         .where(`user_id = '${user.user_id}'`)
         .execute();

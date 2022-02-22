@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class ChatLogs {
+export class Reply {
   @PrimaryGeneratedColumn()
   id: number;
 

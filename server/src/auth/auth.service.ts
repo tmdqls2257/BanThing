@@ -46,8 +46,6 @@ export class AuthService {
 
   //회원가입
   async signUp(newUser: SignUpDTO): Promise<object> {
-    newUser.rating_count = 0;
-    newUser.rating_score = 0;
     await this.userService.save(newUser);
     return { data: null, message: '회원가입 완료' };
   }

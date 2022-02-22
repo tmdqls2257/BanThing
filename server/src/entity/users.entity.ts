@@ -19,10 +19,4 @@ export class Users {
 
   @Column({ nullable: true })
   auth: string;
-
-  @Column({ nullable: true })
-  rating_score: number;
-
-  @Column({ nullable: true })
-  rating_count: number;
 }
