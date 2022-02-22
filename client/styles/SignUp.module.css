@@ -51,7 +51,7 @@
   width: 146px;
   height: 40px;
   padding-left: 12px;
-  font-size: 14px;
+  font-size: 13px;
   color: #686868;
   border: solid;
   border-color: rgb(0 0 0 / 20%);
@@ -72,7 +72,7 @@
   width: 210px;
   height: 40px;
   padding-left: 12px;
-  font-size: 14px;
+  font-size: 13px;
   color: #686868;
   margin: 8px auto 2px auto;
   border: solid;
@@ -143,12 +143,18 @@
   display: flex;
   font-size: 12px;
   margin-top: 1px;
-  padding-left: 47px;
+  padding-left: 43px;
   color: #ff6767;
-  color: #ffffff;
 }
 
 .signup_space {
+  display: flex;
   font-size: 12px;
+  margin-top: 1px;
+  padding-left: 43px;
   opacity: 0;
+}
+
+.signup_space:hover {
+  cursor: default;
 }
