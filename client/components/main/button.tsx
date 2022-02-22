@@ -26,6 +26,7 @@ function Button({ containerName, children }: BasicButtonProp) {
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
       chatRoom.style.display = 'none';
+      rate.style.display = 'none';
       createElement.style.display = 'flex';
     } else if (button.value === '합의완료') {
       rate.style.display = 'flex';
@@ -49,7 +50,7 @@ const StyledButton = styled.div`
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-bold);
     padding: 12px 16px;
-    border-radius: 50px;
+    border-radius: 6px;
     color: #ffffff;
     width: 181px;
     background-color: #ff8a3d;

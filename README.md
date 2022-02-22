@@ -1,5 +1,9 @@
 <img src="https://cdn.discordapp.com/attachments/890401766724751370/942612988614037565/f45bd8aad5bb97d9.jpg" />
 
+# **[BanThing](https://banthing.kr)**
+BanThing 을 클릭하시면 해당 서비스로 이동하실 수 있습니다 :)
+<br/> &nbsp;
+
 # Contents
 1. [About BanThing](#About-BanThing)
 2. [BanThing Wiki](#BanThing-Wiki)
