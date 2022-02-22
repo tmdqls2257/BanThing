@@ -26,9 +26,12 @@ export class Rooms {
   @Column()
   host_role: number;
 
-  @Column({ nullable: true })
+  @Column()
   host_rating_score: number;
 
-  @Column({ nullable: true })
+  @Column()
   host_rating_count: number;
+
+  @Column()
+  category: string;
 }
