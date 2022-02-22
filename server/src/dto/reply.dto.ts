@@ -1,4 +1,4 @@
-export class ChatDTO {
+export class ReplyDTO {
   rooms_id: number;
   nickname: string;
   chat: string;

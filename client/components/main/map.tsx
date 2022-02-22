@@ -34,6 +34,13 @@ const positions = [
     imageSrc:
       'https://cdn.discordapp.com/attachments/934007459763326976/944397124114722826/unknown.png',
   },
+<<<<<<< HEAD
+  // {
+  //   lat: 35.171877,
+  //   lon: 126.808983,
+  // },
+=======
+>>>>>>> dev
 ];
 
 function Map() {
