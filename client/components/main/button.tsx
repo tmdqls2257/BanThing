@@ -1,3 +1,4 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { BasicButtonProp } from '../type';
 
@@ -21,7 +22,18 @@ function Button({
       createElement.style.display = 'none';
       makeRoom.style.display = 'flex';
     } else if (button.value === 'MakeRoom') {
-      console.log(onClick);
+      if (onClick) {
+        try {
+          axios.post(`http://localhost:80/rooms`, {
+            title: onClick[0],
+            category: onClick[1],
+            content: onClick[2],
+            host_roll: Number(onClick[3]),
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      }
       makeRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '나가기') {
@@ -32,7 +44,9 @@ function Button({
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
       console.log(rateNum);
-
+      // axios.post(`http://localhost:80/rooms/evaluation`,{
+      //   rating_score: rateNum
+      // })
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';

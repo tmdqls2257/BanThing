@@ -2,7 +2,7 @@ export interface BasicButtonProp {
   children: string;
   containerName: string;
   rateNum?: number;
-  onClick?: object;
+  onClick?: string[];
 }
 
 export interface RateButtonProp {

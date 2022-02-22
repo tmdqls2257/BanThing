@@ -26,6 +26,7 @@ const SidebarContainer = styled.div`
   }
 `;
 const Sidebar = () => {
+  const state = {};
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />

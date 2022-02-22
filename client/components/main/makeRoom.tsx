@@ -92,7 +92,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const MakeRoom = (state: any) => {
+const MakeRoom = () => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
   const [textarea, setTextarea] = useState('');
@@ -117,7 +117,7 @@ const MakeRoom = (state: any) => {
     event.preventDefault();
     setRadio(event.target.value);
   };
-  const data = { title, select, textarea, radio };
+  const data = [title, select, textarea, radio];
   return (
     <Container id="MakeRoom">
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>
