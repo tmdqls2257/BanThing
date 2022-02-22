@@ -8,4 +8,5 @@ export class CreateRoomDTO {
   host_rating_score: number;
   host_rating_count: number;
   host_role: number;
+  category: string;
 }

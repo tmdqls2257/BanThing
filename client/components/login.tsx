@@ -1,16 +1,47 @@
 import styles from '../styles/Login.module.css';
 import SignUp from './signup';
 import React, { useState } from 'react';
+import axios from 'axios';
+import { ChangeEvent } from 'react';
 interface propsType {
   loginModal: boolean;
   setLoginModal: Function;
+  setIsLogin: Function;
+  setAccessToken: Function;
 }
 
 export default function Login(prop: propsType) {
   const [signUpModal, setSignUpModal] = useState(false);
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
 
   const openSignUpModal = () => {
     setSignUpModal(true);
+  };
+
+  const handleUserId = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserId(event.target.value);
+  };
+
+  const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const handleLogin = () => {
+    axios
+      .post(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+        user_id: userId,
+        password: password,
+      })
+      .then((response) => {
+        const { accessToken } = response.data.data;
+        localStorage.setItem('accessToken', accessToken);
+        console.log(accessToken);
+        prop.setAccessToken(accessToken);
+        prop.setIsLogin(true);
+        prop.setLoginModal(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -29,16 +60,18 @@ export default function Login(prop: propsType) {
           <input
             className={styles.login_input_box}
             placeholder="아이디"
+            onChange={handleUserId}
           ></input>
           <input
             className={styles.login_input_box}
             type="password"
             placeholder="비밀번호"
+            onChange={handlePassword}
           ></input>
           <span className={styles.login_error}>
             아이디 또는 비밀번호가 일치하지 않습니다.
           </span>
-          <button className={styles.login_button}>
+          <button className={styles.login_button} onClick={handleLogin}>
             <img
               src="/login.png"
               alt="login-icon"
