@@ -11,13 +11,13 @@ export class Reply {
   id: number;
 
   @Column()
-  rooms_id: number;
+  post_id: number;
 
   @Column()
   nickname: string;
 
   @Column()
-  chat: string;
+  reply: string;
 
   @CreateDateColumn()
   time: Date;

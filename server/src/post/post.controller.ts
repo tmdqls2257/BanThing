@@ -15,7 +15,7 @@ import { ReplyDTO } from 'src/dto/reply.dto';
 import { EvaluationDTO } from 'src/dto/evaluation.dto';
 
 @Controller('post')
-export class RoomController {
+export class PostController {
   constructor(private postService: PostService) {}
 
   @Post() //글 게시
@@ -29,17 +29,17 @@ export class RoomController {
 
   @Post('/reply') //댓글 저장
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async chatLog(
+  async reply(
     @Body() replyDTO: ReplyDTO,
     @Req() req: Request,
   ): Promise<object> {
-    return await this.postService.chatLog(replyDTO, req.user);
+    return await this.postService.reply(replyDTO, req.user);
   }
 
   @Get('/reply/:id') //댓글 받기(방 입장)
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async getChat(@Param('id') id: number): Promise<object> {
-    return await this.postService.getChat(id);
+  async getReply(@Param('id') id: number): Promise<object> {
+    return await this.postService.getReply(id);
   }
 
   // @Post('/evaluation') //평가하기
