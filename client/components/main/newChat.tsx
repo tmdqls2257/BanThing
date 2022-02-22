@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
+import EVENTS from '../../config/events';
+import { useSockets } from '../network/socket';
 const Container = styled.div`
   .reply__column {
     display: flex;
@@ -30,8 +32,10 @@ const Container = styled.div`
     padding: 0;
   }
 `;
+// const socket = io();
 const NewChat = ({ onCreated, onError }: any) => {
   const [chat, setChat] = useState('');
+  // const { socket, messages, roomId, username, setMessages } = useSockets();
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -47,7 +51,6 @@ const NewChat = ({ onCreated, onError }: any) => {
     // );
     if (chat !== '') {
       onCreated(chat);
-      console.log(chat);
     }
     setChat('');
   };
