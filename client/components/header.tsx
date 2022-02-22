@@ -26,8 +26,10 @@ export default function Header(prop: propsType) {
           headers: {
             Authorization: `Bearer ${prop.accessToken}`,
             'Content-Type': 'application/json',
+            withCredentials: true,
           },
-          withCredentials: true,
+          // 'Content-Type': 'application/json',
+          // withCredentials: true,
         },
       )
       .then((response) => {
@@ -56,9 +58,11 @@ export default function Header(prop: propsType) {
               <a className={styles.nav_menu}>MAIN</a>
             </Link>
             <span className={styles.nav_divide}>|</span>
-            <a className={styles.nav_menu} onClick={handleLogout}>
-              LOGOUT
-            </a>
+            <Link href="/">
+              <a className={styles.nav_menu} onClick={handleLogout}>
+                LOGOUT
+              </a>
+            </Link>
           </nav>
           <div className={styles.nav_user_image_container}>
             <Link href="/mypage">
