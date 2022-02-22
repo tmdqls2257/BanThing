@@ -1,48 +1,52 @@
 .mypage_container {
-  padding-top: 2vw;
   display: flex;
+  position: fixed;
   width: 100%;
   height: 100vh;
-  min-height: 100vh;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .mypage_profile {
   display: flex;
-  width: 17vw;
-  justify-content: center;
+  position: fixed;
+  width: 300px;
+  height: 600px;
+  align-items: center;
   text-align: center;
   flex-direction: column;
+  margin-top: 4.6vw;
 }
 
 .mypage_image {
-  width: 100%;
-  height: auto;
+  display: flex;
+  width: 192px;
 }
 
 .mypage_score_container {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-top: 11px;
+  margin-bottom: 3px;
 }
 
 .mypage_score_description {
-  font-size: 1.3vw;
+  font-size: 16px;
   font-weight: bold;
   color: #ff8a3c;
 }
 
 .mapage_score {
   display: flex;
-  font-size: 1.2vw;
-  width: 8vw;
-  height: 2.5vw;
+  font-size: 14px;
+  width: 85px;
+  height: 28px;
   justify-content: center;
   align-items: center;
   color: #ffffff;
   background-color: #ff8a3c;
-  margin: 0.3vw auto 0.3vw auto;
+  margin-top: 2px;
   border-radius: 25px;
 }
 
@@ -50,19 +54,15 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 0.9vw auto 0.3vw auto;
-}
-
-.mypage_input_disabled {
-  margin: auto auto auto auto;
+  margin: 13px auto 4px auto;
 }
 
 .mypage_id_name {
-  width: 14vw;
-  height: 2.5vw;
-  margin: auto auto 0.5vw auto;
-  font-size: 0.9vw;
-  padding: 0.7vw;
+  width: 205px;
+  height: 36px;
+  margin-bottom: 7px;
+  font-size: 13px;
+  padding-left: 12px;
   background-color: #d6d6d6;
   border: none;
   border-radius: 12px;
@@ -73,17 +73,17 @@
 }
 
 .mypage_password_change_check {
-  width: 14vw;
-  height: 2.5vw;
-  margin: 0.7vw auto auto auto;
-  padding: 0.7vw;
+  width: 205px;
+  height: 36px;
+  margin: 10px auto auto auto;
+  padding-left: 12px;
   color: #686868;
   border: solid;
   border-color: rgb(0 0 0 / 20%);
   background-color: #ffffff;
   border-width: 1px;
   border-radius: 12px;
-  font-size: 0.9vw;
+  font-size: 13px;
 }
 
 .mypage_password_change_check::placeholder {
@@ -99,15 +99,15 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 0.8vw;
+  margin-top: 9px;
 }
 
 .mypage_modify_button {
-  width: 10vw;
-  height: 3.2vw;
+  width: 145px;
+  height: 46px;
   color: #ffffff;
   background-color: #ff8a3c;
-  font-size: 1.3vw;
+  font-size: 18px;
   font-weight: 500;
   border: none;
   border-radius: 12px;
@@ -120,15 +120,15 @@
 }
 
 .mypage_signout_button {
-  width: 10vw;
-  height: 3.2vw;
+  width: 145px;
+  height: 46px;
   color: #ffffff;
   background-color: #ff6666;
-  font-size: 1.3vw;
+  font-size: 18px;
   font-weight: 500;
   border: none;
   border-radius: 12px;
-  margin-top: 1vw;
+  margin-top: 15px;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
@@ -140,18 +140,19 @@
 .mypage_error {
   display: flex;
   color: #ff6666;
-  margin-top: 0.2vw;
-  font-size: 0.8vw;
-  padding-left: 2.1vw;
+  margin-top: 2px;
+  font-size: 11px;
+  padding-left: 58px;
 }
 
 .mypage_space {
   display: flex;
-  margin-top: 0.2vw;
-  font-size: 0.8vw;
+  margin-top: 2px;
+  font-size: 11px;
   padding-left: 0.6vw;
   opacity: 0;
 }
+
 .mypage_space:hover {
   cursor: default;
 }

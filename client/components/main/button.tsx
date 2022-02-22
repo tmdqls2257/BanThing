@@ -1,7 +1,13 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { BasicButtonProp } from '../type';
 
-function Button({ containerName, children }: BasicButtonProp) {
+function Button({
+  onClick,
+  rateNum,
+  containerName,
+  children,
+}: BasicButtonProp) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -16,6 +22,21 @@ function Button({ containerName, children }: BasicButtonProp) {
       createElement.style.display = 'none';
       makeRoom.style.display = 'flex';
     } else if (button.value === 'MakeRoom') {
+      if (onClick) {
+        try {
+          axios.post(
+            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms`,
+            {
+              title: onClick[0],
+              category: onClick[1],
+              content: onClick[2],
+              host_roll: Number(onClick[3]),
+            },
+          );
+        } catch (e) {
+          console.log(e);
+        }
+      }
       makeRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '나가기') {
@@ -25,6 +46,13 @@ function Button({ containerName, children }: BasicButtonProp) {
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
+      console.log(rateNum);
+      axios.post(
+        `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms/evaluation`,
+        {
+          rating_score: rateNum,
+        },
+      );
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';
