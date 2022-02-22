@@ -43,7 +43,7 @@ function Map() {
     const getPosts = async () => {
       try {
         const response: AxiosResponse = await axios.get(
-          'http://localhost:80/main',
+          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
         );
         setData(response.data);
       } catch (e) {

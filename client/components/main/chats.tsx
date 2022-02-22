@@ -46,7 +46,7 @@ const Chats = ({ addable }: ChatsType) => {
   // useEffect(() => {
   //   const getPosts = async () => {
   //     const response: AxiosResponse = await axios.get(
-  //       'http://localhost:80/rooms/chat/1',
+  //       `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms/chat/1`,
   //     );
   //     setChats(response.data.message);
   //     setUser(response.data);
