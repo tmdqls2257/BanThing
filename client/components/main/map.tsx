@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import Loading from './loading';
 import { useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 
 const MapContainer = styled.div`
   display: flex;
@@ -33,15 +34,31 @@ const positions = [
     imageSrc:
       'https://cdn.discordapp.com/attachments/934007459763326976/944397124114722826/unknown.png',
   },
+<<<<<<< HEAD
   // {
   //   lat: 35.171877,
   //   lon: 126.808983,
   // },
+=======
+>>>>>>> dev
 ];
 
 function Map() {
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const response: AxiosResponse = await axios.get(
+          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
+        );
+        setData(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getPosts();
+  }, []);
   useEffect(() => {
     const mapScript = document.createElement('script');
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
@@ -84,7 +101,9 @@ function Map() {
           });
           marker.setMap(map);
           clickEvent(marker, map);
+          // data로 변경 예정
           for (let i = 0; i < positions.length; i++) {
+            // data category가 치킨을 경우 치킨 이미지
             const imageSrc = positions[i].imageSrc, // 마커이미지의 주소입니다
               imageSize = new window.kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
               imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.

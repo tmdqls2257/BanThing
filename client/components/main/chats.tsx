@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import Chat from './chat';
 import NewChat from './newChat';
@@ -41,10 +41,17 @@ interface ChatsType {
 
 const Chats = ({ addable }: ChatsType) => {
   const [chats, setChats] = useState<string[]>([]);
+  const [user, setUser] = useState([]);
+
   // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:80/rooms/chat/:id`)
-  //     .then((chats) => setChats([...chats]));
+  //   const getPosts = async () => {
+  //     const response: AxiosResponse = await axios.get(
+  //       `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms/chat/1`,
+  //     );
+  //     setChats(response.data.message);
+  //     setUser(response.data);
+  //   };
+  //   getPosts();
   // }, []);
 
   const onCreated = (chat: string) => {

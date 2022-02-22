@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         <Introduction
           imagePosition={'left'}
           image={'/worry.png'}
-          title={'혼자는 부담스러운 배달음식'}
+          title={'망설여지는 배달음식'}
           description={[
             '1인분을 시키자니 최저금액을 맞춰야하고,',
             '최저금액만 맞췄더니 배달비가 너무 비싸고,',
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         <Introduction
           imagePosition={'right'}
           image={'/foodmate.png'}
-          title={'내 주변의 배달메이트 찾기'}
+          title={'내 주변의 배달메이트'}
           description={[
             '마침 배달음식을 시켜먹고 싶은데',
             '배달비도 최저금액도 함께 나눌 수 있는',
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         <Introduction
           imagePosition={'left'}
           image={'/chatting.png'}
-          title={'메이트와의 실시간 메뉴선정'}
+          title={'실시간 메뉴선정'}
           description={[
             '어떤 햄버거를 먹을지, 어떤 치킨을 먹을지',
             '배달메이트와 실시간으로 상의하여',

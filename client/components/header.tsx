@@ -2,22 +2,44 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import Login from './login';
 import React, { useState } from 'react';
+import axios from 'axios';
+interface propsType {
+  isLogin: boolean;
+  setIsLogin: Function;
+  accessToken: string;
+  setAccessToken: Function;
+}
 
-export default function NavBar() {
-  const [isLogin, setIsLogin] = useState(true);
+export default function Header(prop: propsType) {
   const [loginModal, setLoginModal] = useState(false);
 
   const openLoginModal = () => {
     setLoginModal(true);
   };
 
-  const handleLogOut = () => {
-    setIsLogin(false);
+  const handleLogout = () => {
+    prop.setIsLogin(false);
+    prop.setAccessToken('');
+    console.log(prop.accessToken);
+    axios.post(
+      `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${prop.accessToken}`,
+        },
+      },
+    );
+    //   .then((response) => {
+    //     console.log(response);
+    //     prop.setIsLogin(false);
+    //     prop.setAccessToken('');
+    //   });
   };
 
   return (
     <>
-      {isLogin ? (
+      {prop.isLogin ? (
         <div className={styles.header}>
           <Link href="/main">
             <a className={styles.logo}>
@@ -34,7 +56,7 @@ export default function NavBar() {
               <a className={styles.nav_menu}>MAIN</a>
             </Link>
             <span className={styles.nav_divide}>|</span>
-            <a className={styles.nav_menu} onClick={() => handleLogOut()}>
+            <a className={styles.nav_menu} onClick={handleLogout}>
               LOGOUT
             </a>
           </nav>
@@ -68,13 +90,18 @@ export default function NavBar() {
                 <a className={styles.nav_menu}>MAIN</a>
               </Link>
               <span className={styles.nav_divide}>|</span>
-              <a className={styles.nav_menu} onClick={() => openLoginModal()}>
+              <a className={styles.nav_menu} onClick={openLoginModal}>
                 LOGIN
               </a>
             </nav>
           </div>
           {loginModal ? (
-            <Login loginModal={loginModal} setLoginModal={setLoginModal} />
+            <Login
+              loginModal={loginModal}
+              setLoginModal={setLoginModal}
+              setIsLogin={prop.setIsLogin}
+              setAccessToken={prop.setAccessToken}
+            />
           ) : (
             <></>
           )}

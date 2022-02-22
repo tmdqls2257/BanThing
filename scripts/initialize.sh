@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/test-for-ec2/server
+cd /home/ubuntu/banthing/server
 npm install
 npm install pm2@latest -g
 npm install @nestjs/cli -g

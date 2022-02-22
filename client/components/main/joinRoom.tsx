@@ -1,5 +1,7 @@
 import Button from './button';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */

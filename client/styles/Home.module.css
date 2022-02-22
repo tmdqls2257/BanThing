@@ -180,8 +180,9 @@
 .introduction_title_right {
   display: flex;
   width: 40vw;
+  margin-left: -0.3vw;
   font-size: 3.1vw;
-  font-weight: 600;
+  font-weight: 500;
   justify-content: flex-end;
 }
 
@@ -189,7 +190,7 @@
   display: flex;
   width: 40vw;
   font-size: 3.1vw;
-  font-weight: 600;
+  font-weight: 500;
   justify-content: flex-start;
 }
 

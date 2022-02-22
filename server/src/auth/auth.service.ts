@@ -80,7 +80,7 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return res
       .cookie('set-cookie', token)
-      .send({ data: null, message: '로그인 완료' });
+      .send({ data: { accessToken: token }, message: '로그인 완료' });
   }
 
   //로그아웃
