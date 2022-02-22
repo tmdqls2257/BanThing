@@ -8,13 +8,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState('');
 
-  // useEffect(() => {
-  //   const log = localStorage.getItem('accessToken');
-  //   if (log) {
-  //     setIsLogin(true);
-  //     setAccessToken(log);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const log = localStorage.getItem('accessToken');
+    if (log) {
+      setIsLogin(true);
+      setAccessToken(log);
+    }
+  }, []);
 
   return (
     <>

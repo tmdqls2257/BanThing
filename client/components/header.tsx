@@ -18,23 +18,21 @@ export default function Header(prop: propsType) {
   };
 
   const handleLogout = () => {
-    prop.setIsLogin(false);
-    prop.setAccessToken('');
-    console.log(prop.accessToken);
-    axios.post(
-      `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${prop.accessToken}`,
+    axios
+      .post(
+        `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${prop.accessToken}`,
+          },
         },
-      },
-    );
-    //   .then((response) => {
-    //     console.log(response);
-    //     prop.setIsLogin(false);
-    //     prop.setAccessToken('');
-    //   });
+      )
+      .then((response) => {
+        localStorage.removeItem('accessToken');
+        prop.setAccessToken('');
+        prop.setIsLogin(false);
+      });
   };
 
   return (
