@@ -1,6 +1,8 @@
 export interface BasicButtonProp {
   children: string;
   containerName: string;
+  rateNum?: number;
+  onClick?: object;
 }
 
 export interface RateButtonProp {

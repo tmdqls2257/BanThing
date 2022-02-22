@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { BasicButtonProp } from '../type';
 
-function Button({ containerName, children }: BasicButtonProp) {
+function Button({
+  onClick,
+  rateNum,
+  containerName,
+  children,
+}: BasicButtonProp) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -16,6 +21,7 @@ function Button({ containerName, children }: BasicButtonProp) {
       createElement.style.display = 'none';
       makeRoom.style.display = 'flex';
     } else if (button.value === 'MakeRoom') {
+      console.log(onClick);
       makeRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '나가기') {
@@ -25,6 +31,8 @@ function Button({ containerName, children }: BasicButtonProp) {
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
+      console.log(rateNum);
+
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';

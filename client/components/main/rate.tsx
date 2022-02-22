@@ -56,7 +56,9 @@ export default function Rate() {
             </p>
           </section>
           <section className={styles.rate_button}>{rendering()}</section>
-          <Button containerName={'평가하기'}>평가하기</Button>
+          <Button rateNum={rateNum} containerName={'평가하기'}>
+            평가하기
+          </Button>
         </form>
       </Container>
     </>
