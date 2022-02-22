@@ -21,19 +21,28 @@ export default function SignUp(prop: propsType) {
   const [correctPassword, setCorrectPassword] = useState(true);
   const [correctCheckPassword, setCorrectCheckPassword] = useState(true);
 
+  const [idMessage, setIdMessage] = useState('');
+  const [nicknameMessage, setNicknameMessage] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+  const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
+
   const handleUserId = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCorrectUserId(true);
     setUserId(event.target.value);
   };
 
   const handleNickname = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCorrectNickname(true);
     setNickname(event.target.value);
   };
 
   const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCorrectPassword(true);
     setPassword(event.target.value);
   };
 
   const handleCheckPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCorrectCheckPassword(true);
     setCheckPassword(event.target.value);
   };
 
@@ -43,41 +52,59 @@ export default function SignUp(prop: propsType) {
 
     if (type === 'id') {
       if (!value) {
-        setCorrectUserId(true);
-      } else if (isSmallLetterAndNumber4to10.test(value)) {
-        setCorrectUserId(true);
-      } else {
+        setIdMessage('필수 정보입니다.');
         setCorrectUserId(false);
+      } else if (!isSmallLetterAndNumber4to10.test(value)) {
+        setIdMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
+        setCorrectUserId(false);
+      } else {
+        setCorrectUserId(true);
       }
     }
 
     if (type === 'nickname') {
       if (!value) {
-        setCorrectNickname(true);
-      } else if (isRightNickname.test(value)) {
-        setCorrectNickname(true);
-      } else {
+        setNicknameMessage('필수 정보입니다.');
         setCorrectNickname(false);
+      } else if (!isRightNickname.test(value)) {
+        setNicknameMessage('3~8자 한글, 영문, 숫자를 사용하세요.');
+        setCorrectNickname(false);
+      } else {
+        setCorrectNickname(true);
       }
     }
 
     if (type === 'password') {
       if (!value) {
-        setCorrectPassword(true);
-      } else if (isSmallLetterAndNumber4to10.test(value)) {
-        setCorrectPassword(true);
-      } else {
+        setPasswordMessage('필수 정보입니다.');
         setCorrectPassword(false);
+      } else if (!isSmallLetterAndNumber4to10.test(value)) {
+        setPasswordMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
+        setCorrectPassword(false);
+      } else {
+        setCorrectPassword(true);
       }
     }
 
     if (type === 'check_password') {
-      if (!value || !correctPassword || password === '') {
-        setCorrectCheckPassword(true);
-      } else if (password === checkPassword) {
-        setCorrectCheckPassword(true);
-      } else {
+      if (!value) {
+        setCheckPasswordMessage('필수 정보입니다.');
         setCorrectCheckPassword(false);
+      } else if (password !== checkPassword) {
+        if (password === '' || !correctPassword) {
+          setCheckPasswordMessage('비밀번호를 양식에 맞춰 작성해주세요.');
+          setCorrectCheckPassword(false);
+        } else {
+          setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
+          setCorrectCheckPassword(false);
+        }
+      } else if (password === checkPassword) {
+        if (!correctPassword) {
+          setCheckPasswordMessage('비밀번호를 양식에 맞춰 작성해주세요.');
+          setCorrectCheckPassword(false);
+        } else {
+          setCorrectCheckPassword(true);
+        }
       }
     }
   };
@@ -107,13 +134,9 @@ export default function SignUp(prop: propsType) {
           </button>
         </div>
         {correctUserId ? (
-          <div className={styles.signup_space}>
-            4~10자 영어 소문자, 숫자를 사용했습니다.
-          </div>
+          <div className={styles.signup_space}>올바르게 작성되었습니다.</div>
         ) : (
-          <span className={styles.signup_error}>
-            4~10자 영어 소문자, 숫자를 사용하세요.
-          </span>
+          <span className={styles.signup_error}>{idMessage}</span>
         )}
         <div className={styles.signup_id_name_container}>
           <input
@@ -128,13 +151,9 @@ export default function SignUp(prop: propsType) {
           </button>
         </div>
         {correctNickname ? (
-          <div className={styles.signup_space}>
-            3~8자 한글, 영문, 숫자를 사용했습니다.
-          </div>
+          <div className={styles.signup_space}>올바르게 작성되었습니다.</div>
         ) : (
-          <span className={styles.signup_error}>
-            3~8자 한글, 영문, 숫자를 사용하세요.
-          </span>
+          <span className={styles.signup_error}>{nicknameMessage}</span>
         )}
         <input
           id="password"
@@ -145,13 +164,9 @@ export default function SignUp(prop: propsType) {
           onBlur={handleBlur}
         />
         {correctPassword ? (
-          <div className={styles.signup_space}>
-            4~10자 영어 소문자, 숫자를 사용했습니다.
-          </div>
+          <div className={styles.signup_space}>올바르게 작성되었습니다.</div>
         ) : (
-          <span className={styles.signup_error}>
-            4~10자 영어 소문자, 숫자를 사용하세요.
-          </span>
+          <span className={styles.signup_error}>{passwordMessage}</span>
         )}
         <input
           id="check_password"
@@ -162,11 +177,9 @@ export default function SignUp(prop: propsType) {
           onBlur={handleBlur}
         />
         {correctCheckPassword ? (
-          <div className={styles.signup_space}>비밀번호가 일치합니다.</div>
+          <div className={styles.signup_space}>올바르게 작성되었습니다.</div>
         ) : (
-          <span className={styles.signup_error}>
-            비밀번호가 일치하지 않습니다.
-          </span>
+          <span className={styles.signup_error}>{checkPasswordMessage}</span>
         )}
         <button className={styles.signup_button}>
           <img
