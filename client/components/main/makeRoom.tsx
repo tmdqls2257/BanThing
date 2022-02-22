@@ -1,6 +1,8 @@
 import SidebarHeader from './sidebarHeader';
 import styled from 'styled-components';
 import { setStateType } from '../type';
+import Button from './button';
+import { useState } from 'react';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -65,7 +67,7 @@ const Container = styled.div`
   }
 `;
 
-const Button = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   margin: auto;
   margin: var(--margine-base) auto;
@@ -91,17 +93,38 @@ const Button = styled.div`
 `;
 
 const MakeRoom = () => {
+  const [title, setTitle] = useState('');
+  const [select, setSelect] = useState('');
+  const [textarea, setTextarea] = useState('');
+  const [radio, setRadio] = useState('');
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.preventDefault();
     const value = event.target.value;
+    setSelect(value);
   };
 
+  const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setTitle(event.target.value);
+  };
+
+  const textareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    event.preventDefault();
+    setTextarea(event.target.value);
+  };
+
+  const radioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setRadio(event.target.value);
+  };
+  const data = [title, select, textarea, radio];
   return (
     <Container id="MakeRoom">
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>
       <main>
         <section className="MakeRoom-main-section-flex">
           <h1>제목</h1>
-          <input type="text" />
+          <input type="text" onChange={inputChange} />
         </section>
         <section className="MakeRoom-main-section-flex">
           <h1>카테고리</h1>
@@ -114,21 +137,38 @@ const MakeRoom = () => {
         </section>
         <h1>역할</h1>
         <section className="MakeRoom-main-section-radio">
-          <input type="radio" name="category" />
-          <p>받는 사람</p>
+          <input
+            type="radio"
+            id="contactChoice1"
+            name="contact"
+            value="1"
+            onChange={radioChange}
+          />
+          <label htmlFor="contactChoice1">받는 사람</label>
         </section>
         <section className="MakeRoom-main-section-radio">
-          <input type="radio" name="category" />
-          <p>가지러 가는 사람</p>
+          <input
+            type="radio"
+            id="contactChoice2"
+            name="contact"
+            value="2"
+            onChange={radioChange}
+          />
+          <label htmlFor="contactChoice2">가지러 가는 사람</label>
         </section>
         <section>
           <h1>내용</h1>
-          <textarea className="MakeRoom-main-section-content" />
+          <textarea
+            className="MakeRoom-main-section-content"
+            onChange={textareaChange}
+          />
         </section>
       </main>
-      <Button>
-        <button>생성하기</button>
-      </Button>
+      <ButtonContainer>
+        <Button onClick={data} containerName={'MakeRoom'}>
+          생성하기
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 };
