@@ -12,12 +12,28 @@ const MyPage: NextPage = () => {
   const [correctChangePassword, setCorrectChangePassword] = useState(true);
   const [correctCheckPassword, setCorrectCheckPassword] = useState(true);
 
+  const [changePasswordMessage, setChangePasswordMessage] = useState('');
+  const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
+
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCorrectChangePassword(true);
     setChangePassword(event.target.value);
   };
 
   const handleCheckPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCorrectCheckPassword(true);
     setCheckPassword(event.target.value);
+  };
+
+  const handleModify = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (changePassword === '') {
+      setChangePasswordMessage('필수 정보입니다.');
+      setCorrectChangePassword(false);
+    }
+    if (checkPassword === '') {
+      setCheckPasswordMessage('필수 정보입니다.');
+      setCorrectCheckPassword(false);
+    }
   };
 
   const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,26 +42,34 @@ const MyPage: NextPage = () => {
 
     if (type === 'change_password') {
       if (!value) {
+        // setChangePasswordMessage('필수 정보입니다.');
         setCorrectChangePassword(true);
-      } else if (isSmallLetterAndNumber4to10.test(value)) {
-        setCorrectChangePassword(true);
-      } else {
+      } else if (!isSmallLetterAndNumber4to10.test(value)) {
+        setChangePasswordMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
         setCorrectChangePassword(false);
+      } else {
+        setCorrectChangePassword(true);
       }
     }
 
-    if (!correctChangePassword) {
-      setCorrectCheckPassword(true);
-    } else {
-      if (changePassword === '') {
+    if (type === 'check_password') {
+      if (!value) {
+        // setCheckPasswordMessage('필수 정보입니다.');
         setCorrectCheckPassword(true);
-      } else if (type === 'check_password') {
-        if (!value) {
-          setCorrectCheckPassword(true);
-        } else if (changePassword === checkPassword) {
-          setCorrectCheckPassword(true);
-        } else {
+      } else if (changePassword !== checkPassword) {
+        if (changePassword === '' || !correctChangePassword) {
+          setCheckPasswordMessage('비밀번호를 양식에 맞춰 작성해주세요.');
           setCorrectCheckPassword(false);
+        } else {
+          setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
+          setCorrectCheckPassword(false);
+        }
+      } else if (changePassword === checkPassword) {
+        if (!correctChangePassword) {
+          setCheckPasswordMessage('비밀번호를 양식에 맞춰 작성해주세요.');
+          setCorrectCheckPassword(false);
+        } else {
+          setCorrectCheckPassword(true);
         }
       }
     }
@@ -95,11 +119,11 @@ const MyPage: NextPage = () => {
             />
             {correctChangePassword ? (
               <span className={styles.mypage_space}>
-                4~10자 영어 소문자, 숫자를 사용하였습니다.
+                올바르게 작성되었습니다.
               </span>
             ) : (
               <span className={styles.mypage_error}>
-                4~10자 영어 소문자, 숫자를 사용하세요.
+                {changePasswordMessage}
               </span>
             )}
             <input
@@ -112,16 +136,21 @@ const MyPage: NextPage = () => {
             />
             {correctCheckPassword ? (
               <span className={styles.mypage_space}>
-                비밀번호가 일치합니다.
+                올바르게 작성되었습니다.
               </span>
             ) : (
               <span className={styles.mypage_error}>
-                비밀번호가 일치하지 않습니다.
+                {checkPasswordMessage}
               </span>
             )}
           </div>
           <div className={styles.mypage_button_container}>
-            <button className={styles.mypage_modify_button}>수정하기</button>
+            <button
+              className={styles.mypage_modify_button}
+              onClick={handleModify}
+            >
+              수정하기
+            </button>
             <button className={styles.mypage_signout_button}>회원탈퇴</button>
           </div>
         </div>
