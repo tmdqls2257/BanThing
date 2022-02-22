@@ -42,7 +42,6 @@ const MyPage: NextPage = () => {
 
     if (type === 'change_password') {
       if (!value) {
-        // setChangePasswordMessage('필수 정보입니다.');
         setCorrectChangePassword(true);
       } else if (!isSmallLetterAndNumber4to10.test(value)) {
         setChangePasswordMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
@@ -54,7 +53,6 @@ const MyPage: NextPage = () => {
 
     if (type === 'check_password') {
       if (!value) {
-        // setCheckPasswordMessage('필수 정보입니다.');
         setCorrectCheckPassword(true);
       } else if (changePassword !== checkPassword) {
         if (changePassword === '' || !correctChangePassword) {
