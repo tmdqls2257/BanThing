@@ -8,7 +8,8 @@ const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
   display: none;
   flex-direction: column;
-  min-width: 30vw;
+  width: 30vw;
+  min-width: 400px;
   min-height: 715px;
 
   height: auto;

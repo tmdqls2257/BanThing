@@ -30,12 +30,18 @@ const ButtonContainer = styled.div`
     margin: 0 4px;
   }
 `;
-const ChatRoom = () => {
+
+interface roomsIdTitleType {
+  roomsId: number;
+  roomTitle: string;
+}
+
+const ChatRoom = ({ roomTitle, roomsId }: roomsIdTitleType) => {
   return (
     <>
       <Container id="ChatRoom">
         <SidebarHeader containerName={'gotoJoinRoom'}>
-          MakeRoom에서 받아온 제목
+          {roomTitle}
         </SidebarHeader>
         <main>
           <Chats addable={true}></Chats>

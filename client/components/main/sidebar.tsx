@@ -28,18 +28,19 @@ const SidebarContainer = styled.div`
 
 interface locationType {
   location: number[];
+  roomsId: number;
 }
 
-const Sidebar = ({ location }: locationType) => {
-  const state = {};
+const Sidebar = ({ location, roomsId }: locationType) => {
+  const [roomTitle, setRoomTitle] = useState('');
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />
       <Container>
         <CreateRoom />
         <MakeRoom location={location} />
-        <JoinRoom />
-        <ChatRoom />
+        <JoinRoom setroomTitle={setRoomTitle} roomsId={roomsId} />
+        <ChatRoom roomTitle={roomTitle} />
       </Container>
     </SidebarContainer>
   );
