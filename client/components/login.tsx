@@ -34,10 +34,14 @@ export default function Login(prop: propsType) {
       setLoginMessage('아이디와 비밀번호를 모두 입력해주세요.');
     } else {
       axios
-        .post(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
-          user_id: userId,
-          password: password,
-        })
+        .post(
+          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`,
+          {
+            user_id: userId,
+            password: password,
+          },
+          // { withCredentials: true },
+        )
         .then((response) => {
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);

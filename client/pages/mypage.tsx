@@ -132,12 +132,12 @@ const MyPage: NextPage = () => {
             alt="user-image"
             className={styles.mypage_image}
           />
-          <div className={styles.mypage_score_container}>
+          {/* <div className={styles.mypage_score_container}>
             <div className={styles.mypage_score_description}>나의 평점</div>
             <div className={styles.mapage_score}>
               9.6<span>{`(${12})`}</span>
             </div>
-          </div>
+          </div> */}
           <div className={styles.mypage_input_container}>
             <div className={styles.mypage_input_disabled}>
               <input
