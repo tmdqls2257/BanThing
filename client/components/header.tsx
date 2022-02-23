@@ -21,7 +21,7 @@ export default function Header(prop: propsType) {
   const handleLogout = () => {
     axios
       .post(
-        `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
         {},
         {
           headers: {

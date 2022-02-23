@@ -15,16 +15,13 @@ export default function Modal(prop: propsType) {
     if (typeof window !== 'undefined' && window.localStorage) {
       const accessToken = localStorage.getItem('accessToken');
       axios
-        .delete(
-          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-              withCredentials: true,
-            },
+        .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+            withCredentials: true,
           },
-        )
+        })
         .then((response) => {
           localStorage.removeItem('accessToken');
           prop.setIsModalOpen(false);

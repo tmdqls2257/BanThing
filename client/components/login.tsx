@@ -34,7 +34,7 @@ export default function Login(prop: propsType) {
     } else {
       axios
         .post(
-          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`,
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`,
           {
             user_id: userId,
             password: password,

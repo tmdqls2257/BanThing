@@ -141,7 +141,7 @@ export default function SignUp(prop: propsType) {
     ) {
       axios
         .post(
-          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signup`,
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signup`,
           { user_id: userId, password: password, nickname: nickname },
           {
             headers: {

@@ -26,7 +26,7 @@ const MyPage: NextPage = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const accessToken = localStorage.getItem('accessToken');
       axios
-        .get(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const MyPage: NextPage = () => {
         const accessToken = localStorage.getItem('accessToken');
         axios
           .post(
-            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
             {
               password: changePassword,
             },
