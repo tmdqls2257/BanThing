@@ -2,7 +2,6 @@ import styles from '../styles/Login.module.css';
 import SignUp from './signup';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ChangeEvent } from 'react';
 interface propsType {
   loginModal: boolean;
   setLoginModal: Function;

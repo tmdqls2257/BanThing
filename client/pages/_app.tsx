@@ -9,10 +9,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
-    const log = localStorage.getItem('accessToken');
-    if (log) {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
       setIsLogin(true);
-      setAccessToken(log);
+      setAccessToken(accessToken);
+    } else {
+      setIsLogin(false);
+      setAccessToken('');
     }
   }, []);
 

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styles from '../styles/MyPage.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from '../components/modal';
 
 const MyPage: NextPage = () => {
   const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
@@ -19,7 +20,7 @@ const MyPage: NextPage = () => {
   const [userId, setUserId] = useState('');
   const [nickname, setNickname] = useState('');
 
-  // const accessToken = localStorage.getItem('accessToken');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -123,6 +124,10 @@ const MyPage: NextPage = () => {
     }
   };
 
+  const handleModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <Head>
@@ -201,9 +206,15 @@ const MyPage: NextPage = () => {
             >
               수정하기
             </button>
-            <button className={styles.mypage_signout_button}>회원탈퇴</button>
+            <button
+              className={styles.mypage_signout_button}
+              onClick={handleModal}
+            >
+              회원탈퇴
+            </button>
           </div>
         </div>
+        {isModalOpen ? <Modal setIsModalOpen={setIsModalOpen} /> : <></>}
       </div>
     </>
   );
