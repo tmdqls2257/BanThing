@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import styles from '../styles/SignUp.module.css';
@@ -109,6 +110,52 @@ export default function SignUp(prop: propsType) {
     }
   };
 
+  const handleSignUp = () => {
+    if (
+      userId === '' ||
+      nickname === '' ||
+      password === '' ||
+      checkPassword === ''
+    ) {
+      if (userId === '') {
+        setIdMessage('필수 정보입니다.');
+        setCorrectUserId(false);
+      }
+      if (nickname === '') {
+        setNicknameMessage('필수 정보입니다.');
+        setCorrectNickname(false);
+      }
+      if (password === '') {
+        setPasswordMessage('필수 정보입니다.');
+        setCorrectPassword(false);
+      }
+      if (checkPassword === '') {
+        setCheckPasswordMessage('필수 정보입니다.');
+        setCorrectCheckPassword(false);
+      }
+    } else if (
+      correctUserId &&
+      correctNickname &&
+      correctPassword &&
+      correctCheckPassword
+    ) {
+      axios
+        .post(
+          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signup`,
+          { user_id: userId, password: password, nickname: nickname },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              withCredentials: true,
+            },
+          },
+        )
+        .then((response) => {
+          console.log(response);
+        });
+    }
+  };
+
   return (
     <>
       <div className={styles.signup_modal}>
@@ -181,7 +228,7 @@ export default function SignUp(prop: propsType) {
         ) : (
           <span className={styles.signup_error}>{checkPasswordMessage}</span>
         )}
-        <button className={styles.signup_button}>
+        <button className={styles.signup_button} onClick={handleSignUp}>
           <img
             src="/signup.png"
             alt="signup-icon"

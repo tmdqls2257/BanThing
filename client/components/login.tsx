@@ -41,6 +41,7 @@ export default function Login(prop: propsType) {
         .then((response) => {
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
+          console.log(document.cookie);
           prop.setAccessToken(accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
