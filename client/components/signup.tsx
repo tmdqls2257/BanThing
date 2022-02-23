@@ -2,10 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import styles from '../styles/SignUp.module.css';
+import Modal from './modal';
 
 interface propsType {
   signUpModal: boolean;
   setSignUpModal: Function;
+  setIsLogin?: Function;
 }
 
 export default function SignUp(prop: propsType) {
@@ -26,6 +28,8 @@ export default function SignUp(prop: propsType) {
   const [nicknameMessage, setNicknameMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleUserId = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCorrectUserId(true);
@@ -110,6 +114,58 @@ export default function SignUp(prop: propsType) {
     }
   };
 
+  const handleCheckId = () => {
+    if (userId === '') {
+      setIdMessage('필수 정보입니다.');
+      setCorrectUserId(false);
+    } else if (userId !== '' && correctUserId) {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signup/id`,
+          { user_id: userId },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              withCredentials: true,
+            },
+          },
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          setIdMessage('이미 존재하는 아이디입니다.');
+          setCorrectUserId(false);
+        });
+    }
+  };
+
+  const handleCheckNickname = () => {
+    if (nickname === '') {
+      setNicknameMessage('필수 정보입니다.');
+      setCorrectNickname(false);
+    } else if (nickname !== '' && correctNickname) {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signup/nickname`,
+          { nickname: nickname },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              withCredentials: true,
+            },
+          },
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          setNicknameMessage('이미 존재하는 닉네임입니다.');
+          setCorrectNickname(false);
+        });
+    }
+  };
+
   const handleSignUp = () => {
     if (
       userId === '' ||
@@ -151,6 +207,7 @@ export default function SignUp(prop: propsType) {
           },
         )
         .then((response) => {
+          setIsModalOpen(true);
           console.log(response);
         });
     }
@@ -176,7 +233,10 @@ export default function SignUp(prop: propsType) {
             onChange={handleUserId}
             onBlur={handleBlur}
           />
-          <button className={styles.signup_double_check_button}>
+          <button
+            className={styles.signup_double_check_button}
+            onClick={handleCheckId}
+          >
             중복확인
           </button>
         </div>
@@ -193,7 +253,10 @@ export default function SignUp(prop: propsType) {
             onChange={handleNickname}
             onBlur={handleBlur}
           />
-          <button className={styles.signup_double_check_button}>
+          <button
+            className={styles.signup_double_check_button}
+            onClick={handleCheckNickname}
+          >
             중복확인
           </button>
         </div>
@@ -237,6 +300,16 @@ export default function SignUp(prop: propsType) {
           <span>회원가입</span>
         </button>
       </div>
+
+      {isModalOpen ? (
+        <Modal
+          setIsModalOpen={setIsModalOpen}
+          setSignUpModal={prop.setSignUpModal}
+          type="signup"
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 }

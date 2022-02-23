@@ -56,6 +56,14 @@ export default function Login(prop: propsType) {
     }
   };
 
+  const handleKakaoLogin = () => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   return (
     <>
       <div className={styles.login_container}>
@@ -90,7 +98,10 @@ export default function Login(prop: propsType) {
             <span>로그인</span>
           </button>
 
-          <button className={styles.login_kakao_button}>
+          <button
+            className={styles.login_kakao_button}
+            onClick={handleKakaoLogin}
+          >
             <div>
               <img
                 src="/kakao.png"
@@ -114,7 +125,11 @@ export default function Login(prop: propsType) {
 
         {signUpModal ? (
           <>
-            <SignUp signUpModal={signUpModal} setSignUpModal={setSignUpModal} />
+            <SignUp
+              signUpModal={signUpModal}
+              setSignUpModal={setSignUpModal}
+              setIsLogin={prop.setIsLogin}
+            />
           </>
         ) : (
           <></>

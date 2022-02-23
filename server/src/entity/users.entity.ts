@@ -8,7 +8,7 @@ export class Users {
   @Column()
   user_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
   @Column()

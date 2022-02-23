@@ -30,13 +30,29 @@ const ButtonContainer = styled.div`
     margin: 0 4px;
   }
 `;
+interface usersChats {
+  data: {
+    replyLog: [
+      {
+        id: number;
+        nickname: string;
+        post_id: number;
+        reply: string;
+        time: string;
+      },
+    ];
+  };
+}
 
 interface roomsIdTitleType {
   roomsId: number;
   roomTitle: string;
+  usersChats: usersChats | undefined;
 }
 
-const ChatRoom = ({ roomTitle, roomsId }: roomsIdTitleType) => {
+const ChatRoom = ({ usersChats, roomTitle, roomsId }: roomsIdTitleType) => {
+  console.log(usersChats);
+
   return (
     <>
       <Container id="ChatRoom">
@@ -44,7 +60,11 @@ const ChatRoom = ({ roomTitle, roomsId }: roomsIdTitleType) => {
           {roomTitle}
         </SidebarHeader>
         <main>
-          <Chats addable={true}></Chats>
+          <Chats
+            usersChats={usersChats}
+            roomsId={roomsId}
+            addable={true}
+          ></Chats>
         </main>
         <ButtonContainer>
           <div>
