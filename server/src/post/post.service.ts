@@ -3,7 +3,7 @@ import { CreatePostDTO } from 'src/dto/createPost.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from './post.repository';
 import { ReplyDTO } from 'src/dto/reply.dto';
-import { ChatLogRepository } from './reply.repository';
+import { ReplyLogRepository } from './reply.repository';
 import { EvaluationDTO } from 'src/dto/evaluation.dto';
 import { getConnection } from 'typeorm';
 import { Users } from 'src/entity/users.entity';
@@ -13,31 +13,31 @@ import { UserService } from 'src/auth/user.service';
 export class PostService {
   constructor(
     @InjectRepository(PostRepository)
-    private roomRepository: PostRepository,
-    @InjectRepository(ChatLogRepository)
-    private chatLogRepository: ChatLogRepository,
+    private postRepository: PostRepository,
+    @InjectRepository(ReplyLogRepository)
+    private replyLogRepository: ReplyLogRepository,
     private userService: UserService,
   ) {}
 
   //방 생성
-  async create(roomDTO: CreatePostDTO, user: any): Promise<object> {
-    roomDTO.host_user_id = user.user_id;
-    roomDTO.host_nickname = user.nickname;
-    await this.roomRepository.save(roomDTO);
+  async create(postDTO: CreatePostDTO, user: any): Promise<object> {
+    postDTO.host_user_id = user.user_id;
+    postDTO.host_nickname = user.nickname;
+    await this.postRepository.save(postDTO);
     return { data: null, message: '글 게시 완료' };
   }
 
   //채팅 저장
-  async chatLog(chatDTO: ReplyDTO, user: any): Promise<object> {
-    chatDTO.nickname = user.nickname;
-    await this.chatLogRepository.save(chatDTO);
+  async reply(replyDTO: ReplyDTO, user: any): Promise<object> {
+    replyDTO.nickname = user.nickname;
+    await this.replyLogRepository.save(replyDTO);
     return { data: null, message: 'reply 저장 완료' };
   }
 
   //채팅 받기(방입장)
-  async getChat(rooms_id: number): Promise<object> {
-    const list = await this.chatLogRepository.find({
-      where: { rooms_id: rooms_id },
+  async getReply(post_id: number): Promise<object> {
+    const list = await this.replyLogRepository.find({
+      where: { post_id: post_id },
     });
     return { data: { replyLog: list }, message: 'Reply 리스트' };
   }
