@@ -1,6 +1,5 @@
-export class SignUpDTO {
+export class SnsSignUpDTO {
   user_id: string;
-  password: string;
   nickname: string;
   auth: string;
 }
