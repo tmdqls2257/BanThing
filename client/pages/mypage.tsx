@@ -48,13 +48,35 @@ const MyPage: NextPage = () => {
   };
 
   const handleModify = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (changePassword === '') {
-      setChangePasswordMessage('필수 정보입니다.');
-      setCorrectChangePassword(false);
-    }
-    if (checkPassword === '') {
-      setCheckPasswordMessage('필수 정보입니다.');
-      setCorrectCheckPassword(false);
+    if (changePassword === '' || checkPassword === '') {
+      if (changePassword === '') {
+        setChangePasswordMessage('필수 정보입니다.');
+        setCorrectChangePassword(false);
+      }
+      if (checkPassword === '') {
+        setCheckPasswordMessage('필수 정보입니다.');
+        setCorrectCheckPassword(false);
+      }
+    } else if (correctChangePassword && correctCheckPassword) {
+      axios
+        .post(
+          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+          {
+            password: changePassword,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+              withCredentials: true,
+            },
+          },
+        )
+        .then((response) => {
+          setChangePassword('');
+          setCheckPassword('');
+          console.log(response);
+        });
     }
   };
 
@@ -134,6 +156,7 @@ const MyPage: NextPage = () => {
               className={styles.mypage_password_change_check}
               placeholder="변경할 비밀번호 입력"
               type="password"
+              value={changePassword}
               onChange={handleChangePassword}
               onBlur={handleBlur}
             />
@@ -151,6 +174,7 @@ const MyPage: NextPage = () => {
               className={styles.mypage_password_change_check}
               placeholder="변경할 비밀번호 확인"
               type="password"
+              value={checkPassword}
               onChange={handleCheckPassword}
               onBlur={handleBlur}
             />
