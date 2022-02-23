@@ -16,25 +16,28 @@ const MyPage: NextPage = () => {
   const [changePasswordMessage, setChangePasswordMessage] = useState('');
   const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
 
-  const accessToken = localStorage.getItem('accessToken');
-
   const [userId, setUserId] = useState('');
   const [nickname, setNickname] = useState('');
 
+  // const accessToken = localStorage.getItem('accessToken');
+
   useEffect(() => {
-    axios
-      .get(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-          withCredentials: true,
-        },
-      })
-      .then((response) => {
-        const { userInfo } = response.data.data;
-        setUserId(userInfo.user_id);
-        setNickname(userInfo.nickname);
-      });
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const accessToken = localStorage.getItem('accessToken');
+      axios
+        .get(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+            withCredentials: true,
+          },
+        })
+        .then((response) => {
+          const { userInfo } = response.data.data;
+          setUserId(userInfo.user_id);
+          setNickname(userInfo.nickname);
+        });
+    }
   }, []);
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,25 +61,28 @@ const MyPage: NextPage = () => {
         setCorrectCheckPassword(false);
       }
     } else if (correctChangePassword && correctCheckPassword) {
-      axios
-        .post(
-          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-          {
-            password: changePassword,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-              withCredentials: true,
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .post(
+            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+            {
+              password: changePassword,
             },
-          },
-        )
-        .then((response) => {
-          setChangePassword('');
-          setCheckPassword('');
-          console.log(response);
-        });
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+                withCredentials: true,
+              },
+            },
+          )
+          .then((response) => {
+            setChangePassword('');
+            setCheckPassword('');
+            console.log(response);
+          });
+      }
     }
   };
 
