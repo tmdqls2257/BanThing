@@ -76,7 +76,6 @@ function Button({
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
       console.log(rateNum);
-
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';

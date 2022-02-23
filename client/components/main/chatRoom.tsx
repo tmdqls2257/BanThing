@@ -1,5 +1,5 @@
 import Button from './button';
-import SidebarHeader from './sidebarHeader';
+import SidebarHeader from './sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
 import Modal from './rate';
 import Chats from './chats';

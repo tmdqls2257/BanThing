@@ -1,33 +1,4 @@
-import styled from 'styled-components';
-const Header = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  height: 32px;
-  margin: var(--margine-base) 0;
-  div {
-    display: flex;
-    text-align: center;
-  }
-  h1 {
-    font-size: var(--font-size-base);
-    margin: auto;
-  }
-
-  button {
-    font-size: var(--font-size-base);
-    size: var(--font-size-base);
-    background-color: var(--white-color);
-    border: none;
-    position: absolute;
-    top: 30%;
-    left: 16px;
-  }
-  button:hover {
-    cursor: pointer;
-  }
-`;
+import styles from './sideBarHeader.module.css';
 
 type SidebarHeaderType = {
   children: string;
@@ -53,14 +24,18 @@ const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 
 const SidebarHeader = ({ containerName, children }: SidebarHeaderType) => {
   return (
-    <Header>
-      <button onClick={handleClick} value={containerName}>
+    <div className={styles.container}>
+      <button
+        className={styles.container_button}
+        onClick={handleClick}
+        value={containerName}
+      >
         <i className="fa-solid fa-angle-left"></i>
       </button>
-      <div>
-        <h1>{children}</h1>
+      <div className={styles.container_container}>
+        <h2 className={styles.container_container_h1}>{children}</h2>
       </div>
-    </Header>
+    </div>
   );
 };
 

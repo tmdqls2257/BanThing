@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ChatRoom from './chatRoom';
 import CreateRoom from './createRoom';
 import JoinRoom from './joinRoom';
-import MakeRoom from './makeRoom';
+import MakeRoom from './makeRoom/makeRoom';
 import MobileButton from './mobileButton';
 
 const Container = styled.div`
