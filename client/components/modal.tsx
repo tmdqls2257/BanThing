@@ -23,10 +23,10 @@ export default function Modal(prop: propsType) {
           },
         })
         .then((response) => {
+          console.log(response);
           localStorage.removeItem('accessToken');
           prop.setIsModalOpen(false);
           return NextResponse.redirect('/');
-          middleware();
         });
     }
   };
