@@ -39,13 +39,14 @@ function Map({ setLocation, roomsData }: mapType) {
     const getPosts = async () => {
       try {
         const response: AxiosResponse = await axios.get(
-          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
         );
         setData(response.data);
       } catch (e) {
         console.log(e);
       }
     };
+
     getPosts();
   }, []);
 
@@ -136,6 +137,7 @@ function Map({ setLocation, roomsData }: mapType) {
                 imageSize,
                 imageOption,
               );
+
               // 마커를 생성합니다
               marker = new window.kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도

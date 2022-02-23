@@ -95,17 +95,31 @@ interface roomData {
 interface roomsIdType {
   roomsId: number;
   setroomTitle: Dispatch<SetStateAction<string>>;
+  setUsersChats: Dispatch<SetStateAction<usersChats | undefined>>;
 }
-
-const JoinRoom = ({ roomsId, setroomTitle }: roomsIdType) => {
+interface usersChats {
+  data: {
+    replyLog: [
+      {
+        id: number;
+        nickname: string;
+        post_id: number;
+        reply: string;
+        time: string;
+      },
+    ];
+  };
+}
+const JoinRoom = ({ setUsersChats, roomsId, setroomTitle }: roomsIdType) => {
   const [data, setData] = useState<roomData>();
+  const [chats, setChats] = useState<usersChats>();
 
   useEffect(() => {
     const getPosts = async () => {
       try {
         if (roomsId !== 0) {
           const response: AxiosResponse = await axios.post(
-            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
             {
               id: roomsId,
             },
@@ -118,6 +132,10 @@ const JoinRoom = ({ roomsId, setroomTitle }: roomsIdType) => {
     };
     getPosts();
   }, [roomsId]);
+  if (chats) {
+    setUsersChats(chats);
+  }
+
   if (data) {
     setroomTitle(data.data.post.title);
   }
@@ -156,7 +174,13 @@ const JoinRoom = ({ roomsId, setroomTitle }: roomsIdType) => {
             </section>
           </article>
           <ButtonContainer>
-            <Button containerName={'JoinRoom'}>참여하기</Button>
+            <Button
+              setChats={setChats}
+              roomId={data.data.post.id}
+              containerName={'JoinRoom'}
+            >
+              참여하기
+            </Button>
           </ButtonContainer>
         </>
       ) : (

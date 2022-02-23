@@ -30,24 +30,32 @@ const Container = styled.div`
     padding: 0;
   }
 `;
-// const socket = io();
-const NewChat = ({ onCreated, onError }: any) => {
+interface newChatType {
+  roomsId: number;
+  onCreated: (chat: string) => void;
+}
+
+const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const [chat, setChat] = useState('');
-  // const { socket, messages, roomId, username, setMessages } = useSockets();
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // axios.post(
-    //   'http://localhost:80/rooms/chat',
-    //   {
-    //     rooms_id: 4,
-    //     chat: chat,
-    //   },
-    //   {
-    //     withCredentials: true,
-    //   },
-    // );
     if (chat !== '') {
+      console.log(roomsId);
+      console.log(chat);
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      };
+      axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+        {
+          post_id: roomsId,
+          reply: chat,
+        },
+        {
+          headers,
+        },
+      );
       onCreated(chat);
     }
     setChat('');

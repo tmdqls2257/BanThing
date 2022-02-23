@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import Script from 'next/script';
 import { NextPage } from 'next';
-import Map from '../../components/main/map';
-import Sidebar from '../../components/main/sidebar';
+import Map from '../components/main/map';
+import Sidebar from '../components/main/sidebar';
 import { useState } from 'react';
 
 declare global {
