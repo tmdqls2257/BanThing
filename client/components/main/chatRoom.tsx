@@ -3,8 +3,6 @@ import SidebarHeader from './sidebarHeader';
 import styled from 'styled-components';
 import Modal from './rate';
 import Chats from './chats';
-import NewChat from './newChat';
-import { memo, useState } from 'react';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -12,6 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   min-height: 715px;
   width: 30vw;
+  min-width: 400px;
   main {
     background-color: var(--chat-background-color);
     display: flex;
@@ -31,20 +30,18 @@ const ButtonContainer = styled.div`
     margin: 0 4px;
   }
 `;
-const ChatRoom = () => {
-  const [error, setError] = useState<string>('');
-  const onError = (error: string) => {
-    setError(error.toString());
-    setTimeout(() => {
-      setError('');
-    }, 3000);
-  };
 
+interface roomsIdTitleType {
+  roomsId: number;
+  roomTitle: string;
+}
+
+const ChatRoom = ({ roomTitle, roomsId }: roomsIdTitleType) => {
   return (
     <>
       <Container id="ChatRoom">
         <SidebarHeader containerName={'gotoJoinRoom'}>
-          MakeRoom에서 받아온 제목
+          {roomTitle}
         </SidebarHeader>
         <main>
           <Chats addable={true}></Chats>

@@ -8,7 +8,8 @@ const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
   display: none;
   flex-direction: column;
-  min-width: 30vw;
+  width: 30vw;
+  min-width: 400px;
   min-height: 715px;
 
   height: auto;
@@ -92,7 +93,11 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const MakeRoom = () => {
+interface locationType {
+  location: number[];
+}
+
+const MakeRoom = ({ location }: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
   const [textarea, setTextarea] = useState('');
@@ -117,7 +122,14 @@ const MakeRoom = () => {
     event.preventDefault();
     setRadio(event.target.value);
   };
-  const data = [title, select, textarea, radio];
+  const data = [
+    title,
+    select,
+    textarea,
+    Number(radio),
+    String(location[0]),
+    String(location[1]),
+  ];
   return (
     <Container id="MakeRoom">
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>

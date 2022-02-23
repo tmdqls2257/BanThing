@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
-import EVENTS from '../../config/events';
-import { useSockets } from '../network/socket';
 const Container = styled.div`
   .reply__column {
     display: flex;
