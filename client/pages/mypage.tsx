@@ -214,7 +214,11 @@ const MyPage: NextPage = () => {
             </button>
           </div>
         </div>
-        {isModalOpen ? <Modal setIsModalOpen={setIsModalOpen} /> : <></>}
+        {isModalOpen ? (
+          <Modal setIsModalOpen={setIsModalOpen} type="signout" />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
