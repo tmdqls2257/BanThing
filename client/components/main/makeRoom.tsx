@@ -92,7 +92,11 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const MakeRoom = () => {
+interface locationType {
+  location: number[];
+}
+
+const MakeRoom = ({ location }: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
   const [textarea, setTextarea] = useState('');
@@ -117,7 +121,14 @@ const MakeRoom = () => {
     event.preventDefault();
     setRadio(event.target.value);
   };
-  const data = [title, select, textarea, radio];
+  const data = [
+    title,
+    select,
+    textarea,
+    Number(radio),
+    String(location[0]),
+    String(location[1]),
+  ];
   return (
     <Container id="MakeRoom">
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>

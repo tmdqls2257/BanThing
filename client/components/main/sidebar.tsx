@@ -25,14 +25,19 @@ const SidebarContainer = styled.div`
     bottom: 0px;
   }
 `;
-const Sidebar = () => {
+
+interface locationType {
+  location: number[];
+}
+
+const Sidebar = ({ location }: locationType) => {
   const state = {};
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />
       <Container>
         <CreateRoom />
-        <MakeRoom />
+        <MakeRoom location={location} />
         <JoinRoom />
         <ChatRoom />
       </Container>

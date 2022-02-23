@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import Loading from './loading';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
@@ -14,38 +14,27 @@ const MapContainer = styled.div`
     height: auto;
   }
 `;
+interface mapType {
+  setLocation: Dispatch<SetStateAction<number[]>>;
+}
 
-const positions = [
-  {
-    lat: 35.169222,
-    lon: 126.806048,
-    imageSrc:
-      'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
-  },
-  {
-    lat: 35.168428,
-    lon: 126.805479,
-    imageSrc:
-      'https://cdn.discordapp.com/attachments/934007459763326976/943866955880878120/unknown.png',
-  },
-  {
-    lat: 35.166637,
-    lon: 126.81332,
-    imageSrc:
-      'https://cdn.discordapp.com/attachments/934007459763326976/944397124114722826/unknown.png',
-  },
-<<<<<<< HEAD
-  // {
-  //   lat: 35.171877,
-  //   lon: 126.808983,
-  // },
-=======
->>>>>>> dev
-];
+interface dataType {
+  data: {
+    roomList: [
+      {
+        category: string;
+        id: number;
+        location_latitude: string;
+        location_longitude: string;
+      },
+    ];
+  };
+}
 
-function Map() {
+function Map({ setLocation }: mapType) {
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<dataType>();
+
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -59,6 +48,10 @@ function Map() {
     };
     getPosts();
   }, []);
+  if (data) {
+    console.log(data.data);
+  }
+
   useEffect(() => {
     const mapScript = document.createElement('script');
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
@@ -91,6 +84,29 @@ function Map() {
         navigator.geolocation.getCurrentPosition(function (position) {
           const lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
+          setLocation([lat, lon]);
+          setLocation;
+          const positions = [
+            {
+              lat: lat + 0.001,
+              lon: lon + 0.002,
+              imageSrc:
+                'https://cdn.discordapp.com/attachments/934007459763326976/945616034247888966/unknown.png',
+            },
+            {
+              lat: lat - 0.001,
+              lon: lon - 0.002,
+              imageSrc:
+                'https://cdn.discordapp.com/attachments/934007459763326976/945616608909475850/unknown.png',
+            },
+            {
+              lat: lat + 0.001,
+              lon: lon - 0.001,
+              imageSrc:
+                'https://cdn.discordapp.com/attachments/934007459763326976/945617088049975296/unknown.png',
+            },
+          ];
+
           const options = {
             center: new window.kakao.maps.LatLng(lat, lon),
           };
@@ -105,7 +121,7 @@ function Map() {
           for (let i = 0; i < positions.length; i++) {
             // data category가 치킨을 경우 치킨 이미지
             const imageSrc = positions[i].imageSrc, // 마커이미지의 주소입니다
-              imageSize = new window.kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+              imageSize = new window.kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
               imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             const markerImage = new window.kakao.maps.MarkerImage(
               imageSrc,
@@ -123,6 +139,9 @@ function Map() {
             });
             clickEvent(marker, map);
           }
+          // for(let i = 0; i<data.data.roomList.length; i++){
+
+          // }
         });
       });
       setLoading(true);
