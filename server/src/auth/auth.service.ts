@@ -77,14 +77,14 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
     return res
-      .cookie('set-cookie', token)
+      .cookie('accessToken', token)
       .send({ data: { accessToken: token }, message: '로그인 완료' });
   }
 
   //로그아웃
   async logOut(res: Response): Promise<object> {
     return res
-      .cookie('set-cookie', '', { maxAge: 1 })
+      .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '로그아웃' });
   }
 
