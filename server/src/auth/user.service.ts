@@ -6,6 +6,7 @@ import { UserRepository } from './user.repository';
 import { Users } from '../entity/users.entity';
 import * as bcrypt from 'bcrypt';
 import { UserInfoDTO } from '../dto/userInfo.dto';
+import { SnsSignUpDTO } from 'src/dto/snsSignUP.dto';
 
 @Injectable()
 export class UserService {
@@ -25,11 +26,22 @@ export class UserService {
   async save(userDTO: SignUpDTO): Promise<SignUpDTO | undefined> {
     const password = await this.transformPassword(userDTO);
     userDTO.password = password;
+    userDTO.auth = 'banthing';
     return await this.userRepository.save(userDTO);
+  }
+
+  //카카오 회원가입
+  async snsSave(snsSignUpDTO: SnsSignUpDTO): Promise<any> {
+    return await this.userRepository.save(snsSignUpDTO);
   }
 
   //회원탈퇴 함수
   async delete(user_id: string): Promise<object> {
+    return await this.userRepository.delete({ user_id });
+  }
+
+  //카카오 회원탈퇴
+  async snsDelete(user_id: string): Promise<any> {
     return await this.userRepository.delete({ user_id });
   }
 
