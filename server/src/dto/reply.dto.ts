@@ -1,5 +1,5 @@
 export class ReplyDTO {
-  rooms_id: number;
+  reply_id: number;
   nickname: string;
-  chat: string;
+  reply: string;
 }

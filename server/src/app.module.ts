@@ -5,7 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './entity/users.entity';
-import { RoomModule } from './post/post.module';
+import { PostModule } from './post/post.module';
 import { Post } from './entity/post.entity';
 import { Reply } from './entity/reply.entity';
 import { MypageModule } from './mypage/mypage.module';
@@ -28,7 +28,7 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
       //synchronize: true, //테이블을 자동으로 생성 개발모드일때만 사용 운영모드일때는 삭제
     }),
     AuthModule,
-    RoomModule,
+    PostModule,
     MypageModule,
     MainPageModule,
   ],

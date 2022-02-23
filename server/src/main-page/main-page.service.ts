@@ -20,15 +20,15 @@ export class MainPageService {
       el.title = undefined;
     });
 
-    return { data: { roomList: list }, message: '모든 방 리스트' };
+    return { data: { postList: list }, message: '모든 게시물 리스트' };
   }
 
   //글 정보
   async postInfo(id: number): Promise<object> {
-    const room = await this.postRepository.findOne(id);
-    room.host_user_id = undefined;
-    room.location_latitude = undefined;
-    room.location_longitude = undefined;
-    return { data: { room: room }, message: '방 정보' };
+    const post = await this.postRepository.findOne(id);
+    post.host_user_id = undefined;
+    post.location_latitude = undefined;
+    post.location_longitude = undefined;
+    return { data: { post: post }, message: '글 정보' };
   }
 }
