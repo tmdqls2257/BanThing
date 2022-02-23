@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         accessToken={accessToken}
         setAccessToken={setAccessToken}
       />
-      <Component {...pageProps} />
+      <Component {...pageProps} accessToken={accessToken} />
     </>
   );
 }

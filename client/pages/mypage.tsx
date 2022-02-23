@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/MyPage.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const MyPage: NextPage = () => {
   const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
@@ -14,6 +15,27 @@ const MyPage: NextPage = () => {
 
   const [changePasswordMessage, setChangePasswordMessage] = useState('');
   const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
+
+  const accessToken = localStorage.getItem('accessToken');
+
+  const [userId, setUserId] = useState('');
+  const [nickname, setNickname] = useState('');
+
+  useEffect(() => {
+    axios
+      .get(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+          withCredentials: true,
+        },
+      })
+      .then((response) => {
+        const { userInfo } = response.data.data;
+        setUserId(userInfo.user_id);
+        setNickname(userInfo.nickname);
+      });
+  }, []);
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCorrectChangePassword(true);
@@ -98,12 +120,12 @@ const MyPage: NextPage = () => {
             <div className={styles.mypage_input_disabled}>
               <input
                 className={styles.mypage_id_name}
-                placeholder="아이디"
+                placeholder={userId}
                 disabled
               />
               <input
                 className={styles.mypage_id_name}
-                placeholder="닉네임"
+                placeholder={nickname}
                 disabled
               />
             </div>
