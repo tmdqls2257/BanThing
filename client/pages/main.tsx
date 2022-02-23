@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { NextPage } from 'next';
 import Map from '../components/main/map';
 import Sidebar from '../components/main/sidebar';
+import { useState } from 'react';
 
 declare global {
   interface Window {
@@ -19,6 +20,7 @@ const Container = styled.div`
 `;
 
 const Main: NextPage = () => {
+  const [location, setLocation] = useState<number[]>([]);
   return (
     <>
       <Head>
@@ -32,8 +34,8 @@ const Main: NextPage = () => {
         crossOrigin="anonymous"
       ></Script>
       <Container>
-        <Map />
-        <Sidebar />
+        <Map setLocation={setLocation} />
+        <Sidebar location={location} />
       </Container>
     </>
   );

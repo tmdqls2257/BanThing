@@ -24,13 +24,21 @@ function Button({
     } else if (button.value === 'MakeRoom') {
       if (onClick) {
         try {
+          const headers = {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          };
           axios.post(
-            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms`,
+            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
             {
               title: onClick[0],
               category: onClick[1],
               content: onClick[2],
-              host_roll: Number(onClick[3]),
+              host_role: onClick[3],
+              location_latitude: onClick[4],
+              location_longitude: onClick[5],
+            },
+            {
+              headers,
             },
           );
         } catch (e) {
