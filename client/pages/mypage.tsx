@@ -1,7 +1,9 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/MyPage.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Modal from '../components/modal';
 
 const MyPage: NextPage = () => {
   const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
@@ -15,6 +17,30 @@ const MyPage: NextPage = () => {
   const [changePasswordMessage, setChangePasswordMessage] = useState('');
   const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
 
+  const [userId, setUserId] = useState('');
+  const [nickname, setNickname] = useState('');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const accessToken = localStorage.getItem('accessToken');
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+            withCredentials: true,
+          },
+        })
+        .then((response) => {
+          const { userInfo } = response.data.data;
+          setUserId(userInfo.user_id);
+          setNickname(userInfo.nickname);
+        });
+    }
+  }, []);
+
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCorrectChangePassword(true);
     setChangePassword(event.target.value);
@@ -26,13 +52,38 @@ const MyPage: NextPage = () => {
   };
 
   const handleModify = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (changePassword === '') {
-      setChangePasswordMessage('필수 정보입니다.');
-      setCorrectChangePassword(false);
-    }
-    if (checkPassword === '') {
-      setCheckPasswordMessage('필수 정보입니다.');
-      setCorrectCheckPassword(false);
+    if (changePassword === '' || checkPassword === '') {
+      if (changePassword === '') {
+        setChangePasswordMessage('필수 정보입니다.');
+        setCorrectChangePassword(false);
+      }
+      if (checkPassword === '') {
+        setCheckPasswordMessage('필수 정보입니다.');
+        setCorrectCheckPassword(false);
+      }
+    } else if (correctChangePassword && correctCheckPassword) {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+            {
+              password: changePassword,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+                withCredentials: true,
+              },
+            },
+          )
+          .then((response) => {
+            setChangePassword('');
+            setCheckPassword('');
+            console.log(response);
+          });
+      }
     }
   };
 
@@ -42,7 +93,6 @@ const MyPage: NextPage = () => {
 
     if (type === 'change_password') {
       if (!value) {
-        // setChangePasswordMessage('필수 정보입니다.');
         setCorrectChangePassword(true);
       } else if (!isSmallLetterAndNumber4to10.test(value)) {
         setChangePasswordMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
@@ -54,7 +104,6 @@ const MyPage: NextPage = () => {
 
     if (type === 'check_password') {
       if (!value) {
-        // setCheckPasswordMessage('필수 정보입니다.');
         setCorrectCheckPassword(true);
       } else if (changePassword !== checkPassword) {
         if (changePassword === '' || !correctChangePassword) {
@@ -75,6 +124,10 @@ const MyPage: NextPage = () => {
     }
   };
 
+  const handleModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <Head>
@@ -90,22 +143,22 @@ const MyPage: NextPage = () => {
             alt="user-image"
             className={styles.mypage_image}
           />
-          <div className={styles.mypage_score_container}>
+          {/* <div className={styles.mypage_score_container}>
             <div className={styles.mypage_score_description}>나의 평점</div>
             <div className={styles.mapage_score}>
               9.6<span>{`(${12})`}</span>
             </div>
-          </div>
+          </div> */}
           <div className={styles.mypage_input_container}>
             <div className={styles.mypage_input_disabled}>
               <input
                 className={styles.mypage_id_name}
-                placeholder="아이디"
+                placeholder={userId}
                 disabled
               />
               <input
                 className={styles.mypage_id_name}
-                placeholder="닉네임"
+                placeholder={nickname}
                 disabled
               />
             </div>
@@ -114,6 +167,7 @@ const MyPage: NextPage = () => {
               className={styles.mypage_password_change_check}
               placeholder="변경할 비밀번호 입력"
               type="password"
+              value={changePassword}
               onChange={handleChangePassword}
               onBlur={handleBlur}
             />
@@ -131,6 +185,7 @@ const MyPage: NextPage = () => {
               className={styles.mypage_password_change_check}
               placeholder="변경할 비밀번호 확인"
               type="password"
+              value={checkPassword}
               onChange={handleCheckPassword}
               onBlur={handleBlur}
             />
@@ -151,9 +206,15 @@ const MyPage: NextPage = () => {
             >
               수정하기
             </button>
-            <button className={styles.mypage_signout_button}>회원탈퇴</button>
+            <button
+              className={styles.mypage_signout_button}
+              onClick={handleModal}
+            >
+              회원탈퇴
+            </button>
           </div>
         </div>
+        {isModalOpen ? <Modal setIsModalOpen={setIsModalOpen} /> : <></>}
       </div>
     </>
   );

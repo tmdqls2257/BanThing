@@ -8,13 +8,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState('');
 
-  // useEffect(() => {
-  //   const log = localStorage.getItem('accessToken');
-  //   if (log) {
-  //     setIsLogin(true);
-  //     setAccessToken(log);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      setIsLogin(true);
+      setAccessToken(accessToken);
+    } else {
+      setIsLogin(false);
+      setAccessToken('');
+    }
+  }, []);
 
   return (
     <>
@@ -25,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         accessToken={accessToken}
         setAccessToken={setAccessToken}
       />
-      <Component {...pageProps} />
+      <Component {...pageProps} accessToken={accessToken} />
     </>
   );
 }

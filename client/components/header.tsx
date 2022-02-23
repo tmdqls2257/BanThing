@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css';
 import Login from './login';
 import React, { useState } from 'react';
 import axios from 'axios';
+
 interface propsType {
   isLogin: boolean;
   setIsLogin: Function;
@@ -18,23 +19,25 @@ export default function Header(prop: propsType) {
   };
 
   const handleLogout = () => {
-    prop.setIsLogin(false);
-    prop.setAccessToken('');
-    console.log(prop.accessToken);
-    axios.post(
-      `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${prop.accessToken}`,
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${prop.accessToken}`,
+            'Content-Type': 'application/json',
+            withCredentials: true,
+          },
+          // 'Content-Type': 'application/json',
+          // withCredentials: true,
         },
-      },
-    );
-    //   .then((response) => {
-    //     console.log(response);
-    //     prop.setIsLogin(false);
-    //     prop.setAccessToken('');
-    //   });
+      )
+      .then((response) => {
+        localStorage.removeItem('accessToken');
+        prop.setAccessToken('');
+        prop.setIsLogin(false);
+      });
   };
 
   return (
@@ -56,9 +59,11 @@ export default function Header(prop: propsType) {
               <a className={styles.nav_menu}>MAIN</a>
             </Link>
             <span className={styles.nav_divide}>|</span>
-            <a className={styles.nav_menu} onClick={handleLogout}>
-              LOGOUT
-            </a>
+            <Link href="/">
+              <a className={styles.nav_menu} onClick={handleLogout}>
+                LOGOUT
+              </a>
+            </Link>
           </nav>
           <div className={styles.nav_user_image_container}>
             <Link href="/mypage">
