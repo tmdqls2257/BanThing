@@ -25,16 +25,46 @@ const SidebarContainer = styled.div`
     bottom: 0px;
   }
 `;
-const Sidebar = () => {
-  const state = {};
+
+interface locationType {
+  location: number[];
+  roomsId: number;
+}
+
+interface usersChats {
+  data: {
+    replyLog: [
+      {
+        id: number;
+        nickname: string;
+        post_id: number;
+        reply: string;
+        time: string;
+      },
+    ];
+  };
+}
+
+const Sidebar = ({ location, roomsId }: locationType) => {
+  const [roomTitle, setRoomTitle] = useState('');
+  const [usersChats, setUsersChats] = useState<usersChats>();
+
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />
       <Container>
         <CreateRoom />
-        <MakeRoom />
-        <JoinRoom />
-        <ChatRoom />
+        <MakeRoom location={location} />
+        <JoinRoom
+          setUsersChats={setUsersChats}
+          setroomTitle={setRoomTitle}
+          roomsId={roomsId}
+        />
+        <ChatRoom
+          roomTitle={roomTitle}
+          roomsId={roomsId}
+          usersChats={usersChats}
+        />
       </Container>
     </SidebarContainer>
   );

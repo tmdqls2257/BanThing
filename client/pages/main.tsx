@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { NextPage } from 'next';
 import Map from '../components/main/map';
 import Sidebar from '../components/main/sidebar';
+import { useState } from 'react';
 
 declare global {
   interface Window {
@@ -14,11 +15,14 @@ const Container = styled.div`
   padding-top: 4.6vw;
   display: flex;
   flex-direction: row;
-  width: 100;
+  width: 100vw;
   height: 100vh;
 `;
 
 const Main: NextPage = () => {
+  const [location, setLocation] = useState<number[]>([]);
+  const [roomsId, setRoomsData] = useState(0);
+
   return (
     <>
       <Head>
@@ -32,8 +36,8 @@ const Main: NextPage = () => {
         crossOrigin="anonymous"
       ></Script>
       <Container>
-        <Map />
-        <Sidebar />
+        <Map roomsData={setRoomsData} setLocation={setLocation} />
+        <Sidebar location={location} roomsId={roomsId} />
       </Container>
     </>
   );

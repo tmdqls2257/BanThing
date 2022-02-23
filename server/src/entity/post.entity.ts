@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class Rooms {
+export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,12 +25,6 @@ export class Rooms {
 
   @Column()
   host_role: number;
-
-  @Column()
-  host_rating_score: number;
-
-  @Column()
-  host_rating_count: number;
 
   @Column()
   category: string;
