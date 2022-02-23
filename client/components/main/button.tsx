@@ -28,7 +28,7 @@ function Button({
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           };
           axios.post(
-            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
             {
               title: onClick[0],
               category: onClick[1],
@@ -56,7 +56,7 @@ function Button({
     } else if (button.value === '평가하기') {
       console.log(rateNum);
       axios.post(
-        `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms/evaluation`,
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms/evaluation`,
         {
           rating_score: rateNum,
         },

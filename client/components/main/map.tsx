@@ -15,30 +15,6 @@ const MapContainer = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-const positions = [
-  {
-    lat: 35.169222,
-    lon: 126.806048,
-    imageSrc:
-      'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
-  },
-  {
-    lat: 35.168428,
-    lon: 126.805479,
-    imageSrc:
-      'https://cdn.discordapp.com/attachments/934007459763326976/943866955880878120/unknown.png',
-  },
-  {
-    lat: 35.166637,
-    lon: 126.81332,
-    imageSrc:
-      'https://cdn.discordapp.com/attachments/934007459763326976/944397124114722826/unknown.png',
-  },
-];
-
-function Map() {
-=======
 interface dataType {
   data: {
     postList: [
@@ -56,7 +32,6 @@ interface mapType {
   roomsData: Dispatch<SetStateAction<number>>;
 }
 function Map({ setLocation, roomsData }: mapType) {
->>>>>>> 83a484ae71882a9c48362a1995971eb5b9b29d6e
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<dataType>();
 
@@ -64,7 +39,7 @@ function Map({ setLocation, roomsData }: mapType) {
     const getPosts = async () => {
       try {
         const response: AxiosResponse = await axios.get(
-          `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
         );
         setData(response.data);
       } catch (e) {
