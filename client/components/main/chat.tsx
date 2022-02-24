@@ -59,13 +59,15 @@ export interface chatType {
   owner: boolean;
   nickname: string;
   time: string;
+  userchat: string[];
 }
 
-const chat = ({ nickname, owner, chats, time }: chatType) => {
+const chat = ({ nickname, owner, chats, time, userchat }: chatType) => {
   const clock = new Date(Date.parse(time));
-  console.log(clock.getMinutes());
+  console.log(time);
+
   let minute = String(clock.getMinutes());
-  console.log(clock.getHours());
+
   let hour = String(clock.getHours());
 
   if (clock.getMinutes() < 10) {

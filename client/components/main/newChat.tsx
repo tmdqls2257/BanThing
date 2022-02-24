@@ -32,9 +32,10 @@ const Container = styled.div`
 `;
 interface newChatType {
   roomsId: number;
+  onCreated: (chat: string) => void;
 }
 
-const NewChat = ({ roomsId }: newChatType) => {
+const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const [chat, setChat] = useState('');
 
   const onSubmit = async (event: React.FormEvent) => {
@@ -58,6 +59,7 @@ const NewChat = ({ roomsId }: newChatType) => {
           },
         );
       }
+      onCreated(chat);
     }
     setChat('');
   };

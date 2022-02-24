@@ -33,6 +33,7 @@ interface ChatsType {
 
 const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
   const [ownernickname, setNickname] = useState('');
+  const [userchat, setChat] = useState<string[]>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
@@ -52,6 +53,17 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
     }
   }, []);
 
+  const onCreated = (chat: string) => {
+    usersChats?.data.replyLog.push({
+      id: usersChats?.data.replyLog.length + 1,
+      nickname: ownernickname,
+      post_id: 1,
+      reply: chat,
+      time: String(new Date()),
+    });
+    setChat((chats) => [...chats, chat]);
+  };
+
   return (
     <>
       <Container>
@@ -64,6 +76,7 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
                 chats={chat.reply}
                 nickname={chat.nickname}
                 time={chat.time}
+                userchat={userchat}
               />
             </>
           ))
@@ -71,7 +84,7 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
           <></>
         )}
       </Container>
-      {addable && <NewChat roomsId={roomsId} />}
+      {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
     </>
   );
 };
