@@ -49,10 +49,7 @@ export class AuthController {
   }
 
   @Post('/login') //로그인
-  async logIn(
-    @Res() res: Response,
-    @Body() loginDTO: LoginDTO,
-  ): Promise<object> {
+  async logIn(@Res() res: Response, @Body() loginDTO: LoginDTO) {
     return await this.authService.logIn(loginDTO, res);
   }
 
@@ -60,7 +57,7 @@ export class AuthController {
   kakaoLogin(@Res() res: Response) {
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirectUrl = 'http://localhost:3001/users/kakaoLoginRedirect';
+    const _redirectUrl = 'http://localhost:8080/users/kakaoLoginRedirect';
     const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
     return res.redirect(url);
   }

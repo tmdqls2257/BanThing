@@ -90,6 +90,7 @@ export class AuthService {
     }
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
+
     return res
       .cookie('accessToken', token)
       .send({ data: { accessToken: token }, message: '로그인 완료' });
@@ -98,7 +99,7 @@ export class AuthService {
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = 'http://localhost:3001/users/kakaoLoginRedirect';
+    const _redirect_url = 'http://localhost:8080/users/kakaoLoginRedirect';
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {
@@ -129,10 +130,9 @@ export class AuthService {
       this.userService.snsSave(snsSignUp);
     }
 
-    return res.cookie('accessToken', data.data['access_token']).send({
-      data: { accessToken: data.data['access_token'] },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', data.data['access_token'])
+      .redirect('http://localhost:3000');
   }
 
   //로그아웃
