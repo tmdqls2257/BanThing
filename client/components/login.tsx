@@ -1,6 +1,7 @@
 import styles from '../styles/Login.module.css';
 import SignUp from './signup';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 interface propsType {
   loginModal: boolean;
@@ -10,6 +11,8 @@ interface propsType {
 }
 
 export default function Login(prop: propsType) {
+  const router = useRouter();
+
   const [signUpModal, setSignUpModal] = useState(false);
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -57,11 +60,7 @@ export default function Login(prop: propsType) {
   };
 
   const handleKakaoLogin = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`)
-      .then((response) => {
-        console.log(response);
-      });
+    router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
   };
 
   return (
