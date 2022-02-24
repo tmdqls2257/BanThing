@@ -54,13 +54,15 @@ export class AuthService {
 
   //회원탈퇴
   //! any 존재
-  async signOut(user: any): Promise<object> {
+  async signOut(user: any, res): Promise<object> {
     await this.userService.delete(user.user_id);
-    return { data: null, message: '회원탈퇴 완료' };
+    return res
+      .cookie('accessToken', '', { maxAge: 1 })
+      .send({ data: null, message: '회원탈퇴 완료' });
   }
 
   //카카오 회원탈퇴
-  async kakaoUnlink(user: any, token: string): Promise<any> {
+  async kakaoUnlink(user: any, token: string, res: Response): Promise<any> {
     await this.userService.snsDelete(user.user_id);
     const _url = 'https://kapi.kakao.com/v1/user/unlink';
     const _header = {
@@ -68,7 +70,9 @@ export class AuthService {
     };
     await axios.post(_url, {}, { headers: _header });
 
-    return { data: null, message: '회원탈퇴 완료' };
+    return res
+      .cookie('accessToken', '', { maxAge: 1 })
+      .send({ data: null, message: '회원탈퇴 완료' });
   }
 
   //로그인
