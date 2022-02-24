@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  max-height: 40vh;
   ul {
     height: 100%;
     padding: 0;
@@ -55,12 +54,25 @@ const Container = styled.div`
   }
 `;
 export interface chatType {
-  onCreated?: (arg0: string) => void;
-  chat: string;
+  chats: string;
   owner: boolean;
+  nickname: string;
+  time: string;
+  userchat: string[];
 }
 
-const chat = ({ owner, chat }: chatType) => {
+const chat = ({ nickname, owner, chats, time, userchat }: chatType) => {
+  const clock = new Date(Date.parse(time));
+
+  let minute = String(clock.getMinutes());
+
+  let hour = String(clock.getHours());
+
+  if (clock.getMinutes() < 10) {
+    minute = '0' + minute;
+  } else if (clock.getHours() < 10) {
+    hour = '0' + hour;
+  }
   return (
     <Container>
       <div className="display-container">
@@ -73,18 +85,22 @@ const chat = ({ owner, chat }: chatType) => {
                 alt=""
               />
               <div className="message-row__content">
-                <span className="message__author">여울</span>
+                <span className="message__author">{nickname}</span>
                 <div className="message__info">
-                  <span className="message__bubble">{chat}</span>
-                  <span className="message__time">18:12</span>
+                  <span className="message__bubble">{chats}</span>
+                  <span className="message__time">
+                    {hour}:{minute}
+                  </span>
                 </div>
               </div>
             </li>
           ) : (
             <li className="sent">
               <div className="message-row--own message-row__content message__info">
-                <span className="message__time">18:13</span>
-                <span className="message__bubble">{chat}</span>
+                <span className="message__time">
+                  {hour}:{minute}
+                </span>
+                <span className="message__bubble">{chats}</span>
               </div>
             </li>
           )}

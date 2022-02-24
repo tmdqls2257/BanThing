@@ -34,6 +34,9 @@ interface mapType {
 function Map({ setLocation, roomsData }: mapType) {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<dataType>();
+  const [dummyToken1, setDummyToken1] = useState('');
+  const [dummyToken2, setDummyToken2] = useState('');
+  const [dummyToken3, setDummyToken3] = useState('');
 
   useEffect(() => {
     const getPosts = async () => {
@@ -46,8 +49,39 @@ function Map({ setLocation, roomsData }: mapType) {
         console.log(e);
       }
     };
-
     getPosts();
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+        user_id: 'dummy',
+        password: '1234',
+      })
+      .then((res) => {
+        setDummyToken1(res.data.data.accessToken);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+        user_id: 'dummy2',
+        password: '1234',
+      })
+      .then((res) => {
+        setDummyToken2(res.data.data.accessToken);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+        user_id: 'dummy3',
+        password: '1234',
+      })
+      .then((res) => {
+        setDummyToken3(res.data.data.accessToken);
+      });
   }, []);
 
   useEffect(() => {
@@ -88,22 +122,31 @@ function Map({ setLocation, roomsData }: mapType) {
           setLocation([lat, lon]);
           const positions = [
             {
-              lat: lat + 0.001,
-              lon: lon + 0.002,
-              imageSrc:
-                'https://cdn.discordapp.com/attachments/934007459763326976/945616034247888966/unknown.png',
+              title: '피자 먹을 사람',
+              content: '특정 브랜드만 먹습니다.',
+              location_latitude: `${lat + 0.001}`,
+              location_longitude: `${lon + 0.001}`,
+              host_role: 1,
+              category: '피자',
+              token: dummyToken1,
             },
             {
-              lat: lat - 0.001,
-              lon: lon - 0.002,
-              imageSrc:
-                'https://cdn.discordapp.com/attachments/934007459763326976/945616608909475850/unknown.png',
+              title: '햄버거 먹을 사람',
+              content: '원하시는 브랜드 먹겠습니다.',
+              location_latitude: `${lat - 0.001}`,
+              location_longitude: `${lon + 0.001}`,
+              host_role: 2,
+              category: '햄버거',
+              token: dummyToken2,
             },
             {
-              lat: lat + 0.001,
-              lon: lon - 0.001,
-              imageSrc:
-                'https://cdn.discordapp.com/attachments/934007459763326976/945617088049975296/unknown.png',
+              title: '치킨 먹을 사람',
+              content: '원하시는 브랜드 먹겠습니다.',
+              location_latitude: `${lat - 0.002}`,
+              location_longitude: `${lon + 0.002}`,
+              host_role: 2,
+              category: '치킨',
+              token: dummyToken3,
             },
           ];
 
@@ -121,14 +164,11 @@ function Map({ setLocation, roomsData }: mapType) {
             for (let i = 0; i < roomList.length; i++) {
               let imageSrc = '';
               if (roomList[i].category === '햄버거') {
-                imageSrc =
-                  'https://cdn.discordapp.com/attachments/934007459763326976/945616034247888966/unknown.png'; // 마커이미지의 주소입니다
+                imageSrc = '/image/hamburger.png'; // 마커이미지의 주소입니다
               } else if (roomList[i].category === '치킨') {
-                imageSrc =
-                  'https://cdn.discordapp.com/attachments/934007459763326976/945616608909475850/unknown.png';
+                imageSrc = '/image/chicken.png';
               } else if (roomList[i].category === '피자') {
-                imageSrc =
-                  'https://cdn.discordapp.com/attachments/934007459763326976/945617088049975296/unknown.png';
+                imageSrc = '/image/pizza.png';
               }
               const imageSize = new window.kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
                 imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -152,24 +192,25 @@ function Map({ setLocation, roomsData }: mapType) {
           }
           // data로 변경 예정
           for (let i = 0; i < positions.length; i++) {
-            // data category가 치킨을 경우 치킨 이미지
-            const imageSrc = positions[i].imageSrc, // 마커이미지의 주소입니다
-              imageSize = new window.kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
-              imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-            const markerImage = new window.kakao.maps.MarkerImage(
-              imageSrc,
-              imageSize,
-              imageOption,
-            );
-            // 마커를 생성합니다
-            marker = new window.kakao.maps.Marker({
-              map: map, // 마커를 표시할 지도
-              position: new window.kakao.maps.LatLng(
-                positions[i].lat,
-                positions[i].lon,
-              ), // 마커의 위치
-              image: markerImage,
-            });
+            if (typeof window !== 'undefined' && positions[i].token) {
+              const headers = {
+                Authorization: `Bearer ${positions[i].token}`,
+              };
+              axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+                {
+                  title: positions[i].title,
+                  content: positions[i].content,
+                  location_latitude: positions[i].location_latitude,
+                  location_longitude: positions[i].location_longitude,
+                  host_role: positions[i].host_role,
+                  category: positions[i].category,
+                },
+                {
+                  headers,
+                },
+              );
+            }
             clickEvent(marker, map);
           }
         });
