@@ -24,6 +24,9 @@ export default function SignUp(prop: propsType) {
   const [correctPassword, setCorrectPassword] = useState(true);
   const [correctCheckPassword, setCorrectCheckPassword] = useState(true);
 
+  const [doubleCheckUserId, setDoubleCheckUserId] = useState(false);
+  const [doubleCheckNickname, setDoubleCheckNickname] = useState(false);
+
   const [idMessage, setIdMessage] = useState('');
   const [nicknameMessage, setNicknameMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
@@ -33,11 +36,13 @@ export default function SignUp(prop: propsType) {
 
   const handleUserId = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCorrectUserId(true);
+    setDoubleCheckUserId(false);
     setUserId(event.target.value);
   };
 
   const handleNickname = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCorrectNickname(true);
+    setDoubleCheckNickname(false);
     setNickname(event.target.value);
   };
 
@@ -59,9 +64,11 @@ export default function SignUp(prop: propsType) {
       if (!value) {
         setIdMessage('필수 정보입니다.');
         setCorrectUserId(false);
+        setDoubleCheckUserId(false);
       } else if (!isSmallLetterAndNumber4to10.test(value)) {
         setIdMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
         setCorrectUserId(false);
+        setDoubleCheckUserId(false);
       } else {
         setCorrectUserId(true);
       }
@@ -71,9 +78,11 @@ export default function SignUp(prop: propsType) {
       if (!value) {
         setNicknameMessage('필수 정보입니다.');
         setCorrectNickname(false);
+        setDoubleCheckNickname(false);
       } else if (!isRightNickname.test(value)) {
         setNicknameMessage('3~8자 한글, 영문, 숫자를 사용하세요.');
         setCorrectNickname(false);
+        setDoubleCheckNickname(false);
       } else {
         setCorrectNickname(true);
       }
@@ -131,10 +140,12 @@ export default function SignUp(prop: propsType) {
           },
         )
         .then((response) => {
+          setDoubleCheckUserId(true);
           console.log(response);
         })
         .catch((error) => {
           setIdMessage('이미 존재하는 아이디입니다.');
+          setDoubleCheckUserId(false);
           setCorrectUserId(false);
         });
     }
@@ -157,10 +168,12 @@ export default function SignUp(prop: propsType) {
           },
         )
         .then((response) => {
+          setDoubleCheckNickname(true);
           console.log(response);
         })
         .catch((error) => {
           setNicknameMessage('이미 존재하는 닉네임입니다.');
+          setDoubleCheckNickname(false);
           setCorrectNickname(false);
         });
     }
@@ -245,6 +258,13 @@ export default function SignUp(prop: propsType) {
         ) : (
           <span className={styles.signup_error}>{idMessage}</span>
         )}
+        {doubleCheckUserId ? (
+          <span className={styles.signup_solved_id}>
+            사용가능한 아이디입니다.
+          </span>
+        ) : (
+          <></>
+        )}
         <div className={styles.signup_id_name_container}>
           <input
             id="nickname"
@@ -264,6 +284,13 @@ export default function SignUp(prop: propsType) {
           <div className={styles.signup_space}>올바르게 작성되었습니다.</div>
         ) : (
           <span className={styles.signup_error}>{nicknameMessage}</span>
+        )}
+        {doubleCheckNickname ? (
+          <span className={styles.signup_solved_nickname}>
+            사용가능한 닉네임입니다.
+          </span>
+        ) : (
+          <></>
         )}
         <input
           id="password"

@@ -41,21 +41,24 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (chat !== '') {
-      console.log(roomsId);
-      console.log(chat);
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      };
-      axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-        {
-          post_id: roomsId,
-          reply: chat,
-        },
-        {
-          headers,
-        },
-      );
+      if (
+        typeof window !== 'undefined' &&
+        localStorage.getItem('accessToken')
+      ) {
+        const headers = {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        };
+        axios.post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+          {
+            post_id: roomsId,
+            reply: chat,
+          },
+          {
+            headers,
+          },
+        );
+      }
       onCreated(chat);
     }
     setChat('');

@@ -146,7 +146,7 @@ const MakeRoom = ({ location }: locationType) => {
     setTextarea(event.target.value);
   };
 
-  const radioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const radioChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     setRadio(event.target.value);
   };

@@ -54,20 +54,25 @@ export class AuthService {
 
   //회원탈퇴
   //! any 존재
-  async signOut(user: any): Promise<object> {
+  async signOut(user: any, res): Promise<object> {
     await this.userService.delete(user.user_id);
-    return { data: null, message: '회원탈퇴 완료' };
+    return res
+      .cookie('accessToken', '', { maxAge: 1 })
+      .send({ data: null, message: '회원탈퇴 완료' });
   }
 
   //카카오 회원탈퇴
-  async kakaoUnlink(token: any, user: any): Promise<any> {
+  async kakaoUnlink(user: any, token: string, res: Response): Promise<any> {
+    await this.userService.snsDelete(user.user_id);
     const _url = 'https://kapi.kakao.com/v1/user/unlink';
     const _header = {
       Authorization: `Bearer ${token}`,
     };
     await axios.post(_url, {}, { headers: _header });
-    await this.userService.snsDelete(user.user_id);
-    return { data: null, message: '회원탈퇴 완료' };
+
+    return res
+      .cookie('accessToken', '', { maxAge: 1 })
+      .send({ data: null, message: '회원탈퇴 완료' });
   }
 
   //로그인
@@ -89,6 +94,7 @@ export class AuthService {
     }
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
+
     return res
       .cookie('accessToken', token)
       .send({ data: { accessToken: token }, message: '로그인 완료' });
@@ -97,7 +103,7 @@ export class AuthService {
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = 'http://localhost:3000/users/kakaoLoginRedirect';
+    const _redirect_url = 'http://localhost:8080/users/kakaoLoginRedirect';
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {
@@ -114,7 +120,7 @@ export class AuthService {
       { headers: _header },
     );
 
-    const userFind = this.userService.findByFields({
+    const userFind: Users = await this.userService.findByFields({
       where: { user_id: sign.data.kakao_account.email },
     });
 
@@ -128,10 +134,9 @@ export class AuthService {
       this.userService.snsSave(snsSignUp);
     }
 
-    return res.cookie('accessToken', data.data['access_token']).send({
-      data: { accessToken: data.data['access_token'] },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', data.data['access_token'])
+      .redirect('http://localhost:3000');
   }
 
   //로그아웃
@@ -142,7 +147,7 @@ export class AuthService {
   }
 
   //카카오 로그아웃
-  async kakaoLogOut(res: Response, token): Promise<any> {
+  async kakaoLogOut(res: Response, token: string): Promise<any> {
     const _url = 'https://kapi.kakao.com/v1/user/logout';
     const _header = {
       Authorization: `Bearer ${token}`,

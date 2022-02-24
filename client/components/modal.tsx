@@ -19,8 +19,8 @@ export default function Modal(prop: propsType) {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
-            withCredentials: true,
           },
+          withCredentials: true,
         })
         .then((response) => {
           console.log(response);
@@ -39,6 +39,28 @@ export default function Modal(prop: propsType) {
       prop.setSignUpModal(false);
     }
   };
+
+  if (prop.type === 'modify') {
+    return (
+      <>
+        <div className={styles.change_password_modal_container}>
+          <div className={styles.change_password_modal_body}>
+            <div className={styles.change_password_modal_description}>
+              <span>비밀번호가 변경되었습니다.</span>
+            </div>
+            <div className={styles.change_password_modal_button_container}>
+              <button
+                className={styles.change_password_modal_button}
+                onClick={handleModal}
+              >
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   if (prop.type === 'signout') {
     return (

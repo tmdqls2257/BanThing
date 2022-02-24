@@ -8,16 +8,24 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState('');
 
+  let cookie: any;
+
+  if (typeof document !== 'undefined') {
+    cookie = document.cookie;
+  } else {
+    cookie = '';
+  }
+
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
+    const accessToken: any = localStorage.getItem('accessToken');
+    if (cookie) {
       setIsLogin(true);
       setAccessToken(accessToken);
     } else {
       setIsLogin(false);
       setAccessToken('');
     }
-  }, []);
+  }, [cookie]);
 
   return (
     <>

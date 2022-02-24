@@ -20,7 +20,8 @@ const MyPage: NextPage = () => {
   const [userId, setUserId] = useState('');
   const [nickname, setNickname] = useState('');
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
+  const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -61,6 +62,9 @@ const MyPage: NextPage = () => {
         setCheckPasswordMessage('필수 정보입니다.');
         setCorrectCheckPassword(false);
       }
+    } else if (changePassword !== checkPassword) {
+      setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
+      setCorrectCheckPassword(false);
     } else if (correctChangePassword && correctCheckPassword) {
       if (typeof window !== 'undefined' && window.localStorage) {
         const accessToken = localStorage.getItem('accessToken');
@@ -81,7 +85,7 @@ const MyPage: NextPage = () => {
           .then((response) => {
             setChangePassword('');
             setCheckPassword('');
-            console.log(response);
+            setIsModifyModalOpen(true);
           });
       }
     }
@@ -97,6 +101,9 @@ const MyPage: NextPage = () => {
       } else if (!isSmallLetterAndNumber4to10.test(value)) {
         setChangePasswordMessage('4~10자 영어 소문자, 숫자를 사용하세요.');
         setCorrectChangePassword(false);
+      } else if (changePassword === checkPassword) {
+        setCorrectChangePassword(true);
+        setCorrectCheckPassword(true);
       } else {
         setCorrectChangePassword(true);
       }
@@ -125,7 +132,7 @@ const MyPage: NextPage = () => {
   };
 
   const handleModal = () => {
-    setIsModalOpen(true);
+    setIsSignoutModalOpen(true);
   };
 
   return (
@@ -214,8 +221,13 @@ const MyPage: NextPage = () => {
             </button>
           </div>
         </div>
-        {isModalOpen ? (
-          <Modal setIsModalOpen={setIsModalOpen} type="signout" />
+        {isSignoutModalOpen ? (
+          <Modal setIsModalOpen={setIsSignoutModalOpen} type="signout" />
+        ) : (
+          <></>
+        )}
+        {isModifyModalOpen ? (
+          <Modal setIsModalOpen={setIsModifyModalOpen} type="modify" />
         ) : (
           <></>
         )}

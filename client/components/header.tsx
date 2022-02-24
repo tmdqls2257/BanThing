@@ -27,10 +27,8 @@ export default function Header(prop: propsType) {
           headers: {
             Authorization: `Bearer ${prop.accessToken}`,
             'Content-Type': 'application/json',
-            withCredentials: true,
           },
-          // 'Content-Type': 'application/json',
-          // withCredentials: true,
+          withCredentials: true,
         },
       )
       .then((response) => {
