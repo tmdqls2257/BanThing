@@ -118,13 +118,13 @@ const JoinRoom = ({ setUsersChats, roomsId, setroomTitle }: roomsIdType) => {
     const getPosts = async () => {
       try {
         if (roomsId !== 0) {
-          const response: AxiosResponse = await axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
-            {
+          axios
+            .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`, {
               id: roomsId,
-            },
-          );
-          setData(response.data);
+            })
+            .then((response) => {
+              setData(response.data);
+            });
         }
       } catch (e) {
         console.log(e);

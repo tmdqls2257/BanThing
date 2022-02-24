@@ -32,31 +32,32 @@ const Container = styled.div`
 `;
 interface newChatType {
   roomsId: number;
-  onCreated: (chat: string) => void;
 }
 
-const NewChat = ({ roomsId, onCreated }: newChatType) => {
+const NewChat = ({ roomsId }: newChatType) => {
   const [chat, setChat] = useState('');
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (chat !== '') {
-      console.log(roomsId);
-      console.log(chat);
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      };
-      axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-        {
-          post_id: roomsId,
-          reply: chat,
-        },
-        {
-          headers,
-        },
-      );
-      onCreated(chat);
+      if (
+        typeof window !== 'undefined' &&
+        localStorage.getItem('accessToken')
+      ) {
+        const headers = {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        };
+        axios.post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+          {
+            post_id: roomsId,
+            reply: chat,
+          },
+          {
+            headers,
+          },
+        );
+      }
     }
     setChat('');
   };

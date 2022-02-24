@@ -24,27 +24,33 @@ function Button({
       createElement.style.display = 'none';
       makeRoom.style.display = 'flex';
     } else if (button.value === 'MakeRoom') {
-      if (onClick) {
-        try {
-          const headers = {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          };
-          axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-            {
-              title: onClick[0],
-              category: onClick[1],
-              content: onClick[2],
-              host_role: onClick[3],
-              location_latitude: onClick[4],
-              location_longitude: onClick[5],
-            },
-            {
-              headers,
-            },
-          );
-        } catch (e) {
-          console.log(e);
+      if (
+        typeof window !== 'undefined' &&
+        localStorage.getItem('accessToken')
+      ) {
+        if (onClick) {
+          try {
+            const headers = {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            };
+
+            axios.post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+              {
+                title: onClick[0],
+                category: onClick[1],
+                content: onClick[2],
+                host_role: onClick[3],
+                location_latitude: onClick[4],
+                location_longitude: onClick[5],
+              },
+              {
+                headers,
+              },
+            );
+          } catch (e) {
+            console.log(e);
+          }
         }
       }
       makeRoom.style.display = 'none';
@@ -53,25 +59,28 @@ function Button({
       chatRoom.style.display = 'none';
       createElement.style.display = 'flex';
     } else if (button.value === 'JoinRoom') {
-      console.log(roomId);
-      const getPosts = async () => {
-        try {
-          const headers = {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          };
-          const response: AxiosResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${roomId}`,
-            {
-              headers,
-            },
-          );
-          setChats(response.data);
-          console.log(response.data);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      getPosts();
+      if (
+        typeof window !== 'undefined' &&
+        localStorage.getItem('accessToken')
+      ) {
+        const getPosts = async () => {
+          try {
+            const headers = {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            };
+            const response: AxiosResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${roomId}`,
+              {
+                headers,
+              },
+            );
+            setChats(response.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getPosts();
+      }
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {

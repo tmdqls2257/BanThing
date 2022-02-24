@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Container = styled.div`
   overflow-y: auto;
-  max-height: 70vh;
+  max-height: 72vh;
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -32,16 +32,11 @@ interface ChatsType {
 }
 
 const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
-  const [chats, setChats] = useState<string[]>([]);
-  const [nickname, setNickname] = useState('');
+  const [ownernickname, setNickname] = useState('');
   console.log(usersChats?.data.replyLog);
 
-  const onCreated = (chat: string) => {
-    setChats((chats) => [...chats, chat]);
-  };
-
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
+    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
       const accessToken = localStorage.getItem('accessToken');
       axios
         .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
@@ -66,9 +61,10 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
             <>
               <Chat
                 key={chat.id}
-                owner={nickname === chat.nickname}
-                chat={chat.reply}
-                onCreated={onCreated}
+                owner={ownernickname === chat.nickname}
+                chats={chat.reply}
+                nickname={chat.nickname}
+                time={chat.time}
               />
             </>
           ))
@@ -76,7 +72,7 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
           <></>
         )}
       </Container>
-      {addable && <NewChat roomsId={roomsId} onCreated={onCreated} />}
+      {addable && <NewChat roomsId={roomsId} />}
     </>
   );
 };

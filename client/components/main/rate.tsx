@@ -39,7 +39,6 @@ export default function Rate() {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(rateNum);
   };
 
   return (
