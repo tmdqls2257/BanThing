@@ -42,7 +42,7 @@ export default function Login(prop: propsType) {
             user_id: userId,
             password: password,
           },
-          // { withCredentials: true },
+          { withCredentials: true },
         )
         .then((response) => {
           const { accessToken } = response.data.data;
@@ -60,12 +60,7 @@ export default function Login(prop: propsType) {
   };
 
   const handleKakaoLogin = () => {
-    const _hostName = 'https://kauth.kakao.com';
-    const _restApiKey = process.env.KAKAO_ID;
-    const _redirectUrl = 'http://localhost:8080/users/kakaoLoginRedirect';
-    const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
-    return router.push(`${url}`);
-    // router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
+    router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
   };
 
   return (

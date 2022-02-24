@@ -29,8 +29,6 @@ export default function Header(prop: propsType) {
             'Content-Type': 'application/json',
             withCredentials: true,
           },
-          // 'Content-Type': 'application/json',
-          // withCredentials: true,
         },
       )
       .then((response) => {
