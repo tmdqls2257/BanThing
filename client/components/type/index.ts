@@ -3,6 +3,8 @@ export interface BasicButtonProp {
   containerName: string;
   rateNum?: number;
   onClick?: (string | number)[];
+  setChats?: any;
+  roomId?: number;
 }
 
 export interface RateButtonProp {

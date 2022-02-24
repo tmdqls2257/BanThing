@@ -1,7 +1,7 @@
-import SidebarHeader from './sidebarHeader';
+import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
-import { setStateType } from '../type';
-import Button from './button';
+import { setStateType } from '../../type';
+import Button from '../button';
 import { useState } from 'react';
 
 const Container = styled.div`
@@ -11,16 +11,18 @@ const Container = styled.div`
   width: 30vw;
   min-width: 400px;
   min-height: 715px;
+  background-color: var(--chat-background-color);
 
   height: auto;
   main {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 332px;
-
     justify-content: space-between;
     margin: auto;
   }
+
   .MakeRoom-main-section-flex {
     display: flex;
     flex-direction: row;
@@ -28,9 +30,15 @@ const Container = styled.div`
     justify-content: space-between;
     input,
     select {
+      padding-left: 10px;
       display: flex;
       width: 200px;
       font-size: var(--font-size-base);
+      height: 37px;
+      border-radius: 5px;
+      border: none;
+      margin-left: 10px;
+      min-width: 60%;
     }
   }
   .MakeRoom-main-section-radio {
@@ -41,19 +49,34 @@ const Container = styled.div`
     input {
       margin-right: var(--margine-base);
     }
+    select {
+      padding-left: 10px;
+      display: flex;
+      width: 200px;
+      font-size: var(--font-size-base);
+      height: 37px;
+      border-radius: 5px;
+      border: none;
+      margin-left: 10px;
+      min-width: 60%;
+    }
   }
   .MakeRoom-main-section-content {
     padding: 32px;
     line-height: 1.5;
     display: flex;
     border: none;
-    border-radius: var(--border-radius-base);
+    border-radius: 5px;
     background-color: var(--gary-color);
     width: var(--sidebar-content-width);
     height: 30vh;
     ::-webkit-scrollbar {
       width: 0;
     }
+  }
+  textarea {
+    resize: none;
+    /* border-radius: 5px; */
   }
   textarea:focus,
   input,
@@ -62,6 +85,11 @@ const Container = styled.div`
   }
   h1 {
     font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    background-color: var(--chat-by-me-color);
   }
   @media screen and (max-width: 768px) {
     width: 100vw;
@@ -147,18 +175,23 @@ const MakeRoom = ({ location }: locationType) => {
             <option value="피자">피자</option>
           </select>
         </section>
-        <h1>역할</h1>
         <section className="MakeRoom-main-section-radio">
-          <input
+          <h1>역할</h1>
+          <select id="choise-foods" onChange={radioChange}>
+            <option value=""></option>
+            <option value="받는 사람">받는 사람</option>
+            <option value="가지러 가는 사람">가지러 가는 사람</option>
+          </select>
+          {/* <input
             type="radio"
             id="contactChoice1"
             name="contact"
             value="1"
             onChange={radioChange}
           />
-          <label htmlFor="contactChoice1">받는 사람</label>
+          <label htmlFor="contactChoice1">받는 사람</label> */}
         </section>
-        <section className="MakeRoom-main-section-radio">
+        {/* <section className="MakeRoom-main-section-radio">
           <input
             type="radio"
             id="contactChoice2"
@@ -167,7 +200,7 @@ const MakeRoom = ({ location }: locationType) => {
             onChange={radioChange}
           />
           <label htmlFor="contactChoice2">가지러 가는 사람</label>
-        </section>
+        </section> */}
         <section>
           <h1>내용</h1>
           <textarea

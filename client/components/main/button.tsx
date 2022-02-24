@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import styled from 'styled-components';
 import { BasicButtonProp } from '../type';
 
@@ -7,6 +7,8 @@ function Button({
   rateNum,
   containerName,
   children,
+  setChats,
+  roomId,
 }: BasicButtonProp) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -28,7 +30,7 @@ function Button({
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           };
           axios.post(
-            `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
             {
               title: onClick[0],
               category: onClick[1],
@@ -51,16 +53,29 @@ function Button({
       chatRoom.style.display = 'none';
       createElement.style.display = 'flex';
     } else if (button.value === 'JoinRoom') {
+      console.log(roomId);
+      const getPosts = async () => {
+        try {
+          const headers = {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          };
+          const response: AxiosResponse = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${roomId}`,
+            {
+              headers,
+            },
+          );
+          setChats(response.data);
+          console.log(response.data);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getPosts();
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
     } else if (button.value === '평가하기') {
       console.log(rateNum);
-      axios.post(
-        `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/rooms/evaluation`,
-        {
-          rating_score: rateNum,
-        },
-      );
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';

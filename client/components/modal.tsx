@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 interface propsType {
   setIsModalOpen: Function;
   setSignUpModal?: Function;
-  setIsLogin?: Function;
   type: string;
 }
 
@@ -28,10 +27,6 @@ export default function Modal(prop: propsType) {
           localStorage.removeItem('accessToken');
           prop.setIsModalOpen(false);
           router.push('/');
-          console.log(prop.setIsLogin);
-          if (prop.setIsLogin) {
-            prop.setIsLogin(false);
-          }
         });
     }
   };

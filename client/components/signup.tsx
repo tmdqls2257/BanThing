@@ -305,7 +305,6 @@ export default function SignUp(prop: propsType) {
         <Modal
           setIsModalOpen={setIsModalOpen}
           setSignUpModal={prop.setSignUpModal}
-          setIsLogin={prop.setIsLogin}
           type="signup"
         />
       ) : (

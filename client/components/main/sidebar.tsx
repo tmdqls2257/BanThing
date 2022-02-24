@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ChatRoom from './chatRoom';
 import CreateRoom from './createRoom';
 import JoinRoom from './joinRoom';
-import MakeRoom from './makeRoom';
+import MakeRoom from './makeRoom/makeRoom';
 import MobileButton from './mobileButton';
 
 const Container = styled.div`
@@ -31,16 +31,40 @@ interface locationType {
   roomsId: number;
 }
 
+interface usersChats {
+  data: {
+    replyLog: [
+      {
+        id: number;
+        nickname: string;
+        post_id: number;
+        reply: string;
+        time: string;
+      },
+    ];
+  };
+}
+
 const Sidebar = ({ location, roomsId }: locationType) => {
   const [roomTitle, setRoomTitle] = useState('');
+  const [usersChats, setUsersChats] = useState<usersChats>();
+
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />
       <Container>
         <CreateRoom />
         <MakeRoom location={location} />
-        <JoinRoom setroomTitle={setRoomTitle} roomsId={roomsId} />
-        <ChatRoom roomTitle={roomTitle} />
+        <JoinRoom
+          setUsersChats={setUsersChats}
+          setroomTitle={setRoomTitle}
+          roomsId={roomsId}
+        />
+        <ChatRoom
+          roomTitle={roomTitle}
+          roomsId={roomsId}
+          usersChats={usersChats}
+        />
       </Container>
     </SidebarContainer>
   );
