@@ -17,8 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken && cookie) {
+    const accessToken: any = localStorage.getItem('accessToken');
+    if (cookie) {
       setIsLogin(true);
       setAccessToken(accessToken);
     } else {

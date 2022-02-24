@@ -19,8 +19,8 @@ export default function Modal(prop: propsType) {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
-            withCredentials: true,
           },
+          withCredentials: true,
         })
         .then((response) => {
           console.log(response);

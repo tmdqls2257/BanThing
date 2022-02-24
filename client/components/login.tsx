@@ -47,7 +47,7 @@ export default function Login(prop: propsType) {
         .then((response) => {
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
-          console.log(document);
+          console.log(document.cookie);
           prop.setAccessToken(accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
@@ -61,6 +61,8 @@ export default function Login(prop: propsType) {
 
   const handleKakaoLogin = () => {
     router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
+    console.log(document.cookie);
+    // const accessToken = localStorage.getItem('accessToken');
   };
 
   return (
