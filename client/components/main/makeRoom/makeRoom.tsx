@@ -177,7 +177,7 @@ const MakeRoom = ({ location }: locationType) => {
         </section>
         <section className="MakeRoom-main-section-radio">
           <h1>역할</h1>
-          <select id="choise-foods" onChange={(event) => selectChange(event)}>
+          <select id="choise-foods" onChange={(event) => radioChange(event)}>
             <option value=""></option>
             <option value="받는 사람">받는 사람</option>
             <option value="가지러 가는 사람">가지러 가는 사람</option>
