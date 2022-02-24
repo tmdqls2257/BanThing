@@ -8,6 +8,7 @@ import {
   Req,
   Get,
   Query,
+  Header,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { AuthService } from './auth.service';
@@ -55,29 +56,51 @@ export class AuthController {
     return await this.authService.logIn(loginDTO, res);
   }
 
+  @Get('kakao')
+  @Header('Content-Type', 'text/html')
+  getKakaoLoginPage(): string {
+    return `
+    <div>
+    <h1>카카오</h1>
+
+    <form action="http://localhost:3001/users/kakaoLogin" method="GET">
+    <input type="submit" value="카카오로그인" />
+    </form>
+
+    <form action="http://localhost:3001/users/kakaoLogout" method="GET">
+    <input type="submit" value="카카오로그아웃" />
+    </form>
+
+    <form action="http://localhost:3001/users/kakaoUnlink" method="GET">
+    <input type="submit" value="연결끊기(회원탈퇴?)" />
+    </form>`;
+  }
+
   @Get('kakaoLogin') //카카오 로그인
+  //@Header('Content-Type', 'text/html')
   kakaoLogin(@Res() res: Response) {
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirectUrl = 'http://127.0.0.1:3000/users/kakaoLoginRedirect';
+    const _redirectUrl = 'http://localhost:3001/users/kakaoLoginLogicRedirect';
     const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
     return res.redirect(url);
   }
 
-  @Get('kakaoLoginRedirect') //카카오 로그인
-  async kakaoLoginRedirect(@Query() qs, @Res() res: Response) {
-    return await this.authService.kakaoLogin(qs.code, res);
+  @Get('kakaoLoginLogicRedirect') //카카오 로그인
+  //@Header('Content-Type', 'text/html')
+  kakaoLoginRedirect(@Query() qs, @Res() res: Response) {
+    return this.authService.kakaoLogin(qs.code, res);
   }
 
   @Post('/logout') //로그아웃
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async logOut(@Res() res: Response): Promise<object> {
-    return await this.authService.logOut(res);
+  logOut(@Res() res: Response): Promise<object> {
+    return this.authService.logOut(res);
   }
 
   @Get('kakaoLogOut')
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async kakaoLogOut(@Res() res: Response, @Body() token) {
-    return await this.authService.kakaoLogOut(res, token);
+  kakaoLogOut(@Res() res: Response, @Body() token) {
+    return this.authService.kakaoLogOut(res, token);
   }
 }
