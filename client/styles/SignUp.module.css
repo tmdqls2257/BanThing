@@ -147,6 +147,24 @@
   color: #ff6767;
 }
 
+.signup_solved_id {
+  display: flex;
+  position: fixed;
+  font-size: 12px;
+  margin-top: -105px;
+  padding-left: 43px;
+  color: #32b820;
+}
+
+.signup_solved_nickname {
+  display: flex;
+  position: fixed;
+  font-size: 12px;
+  margin-top: 25px;
+  padding-left: 43px;
+  color: #32b820;
+}
+
 .signup_space {
   display: flex;
   font-size: 12px;

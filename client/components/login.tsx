@@ -47,7 +47,7 @@ export default function Login(prop: propsType) {
         .then((response) => {
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
-          console.log(document.cookie);
+          console.log(document);
           prop.setAccessToken(accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
@@ -60,7 +60,12 @@ export default function Login(prop: propsType) {
   };
 
   const handleKakaoLogin = () => {
-    router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
+    const _hostName = 'https://kauth.kakao.com';
+    const _restApiKey = process.env.KAKAO_ID;
+    const _redirectUrl = 'http://localhost:8080/users/kakaoLoginRedirect';
+    const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
+    return router.push(`${url}`);
+    // router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
   };
 
   return (

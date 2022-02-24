@@ -98,7 +98,7 @@ export class AuthService {
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = 'http://localhost:3001/users/kakaoLoginRedirect';
+    const _redirect_url = 'http://localhost:8080/users/kakaoLoginRedirect';
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {
