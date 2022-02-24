@@ -90,6 +90,7 @@ export class AuthService {
     }
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
+
     return res
       .cookie('accessToken', token)
       .send({ data: { accessToken: token }, message: '로그인 완료' });
@@ -129,10 +130,9 @@ export class AuthService {
       this.userService.snsSave(snsSignUp);
     }
 
-    return res.cookie('accessToken', data.data['access_token']).send({
-      data: { accessToken: data.data['access_token'] },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', data.data['access_token'])
+      .redirect('http://localhost:3000');
   }
 
   //로그아웃

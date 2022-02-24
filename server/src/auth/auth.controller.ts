@@ -49,10 +49,7 @@ export class AuthController {
   }
 
   @Post('/login') //로그인
-  async logIn(
-    @Res() res: Response,
-    @Body() loginDTO: LoginDTO,
-  ): Promise<object> {
+  async logIn(@Res() res: Response, @Body() loginDTO: LoginDTO) {
     return await this.authService.logIn(loginDTO, res);
   }
 
