@@ -8,6 +8,7 @@ import {
   Req,
   Get,
   Query,
+  Header,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { AuthService } from './auth.service';
@@ -41,10 +42,10 @@ export class AuthController {
     return await this.authService.signOut(req.user);
   }
 
-  @Delete('kakaoUnlink')
+  @Delete('kakaoUnlink') //카카오 회원탈퇴
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async kakaoUnlink(@Body() token, @Req() req: Request) {
-    return await this.authService.kakaoUnlink(token, req.user);
+  async kakaoUnlink(@Req() req: Request, @Body() token: string) {
+    return this.authService.kakaoUnlink(req.user, token);
   }
 
   @Post('/login') //로그인
@@ -59,25 +60,25 @@ export class AuthController {
   kakaoLogin(@Res() res: Response) {
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirectUrl = 'http://127.0.0.1:3000/users/kakaoLoginRedirect';
+    const _redirectUrl = 'http://localhost:3001/users/kakaoLoginRedirect';
     const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
     return res.redirect(url);
   }
 
   @Get('kakaoLoginRedirect') //카카오 로그인
-  async kakaoLoginRedirect(@Query() qs, @Res() res: Response) {
-    return await this.authService.kakaoLogin(qs.code, res);
+  kakaoLoginRedirect(@Query() qs, @Res() res: Response) {
+    return this.authService.kakaoLogin(qs.code, res);
   }
 
   @Post('/logout') //로그아웃
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async logOut(@Res() res: Response): Promise<object> {
-    return await this.authService.logOut(res);
+  logOut(@Res() res: Response): Promise<object> {
+    return this.authService.logOut(res);
   }
 
-  @Get('kakaoLogOut')
-  @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async kakaoLogOut(@Res() res: Response, @Body() token) {
-    return await this.authService.kakaoLogOut(res, token);
+  @Get('kakaoLogOut') //카카오 로그아웃
+  //@UseGuards(AuthGuard) //토큰으로 유저 정보 확인
+  kakaoLogOut(@Res() res: Response, @Body() token) {
+    return this.authService.kakaoLogOut(res, token);
   }
 }

@@ -42,6 +42,7 @@ export class UserService {
 
   //카카오 회원탈퇴
   async snsDelete(user_id: string): Promise<any> {
+    console.log(user_id);
     return await this.userRepository.delete({ user_id });
   }
 
