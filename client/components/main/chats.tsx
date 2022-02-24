@@ -6,7 +6,9 @@ import axios from 'axios';
 
 const Container = styled.div`
   overflow-y: auto;
-  max-height: 72vh;
+  min-height: 515px;
+  max-height: 74vh;
+  /* padding-bottom: 64px; */
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -62,11 +64,15 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
       time: String(new Date()),
     });
     setChat((chats) => [...chats, chat]);
+    const chatContainer = document.querySelector(
+      '.chat-Container',
+    )! as HTMLElement;
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
   };
 
   return (
     <>
-      <Container>
+      <Container className="chat-Container">
         {usersChats?.data.replyLog ? (
           usersChats?.data.replyLog.map((chat) => (
             <>

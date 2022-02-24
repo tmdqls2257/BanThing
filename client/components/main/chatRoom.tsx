@@ -1,7 +1,7 @@
 import Button from './button';
 import SidebarHeader from './sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
-import Modal from './rate';
+import Modal from './removeModal';
 import Chats from './chats';
 
 const Container = styled.div`
@@ -66,10 +66,7 @@ const ChatRoom = ({ usersChats, roomTitle, roomsId }: roomsIdTitleType) => {
         </main>
         <ButtonContainer>
           <div>
-            <Button containerName={'합의완료'}>합의완료</Button>
-          </div>
-          <div>
-            <Button containerName={'나가기'}>나가기</Button>
+            <Button containerName={'삭제하기'}>삭제하기</Button>
           </div>
         </ButtonContainer>
         <Modal />

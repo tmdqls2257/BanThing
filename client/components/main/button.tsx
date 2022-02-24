@@ -4,7 +4,6 @@ import { BasicButtonProp } from '../type';
 
 function Button({
   onClick,
-  rateNum,
   containerName,
   children,
   setChats,
@@ -55,9 +54,6 @@ function Button({
       }
       makeRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
-    } else if (button.value === '나가기') {
-      chatRoom.style.display = 'none';
-      createElement.style.display = 'flex';
     } else if (button.value === 'JoinRoom') {
       if (
         typeof window !== 'undefined' &&
@@ -83,13 +79,12 @@ function Button({
       }
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
-    } else if (button.value === '평가하기') {
-      console.log(rateNum);
+    } else if (button.value === '삭제하기') {
+      rate.style.display = 'flex';
+    } else if (button.value === 'removeModal') {
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';
-    } else if (button.value === '합의완료') {
-      rate.style.display = 'flex';
     }
   };
   return (

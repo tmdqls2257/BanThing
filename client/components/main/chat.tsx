@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  max-height: 40vh;
   ul {
     height: 100%;
     padding: 0;
@@ -64,7 +63,6 @@ export interface chatType {
 
 const chat = ({ nickname, owner, chats, time, userchat }: chatType) => {
   const clock = new Date(Date.parse(time));
-  console.log(time);
 
   let minute = String(clock.getMinutes());
 
