@@ -33,7 +33,6 @@ interface ChatsType {
 
 const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
   const [ownernickname, setNickname] = useState('');
-  console.log(usersChats?.data.replyLog);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {

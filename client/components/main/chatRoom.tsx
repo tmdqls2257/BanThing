@@ -51,8 +51,6 @@ interface roomsIdTitleType {
 }
 
 const ChatRoom = ({ usersChats, roomTitle, roomsId }: roomsIdTitleType) => {
-  console.log(usersChats);
-
   return (
     <>
       <Container id="ChatRoom">
