@@ -31,8 +31,8 @@ const MyPage: NextPage = () => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
-            withCredentials: true,
           },
+          withCredentials: true,
         })
         .then((response) => {
           const { userInfo } = response.data.data;
@@ -78,8 +78,8 @@ const MyPage: NextPage = () => {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
-                withCredentials: true,
               },
+              withCredentials: true,
             },
           )
           .then((response) => {
