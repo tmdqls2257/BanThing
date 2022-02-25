@@ -23,8 +23,8 @@ export class PostService {
   async create(postDTO: CreatePostDTO, user: any): Promise<object> {
     postDTO.host_user_id = user.user_id;
     postDTO.host_nickname = user.nickname;
-    await this.postRepository.save(postDTO);
-    return { data: null, message: '글 게시 완료' };
+    const data = await this.postRepository.save(postDTO);
+    return { data: { post_id: data.id }, message: '글 게시 완료' };
   }
 
   //채팅 저장
