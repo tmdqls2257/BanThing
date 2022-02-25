@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ChatRoom from './chatRoom';
 import CreateRoom from './createRoom';
@@ -47,22 +47,37 @@ interface usersChats {
 
 const Sidebar = ({ location, roomsId }: locationType) => {
   const [roomTitle, setRoomTitle] = useState('');
+  const [roomHostNickName, setroomHostNickName] = useState('');
   const [usersChats, setUsersChats] = useState<usersChats>();
+  const [roomId, setMakeRoom_MapRoomId] = useState<number>(0);
+
+  console.log(roomId);
+
+  useEffect(() => {
+    if (roomsId !== 0) {
+      setMakeRoom_MapRoomId(roomsId);
+    }
+  }, [roomsId]);
 
   return (
     <SidebarContainer id={'sidebarContainer'}>
       <MobileButton />
       <Container>
         <CreateRoom />
-        <MakeRoom location={location} />
+        <MakeRoom
+          location={location}
+          setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
+        />
         <JoinRoom
+          setroomHostNickName={setroomHostNickName}
           setUsersChats={setUsersChats}
           setroomTitle={setRoomTitle}
-          roomsId={roomsId}
+          roomsId={roomId}
         />
         <ChatRoom
+          roomHostNickName={roomHostNickName}
           roomTitle={roomTitle}
-          roomsId={roomsId}
+          roomsId={roomId}
           usersChats={usersChats}
         />
       </Container>

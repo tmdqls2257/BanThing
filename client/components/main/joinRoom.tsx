@@ -96,6 +96,7 @@ interface roomsIdType {
   roomsId: number;
   setroomTitle: Dispatch<SetStateAction<string>>;
   setUsersChats: Dispatch<SetStateAction<usersChats | undefined>>;
+  setroomHostNickName: Dispatch<SetStateAction<string>>;
 }
 interface usersChats {
   data: {
@@ -110,7 +111,12 @@ interface usersChats {
     ];
   };
 }
-const JoinRoom = ({ setUsersChats, roomsId, setroomTitle }: roomsIdType) => {
+const JoinRoom = ({
+  setUsersChats,
+  roomsId,
+  setroomTitle,
+  setroomHostNickName,
+}: roomsIdType) => {
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
 
@@ -132,13 +138,16 @@ const JoinRoom = ({ setUsersChats, roomsId, setroomTitle }: roomsIdType) => {
     };
     getPosts();
   }, [roomsId]);
-  if (chats) {
-    setUsersChats(chats);
-  }
+  useEffect(() => {
+    if (chats) {
+      setUsersChats(chats);
+    }
 
-  if (data) {
-    setroomTitle(data.data.post.title);
-  }
+    if (data) {
+      setroomTitle(data.data.post.title);
+      setroomHostNickName(data.data.post.host_nickname);
+    }
+  }, [chats, data]);
 
   return (
     <Container id="JoinRoom">
