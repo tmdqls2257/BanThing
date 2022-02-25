@@ -9,8 +9,6 @@ interface propsType {
   setIsLogin: Function;
   accessToken: string;
   setAccessToken: Function;
-  auth: string;
-  setAuth: Function;
 }
 
 export default function Header(prop: propsType) {
@@ -21,40 +19,50 @@ export default function Header(prop: propsType) {
   };
 
   const handleLogout = () => {
-    if (prop.auth === 'banthing') {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${prop.accessToken}`,
-              'Content-Type': 'application/json',
+    if (typeof localStorage !== 'undefined') {
+      const auth = localStorage.getItem('auth');
+      if (auth === 'banthing') {
+        const accessToken: any = localStorage.getItem('accessToken');
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+              withCredentials: true,
             },
-            withCredentials: true,
-          },
-        )
-        .then((response) => {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('auth');
-          prop.setAccessToken('');
-          prop.setIsLogin(false);
-        });
-    } else {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
-          { token: `${prop.accessToken}` },
-          {
-            withCredentials: true,
-          },
-        )
-        .then((response) => {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('auth');
-          prop.setAccessToken('');
-          prop.setIsLogin(false);
-        });
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('auth');
+            prop.setAccessToken('');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
+            { token: `${prop.accessToken}` },
+            {
+              withCredentials: true,
+            },
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('auth');
+            prop.setAccessToken('');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 
@@ -124,8 +132,6 @@ export default function Header(prop: propsType) {
               setLoginModal={setLoginModal}
               setIsLogin={prop.setIsLogin}
               setAccessToken={prop.setAccessToken}
-              auth={prop.auth}
-              setAuth={prop.setAuth}
             />
           ) : (
             <></>
