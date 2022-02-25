@@ -62,6 +62,29 @@ export default function Modal(prop: propsType) {
     );
   }
 
+  if (prop.type === 'mypage_kakao_do_modify') {
+    return (
+      <>
+        <div className={styles.change_password_modal_container}>
+          <div className={styles.change_password_modal_body}>
+            <div className={styles.change_password_modal_description}>
+              <span>카카오 회원은 마이페이지에서</span>
+              <span>비밀번호를 변경할 수 없습니다.</span>
+            </div>
+            <div className={styles.change_password_modal_button_container}>
+              <button
+                className={styles.change_password_modal_button}
+                onClick={handleModal}
+              >
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   if (prop.type === 'signout') {
     return (
       <>

@@ -19,9 +19,11 @@ const MyPage: NextPage = () => {
 
   const [userId, setUserId] = useState('');
   const [nickname, setNickname] = useState('');
+  const [auth, setAuth] = useState('');
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
+  const [isKakaoModalOpen, setIsKakaoModalOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -38,6 +40,7 @@ const MyPage: NextPage = () => {
           const { userInfo } = response.data.data;
           setUserId(userInfo.user_id);
           setNickname(userInfo.nickname);
+          setAuth(userInfo.auth);
         });
     }
   }, []);
@@ -53,41 +56,45 @@ const MyPage: NextPage = () => {
   };
 
   const handleModify = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (changePassword === '' || checkPassword === '') {
-      if (changePassword === '') {
-        setChangePasswordMessage('필수 정보입니다.');
-        setCorrectChangePassword(false);
-      }
-      if (checkPassword === '') {
-        setCheckPasswordMessage('필수 정보입니다.');
+    if (auth === 'banthing') {
+      if (changePassword === '' || checkPassword === '') {
+        if (changePassword === '') {
+          setChangePasswordMessage('필수 정보입니다.');
+          setCorrectChangePassword(false);
+        }
+        if (checkPassword === '') {
+          setCheckPasswordMessage('필수 정보입니다.');
+          setCorrectCheckPassword(false);
+        }
+      } else if (changePassword !== checkPassword) {
+        setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
         setCorrectCheckPassword(false);
-      }
-    } else if (changePassword !== checkPassword) {
-      setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
-      setCorrectCheckPassword(false);
-    } else if (correctChangePassword && correctCheckPassword) {
-      if (typeof window !== 'undefined' && window.localStorage) {
-        const accessToken = localStorage.getItem('accessToken');
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-            {
-              password: changePassword,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
+      } else if (correctChangePassword && correctCheckPassword) {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          const accessToken = localStorage.getItem('accessToken');
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+              {
+                password: changePassword,
               },
-              withCredentials: true,
-            },
-          )
-          .then((response) => {
-            setChangePassword('');
-            setCheckPassword('');
-            setIsModifyModalOpen(true);
-          });
+              {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              },
+            )
+            .then((response) => {
+              setChangePassword('');
+              setCheckPassword('');
+              setIsModifyModalOpen(true);
+            });
+        }
       }
+    } else {
+      setIsKakaoModalOpen(true);
     }
   };
 
@@ -169,15 +176,23 @@ const MyPage: NextPage = () => {
                 disabled
               />
             </div>
-            <input
-              id="change_password"
-              className={styles.mypage_password_change_check}
-              placeholder="변경할 비밀번호 입력"
-              type="password"
-              value={changePassword}
-              onChange={handleChangePassword}
-              onBlur={handleBlur}
-            />
+            {auth === 'banthing' ? (
+              <input
+                id="change_password"
+                className={styles.mypage_password_change_check}
+                placeholder="변경할 비밀번호 입력"
+                type="password"
+                value={changePassword}
+                onChange={handleChangePassword}
+                onBlur={handleBlur}
+              />
+            ) : (
+              <input
+                className={styles.mypage_password_change_check_kakao}
+                placeholder="비밀번호를 변경할 수 없습니다."
+                disabled
+              />
+            )}
             {correctChangePassword ? (
               <span className={styles.mypage_space}>
                 올바르게 작성되었습니다.
@@ -187,15 +202,23 @@ const MyPage: NextPage = () => {
                 {changePasswordMessage}
               </span>
             )}
-            <input
-              id="check_password"
-              className={styles.mypage_password_change_check}
-              placeholder="변경할 비밀번호 확인"
-              type="password"
-              value={checkPassword}
-              onChange={handleCheckPassword}
-              onBlur={handleBlur}
-            />
+            {auth === 'banthing' ? (
+              <input
+                id="check_password"
+                className={styles.mypage_password_change_check}
+                placeholder="변경할 비밀번호 확인"
+                type="password"
+                value={checkPassword}
+                onChange={handleCheckPassword}
+                onBlur={handleBlur}
+              />
+            ) : (
+              <input
+                className={styles.mypage_password_change_check_kakao}
+                placeholder="비밀번호를 변경할 수 없습니다."
+                disabled
+              />
+            )}
             {correctCheckPassword ? (
               <span className={styles.mypage_space}>
                 올바르게 작성되었습니다.
@@ -228,6 +251,14 @@ const MyPage: NextPage = () => {
         )}
         {isModifyModalOpen ? (
           <Modal setIsModalOpen={setIsModifyModalOpen} type="modify" />
+        ) : (
+          <></>
+        )}
+        {isKakaoModalOpen ? (
+          <Modal
+            setIsModalOpen={setIsKakaoModalOpen}
+            type="mypage_kakao_do_modify"
+          />
         ) : (
           <></>
         )}
