@@ -9,7 +9,7 @@ function Button({
   children,
   setChats,
   roomId,
-
+  removeRoomId,
   setMakeRoomId,
 }: BasicButtonProp) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -86,14 +86,26 @@ function Button({
       }
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
-    } else if (button.value === '삭제하기') {
-      rate.style.display = 'flex';
     } else if (button.value === 'removeModal') {
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';
-
-      // axios.get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${roomId}`)
+      if (
+        typeof window !== 'undefined' &&
+        localStorage.getItem('accessToken')
+      ) {
+        const headers = {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        };
+        axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+          {
+            headers,
+          },
+        );
+      }
+    } else if (button.value === '삭제하기') {
+      rate.style.display = 'flex';
     }
   };
   return (

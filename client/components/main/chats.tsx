@@ -57,16 +57,14 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
       <Container className="chat-Container">
         {usersChats?.data.replyLog ? (
           usersChats?.data.replyLog.map((chat) => (
-            <>
-              <Chat
-                key={chat.id}
-                owner={usernickname === chat.nickname}
-                chats={chat.reply}
-                nickname={chat.nickname}
-                time={chat.time}
-                userchat={userchat}
-              />
-            </>
+            <Chat
+              key={chat.id}
+              owner={usernickname === chat.nickname}
+              chats={chat.reply}
+              nickname={chat.nickname}
+              time={chat.time}
+              userchat={userchat}
+            />
           ))
         ) : (
           <></>

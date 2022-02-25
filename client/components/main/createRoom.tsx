@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
+  font-family: 'Nanum Gothic', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,6 +19,7 @@ const Container = styled.div`
   }
   p {
     font-size: var(--font-size-base);
+    font-family: 'Nanum Gothic', sans-serif;
     color: #8e8e8e;
   }
 `;
