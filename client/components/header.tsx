@@ -36,6 +36,7 @@ export default function Header(prop: propsType) {
         )
         .then((response) => {
           localStorage.removeItem('accessToken');
+          localStorage.removeItem('auth');
           prop.setAccessToken('');
           prop.setIsLogin(false);
         });
@@ -50,6 +51,7 @@ export default function Header(prop: propsType) {
         )
         .then((response) => {
           localStorage.removeItem('accessToken');
+          localStorage.removeItem('auth');
           prop.setAccessToken('');
           prop.setIsLogin(false);
         });

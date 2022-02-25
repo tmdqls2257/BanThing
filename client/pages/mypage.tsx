@@ -28,20 +28,38 @@ const MyPage: NextPage = () => {
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const accessToken = localStorage.getItem('accessToken');
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        })
-        .then((response) => {
-          const { userInfo } = response.data.data;
-          setUserId(userInfo.user_id);
-          setNickname(userInfo.nickname);
-          setAuth(userInfo.auth);
-        });
+      const auth = localStorage.getItem('auth');
+      if (auth === 'banthing') {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setUserId(userInfo.user_id);
+            setNickname(userInfo.nickname);
+            setAuth(userInfo.auth);
+          });
+      } else {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
+          .then((response) => {
+            console.log(response.data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   }, []);
 

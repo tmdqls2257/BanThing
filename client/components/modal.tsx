@@ -14,20 +14,41 @@ export default function Modal(prop: propsType) {
   const handleSignout = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const accessToken = localStorage.getItem('accessToken');
-      axios
-        .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        })
-        .then((response) => {
-          console.log(response);
-          localStorage.removeItem('accessToken');
-          prop.setIsModalOpen(false);
-          router.push('/');
-        });
+      const auth = localStorage.getItem('auth');
+      if (auth === 'banthing') {
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
+          .then((response) => {
+            console.log(response);
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          });
+      } else {
+        axios
+          .delete(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoUnlink`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+            },
+          )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 
