@@ -166,7 +166,7 @@
 
 /* ------------------------------------------------------------- */
 
-/* ------------------------signup.tsx CSS----------------------- */
+/* ------------------------mypage.tsx CSS----------------------- */
 
 .change_password_modal_container {
   position: fixed;
@@ -203,6 +203,16 @@
   font-size: 18px;
   margin-top: 10px;
   margin-bottom: 15px;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 30px;
+}
+
+.change_password_modal_description_kakao {
+  display: flex;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 22px;
   flex-direction: column;
   justify-content: center;
   line-height: 30px;

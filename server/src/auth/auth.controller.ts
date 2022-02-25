@@ -16,6 +16,7 @@ import { LoginDTO } from '../dto/login.dto';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { AuthGuard } from '../token/auth.guard';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
+import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
 
 @Controller('users')
 export class AuthController {
@@ -39,17 +40,13 @@ export class AuthController {
   @Delete('/signout') //회원탈퇴
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
   async signOut(@Req() req: Request, @Res() res: Response): Promise<object> {
-    return await this.authService.signOut(req.user, res);
+    return await this.authService.signOut(req.user, res, req);
   }
 
   @Delete('kakaoUnlink') //카카오 회원탈퇴
-  @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async kakaoUnlink(
-    @Req() req: Request,
-    @Body() token: string,
-    @Res() res: Response,
-  ) {
-    return this.authService.kakaoUnlink(req.user, token, res);
+  async kakaoUnlink(@Req() req: Request, @Res() res: Response) {
+    const token = req.cookies['accessToken'];
+    return this.authService.kakaoUnlink(token, res);
   }
 
   @Post('/login') //로그인
@@ -73,13 +70,12 @@ export class AuthController {
 
   @Post('/logout') //로그아웃
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  logOut(@Res() res: Response): Promise<object> {
-    return this.authService.logOut(res);
+  logOut(@Res() res: Response, @Req() req: Request): Promise<object> {
+    return this.authService.logOut(res, req.user, req);
   }
 
-  @Get('kakaoLogOut') //카카오 로그아웃
-  //@UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  kakaoLogOut(@Res() res: Response, @Body() token) {
+  @Post('kakaoLogOut') //카카오 로그아웃
+  kakaoLogOut(@Res() res: Response, @Body() token: KakaoTokenDTO) {
     return this.authService.kakaoLogOut(res, token);
   }
 }

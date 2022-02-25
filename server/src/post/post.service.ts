@@ -23,8 +23,8 @@ export class PostService {
   async create(postDTO: CreatePostDTO, user: any): Promise<object> {
     postDTO.host_user_id = user.user_id;
     postDTO.host_nickname = user.nickname;
-    await this.postRepository.save(postDTO);
-    return { data: null, message: '글 게시 완료' };
+    const data = await this.postRepository.save(postDTO);
+    return { data: { post_id: data.id }, message: '글 게시 완료' };
   }
 
   //채팅 저장
@@ -40,6 +40,17 @@ export class PostService {
       where: { post_id: post_id },
     });
     return { data: { replyLog: list }, message: 'Reply 리스트' };
+  }
+
+  //글 삭제
+  async deletePost(id: number, user: any): Promise<object> {
+    const post = await this.postRepository.findOne({
+      where: { id: id },
+    });
+    if (post.host_user_id === user.user_id) {
+      await this.postRepository.delete({ id });
+    }
+    return { data: null, message: '글 삭제 완료' };
   }
 
   //평가하기

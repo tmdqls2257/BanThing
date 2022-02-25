@@ -94,6 +94,18 @@
   outline-color: #ffc49d;
 }
 
+.mypage_password_change_check_kakao {
+  width: 205px;
+  height: 36px;
+  margin: 10px auto auto auto;
+  padding-left: 12px;
+  color: #686868;
+  border: none;
+  background-color: #d6d6d6;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
 .mypage_button_container {
   display: flex;
   justify-content: center;

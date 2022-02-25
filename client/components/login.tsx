@@ -8,6 +8,8 @@ interface propsType {
   setLoginModal: Function;
   setIsLogin: Function;
   setAccessToken: Function;
+  auth: string;
+  setAuth: Function;
 }
 
 export default function Login(prop: propsType) {
@@ -31,6 +33,12 @@ export default function Login(prop: propsType) {
     setPassword(event.target.value);
   };
 
+  const handleLoginByKey = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   const handleLogin = () => {
     if (userId === '' || password === '') {
       setLoginMessage('아이디와 비밀번호를 모두 입력해주세요.');
@@ -45,9 +53,11 @@ export default function Login(prop: propsType) {
           { withCredentials: true },
         )
         .then((response) => {
+          const { auth } = response.data.data;
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
-          console.log(document.cookie);
+          localStorage.setItem('auth', 'banthing');
+          prop.setAuth(auth);
           prop.setAccessToken(accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
@@ -61,8 +71,6 @@ export default function Login(prop: propsType) {
 
   const handleKakaoLogin = () => {
     router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
-    console.log(document.cookie);
-    // const accessToken = localStorage.getItem('accessToken');
   };
 
   return (
@@ -82,12 +90,14 @@ export default function Login(prop: propsType) {
             className={styles.login_input_box}
             placeholder="아이디"
             onChange={handleUserId}
+            onKeyUp={handleLoginByKey}
           ></input>
           <input
             className={styles.login_input_box}
             type="password"
             placeholder="비밀번호"
             onChange={handlePassword}
+            onKeyUp={handleLoginByKey}
           ></input>
           <span className={styles.login_error}>{loginMessage}</span>
           <button className={styles.login_button} onClick={handleLogin}>
