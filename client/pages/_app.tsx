@@ -9,6 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState('');
   const [auth, setAuth] = useState('');
 
+  console.log(auth);
+
   let cookie: any;
   let cookieToken: any;
 

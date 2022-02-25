@@ -196,20 +196,24 @@ function Map({ setLocation, roomsData }: mapType) {
               const headers = {
                 Authorization: `Bearer ${positions[i].token}`,
               };
-              axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-                {
-                  title: positions[i].title,
-                  content: positions[i].content,
-                  location_latitude: positions[i].location_latitude,
-                  location_longitude: positions[i].location_longitude,
-                  host_role: positions[i].host_role,
-                  category: positions[i].category,
-                },
-                {
-                  headers,
-                },
-              );
+              axios
+                .post(
+                  `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+                  {
+                    title: positions[i].title,
+                    content: positions[i].content,
+                    location_latitude: positions[i].location_latitude,
+                    location_longitude: positions[i].location_longitude,
+                    host_role: positions[i].host_role,
+                    category: positions[i].category,
+                  },
+                  {
+                    headers,
+                  },
+                )
+                .then((response) => {
+                  console.log('1이라고 합니다.');
+                });
             }
             clickEvent(marker, map);
           }
