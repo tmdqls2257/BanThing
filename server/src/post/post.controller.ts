@@ -50,4 +50,13 @@ export class PostController {
   // ): Promise<object> {
   //   return await this.postService.evaluation(evaluationDTO, req.user);
   // }
+
+  @Get('/deletePost/:id')
+  @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
+  async deletePost(
+    @Param('id') id: number,
+    @Req() req: Request,
+  ): Promise<object> {
+    return await this.postService.deletePost(id, req.user);
+  }
 }

@@ -42,6 +42,17 @@ export class PostService {
     return { data: { replyLog: list }, message: 'Reply 리스트' };
   }
 
+  //글 삭제
+  async deletePost(id: number, user: any): Promise<object> {
+    const post = await this.postRepository.findOne({
+      where: { id: id },
+    });
+    if (post.host_user_id === user.user_id) {
+      await this.postRepository.delete({ id });
+    }
+    return { data: null, message: '글 삭제 완료' };
+  }
+
   //평가하기
   // async evaluation(evaluationDTO: EvaluationDTO, user: any): Promise<object> {
   //   //점수 반영
