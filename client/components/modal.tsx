@@ -67,7 +67,7 @@ export default function Modal(prop: propsType) {
       <>
         <div className={styles.change_password_modal_container}>
           <div className={styles.change_password_modal_body}>
-            <div className={styles.change_password_modal_description}>
+            <div className={styles.change_password_modal_description_kakao}>
               <span>카카오 회원은 마이페이지에서</span>
               <span>비밀번호를 변경할 수 없습니다.</span>
             </div>
