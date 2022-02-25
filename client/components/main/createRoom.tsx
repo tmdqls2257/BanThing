@@ -1,4 +1,3 @@
-import Button from './button';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -31,9 +30,31 @@ const ButtonContainer = styled.div`
   div {
     margin: var(--margine-small);
   }
+  button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #ffffff;
+    width: 181px;
+    background-color: #ff8a3d;
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
+  }
 `;
 
 const CreateRoom = () => {
+  const onClick = () => {
+    const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
+    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+    createElement.style.display = 'none';
+    makeRoom.style.display = 'flex';
+  };
   return (
     <Container id="CreateRoom">
       <img
@@ -42,7 +63,7 @@ const CreateRoom = () => {
       />
       <p>원하는 마크를 선택하거나 방을 만들어주세요.</p>
       <ButtonContainer>
-        <Button containerName={'CreateRoom'}>방 만들기</Button>
+        <button onClick={onClick}>방 만들기</button>
       </ButtonContainer>
     </Container>
   );

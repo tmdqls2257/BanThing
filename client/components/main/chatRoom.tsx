@@ -1,4 +1,3 @@
-import Button from './button';
 import SidebarHeader from './sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
 import Modal from './removeModal';
@@ -30,6 +29,22 @@ const ButtonContainer = styled.div`
   margin: var(--margine-base) auto;
   div {
     margin: 0 4px;
+  }
+  button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #ffffff;
+    width: 181px;
+    background-color: #ff8a3d;
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
   }
 `;
 interface usersChats {
@@ -79,6 +94,11 @@ const ChatRoom = ({
     }
   }, []);
 
+  const onClick = () => {
+    const removeModal = document.querySelector('#removeModal')! as HTMLElement;
+    removeModal.style.display = 'flex';
+  };
+
   if (usernickname === roomHostNickName) {
     return (
       <>
@@ -95,9 +115,7 @@ const ChatRoom = ({
             ></Chats>
           </main>
           <ButtonContainer>
-            <div>
-              <Button containerName={'삭제하기'}>삭제하기</Button>
-            </div>
+            <button onClick={onClick}>삭제하기</button>
           </ButtonContainer>
           <Modal removeRoomId={roomsId} />
         </Container>

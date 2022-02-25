@@ -1,7 +1,8 @@
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
-import Button from '../button';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import MakeRoomModal from '../makeRoomModal';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -131,6 +132,8 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const [textarea, setTextarea] = useState('');
   const [radio, setRadio] = useState('');
   const [makeRoomId, setMakeRoomId] = useState(0);
+  const [makeRoomModal, setMakeRoomModal] = useState(false);
+
   useEffect(() => {
     if (makeRoomId !== 0) {
       setMakeRoom_MapRoomId(makeRoomId);
@@ -158,10 +161,6 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     setRadio(event.target.value);
   };
 
-  const onChange = (value: number) => {
-    setMakeRoomId(value);
-  };
-
   const data = [
     title,
     select,
@@ -170,6 +169,55 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     String(location[0]),
     String(location[1]),
   ];
+
+  const axiosPost = () => {
+    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+
+    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      };
+
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+          {
+            title: data[0],
+            category: data[1],
+            content: data[2],
+            host_role: data[3],
+            location_latitude: data[4],
+            location_longitude: data[5],
+          },
+          {
+            headers,
+          },
+        )
+        .then((res) => {
+          setMakeRoomId(res.data.data.post_id);
+        });
+      console.log(data);
+    }
+    makeRoom.style.display = 'none';
+    joinRoom.style.display = 'flex';
+  };
+
+  const onClick = () => {
+    if (
+      title === '' ||
+      select === '' ||
+      textarea === '' ||
+      Number(radio) === 0 ||
+      String(location[0]) === '0' ||
+      String(location[1]) === '0'
+    ) {
+      setMakeRoomModal(true);
+    } else {
+      axiosPost();
+    }
+  };
+
   return (
     <Container id="MakeRoom">
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>
@@ -222,14 +270,13 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
         </section>
       </main>
       <ButtonContainer>
-        <Button
-          setMakeRoomId={onChange}
-          onClick={data}
-          containerName={'MakeRoom'}
-        >
-          생성하기
-        </Button>
+        <button onClick={onClick}>생성하기</button>
       </ButtonContainer>
+      {makeRoomModal ? (
+        <MakeRoomModal setMakeRoomModal={setMakeRoomModal} />
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };
