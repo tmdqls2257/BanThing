@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { Payload } from '../token/payload';
 import { Users } from '../entity/users.entity';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { UserInfoDTO } from 'src/dto/userInfo.dto';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
@@ -54,26 +54,43 @@ export class AuthService {
 
   //회원탈퇴
   //! any 존재
-  async signOut(user: any, res): Promise<object> {
-    await this.userService.delete(user.user_id);
-    return res
-      .cookie('accessToken', '', { maxAge: 1 })
-      .send({ data: null, message: '회원탈퇴 완료' });
+  async signOut(user: any, res: Response, req: Request): Promise<object> {
+    //banthing
+    if (user.auth === 'banthing') {
+      await this.userService.delete(user.user_id);
+      return res
+        .cookie('accessToken', '', { maxAge: 1 })
+        .send({ data: null, message: '회원탈퇴 완료' });
+    }
+
+    //kakao
+    if (user.auth === 'kakao') {
+      await this.userService.snsDelete(user.user_id);
+      const _url = 'https://kapi.kakao.com/v1/user/unlink';
+      const _header = {
+        Authorization: `Bearer ${req.cookies['accessToken']}`,
+      };
+      await axios.post(_url, {}, { headers: _header });
+
+      return res
+        .cookie('accessToken', '', { maxAge: 1 })
+        .send({ data: null, message: '회원탈퇴 완료' });
+    }
   }
 
   //카카오 회원탈퇴
-  async kakaoUnlink(user: any, token: string, res: Response): Promise<any> {
-    await this.userService.snsDelete(user.user_id);
-    const _url = 'https://kapi.kakao.com/v1/user/unlink';
-    const _header = {
-      Authorization: `Bearer ${token}`,
-    };
-    await axios.post(_url, {}, { headers: _header });
+  // async kakaoUnlink(user: any, token: string, res: Response): Promise<any> {
+  //   await this.userService.snsDelete(user.user_id);
+  //   const _url = 'https://kapi.kakao.com/v1/user/unlink';
+  //   const _header = {
+  //     Authorization: `Bearer ${token}`,
+  //   };
+  //   await axios.post(_url, {}, { headers: _header });
 
-    return res
-      .cookie('accessToken', '', { maxAge: 1 })
-      .send({ data: null, message: '회원탈퇴 완료' });
-  }
+  //   return res
+  //     .cookie('accessToken', '', { maxAge: 1 })
+  //     .send({ data: null, message: '회원탈퇴 완료' });
+  // }
 
   //로그인
   async logIn(loginDTO: LoginDTO, res: Response): Promise<object> {
@@ -140,23 +157,36 @@ export class AuthService {
   }
 
   //로그아웃
-  async logOut(res: Response): Promise<object> {
-    return res
-      .cookie('accessToken', '', { maxAge: 1 })
-      .send({ data: null, message: '로그아웃' });
+  async logOut(res: Response, user: any, req: Request): Promise<object> {
+    if (user.auth === 'banthing') {
+      return res
+        .cookie('accessToken', '', { maxAge: 1 })
+        .send({ data: null, message: '로그아웃' });
+    }
+
+    if (user.auth === 'kakao') {
+      const _url = 'https://kapi.kakao.com/v1/user/logout';
+      const _header = {
+        Authorization: `Bearer ${req.cookies['accessToken']}`,
+      };
+      await axios.post(_url, {}, { headers: _header });
+      return res
+        .cookie('accessToken', '', { maxAge: 1 })
+        .send({ data: null, message: '로그아웃' });
+    }
   }
 
   //카카오 로그아웃
-  async kakaoLogOut(res: Response, token: string): Promise<any> {
-    const _url = 'https://kapi.kakao.com/v1/user/logout';
-    const _header = {
-      Authorization: `Bearer ${token}`,
-    };
-    await axios.post(_url, {}, { headers: _header });
-    return res
-      .cookie('accessToken', '', { maxAge: 1 })
-      .send({ data: null, message: '로그아웃' });
-  }
+  // async kakaoLogOut(res: Response, token: string): Promise<any> {
+  //   const _url = 'https://kapi.kakao.com/v1/user/logout';
+  //   const _header = {
+  //     Authorization: `Bearer ${token}`,
+  //   };
+  //   await axios.post(_url, {}, { headers: _header });
+  //   return res
+  //     .cookie('accessToken', '', { maxAge: 1 })
+  //     .send({ data: null, message: '로그아웃' });
+  // }
 
   //토큰으로 사용자 정보 확인
   async tokenValidateUser(payload: Payload): Promise<UserInfoDTO> {
