@@ -78,7 +78,6 @@ const ChatRoom = ({
         });
     }
   }, []);
-  console.log(roomsId);
 
   if (usernickname === roomHostNickName) {
     return (
@@ -100,7 +99,7 @@ const ChatRoom = ({
               <Button containerName={'삭제하기'}>삭제하기</Button>
             </div>
           </ButtonContainer>
-          <Modal />
+          <Modal removeRoomId={roomsId} />
         </Container>
       </>
     );
@@ -119,7 +118,6 @@ const ChatRoom = ({
             addable={true}
           ></Chats>
         </main>
-        <Modal />
       </Container>
     </>
   );
