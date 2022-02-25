@@ -11,6 +11,5 @@ async function bootstrap() {
     credentials: true,
   });
   await app.listen(process.env.SERVERPORT);
-  console.log(process.env.CORSORIGIN);
 }
 bootstrap();
