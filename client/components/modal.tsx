@@ -25,8 +25,8 @@ export default function Modal(prop: propsType) {
             withCredentials: true,
           })
           .then((response) => {
-            console.log(response);
             localStorage.removeItem('accessToken');
+            localStorage.removeItem('auth');
             prop.setIsModalOpen(false);
             router.push('/');
           });
@@ -43,7 +43,10 @@ export default function Modal(prop: propsType) {
             },
           )
           .then((response) => {
-            console.log(response);
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('auth');
+            prop.setIsModalOpen(false);
+            router.push('/');
           })
           .catch((error) => {
             console.log(error);
