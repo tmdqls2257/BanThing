@@ -2,7 +2,7 @@ import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
 import { setStateType } from '../../type';
 import Button from '../button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -123,13 +123,21 @@ const ButtonContainer = styled.div`
 
 interface locationType {
   location: number[];
+  setMakeRoom_MapRoomId: (value: number) => void;
 }
 
-const MakeRoom = ({ location }: locationType) => {
+const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
   const [textarea, setTextarea] = useState('');
   const [radio, setRadio] = useState('');
+  const [makeRoomId, setMakeRoomId] = useState(0);
+  useEffect(() => {
+    if (makeRoomId !== 0) {
+      setMakeRoom_MapRoomId(makeRoomId);
+    }
+  }, [makeRoomId]);
+
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const value = event.target.value;
@@ -150,6 +158,11 @@ const MakeRoom = ({ location }: locationType) => {
     event.preventDefault();
     setRadio(event.target.value);
   };
+
+  const onChange = (value: number) => {
+    setMakeRoomId(value);
+  };
+
   const data = [
     title,
     select,
@@ -179,8 +192,8 @@ const MakeRoom = ({ location }: locationType) => {
           <h1>역할</h1>
           <select id="choise-foods" onChange={(event) => radioChange(event)}>
             <option value=""></option>
-            <option value="받는 사람">받는 사람</option>
-            <option value="가지러 가는 사람">가지러 가는 사람</option>
+            <option value="1">받는 사람</option>
+            <option value="2">가지러 가는 사람</option>
           </select>
           {/* <input
             type="radio"
@@ -210,7 +223,11 @@ const MakeRoom = ({ location }: locationType) => {
         </section>
       </main>
       <ButtonContainer>
-        <Button onClick={data} containerName={'MakeRoom'}>
+        <Button
+          setMakeRoomId={onChange}
+          onClick={data}
+          containerName={'MakeRoom'}
+        >
           생성하기
         </Button>
       </ButtonContainer>
