@@ -31,34 +31,16 @@ interface ChatsType {
   addable: boolean;
   roomsId: number;
   usersChats: usersChats | undefined;
+  usernickname: string;
 }
 
-const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
-  const [ownernickname, setNickname] = useState('');
+const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
   const [userchat, setChat] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
-      const accessToken = localStorage.getItem('accessToken');
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-            withCredentials: true,
-          },
-        })
-        .then((response) => {
-          const { userInfo } = response.data.data;
-          setNickname(userInfo.nickname);
-        });
-    }
-  }, []);
 
   const onCreated = (chat: string) => {
     usersChats?.data.replyLog.push({
       id: usersChats?.data.replyLog.length + 1,
-      nickname: ownernickname,
+      nickname: usernickname,
       post_id: 1,
       reply: chat,
       time: String(new Date()),
@@ -78,7 +60,7 @@ const Chats = ({ usersChats, roomsId, addable }: ChatsType) => {
             <>
               <Chat
                 key={chat.id}
-                owner={ownernickname === chat.nickname}
+                owner={usernickname === chat.nickname}
                 chats={chat.reply}
                 nickname={chat.nickname}
                 time={chat.time}

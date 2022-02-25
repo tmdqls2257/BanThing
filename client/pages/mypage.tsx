@@ -54,7 +54,9 @@ const MyPage: NextPage = () => {
             withCredentials: true,
           })
           .then((response) => {
-            console.log(response.data.data);
+            const { userInfo } = response.data.data;
+            setUserId(userInfo.user_id);
+            setNickname(userInfo.nickname);
           })
           .catch((error) => {
             console.log(error);

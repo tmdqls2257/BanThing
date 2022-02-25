@@ -3,6 +3,8 @@ import SidebarHeader from './sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
 import Modal from './removeModal';
 import Chats from './chats';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -48,9 +50,61 @@ interface roomsIdTitleType {
   roomsId: number;
   roomTitle: string;
   usersChats: usersChats | undefined;
+  roomHostNickName: string;
 }
 
-const ChatRoom = ({ usersChats, roomTitle, roomsId }: roomsIdTitleType) => {
+const ChatRoom = ({
+  usersChats,
+  roomTitle,
+  roomsId,
+  roomHostNickName,
+}: roomsIdTitleType) => {
+  const [usernickname, setNickname] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
+      const accessToken = localStorage.getItem('accessToken');
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+            withCredentials: true,
+          },
+        })
+        .then((response) => {
+          const { userInfo } = response.data.data;
+          setNickname(userInfo.nickname);
+        });
+    }
+  }, []);
+  console.log(roomsId);
+
+  if (usernickname === roomHostNickName) {
+    return (
+      <>
+        <Container id="ChatRoom">
+          <SidebarHeader containerName={'gotoJoinRoom'}>
+            {roomTitle}
+          </SidebarHeader>
+          <main>
+            <Chats
+              usernickname={usernickname}
+              usersChats={usersChats}
+              roomsId={roomsId}
+              addable={true}
+            ></Chats>
+          </main>
+          <ButtonContainer>
+            <div>
+              <Button containerName={'삭제하기'}>삭제하기</Button>
+            </div>
+          </ButtonContainer>
+          <Modal />
+        </Container>
+      </>
+    );
+  }
   return (
     <>
       <Container id="ChatRoom">
@@ -59,16 +113,12 @@ const ChatRoom = ({ usersChats, roomTitle, roomsId }: roomsIdTitleType) => {
         </SidebarHeader>
         <main>
           <Chats
+            usernickname={usernickname}
             usersChats={usersChats}
             roomsId={roomsId}
             addable={true}
           ></Chats>
         </main>
-        <ButtonContainer>
-          <div>
-            <Button containerName={'삭제하기'}>삭제하기</Button>
-          </div>
-        </ButtonContainer>
         <Modal />
       </Container>
     </>

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface BasicButtonProp {
   children: string;
   containerName: string;
@@ -5,6 +7,7 @@ export interface BasicButtonProp {
   onClick?: (string | number)[];
   setChats?: any;
   roomId?: number;
+  setMakeRoomId?: any;
 }
 
 export interface RateButtonProp {

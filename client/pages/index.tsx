@@ -68,7 +68,7 @@ const Home: NextPage = () => {
             '마음이 잘 통한다면 주문하기만 하면 됩니다!',
           ]}
         />
-        <Introduction
+        {/* <Introduction
           imagePosition={'right'}
           image={'/rating.png'}
           title={'레이팅 시스템'}
@@ -79,7 +79,7 @@ const Home: NextPage = () => {
             '해당 점수는 배달메이트의 평점에 반영되며,',
             '평점은 다른 이용자들에게 노출됩니다.',
           ]}
-        />
+        /> */}
 
         <Caption />
 

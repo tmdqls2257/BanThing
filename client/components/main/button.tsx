@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { BasicButtonProp } from '../type';
 
@@ -8,6 +9,8 @@ function Button({
   children,
   setChats,
   roomId,
+
+  setMakeRoomId,
 }: BasicButtonProp) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -33,27 +36,31 @@ function Button({
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             };
 
-            axios.post(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-              {
-                title: onClick[0],
-                category: onClick[1],
-                content: onClick[2],
-                host_role: onClick[3],
-                location_latitude: onClick[4],
-                location_longitude: onClick[5],
-              },
-              {
-                headers,
-              },
-            );
+            axios
+              .post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+                {
+                  title: onClick[0],
+                  category: onClick[1],
+                  content: onClick[2],
+                  host_role: onClick[3],
+                  location_latitude: onClick[4],
+                  location_longitude: onClick[5],
+                },
+                {
+                  headers,
+                },
+              )
+              .then((res) => {
+                setMakeRoomId(res.data.data.post_id);
+              });
           } catch (e) {
             console.log(e);
           }
         }
       }
       makeRoom.style.display = 'none';
-      chatRoom.style.display = 'flex';
+      joinRoom.style.display = 'flex';
     } else if (button.value === 'JoinRoom') {
       if (
         typeof window !== 'undefined' &&
@@ -85,6 +92,8 @@ function Button({
       chatRoom.style.display = 'none';
       rate.style.display = 'none';
       createElement.style.display = 'flex';
+
+      // axios.get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${roomId}`)
     }
   };
   return (
