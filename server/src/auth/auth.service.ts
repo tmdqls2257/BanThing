@@ -16,6 +16,7 @@ import { UserInfoDTO } from 'src/dto/userInfo.dto';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
 import axios from 'axios';
 import { SnsSignUpDTO } from 'src/dto/snsSignUP.dto';
+import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
 
 @Injectable()
 export class AuthService {
@@ -62,11 +63,11 @@ export class AuthService {
   }
 
   //카카오 회원탈퇴
-  async kakaoUnlink(user: any, token: string, res: Response): Promise<any> {
-    await this.userService.snsDelete(user.user_id);
+  async kakaoUnlink(body: any, res: Response): Promise<any> {
+    await this.userService.snsDelete(body.user_id);
     const _url = 'https://kapi.kakao.com/v1/user/unlink';
     const _header = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${body.token}`,
     };
     await axios.post(_url, {}, { headers: _header });
 
@@ -95,12 +96,10 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    return res
-      .cookie('accessToken', token)
-      .send({
-        data: { accessToken: token, auth: userFind.auth },
-        message: '로그인 완료',
-      });
+    return res.cookie('accessToken', token).send({
+      data: { accessToken: token, auth: userFind.auth },
+      message: '로그인 완료',
+    });
   }
 
   //카카오 로그인
@@ -114,6 +113,7 @@ export class AuthService {
       },
     };
     const data = await axios.post(_hostName, {}, headers);
+
     const _header = {
       Authorization: `Bearer ${data.data['access_token']}`,
     };
@@ -150,10 +150,12 @@ export class AuthService {
   }
 
   //카카오 로그아웃
-  async kakaoLogOut(res: Response, token: string): Promise<any> {
+  async kakaoLogOut(res: Response, token: KakaoTokenDTO): Promise<any> {
+    console.log(token);
+
     const _url = 'https://kapi.kakao.com/v1/user/logout';
     const _header = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.token}`,
     };
     await axios.post(_url, {}, { headers: _header });
     return res
