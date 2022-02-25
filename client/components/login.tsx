@@ -3,6 +3,8 @@ import SignUp from './signup';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Modal from './modal';
+
 interface propsType {
   loginModal: boolean;
   setLoginModal: Function;
@@ -18,6 +20,8 @@ export default function Login(prop: propsType) {
   const [password, setPassword] = useState('');
 
   const [loginMessage, setLoginMessage] = useState('');
+
+  const [kakaoModal, setKakaoModal] = useState(false);
 
   const openSignUpModal = () => {
     setSignUpModal(true);
@@ -65,9 +69,8 @@ export default function Login(prop: propsType) {
     }
   };
 
-  const handleKakaoLogin = () => {
-    router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
-    localStorage.setItem('auth', '');
+  const handleKakaoModal = () => {
+    setKakaoModal(true);
   };
 
   return (
@@ -108,7 +111,7 @@ export default function Login(prop: propsType) {
 
           <button
             className={styles.login_kakao_button}
-            onClick={handleKakaoLogin}
+            onClick={handleKakaoModal}
           >
             <div>
               <img
@@ -139,6 +142,12 @@ export default function Login(prop: propsType) {
               setIsLogin={prop.setIsLogin}
             />
           </>
+        ) : (
+          <></>
+        )}
+
+        {kakaoModal ? (
+          <Modal setIsModalOpen={setKakaoModal} type={'kakao_login'} />
         ) : (
           <></>
         )}
