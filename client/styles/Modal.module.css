@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic-Bold';
+  src: url('../asset/NanumGothic/NanumGothic-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
@@ -65,21 +79,20 @@
 }
 
 .signout_modal_description {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 17px;
+  margin-bottom: 30px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signout_modal_yes_button {
-  width: 220px;
+  width: 210px;
   height: 44px;
   color: #ffffff;
   background-color: #9b9b9b;
-  font-size: 15px;
+  font-size: 14px;
   border: none;
   border-radius: 12px;
-  margin-bottom: 10px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signout_modal_yes_button:hover {
@@ -87,16 +100,15 @@
 }
 
 .signout_modal_no_button {
-  width: 220px;
+  width: 210px;
   height: 44px;
   color: #ffffff;
   background-color: #ff8a3c;
-  font-size: 15px;
+  font-size: 14px;
   border: none;
   border-radius: 12px;
-  margin-top: 2px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  margin-bottom: 7px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signout_modal_no_button:hover {
@@ -139,16 +151,17 @@
 
 .signup_modal_description {
   display: flex;
-  font-size: 18px;
+  font-size: 17px;
   margin-top: 10px;
   margin-bottom: 15px;
   flex-direction: column;
   justify-content: center;
   line-height: 30px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_modal_button {
-  width: 90px;
+  width: 80px;
   height: 44px;
   color: #ffffff;
   background-color: #ff8a3c;
@@ -156,8 +169,9 @@
   border: none;
   border-radius: 12px;
   margin-bottom: 10px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  /* box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_modal_button:hover {
@@ -200,22 +214,24 @@
 
 .change_password_modal_description {
   display: flex;
-  font-size: 18px;
+  font-size: 17px;
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   flex-direction: column;
   justify-content: center;
   line-height: 30px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .change_password_modal_description_kakao {
   display: flex;
-  font-size: 18px;
+  font-size: 17px;
   margin-top: 10px;
   margin-bottom: 22px;
   flex-direction: column;
   justify-content: center;
   line-height: 30px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .change_password_modal_button {
@@ -227,8 +243,7 @@
   border: none;
   border-radius: 12px;
   margin-bottom: 10px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .change_password_modal_button:hover {
@@ -255,8 +270,9 @@
   position: fixed;
   font-size: 22px;
   font-weight: 700;
-  margin-top: -160px;
-  margin-left: 295px;
+  margin-top: -152px;
+  margin-left: 317px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .kakao_login_modal_times:hover {
@@ -266,7 +282,7 @@
 .kakao_login_modal_body {
   position: fixed;
   display: flex;
-  width: 330px;
+  width: 350px;
   height: 200px;
   flex-direction: column;
   justify-content: center;
@@ -290,11 +306,12 @@
   flex-direction: column;
   justify-content: center;
   line-height: 30px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .kakao_login_modal_description_kakao {
   display: flex;
-  font-size: 18px;
+  font-size: 17px;
   margin-top: 10px;
   margin-bottom: 22px;
   flex-direction: column;
@@ -303,16 +320,15 @@
 }
 
 .kakao_login_modal_button {
-  width: 105px;
+  width: 80px;
   height: 44px;
   color: #ffffff;
   background-color: #ff8a3c;
-  font-size: 15px;
+  font-size: 16px;
   border: none;
   border-radius: 12px;
   margin-bottom: 10px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .kakao_login_modal_button:hover {

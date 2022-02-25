@@ -124,16 +124,16 @@ export default function Modal(prop: propsType) {
             </div>
             <div className={styles.signout_modal_button_container}>
               <button
+                className={styles.signout_modal_no_button}
+                onClick={handleModal}
+              >
+                아뇨, 조금 더 이용해볼래요!
+              </button>
+              <button
                 className={styles.signout_modal_yes_button}
                 onClick={handleSignout}
               >
                 네, 그만 이용하고 싶어요.
-              </button>
-              <button
-                className={styles.signout_modal_no_button}
-                onClick={handleModal}
-              >
-                아니오, 조금 더 이용해볼래요!
               </button>
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function Modal(prop: propsType) {
                 className={styles.kakao_login_modal_button}
                 onClick={handleKakaoLogin}
               >
-                알겠습니다
+                확인
               </button>
             </div>
           </div>
