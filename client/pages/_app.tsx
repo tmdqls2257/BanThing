@@ -9,9 +9,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState('');
 
   let cookie: any;
+  let cookieToken: any;
 
   if (typeof document !== 'undefined') {
     cookie = document.cookie;
+    cookieToken = cookie.split('=')[1];
   } else {
     cookie = '';
   }
@@ -20,7 +22,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     const accessToken: any = localStorage.getItem('accessToken');
     if (cookie) {
       setIsLogin(true);
-      setAccessToken(accessToken);
+      setAccessToken(cookieToken);
+      if (accessToken) {
+        setAccessToken(accessToken);
+      }
     } else {
       setIsLogin(false);
       setAccessToken('');
