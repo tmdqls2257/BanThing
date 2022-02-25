@@ -8,8 +8,6 @@ interface propsType {
   setLoginModal: Function;
   setIsLogin: Function;
   setAccessToken: Function;
-  auth: string;
-  setAuth: Function;
 }
 
 export default function Login(prop: propsType) {
@@ -56,9 +54,7 @@ export default function Login(prop: propsType) {
           const { auth } = response.data.data;
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('auth', 'banthing');
-          prop.setAuth(auth);
-          prop.setAccessToken(accessToken);
+          localStorage.setItem('auth', auth);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
         })
@@ -71,6 +67,7 @@ export default function Login(prop: propsType) {
 
   const handleKakaoLogin = () => {
     router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
+    localStorage.setItem('auth', '');
   };
 
   return (

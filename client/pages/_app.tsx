@@ -9,9 +9,6 @@ import { useState, useEffect } from 'react';
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState('');
-  const [auth, setAuth] = useState('');
-
-  console.log(auth);
 
   let cookie: any;
   let cookieToken: any;
@@ -25,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const accessToken: any = localStorage.getItem('accessToken');
-    if (cookie) {
+    if (cookieToken) {
       setIsLogin(true);
       setAccessToken(cookieToken);
       if (accessToken) {
@@ -45,8 +42,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         setIsLogin={setIsLogin}
         accessToken={accessToken}
         setAccessToken={setAccessToken}
-        auth={auth}
-        setAuth={setAuth}
       />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} accessToken={accessToken} />
