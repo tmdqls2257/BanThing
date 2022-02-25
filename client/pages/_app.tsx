@@ -2,6 +2,8 @@ import '../styles/globals.css';
 import Header from '../components/header';
 import type { AppProps } from 'next/app';
 import GlobalStyle from '../styles/GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../styles/theme';
 import { useState, useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -36,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         accessToken={accessToken}
         setAccessToken={setAccessToken}
       />
-      <Component {...pageProps} accessToken={accessToken} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} accessToken={accessToken} />
+      </ThemeProvider>
     </>
   );
 }
