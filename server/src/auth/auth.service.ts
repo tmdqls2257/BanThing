@@ -63,11 +63,24 @@ export class AuthService {
   }
 
   //카카오 회원탈퇴
-  async kakaoUnlink(body: any, res: Response): Promise<any> {
-    await this.userService.snsDelete(body.user_id);
+  async kakaoUnlink(token: KakaoTokenDTO, res: Response): Promise<any> {
+    const header = {
+      Authorization: `Bearer ${token}`,
+    };
+    const sign = await axios.post(
+      'https://kapi.kakao.com/v2/user/me',
+      {},
+      { headers: header },
+    );
+
+    const userFind: Users = await this.userService.findByFields({
+      where: { user_id: sign.data.kakao_account.email },
+    });
+    await this.userService.snsDelete(userFind.user_id);
+
     const _url = 'https://kapi.kakao.com/v1/user/unlink';
     const _header = {
-      Authorization: `Bearer ${body.token}`,
+      Authorization: `Bearer ${token}`,
     };
     await axios.post(_url, {}, { headers: _header });
 

@@ -44,8 +44,9 @@ export class AuthController {
   }
 
   @Delete('kakaoUnlink') //카카오 회원탈퇴
-  async kakaoUnlink(@Body() body: any, @Res() res: Response) {
-    return this.authService.kakaoUnlink(body, res);
+  async kakaoUnlink(@Req() req: Request, @Res() res: Response) {
+    const token = req.cookies['accessToken'];
+    return this.authService.kakaoUnlink(token, res);
   }
 
   @Post('/login') //로그인
