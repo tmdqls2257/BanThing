@@ -8,6 +8,8 @@ interface propsType {
   setLoginModal: Function;
   setIsLogin: Function;
   setAccessToken: Function;
+  auth: string;
+  setAuth: Function;
 }
 
 export default function Login(prop: propsType) {
@@ -51,9 +53,10 @@ export default function Login(prop: propsType) {
           { withCredentials: true },
         )
         .then((response) => {
+          const { auth } = response.data.data;
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
-          console.log(document.cookie);
+          prop.setAuth(auth);
           prop.setAccessToken(accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);

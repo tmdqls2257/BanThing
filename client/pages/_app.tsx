@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState('');
+  const [auth, setAuth] = useState('');
 
   let cookie: any;
   let cookieToken: any;
@@ -40,6 +41,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         setIsLogin={setIsLogin}
         accessToken={accessToken}
         setAccessToken={setAccessToken}
+        auth={auth}
+        setAuth={setAuth}
       />
       <Component {...pageProps} accessToken={accessToken} />
     </>

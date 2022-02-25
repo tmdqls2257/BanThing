@@ -9,6 +9,8 @@ interface propsType {
   setIsLogin: Function;
   accessToken: string;
   setAccessToken: Function;
+  auth: string;
+  setAuth: Function;
 }
 
 export default function Header(prop: propsType) {
@@ -19,23 +21,39 @@ export default function Header(prop: propsType) {
   };
 
   const handleLogout = () => {
-    axios
-      .post(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${prop.accessToken}`,
-            'Content-Type': 'application/json',
+    if (prop.auth === 'banthing') {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${prop.accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
           },
-          withCredentials: true,
-        },
-      )
-      .then((response) => {
-        localStorage.removeItem('accessToken');
-        prop.setAccessToken('');
-        prop.setIsLogin(false);
-      });
+        )
+        .then((response) => {
+          localStorage.removeItem('accessToken');
+          prop.setAccessToken('');
+          prop.setIsLogin(false);
+        });
+    } else {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
+          { token: `${prop.accessToken}` },
+          {
+            withCredentials: true,
+          },
+        )
+        .then((response) => {
+          localStorage.removeItem('accessToken');
+          prop.setAccessToken('');
+          prop.setIsLogin(false);
+        });
+    }
   };
 
   return (
@@ -104,6 +122,8 @@ export default function Header(prop: propsType) {
               setLoginModal={setLoginModal}
               setIsLogin={prop.setIsLogin}
               setAccessToken={prop.setAccessToken}
+              auth={prop.auth}
+              setAuth={prop.setAuth}
             />
           ) : (
             <></>

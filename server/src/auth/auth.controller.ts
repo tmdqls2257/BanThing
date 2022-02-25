@@ -76,7 +76,7 @@ export class AuthController {
     return this.authService.logOut(res, req.user, req);
   }
 
-  @Get('kakaoLogOut') //카카오 로그아웃
+  @Post('kakaoLogOut') //카카오 로그아웃
   kakaoLogOut(@Res() res: Response, @Body() token) {
     return this.authService.kakaoLogOut(res, token);
   }
