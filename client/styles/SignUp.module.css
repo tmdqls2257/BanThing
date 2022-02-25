@@ -104,6 +104,10 @@
   cursor: pointer;
 }
 
+.signup_double_check_button:focus {
+  outline: none;
+}
+
 .signup_button {
   display: flex;
   justify-content: center;

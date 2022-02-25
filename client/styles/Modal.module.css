@@ -284,9 +284,9 @@
 
 .kakao_login_modal_description {
   display: flex;
-  font-size: 16px;
+  font-size: 17px;
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 17px;
   flex-direction: column;
   justify-content: center;
   line-height: 30px;
@@ -303,7 +303,7 @@
 }
 
 .kakao_login_modal_button {
-  width: 110px;
+  width: 105px;
   height: 44px;
   color: #ffffff;
   background-color: #ff8a3c;
