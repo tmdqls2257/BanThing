@@ -178,8 +178,6 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
       const kakaoToken = document.cookie.split('=')[1];
-      // console.log(accessToken);
-      // console.log(kakaoToken);
 
       if (auth === 'banthing') {
         const headers = {
@@ -199,6 +197,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             },
             {
               headers,
+              withCredentials: true,
             },
           )
           .then((res) => {

@@ -61,6 +61,7 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
             },
             {
               headers,
+              withCredentials: true,
             },
           );
         } else {
@@ -75,6 +76,7 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
             },
             {
               headers,
+              withCredentials: true,
             },
           );
         }

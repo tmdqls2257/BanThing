@@ -183,6 +183,7 @@ const JoinRoom = ({
               `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
               {
                 headers,
+                withCredentials: true,
               },
             );
             setChats(response.data);
@@ -201,6 +202,7 @@ const JoinRoom = ({
               `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao/${data.data.post.id}`,
               {
                 headers,
+                withCredentials: true,
               },
             );
             setChats(response.data);

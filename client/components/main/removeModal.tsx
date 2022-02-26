@@ -56,6 +56,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
           `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
           {
             headers,
+            withCredentials: true,
           },
         );
       } else {
@@ -66,6 +67,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
           `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
           {
             headers,
+            withCredentials: true,
           },
         );
       }
