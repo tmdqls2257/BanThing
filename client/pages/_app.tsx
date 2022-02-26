@@ -14,11 +14,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   if (typeof document !== 'undefined') {
     console.log(document.cookie.split(';'));
-    cookie = document.cookie;
     if (cookie.includes(';')) {
       cookieList = cookie.split(';');
-      cookieToken = cookieList[1].split('=')[1];
-      inner = cookieList[0].split('=')[1];
+      const findInner = cookieList.filter((element: any) => {
+        return element.includes('inner=true');
+      });
+      inner = findInner[0].split('=')[1];
+      const findAccessToken = cookieList.filter((cookie: any) => {
+        return cookie.includes('accessToken');
+      });
+      cookieToken = findAccessToken[0].split('=')[1];
     } else {
       cookieToken = cookie.split('=')[1];
     }

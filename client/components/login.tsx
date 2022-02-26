@@ -73,7 +73,15 @@ export default function Login(prop: propsType) {
     let inner;
     const cookie = document.cookie;
     if (cookie.includes('inner')) {
-      inner = cookie.split('=')[1];
+      if (cookie.includes(';')) {
+        const cookieList = cookie.split(';');
+        const findInner = cookieList.filter((cookie: any) => {
+          return cookie.includes('inner');
+        });
+        inner = findInner[0].split('=')[1];
+      } else {
+        inner = cookie.split('=')[1];
+      }
     } else {
       inner = '';
     }
