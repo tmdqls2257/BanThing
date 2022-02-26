@@ -17,12 +17,19 @@ import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
 import axios from 'axios';
 import { SnsSignUpDTO } from 'src/dto/snsSignUP.dto';
 import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PostRepository } from '../post/post.repository';
+import { ReplyLogRepository } from '../post/reply.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    @InjectRepository(PostRepository)
+    private postRepository: PostRepository,
+    @InjectRepository(ReplyLogRepository)
+    private replyLogRepository: ReplyLogRepository,
   ) {}
 
   //아이디 중복확인
@@ -56,6 +63,15 @@ export class AuthService {
   //회원탈퇴
   //! any 존재
   async signOut(user: any, res: Response, req: Request): Promise<object> {
+    const list = await this.postRepository.find({ host_user_id: user.user_id });
+
+    if (list) {
+      for (const e of list) {
+        this.replyLogRepository.delete({ post_id: e.id });
+        this.postRepository.delete({ id: e.id });
+      }
+    }
+    await this.postRepository.delete({ host_user_id: user.user_id });
     await this.userService.delete(user.user_id);
     return res
       .cookie('accessToken', '', { maxAge: 1 })
@@ -75,6 +91,20 @@ export class AuthService {
 
     const userFind: Users = await this.userService.findByFields({
       where: { user_id: sign.data.kakao_account.email },
+    });
+
+    const list = await this.postRepository.find({
+      host_user_id: sign.data.kakao_account.email,
+    });
+
+    if (list) {
+      for (const e of list) {
+        this.replyLogRepository.delete({ post_id: e.id });
+        this.postRepository.delete({ id: e.id });
+      }
+    }
+    await this.postRepository.delete({
+      host_user_id: sign.data.kakao_account.email,
     });
     await this.userService.snsDelete(userFind.user_id);
 
@@ -118,7 +148,7 @@ export class AuthService {
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = 'http://localhost:8080/users/kakaoLoginRedirect';
+    const _redirect_url = 'http://localhost:3001/users/kakaoLoginRedirect';
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {

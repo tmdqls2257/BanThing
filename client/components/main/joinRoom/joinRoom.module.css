@@ -1,0 +1,60 @@
+.JoinRoom {
+  display: none;
+  flex-direction: column;
+  width: 30vw;
+  min-width: 400px;
+  min-height: 715px;
+  height: auto;
+}
+.image {
+  width: var(--img-size);
+  margin: var(--margine-large);
+}
+.joinRoom_profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--orange-color);
+}
+.JoinRoom_title {
+  display: flex;
+}
+.h3 {
+  font-size: var(--font-size-base);
+}
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+.JoinRoom_profile_p {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+}
+.joinRoom_content_p {
+  padding: 32px;
+  line-height: 1.5;
+  display: flex;
+  border: none;
+  border-radius: var(--border-radius-base);
+  background-color: var(--gary-color);
+  max-width: 40vh;
+  width: var(--sidebar-content-width);
+  max-height: 30vh;
+  height: 20vh;
+}
+.joinRoom_content_p::-webkit-scrollbar {
+  width: 0;
+}
+.div {
+  display: inline-block;
+  margin-top: var(--margine-base);
+  margin-right: var(--margine-base);
+}
+@media screen and (max-width: 768px) {
+  .JoinRoom {
+    width: 100vw;
+  }
+}
