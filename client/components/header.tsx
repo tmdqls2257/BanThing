@@ -20,7 +20,7 @@ export default function Header(prop: propsType) {
 
   const handleLogout = () => {
     if (typeof localStorage !== 'undefined') {
-      const auth = localStorage.getItem('auth');
+      const auth = localStorage.getItem('auth'); //'banthing'
       if (auth === 'banthing') {
         const accessToken: any = localStorage.getItem('accessToken');
         axios
