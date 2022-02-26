@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   let cookieToken: any;
 
   if (typeof document !== 'undefined') {
+    console.log(document.cookie); //! 녹두가 추가
     cookie = document.cookie;
     cookieToken = cookie.split('=')[1];
   } else {
