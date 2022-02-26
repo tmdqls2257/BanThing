@@ -14,7 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   if (typeof document !== 'undefined') {
     cookie = document.cookie; //document.cookie = X
-    if (cookie.includes('accessToken') || cookie.includes('inner')) {
+    if (
+      cookie.includes(';') &&
+      (cookie.includes('accessToken') || cookie.includes('inner'))
+    ) {
       cookieList = cookie.split(';');
       const findInner = cookieList.filter((cookie: any) => {
         return cookie.includes('inner=true');
