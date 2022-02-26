@@ -46,13 +46,9 @@ export default function Header(prop: propsType) {
           });
       } else {
         axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
-            { token: `${prop.accessToken}` },
-            {
-              withCredentials: true,
-            },
-          )
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`, {
+            withCredentials: true,
+          })
           .then((response) => {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('auth');

@@ -74,8 +74,9 @@ export class AuthController {
     return this.authService.logOut(res, req.user, req);
   }
 
-  @Post('kakaoLogOut') //카카오 로그아웃
-  kakaoLogOut(@Res() res: Response, @Body() token: KakaoTokenDTO) {
+  @Get('kakaoLogOut') //카카오 로그아웃
+  kakaoLogOut(@Res() res: Response, @Req() req: Request) {
+    const token = req.cookies['accessToken'];
     return this.authService.kakaoLogOut(res, token);
   }
 }

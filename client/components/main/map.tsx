@@ -50,9 +50,6 @@ function Map({ setLocation, roomsData }: mapType) {
       }
     };
     getPosts();
-  }, []);
-
-  useEffect(() => {
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
         user_id: 'dummy',
@@ -61,9 +58,6 @@ function Map({ setLocation, roomsData }: mapType) {
       .then((res) => {
         setDummyToken1(res.data.data.accessToken);
       });
-  }, []);
-
-  useEffect(() => {
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
         user_id: 'dummy2',
@@ -72,8 +66,6 @@ function Map({ setLocation, roomsData }: mapType) {
       .then((res) => {
         setDummyToken2(res.data.data.accessToken);
       });
-  }, []);
-  useEffect(() => {
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
         user_id: 'dummy3',

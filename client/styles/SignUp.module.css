@@ -25,7 +25,8 @@
   font-size: 22px;
   font-weight: 700;
   margin-top: -450px;
-  margin-left: 240px;
+  margin-left: 245px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_times:hover {
@@ -36,14 +37,15 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-top: 18px;
-  margin-bottom: 20px;
+  margin-top: 23px;
+  margin-bottom: 15px;
+  font-family: 'BMDOHYEON', sans-serif;
 }
 
 .signup_id_name_container {
   display: flex;
   width: 210px;
-  margin: 8px auto 1px auto;
+  margin: 9px auto 1px auto;
   flex-direction: row;
 }
 
@@ -62,6 +64,7 @@
 
 .signup_input_box_1::placeholder {
   color: rgb(0 0 0 / 40%);
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_input_box_1:focus {
@@ -84,6 +87,7 @@
 
 .signup_input_box_2::placeholder {
   color: rgb(0 0 0 / 40%);
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_input_box_2:focus {
@@ -94,14 +98,19 @@
   width: 60px;
   border: none;
   font-size: 12px;
-  border-radius: 12px;
+  border-radius: 8px;
   color: #ffffff;
   background-color: #ff8a3c;
   margin-left: 4px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_double_check_button:hover {
   cursor: pointer;
+}
+
+.signup_double_check_button:focus {
+  outline: none;
 }
 
 .signup_button {
@@ -110,13 +119,14 @@
   align-items: center;
   width: 125px;
   height: 40px;
-  font-size: 17px;
+  font-size: 16px;
   margin: 14px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
   background-color: #ff8a3c;
   border-radius: 12px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_button:hover {
@@ -125,7 +135,6 @@
 
 .signup_icon {
   width: 18px;
-  margin-top: -1.6px;
   margin-right: 8px;
 }
 
@@ -143,8 +152,10 @@
   display: flex;
   font-size: 12px;
   margin-top: 1px;
+  margin-bottom: 1px;
   padding-left: 43px;
   color: #ff6767;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_solved_id {
@@ -154,15 +165,17 @@
   margin-top: -105px;
   padding-left: 43px;
   color: #32b820;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_solved_nickname {
   display: flex;
   position: fixed;
   font-size: 12px;
-  margin-top: 25px;
+  margin-top: 27px;
   padding-left: 43px;
   color: #32b820;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .signup_space {

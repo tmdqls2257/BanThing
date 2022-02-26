@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import styles from '../../styles/main/Rate.module.css';
 import Button from './button';
@@ -12,7 +11,11 @@ const Container = styled.div`
   z-index: 1;
   backdrop-filter: blur(2px);
 `;
-export default function RemoveModal() {
+interface removeRoomId {
+  removeRoomId: number;
+}
+
+export default function RemoveModal({ removeRoomId }: removeRoomId) {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
   };
@@ -24,8 +27,9 @@ export default function RemoveModal() {
           <section className={styles.rate_title}>
             <h1>정말 삭제하시겠습니까?</h1>
           </section>
-
-          <Button containerName={'removeModal'}>삭제하기</Button>
+          <Button removeRoomId={removeRoomId} containerName={'removeModal'}>
+            삭제하기
+          </Button>
         </form>
       </Container>
     </>

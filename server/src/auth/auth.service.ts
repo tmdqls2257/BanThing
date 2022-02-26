@@ -168,7 +168,7 @@ export class AuthService {
 
     const _url = 'https://kapi.kakao.com/v1/user/logout';
     const _header = {
-      Authorization: `Bearer ${token.token}`,
+      Authorization: `Bearer ${token}`,
     };
     await axios.post(_url, {}, { headers: _header });
     return res

@@ -66,6 +66,7 @@
   background-color: #d6d6d6;
   border: none;
   border-radius: 12px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .login_input_box::placeholder {
@@ -88,6 +89,7 @@
 
 .mypage_password_change_check::placeholder {
   color: rgb(0 0 0 / 40%);
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .mypage_password_change_check:focus {
@@ -97,13 +99,14 @@
 .mypage_password_change_check_kakao {
   width: 205px;
   height: 36px;
-  margin: 10px auto auto auto;
+  margin: auto auto 7px auto;
   padding-left: 12px;
   color: #686868;
   border: none;
   background-color: #d6d6d6;
   border-radius: 12px;
   font-size: 13px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .mypage_button_container {
@@ -115,16 +118,15 @@
 }
 
 .mypage_modify_button {
-  width: 145px;
+  width: 130px;
   height: 46px;
   color: #ffffff;
   background-color: #ff8a3c;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 500;
   border: none;
   border-radius: 12px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .mypage_modify_button:hover {
@@ -132,17 +134,16 @@
 }
 
 .mypage_signout_button {
-  width: 145px;
+  width: 130px;
   height: 46px;
   color: #ffffff;
   background-color: #ff6666;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 500;
   border: none;
   border-radius: 12px;
   margin-top: 15px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .mypage_signout_button:hover {

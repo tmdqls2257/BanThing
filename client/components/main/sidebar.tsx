@@ -51,8 +51,6 @@ const Sidebar = ({ location, roomsId }: locationType) => {
   const [usersChats, setUsersChats] = useState<usersChats>();
   const [roomId, setMakeRoom_MapRoomId] = useState<number>(0);
 
-  console.log(roomId);
-
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);

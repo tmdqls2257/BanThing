@@ -1,6 +1,5 @@
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
-import { setStateType } from '../../type';
 import Button from '../button';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +11,6 @@ const Container = styled.div`
   min-width: 400px;
   min-height: 715px;
   background-color: var(--chat-background-color);
-
   height: auto;
   main {
     position: relative;
@@ -100,6 +98,7 @@ const ButtonContainer = styled.div`
   display: flex;
   margin: auto;
   margin: var(--margine-base) auto;
+
   div {
     margin: var(--margine-small);
   }

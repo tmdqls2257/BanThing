@@ -55,6 +55,11 @@ export default function Modal(prop: propsType) {
     }
   };
 
+  const handleKakaoLogin = () => {
+    router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
+    localStorage.setItem('auth', '');
+  };
+
   const handleModal = () => {
     if (!prop.setSignUpModal) {
       prop.setIsModalOpen(false);
@@ -119,16 +124,45 @@ export default function Modal(prop: propsType) {
             </div>
             <div className={styles.signout_modal_button_container}>
               <button
+                className={styles.signout_modal_no_button}
+                onClick={handleModal}
+              >
+                아뇨, 조금 더 이용해볼래요!
+              </button>
+              <button
                 className={styles.signout_modal_yes_button}
                 onClick={handleSignout}
               >
                 네, 그만 이용하고 싶어요.
               </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (prop.type === 'kakao_login') {
+    return (
+      <>
+        <div className={styles.kakao_login_modal_container}>
+          <div className={styles.kakao_login_modal_body}>
+            <span
+              className={styles.kakao_login_modal_times}
+              onClick={() => prop.setIsModalOpen(false)}
+            >
+              &times;
+            </span>
+            <div className={styles.kakao_login_modal_description}>
+              <span>카카오 로그인을 이용하실 경우,</span>
+              <span>이메일 제공에 반드시 동의해주셔야 합니다.</span>
+            </div>
+            <div className={styles.kakao_login_modal_button_container}>
               <button
-                className={styles.signout_modal_no_button}
-                onClick={handleModal}
+                className={styles.kakao_login_modal_button}
+                onClick={handleKakaoLogin}
               >
-                아니오, 조금 더 이용해볼래요!
+                확인
               </button>
             </div>
           </div>

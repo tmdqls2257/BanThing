@@ -213,7 +213,7 @@ const MyPage: NextPage = () => {
                 disabled
               />
             )}
-            {correctChangePassword ? (
+            {correctChangePassword && auth === 'banthing' ? (
               <span className={styles.mypage_space}>
                 올바르게 작성되었습니다.
               </span>

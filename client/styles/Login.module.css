@@ -6,6 +6,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic-Bold';
+  src: url('../asset/NanumGothic/NanumGothic-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
@@ -76,7 +90,8 @@
   font-size: 22px;
   font-weight: 700;
   margin-top: -450px;
-  margin-left: 240px;
+  margin-left: 245px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .login_times:hover {
@@ -87,8 +102,9 @@
   font-size: 47px;
   font-weight: 700;
   color: #ff8a3c;
-  margin-top: 50px;
-  margin-bottom: 35px;
+  margin-top: 55px;
+  margin-bottom: 30px;
+  font-family: 'BMDOHYEON', sans-serif;
 }
 
 .login_input_box {
@@ -103,10 +119,12 @@
   border-width: 1px;
   border-radius: 12px;
   background-color: #ffffff;
+  /* font-family: 'NanumGothic', sans-serif; */
 }
 
 .login_input_box::placeholder {
   color: rgb(0 0 0 / 40%);
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .login_input_box:focus {
@@ -116,14 +134,14 @@
 .login_button {
   width: 125px;
   height: 40px;
-  font-size: 17px;
-  margin: 39px auto 0 auto;
+  font-size: 16px;
+  margin: 35px auto 0 auto;
   border: none;
   color: white;
   font-weight: 500;
   background-color: #ff8a3c;
-  padding-top: 3px;
   border-radius: 12px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .login_button:hover {
@@ -138,14 +156,14 @@
 .login_kakao_button {
   width: 125px;
   height: 40px;
-  font-size: 17px;
+  font-size: 16px;
   margin: 10px auto 0px auto;
   border: none;
   color: #000000 85%;
   font-weight: 500;
   background-color: #fee500;
-  padding-top: 3px;
   border-radius: 12px;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .login_kakao_logo {
@@ -162,18 +180,25 @@
 }
 
 .login_description {
+  display: flex;
+  flex-direction: column;
   font-size: 13px;
-  margin: 50px auto 35px auto;
+  margin: 35px auto 35px auto;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .login_signup {
   color: #ff8a3c;
+  margin-top: 8px;
   margin-left: 5px;
   font-weight: bold;
+  font-family: 'NanumGothic-Bold', sans-serif;
 }
 
 .login_signup:hover {
   cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .login_error {

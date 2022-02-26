@@ -8,6 +8,7 @@ export interface BasicButtonProp {
   setChats?: any;
   roomId?: number;
   setMakeRoomId?: any;
+  removeRoomId?: number;
 }
 
 export interface RateButtonProp {
