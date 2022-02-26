@@ -109,10 +109,15 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    return res.cookie('accessToken', token).send({
-      data: { accessToken: token, auth: userFind.auth },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', token, {
+        sameSite: 'none',
+        secure: true,
+      })
+      .send({
+        data: { accessToken: token, auth: userFind.auth },
+        message: '로그인 완료',
+      });
   }
 
   //카카오 로그인
