@@ -80,34 +80,42 @@ const ChatRoom = ({
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const auth = localStorage.getItem('auth');
+
       const accessToken = localStorage.getItem('accessToken');
       const kakaoToken = document.cookie.split('=')[1];
-      if (auth === 'banthing') {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setNickname(userInfo.nickname);
-          });
-      } else {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
-            headers: {
-              Authorization: `Bearer ${kakaoToken}`,
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setNickname(userInfo.nickname);
-          });
+      if (accessToken || kakaoToken) {
+        if (accessToken || kakaoToken) {
+          console.log(accessToken);
+          console.log(kakaoToken);
+
+          if (auth === 'banthing') {
+            axios
+              .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              })
+              .then((response) => {
+                const { userInfo } = response.data.data;
+                setNickname(userInfo.nickname);
+              });
+          } else {
+            axios
+              .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
+                headers: {
+                  Authorization: `Bearer ${kakaoToken}`,
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              })
+              .then((response) => {
+                const { userInfo } = response.data.data;
+                setNickname(userInfo.nickname);
+              });
+          }
+        }
       }
     }
   }, []);
@@ -116,8 +124,6 @@ const ChatRoom = ({
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;
     removeModal.style.display = 'flex';
   };
-  console.log(usernickname);
-  console.log(roomHostNickName);
 
   if (usernickname === roomHostNickName) {
     return (

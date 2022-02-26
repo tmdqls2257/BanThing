@@ -48,28 +48,30 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
       const kakaoToken = document.cookie.split('=')[1];
-      if (auth === 'banthing') {
-        const headers = {
-          Authorization: `Bearer ${accessToken}`,
-        };
-        axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-          {
-            headers,
-            withCredentials: true,
-          },
-        );
-      } else {
-        const headers = {
-          Authorization: `Bearer ${kakaoToken}`,
-        };
-        axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
-          {
-            headers,
-            withCredentials: true,
-          },
-        );
+      if (accessToken || kakaoToken) {
+        if (auth === 'banthing') {
+          const headers = {
+            Authorization: `Bearer ${accessToken}`,
+          };
+          axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+            {
+              headers,
+              withCredentials: true,
+            },
+          );
+        } else {
+          const headers = {
+            Authorization: `Bearer ${kakaoToken}`,
+          };
+          axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
+            {
+              headers,
+              withCredentials: true,
+            },
+          );
+        }
       }
     }
   };
