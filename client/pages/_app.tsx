@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       console.log(findAccessToken);
 
       cookieToken = findAccessToken[0].split('=')[1];
-    } else {
+    } else if (cookie.includes('accessToken')) {
       cookieToken = cookie.split('=')[1];
     }
   } else {
