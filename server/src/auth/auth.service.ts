@@ -113,6 +113,7 @@ export class AuthService {
       .cookie('accessToken', token, {
         sameSite: 'none',
         secure: true,
+        domain: 'banthing.kr',
       })
       .send({
         data: { accessToken: token, auth: userFind.auth },
