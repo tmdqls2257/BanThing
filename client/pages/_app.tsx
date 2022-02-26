@@ -16,8 +16,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     cookie = document.cookie;
     if (cookie.includes(';')) {
       cookieList = cookie.split(';');
-      const findInner = cookieList.filter((element: any) => {
-        return element.includes('inner=true');
+      const findInner = cookieList.filter((cookie: any) => {
+        return cookie.includes('inner=true');
       });
       inner = findInner[0].split('=')[1];
       const findAccessToken = cookieList.filter((cookie: any) => {
