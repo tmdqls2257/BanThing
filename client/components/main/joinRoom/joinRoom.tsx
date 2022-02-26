@@ -167,14 +167,17 @@ const JoinRoom = ({
     const auth = localStorage.getItem('auth');
     if (
       typeof window !== 'undefined' &&
-      localStorage.getItem('accessToken') &&
+      typeof localStorage !== 'undefined' &&
       data
     ) {
+      const auth = localStorage.getItem('auth');
+      const accessToken = localStorage.getItem('accessToken');
+      const kakaoToken = document.cookie.split('=')[1];
       if (auth === 'banthing') {
         const getPosts = async () => {
           try {
             const headers = {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              Authorization: `Bearer ${accessToken}`,
             };
             const response: AxiosResponse = await axios.get(
               `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
@@ -192,7 +195,7 @@ const JoinRoom = ({
         const getPosts = async () => {
           try {
             const headers = {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              Authorization: `Bearer ${kakaoToken}`,
             };
             const response: AxiosResponse = await axios.get(
               `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao/${data.data.post.id}`,

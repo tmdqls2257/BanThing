@@ -33,6 +33,7 @@ export class PostController {
     @Req() req: Request,
   ): Promise<object> {
     const token = req.cookies['accessToken'];
+    console.log(token);
     return await this.postService.createKakao(postDTO, token);
   }
 

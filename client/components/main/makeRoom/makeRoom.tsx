@@ -171,14 +171,21 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const axiosPost = () => {
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    console.log(typeof window);
+    console.log(typeof localStorage);
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const auth = localStorage.getItem('auth');
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      };
-      console.log(headers);
+      const accessToken = localStorage.getItem('accessToken');
+      const kakaoToken = document.cookie.split('=')[1];
+      // console.log(accessToken);
+      // console.log(kakaoToken);
+
       if (auth === 'banthing') {
+        const headers = {
+          Authorization: `Bearer ${accessToken}`,
+        };
+
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
@@ -198,6 +205,10 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             setMakeRoomId(res.data.data.post_id);
           });
       } else {
+        const headers = {
+          Authorization: `Bearer ${kakaoToken}`,
+        };
+
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
