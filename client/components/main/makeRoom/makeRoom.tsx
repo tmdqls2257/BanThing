@@ -222,6 +222,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             },
             {
               headers,
+              withCredentials: true,
             },
           )
           .then((res) => {
