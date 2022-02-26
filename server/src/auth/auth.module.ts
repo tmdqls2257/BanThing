@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { ConfigService } from '@nestjs/config';
 import { PostRepository } from 'src/post/post.repository';
 import { ReplyLogRepository } from 'src/post/reply.repository';
+import { PostService } from 'src/post/post.service';
 
 @Module({
   imports: [
@@ -29,6 +30,6 @@ import { ReplyLogRepository } from 'src/post/reply.repository';
   ],
   exports: [TypeOrmModule],
   controllers: [AuthController],
-  providers: [AuthService, UserService, JwtStrategy],
+  providers: [AuthService, UserService, JwtStrategy, PostService],
 })
 export class AuthModule {}

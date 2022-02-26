@@ -18,7 +18,6 @@ export class MypageService {
 
   //카카오 마이페이지
   async kakaoInfo(token: KakaoTokenDTO) {
-    console.log(token);
     const _header = {
       Authorization: `Bearer ${token}`,
     };
@@ -31,7 +30,6 @@ export class MypageService {
       user_id: data.data.kakao_account.email,
       nickname: data.data.properties.nickname,
     };
-    console.log(user);
     return { data: { userInfo: user }, message: '회원정보' };
   }
 
