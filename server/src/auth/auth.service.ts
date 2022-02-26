@@ -103,8 +103,8 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     };
     await axios.post(_url, {}, { headers: _header });
-    res.cookie('inner', '', { maxAge: 1 });
 
+    res.cookie('inner', '', { maxAge: 1 });
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '회원탈퇴 완료' });
@@ -170,8 +170,10 @@ export class AuthService {
       };
       this.userService.snsSave(snsSignUp);
     }
-    res.cookie('accessToken', data.data['access_token']);
-    return res.cookie('inner', 'true').redirect('http://localhost:3000');
+    res.cookie('inner', 'true');
+    return res
+      .cookie('accessToken', data.data['access_token'])
+      .redirect('http://localhost:3000');
   }
 
   //로그아웃
