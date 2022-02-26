@@ -225,6 +225,10 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
           });
       }
     }
+    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    makeRoom.style.display = 'none';
+    joinRoom.style.display = 'flex';
   };
 
   const onClick = () => {
@@ -239,10 +243,6 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       setMakeRoomModal(true);
     } else {
       axiosPost();
-      const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
-      const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-      makeRoom.style.display = 'none';
-      joinRoom.style.display = 'flex';
     }
   };
 
@@ -270,25 +270,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             <option value="1">받는 사람</option>
             <option value="2">가지러 가는 사람</option>
           </select>
-          {/* <input
-            type="radio"
-            id="contactChoice1"
-            name="contact"
-            value="1"
-            onChange={radioChange}
-          />
-          <label htmlFor="contactChoice1">받는 사람</label> */}
         </section>
-        {/* <section className="MakeRoom-main-section-radio">
-          <input
-            type="radio"
-            id="contactChoice2"
-            name="contact"
-            value="2"
-            onChange={radioChange}
-          />
-          <label htmlFor="contactChoice2">가지러 가는 사람</label>
-        </section> */}
         <section>
           <h1>내용</h1>
           <textarea

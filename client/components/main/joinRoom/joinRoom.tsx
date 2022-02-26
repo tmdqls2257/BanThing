@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
+axios.defaults.withCredentials = true;
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -179,7 +180,6 @@ const JoinRoom = ({
               `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
               {
                 headers,
-                withCredentials: true,
               },
             );
             setChats(response.data);
@@ -198,7 +198,6 @@ const JoinRoom = ({
               `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao/${data.data.post.id}`,
               {
                 headers,
-                withCredentials: true,
               },
             );
             setChats(response.data);

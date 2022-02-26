@@ -1,6 +1,7 @@
 import axios from 'axios';
 import styled from 'styled-components';
 import styles from '../../styles/main/Rate.module.css';
+axios.defaults.withCredentials = true;
 
 const Container = styled.div`
   display: none;
@@ -58,7 +59,6 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
             `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
             {
               headers,
-              withCredentials: true,
             },
           );
         } else {
@@ -69,7 +69,6 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
             `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
             {
               headers,
-              withCredentials: true,
             },
           );
         }

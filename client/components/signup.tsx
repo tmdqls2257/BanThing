@@ -4,6 +4,8 @@ import { useState } from 'react';
 import styles from '../styles/SignUp.module.css';
 import Modal from './modal';
 
+axios.defaults.withCredentials = true;
+
 interface propsType {
   signUpModal: boolean;
   setSignUpModal: Function;
@@ -135,7 +137,6 @@ export default function SignUp(prop: propsType) {
           {
             headers: {
               'Content-Type': 'application/json',
-              withCredentials: true,
             },
           },
         )
@@ -163,7 +164,6 @@ export default function SignUp(prop: propsType) {
           {
             headers: {
               'Content-Type': 'application/json',
-              withCredentials: true,
             },
           },
         )
@@ -215,7 +215,6 @@ export default function SignUp(prop: propsType) {
           {
             headers: {
               'Content-Type': 'application/json',
-              withCredentials: true,
             },
           },
         )
