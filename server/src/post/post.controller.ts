@@ -27,7 +27,7 @@ export class PostController {
     return await this.postService.create(postDTO, req.user);
   }
 
-  @Post() //글 게시(카카오)
+  @Post('/kakao') //글 게시(카카오)
   async postCreateKakao(
     @Body() postDTO: CreatePostDTO,
     @Req() req: Request,

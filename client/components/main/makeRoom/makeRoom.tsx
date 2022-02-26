@@ -172,11 +172,14 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
     const auth = localStorage.getItem('auth');
+    console.log(auth);
+
     if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
       if (auth === 'banthing') {
         const headers = {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         };
+        console.log(1);
 
         axios
           .post(
@@ -196,30 +199,31 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
           .then((res) => {
             setMakeRoomId(res.data.data.post_id);
           });
-      } else {
-        const headers = {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        };
-
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
-            {
-              title: data[0],
-              category: data[1],
-              content: data[2],
-              host_role: data[3],
-              location_latitude: data[4],
-              location_longitude: data[5],
-            },
-            {
-              headers,
-            },
-          )
-          .then((res) => {
-            setMakeRoomId(res.data.data.post_id);
-          });
       }
+    } else {
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      };
+      console.log(2);
+
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
+          {
+            title: data[0],
+            category: data[1],
+            content: data[2],
+            host_role: data[3],
+            location_latitude: data[4],
+            location_longitude: data[5],
+          },
+          {
+            headers,
+          },
+        )
+        .then((res) => {
+          setMakeRoomId(res.data.data.post_id);
+        });
     }
     makeRoom.style.display = 'none';
     joinRoom.style.display = 'flex';
@@ -236,6 +240,15 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     ) {
       setMakeRoomModal(true);
     } else {
+      console.log(
+        title,
+        select,
+        textarea,
+        Number(radio),
+        String(location[0]),
+        String(location[1]),
+      );
+
       axiosPost();
     }
   };
