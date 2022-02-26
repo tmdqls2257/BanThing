@@ -10,6 +10,6 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
-  await app.listen(process.env.SERVERPORT);
+  await app.listen(process.env.SERVER_PORT);
 }
 bootstrap();
