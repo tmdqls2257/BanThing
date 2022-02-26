@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   let inner: string;
 
   if (typeof document !== 'undefined') {
-    console.log(document.cookie.split(';'));
+    cookie = document.cookie;
     if (cookie.includes(';')) {
       cookieList = cookie.split(';');
       const findInner = cookieList.filter((element: any) => {
