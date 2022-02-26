@@ -41,14 +41,11 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (chat !== '') {
-      if (
-        typeof window !== 'undefined' &&
-        typeof localStorage !== 'undefined'
-      ) {
+      if (typeof window !== 'undefined' && window.localStorage) {
         const auth = localStorage.getItem('auth');
         const accessToken = localStorage.getItem('accessToken');
-        const kakaoToken = document.cookie.split('=')[1];
-
+        const innerCookie = document.cookie.split(';')[1];
+        const kakaoToken = innerCookie.split('=')[1];
         if (auth === 'banthing') {
           const headers = {
             Authorization: `Bearer ${accessToken}`,

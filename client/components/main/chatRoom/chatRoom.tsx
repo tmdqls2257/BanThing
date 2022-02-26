@@ -78,43 +78,62 @@ const ChatRoom = ({
   const [usernickname, setNickname] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
+      console.log(window);
+      console.log(localStorage);
+
       const auth = localStorage.getItem('auth');
 
       const accessToken = localStorage.getItem('accessToken');
-      const kakaoToken = document.cookie.split('=')[1];
-      if (accessToken || kakaoToken) {
-        if (accessToken || kakaoToken) {
-          console.log(accessToken);
-          console.log(kakaoToken);
+      const cookie = document.cookie.split(';')[1];
+      const kakaoToken = cookie.split('=')[1];
+      console.log(kakaoToken);
 
-          if (auth === 'banthing') {
-            axios
-              .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                  'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-              })
-              .then((response) => {
-                const { userInfo } = response.data.data;
-                setNickname(userInfo.nickname);
-              });
-          } else {
-            axios
-              .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
-                headers: {
-                  Authorization: `Bearer ${kakaoToken}`,
-                  'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-              })
-              .then((response) => {
-                const { userInfo } = response.data.data;
-                setNickname(userInfo.nickname);
-              });
-          }
+      // const cookie = document.cookie;
+      // const cookieList = cookie.split(';');
+      // //이렇게 하면 ; 를 기준으로 쿠키들이 나뉘어져 배열화 됩니다.
+
+      // const findAccessToken = cookieList.filter((element) => {
+      //   element.includes('accessToken');
+      // });
+      // //Array.filter 메소드를 통해 accessToken 이라는 String 값이 들어가있는 인자만 찾아냅니다.
+      // //findAccessToken 은 ['accessToken=qT_Cy7C-wsgefzvr_f32LU-D5k7OBQHQXb3b3gorDSAAAAF_NUBvmA'] 가 되어있을겁니다.
+
+      // const kakaoToken = findAccessToken[0].split('=')[1];
+      // //findAccessToken 의 0번째 인자를 '=' 으로 구분짓고, 그 결과의 1번째 인자는 accessToken입니다.
+
+      // console.log(kakaoToken);
+      // console.log(document.cookie);
+      // const cookie = document.cookie.split(';')[1];
+      // const kakaoToken = cookie.split('=')[1];
+      // console.log(kakaoToken);
+      if (accessToken || kakaoToken) {
+        if (auth === 'banthing') {
+          axios
+            .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+            })
+            .then((response) => {
+              const { userInfo } = response.data.data;
+              setNickname(userInfo.nickname);
+            });
+        } else {
+          axios
+            .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
+              headers: {
+                Authorization: `Bearer ${kakaoToken}`,
+                'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+            })
+            .then((response) => {
+              const { userInfo } = response.data.data;
+              setNickname(userInfo.nickname);
+            });
         }
       }
     }

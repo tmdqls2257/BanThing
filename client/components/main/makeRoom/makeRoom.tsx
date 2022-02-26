@@ -169,15 +169,11 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   ];
 
   const axiosPost = () => {
-    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
-    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-    console.log(typeof window);
-    console.log(typeof localStorage);
-
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    if (typeof window !== 'undefined' && window.localStorage) {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
-      const kakaoToken = document.cookie.split('=')[1];
+      const cookie = document.cookie.split(';')[1];
+      const kakaoToken = cookie.split('=')[1];
       if (accessToken || kakaoToken) {
         if (auth === 'banthing') {
           const headers = {
@@ -230,8 +226,6 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
         }
       }
     }
-    makeRoom.style.display = 'none';
-    joinRoom.style.display = 'flex';
   };
 
   const onClick = () => {
@@ -244,6 +238,10 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       String(location[1]) === '0'
     ) {
       setMakeRoomModal(true);
+      const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+      const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+      makeRoom.style.display = 'none';
+      joinRoom.style.display = 'flex';
     } else {
       axiosPost();
     }

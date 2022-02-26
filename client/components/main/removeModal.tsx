@@ -47,7 +47,8 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
-      const kakaoToken = document.cookie.split('=')[1];
+      const innerCookie = document.cookie.split(';')[1];
+      const kakaoToken = innerCookie.split('=')[1];
       if (accessToken || kakaoToken) {
         if (auth === 'banthing') {
           const headers = {

@@ -164,15 +164,11 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-    const auth = localStorage.getItem('auth');
-    if (
-      typeof window !== 'undefined' &&
-      typeof localStorage !== 'undefined' &&
-      data
-    ) {
+    if (typeof window !== 'undefined' && window.localStorage && data) {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
-      const kakaoToken = document.cookie.split('=')[1];
+      const cookie = document.cookie.split(';')[1];
+      const kakaoToken = cookie.split('=')[1];
       if (auth === 'banthing') {
         const getPosts = async () => {
           try {
@@ -254,7 +250,7 @@ const JoinRoom = ({
           </ButtonContainer>
         </>
       ) : (
-        <>더미 입니다.</>
+        <h1>로그인해주세요</h1>
       )}
     </Container>
   );
