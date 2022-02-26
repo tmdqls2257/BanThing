@@ -10,25 +10,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   let cookie: any;
   let cookieToken: any;
   let cookieList: any;
-  let inner: string;
 
   if (typeof document !== 'undefined') {
-    cookie = document.cookie; //document.cookie = X
-    if (
-      cookie.includes(';') &&
-      (cookie.includes('accessToken') || cookie.includes('inner'))
-    ) {
+    cookie = document.cookie;
+    if (cookie.includes(';') && cookie.includes('accessToken')) {
       cookieList = cookie.split(';');
-      const findInner = cookieList.filter((cookie: any) => {
-        return cookie.includes('inner=true');
-      });
-      inner = findInner[0].split('=')[1];
       const findAccessToken = cookieList.filter((cookie: any) => {
         return cookie.includes('accessToken');
       });
-      if (findAccessToken.length !== 0) {
-        cookieToken = findAccessToken[0].split('=')[1];
-      }
+      cookieToken = findAccessToken[0].split('=')[1];
     } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
       cookieToken = cookie.split('=')[1];
     }
