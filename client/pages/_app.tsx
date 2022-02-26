@@ -14,7 +14,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   if (typeof document !== 'undefined') {
     cookie = document.cookie; //document.cookie = X
-    console.log(cookie);
 
     if (
       cookie.includes(';') &&

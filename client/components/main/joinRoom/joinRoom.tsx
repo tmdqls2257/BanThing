@@ -212,15 +212,26 @@ const JoinRoom = ({
     joinRoom.style.display = 'none';
     chatRoom.style.display = 'flex';
   };
+  console.log(data);
+  const rendering = () => {
+    if (data) {
+      const { category } = data.data.post;
+      if (category === '피자') {
+        return <img src="/image/pizza.png" alt="" />;
+      } else if (category === '치킨') {
+        return <img src="/image/chicken.png" alt="" />;
+      } else if (category === '햄버거') {
+        return <img src="/image/hamburger.png" alt="" />;
+      }
+    }
+  };
+
   return (
     <Container id="JoinRoom">
       {data ? (
         <>
           <section className="JoinRoom-profile">
-            <img
-              src="https://cdn.discordapp.com/attachments/934007459763326976/943866955880878120/unknown.png"
-              alt=""
-            />
+            {rendering()}
             <h1>{data.data.post.host_nickname}</h1>
           </section>
           <article>

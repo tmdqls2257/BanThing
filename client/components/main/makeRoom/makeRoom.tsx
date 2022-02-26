@@ -174,56 +174,55 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       const accessToken = localStorage.getItem('accessToken');
       const cookie = document.cookie.split(';')[1];
       const kakaoToken = cookie.split('=')[1];
-      if (accessToken || kakaoToken) {
-        if (auth === 'banthing') {
-          const headers = {
-            Authorization: `Bearer ${accessToken}`,
-          };
 
-          axios
-            .post(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-              {
-                title: data[0],
-                category: data[1],
-                content: data[2],
-                host_role: data[3],
-                location_latitude: data[4],
-                location_longitude: data[5],
-              },
-              {
-                headers,
-                withCredentials: true,
-              },
-            )
-            .then((res) => {
-              setMakeRoomId(res.data.data.post_id);
-            });
-        } else {
-          const headers = {
-            Authorization: `Bearer ${kakaoToken}`,
-          };
+      if (auth === 'banthing') {
+        const headers = {
+          Authorization: `Bearer ${accessToken}`,
+        };
 
-          axios
-            .post(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
-              {
-                title: data[0],
-                category: data[1],
-                content: data[2],
-                host_role: data[3],
-                location_latitude: data[4],
-                location_longitude: data[5],
-              },
-              {
-                headers,
-                withCredentials: true,
-              },
-            )
-            .then((res) => {
-              setMakeRoomId(res.data.data.post_id);
-            });
-        }
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+            {
+              title: data[0],
+              category: data[1],
+              content: data[2],
+              host_role: data[3],
+              location_latitude: data[4],
+              location_longitude: data[5],
+            },
+            {
+              headers,
+              withCredentials: true,
+            },
+          )
+          .then((res) => {
+            setMakeRoomId(res.data.data.post_id);
+          });
+      } else {
+        const headers = {
+          Authorization: `Bearer ${kakaoToken}`,
+        };
+
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
+            {
+              title: data[0],
+              category: data[1],
+              content: data[2],
+              host_role: data[3],
+              location_latitude: data[4],
+              location_longitude: data[5],
+            },
+            {
+              headers,
+              withCredentials: true,
+            },
+          )
+          .then((res) => {
+            setMakeRoomId(res.data.data.post_id);
+          });
       }
     }
   };
@@ -238,12 +237,12 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       String(location[1]) === '0'
     ) {
       setMakeRoomModal(true);
+    } else {
+      axiosPost();
       const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
       const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
       makeRoom.style.display = 'none';
       joinRoom.style.display = 'flex';
-    } else {
-      axiosPost();
     }
   };
 
