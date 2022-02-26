@@ -21,7 +21,6 @@ const Container = styled.div`
     justify-content: space-between;
     margin: auto;
   }
-
   .MakeRoom-main-section-flex {
     display: flex;
     flex-direction: row;
@@ -99,7 +98,6 @@ const ButtonContainer = styled.div`
   display: flex;
   margin: auto;
   margin: var(--margine-base) auto;
-
   div {
     margin: var(--margine-small);
   }
@@ -173,31 +171,55 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const axiosPost = () => {
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-
+    const auth = localStorage.getItem('auth');
     if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
-      const headers = {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      };
+      if (auth === 'banthing') {
+        const headers = {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        };
 
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-          {
-            title: data[0],
-            category: data[1],
-            content: data[2],
-            host_role: data[3],
-            location_latitude: data[4],
-            location_longitude: data[5],
-          },
-          {
-            headers,
-          },
-        )
-        .then((res) => {
-          setMakeRoomId(res.data.data.post_id);
-        });
-      console.log(data);
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+            {
+              title: data[0],
+              category: data[1],
+              content: data[2],
+              host_role: data[3],
+              location_latitude: data[4],
+              location_longitude: data[5],
+            },
+            {
+              headers,
+            },
+          )
+          .then((res) => {
+            setMakeRoomId(res.data.data.post_id);
+          });
+      } else {
+        const headers = {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        };
+
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
+            {
+              title: data[0],
+              category: data[1],
+              content: data[2],
+              host_role: data[3],
+              location_latitude: data[4],
+              location_longitude: data[5],
+            },
+            {
+              headers,
+            },
+          )
+          .then((res) => {
+            setMakeRoomId(res.data.data.post_id);
+          });
+      }
     }
     makeRoom.style.display = 'none';
     joinRoom.style.display = 'flex';

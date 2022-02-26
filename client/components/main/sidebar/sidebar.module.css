@@ -1,0 +1,20 @@
+.sidebar_container {
+  display: flex;
+}
+.section {
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  .sidebar_container {
+    flex-direction: column;
+    position: absolute;
+    bottom: 0px;
+  }
+  .section {
+    display: flex;
+    z-index: 1;
+    background-color: var(--white-color);
+    width: 100vw;
+    height: 85vh;
+  }
+}

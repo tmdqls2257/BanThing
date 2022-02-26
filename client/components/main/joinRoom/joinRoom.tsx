@@ -9,7 +9,6 @@ const Container = styled.div`
   width: 30vw;
   min-width: 400px;
   min-height: 715px;
-
   height: auto;
   img {
     width: var(--img-size);
@@ -69,7 +68,6 @@ const Container = styled.div`
     margin-top: var(--margine-base);
     margin-right: var(--margine-base);
   }
-
   @media screen and (max-width: 768px) {
     width: 100vw;
   }
@@ -166,29 +164,49 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-
+    const auth = localStorage.getItem('auth');
     if (
       typeof window !== 'undefined' &&
       localStorage.getItem('accessToken') &&
       data
     ) {
-      const getPosts = async () => {
-        try {
-          const headers = {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          };
-          const response: AxiosResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
-            {
-              headers,
-            },
-          );
-          setChats(response.data);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      getPosts();
+      if (auth === 'banthing') {
+        const getPosts = async () => {
+          try {
+            const headers = {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            };
+            const response: AxiosResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
+              {
+                headers,
+              },
+            );
+            setChats(response.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getPosts();
+      } else {
+        const getPosts = async () => {
+          try {
+            const headers = {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            };
+            const response: AxiosResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao/${data.data.post.id}`,
+              {
+                headers,
+              },
+            );
+            setChats(response.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getPosts();
+      }
     }
     joinRoom.style.display = 'none';
     chatRoom.style.display = 'flex';

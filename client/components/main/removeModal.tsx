@@ -48,12 +48,22 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       const headers = {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
-      axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-        {
-          headers,
-        },
-      );
+      const auth = localStorage.getItem('auth');
+      if (auth === 'banthing') {
+        axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+          {
+            headers,
+          },
+        );
+      } else {
+        axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
+          {
+            headers,
+          },
+        );
+      }
     }
   };
   return (

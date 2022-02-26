@@ -1,9 +1,10 @@
-import SidebarHeader from './sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
-import Modal from './removeModal';
-import Chats from './chats';
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SidebarHeader from '../sidebarHeader/sidebarHeader';
+import Chats from '../chats/chats';
+import Modal from '../removeModal';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */

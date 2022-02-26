@@ -40,6 +40,7 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const auth = localStorage.getItem('auth');
     if (chat !== '') {
       if (
         typeof window !== 'undefined' &&
@@ -48,16 +49,29 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
         const headers = {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         };
-        axios.post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-          {
-            post_id: roomsId,
-            reply: chat,
-          },
-          {
-            headers,
-          },
-        );
+        if (auth === 'banthing') {
+          axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+            {
+              post_id: roomsId,
+              reply: chat,
+            },
+            {
+              headers,
+            },
+          );
+        } else {
+          axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao`,
+            {
+              post_id: roomsId,
+              reply: chat,
+            },
+            {
+              headers,
+            },
+          );
+        }
       }
       onCreated(chat);
     }
