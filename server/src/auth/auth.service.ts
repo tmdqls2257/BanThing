@@ -114,6 +114,8 @@ export class AuthService {
         sameSite: 'none',
         secure: true,
         domain: '*.banthing.kr',
+        path: '/',
+        maxAge: 24 * 60 * 60 * 100,
       })
       .send({
         data: { accessToken: token, auth: userFind.auth },
