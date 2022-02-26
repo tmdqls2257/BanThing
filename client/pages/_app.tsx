@@ -26,7 +26,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       const findAccessToken = cookieList.filter((cookie: any) => {
         return cookie.includes('accessToken');
       });
-      cookieToken = findAccessToken[0].split('=')[1];
+      if (findAccessToken.length !== 0) {
+        cookieToken = findAccessToken[0].split('=')[1];
+      }
     } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
       cookieToken = cookie.split('=')[1];
     }
