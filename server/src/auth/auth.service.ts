@@ -113,7 +113,7 @@ export class AuthService {
       .cookie('accessToken', token, {
         sameSite: 'none',
         secure: true,
-        domain: '*.banthing.kr',
+        domain: '.banthing.kr',
         path: '/',
         maxAge: 24 * 60 * 60 * 100,
       })
