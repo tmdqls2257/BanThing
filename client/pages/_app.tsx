@@ -9,17 +9,26 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   let cookie: any;
   let cookieToken: any;
+  let cookieList: any;
+  let inner: string;
 
   if (typeof document !== 'undefined') {
+    console.log(document.cookie.split(';'));
     cookie = document.cookie;
-    cookieToken = cookie.split('=')[1];
+    if (cookie.includes(';')) {
+      cookieList = cookie.split(';');
+      cookieToken = cookieList[1].split('=')[1];
+      inner = cookieList[0].split('=')[1];
+    } else {
+      cookieToken = cookie.split('=')[1];
+    }
   } else {
     cookie = '';
   }
 
   useEffect(() => {
     const accessToken: any = localStorage.getItem('accessToken');
-    if (cookieToken) {
+    if (cookieToken && cookie.includes('accessToken')) {
       setIsLogin(true);
       setAccessToken(cookieToken);
       if (accessToken) {
