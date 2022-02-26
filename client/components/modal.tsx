@@ -2,6 +2,7 @@ import axios from 'axios';
 import styles from '../styles/Modal.module.css';
 import { useRouter } from 'next/router';
 
+axios.defaults.withCredentials = true;
 interface propsType {
   setIsModalOpen: Function;
   setSignUpModal?: Function;
@@ -22,7 +23,6 @@ export default function Modal(prop: propsType) {
               Authorization: `Bearer ${accessToken}`,
               'Content-Type': 'application/json',
             },
-            withCredentials: true,
           })
           .then((response) => {
             localStorage.removeItem('accessToken');
@@ -39,7 +39,6 @@ export default function Modal(prop: propsType) {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
               },
-              withCredentials: true,
             },
           )
           .then((response) => {

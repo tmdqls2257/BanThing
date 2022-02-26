@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from '../components/modal';
 
+axios.defaults.withCredentials = true;
+
 const MyPage: NextPage = () => {
   const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
 
@@ -36,7 +38,6 @@ const MyPage: NextPage = () => {
               Authorization: `Bearer ${accessToken}`,
               'Content-Type': 'application/json',
             },
-            withCredentials: true,
           })
           .then((response) => {
             const { userInfo } = response.data.data;
@@ -51,7 +52,6 @@ const MyPage: NextPage = () => {
               Authorization: `Bearer ${accessToken}`,
               'Content-Type': 'application/json',
             },
-            withCredentials: true,
           })
           .then((response) => {
             const { userInfo } = response.data.data;
@@ -103,7 +103,6 @@ const MyPage: NextPage = () => {
                   Authorization: `Bearer ${accessToken}`,
                   'Content-Type': 'application/json',
                 },
-                withCredentials: true,
               },
             )
             .then((response) => {
