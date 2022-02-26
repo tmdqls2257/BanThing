@@ -169,7 +169,7 @@ export class AuthService {
       };
       this.userService.snsSave(snsSignUp);
     }
-
+    res.cookie('inner', 'true');
     return res
       .cookie('accessToken', data.data['access_token'])
       .redirect('http://localhost:3000');
