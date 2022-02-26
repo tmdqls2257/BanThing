@@ -20,12 +20,14 @@ import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from '../post/post.repository';
 import { ReplyLogRepository } from '../post/reply.repository';
+import { PostService } from 'src/post/post.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private postService: PostService,
     @InjectRepository(PostRepository)
     private postRepository: PostRepository,
     @InjectRepository(ReplyLogRepository)
@@ -80,21 +82,9 @@ export class AuthService {
 
   //카카오 회원탈퇴
   async kakaoUnlink(token: KakaoTokenDTO, res: Response): Promise<any> {
-    const header = {
-      Authorization: `Bearer ${token}`,
-    };
-    const sign = await axios.post(
-      'https://kapi.kakao.com/v2/user/me',
-      {},
-      { headers: header },
-    );
-
-    const userFind: Users = await this.userService.findByFields({
-      where: { user_id: sign.data.kakao_account.email },
-    });
-
+    const info = await this.postService.getInfoKakao(token);
     const list = await this.postRepository.find({
-      host_user_id: sign.data.kakao_account.email,
+      host_user_id: info.user_id,
     });
 
     if (list) {
@@ -104,9 +94,9 @@ export class AuthService {
       }
     }
     await this.postRepository.delete({
-      host_user_id: sign.data.kakao_account.email,
+      host_user_id: info.user_id,
     });
-    await this.userService.snsDelete(userFind.user_id);
+    await this.userService.snsDelete(info.user_id);
 
     const _url = 'https://kapi.kakao.com/v1/user/unlink';
     const _header = {
@@ -179,7 +169,7 @@ export class AuthService {
       };
       this.userService.snsSave(snsSignUp);
     }
-
+    res.cookie('inner', 'true');
     return res
       .cookie('accessToken', data.data['access_token'])
       .redirect('http://localhost:3000');
@@ -194,8 +184,6 @@ export class AuthService {
 
   //카카오 로그아웃
   async kakaoLogOut(res: Response, token: KakaoTokenDTO): Promise<any> {
-    console.log(token);
-
     const _url = 'https://kapi.kakao.com/v1/user/logout';
     const _header = {
       Authorization: `Bearer ${token}`,

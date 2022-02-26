@@ -171,13 +171,13 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const axiosPost = () => {
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    console.log(typeof window);
+    console.log(typeof localStorage);
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
       const kakaoToken = document.cookie.split('=')[1];
-      // console.log(accessToken);
-      // console.log(kakaoToken);
 
       if (auth === 'banthing') {
         const headers = {
@@ -197,6 +197,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             },
             {
               headers,
+              withCredentials: true,
             },
           )
           .then((res) => {
@@ -220,6 +221,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             },
             {
               headers,
+              withCredentials: true,
             },
           )
           .then((res) => {
@@ -242,15 +244,6 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     ) {
       setMakeRoomModal(true);
     } else {
-      console.log(
-        title,
-        select,
-        textarea,
-        Number(radio),
-        String(location[0]),
-        String(location[1]),
-      );
-
       axiosPost();
     }
   };
