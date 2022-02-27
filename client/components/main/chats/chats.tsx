@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
+import styles from './chats.module.css';
 import Chat from '../chat/chat';
 import styled from 'styled-components';
-import axios from 'axios';
-import NewChat from '../newChat';
+import NewChat from '../newChat/newChat';
 
 const Container = styled.div`
-  overflow-y: auto;
-  min-height: 515px;
-  max-height: 74vh;
-  /* padding-bottom: 64px; */
+  overflow-y: scroll;
+  min-height: 50px;
+  max-height: 70vh;
   ::-webkit-scrollbar {
     width: 0;
+  }
+  @media screen and (max-height: 480px) {
+    max-height: 120vh;
+  }
+  @media screen and (max-height: 580px) {
+    max-height: 100vh;
+  }
+  @media screen and (max-height: 680px) {
+    max-height: 80vh;
   }
 `;
 
@@ -46,15 +54,18 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
       time: String(new Date()),
     });
     setChat((chats) => [...chats, chat]);
+  };
+
+  useEffect(() => {
     const chatContainer = document.querySelector(
-      '.chat-Container',
+      '#chat-Container',
     )! as HTMLElement;
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
-  };
+  }, [userchat.length]);
 
   return (
     <>
-      <Container className="chat-Container">
+      <section className={styles.chat_container} id={'chat-Container'}>
         {usersChats?.data.replyLog ? (
           usersChats?.data.replyLog.map((chat) => (
             <Chat
@@ -63,13 +74,12 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
               chats={chat.reply}
               nickname={chat.nickname}
               time={chat.time}
-              userchat={userchat}
             />
           ))
         ) : (
           <></>
         )}
-      </Container>
+      </section>
       {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
     </>
   );

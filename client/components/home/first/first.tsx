@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import styles from '../../styles/Home.module.css';
+import styles from './First.module.css';
 import { Zoom, Fade } from 'react-awesome-reveal';
 
-export default function Title() {
+export default function First() {
   return (
     <>
       <div className={styles.title_container}>

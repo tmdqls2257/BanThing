@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import styles from './mobileButton.module.css';
 import styled from 'styled-components';
-import { BasicButtonProp, Direction } from '../type';
+import { Direction } from '../../type';
 
 const Button = styled.div`
   display: flex;
@@ -23,7 +24,6 @@ const MobileButton = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const button: HTMLButtonElement = event.currentTarget;
     const sidebarContainer = document.querySelector(
       '#sidebarContainer',
     )! as HTMLElement;
@@ -36,12 +36,12 @@ const MobileButton = () => {
     }
   };
   return (
-    <Button>
-      <button onClick={handleClick}>
+    <section className={styles.section}>
+      <button className={styles.button} onClick={handleClick}>
         <i className="fa-solid fa-arrow-up"></i>
         <i className="fa-solid fa-arrow-down"></i>
       </button>
-    </Button>
+    </section>
   );
 };
 

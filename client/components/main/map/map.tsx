@@ -1,6 +1,6 @@
 import styles from './map.module.css';
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import Loading from '../loading';
+import Loading from '../loading/loading';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
@@ -156,11 +156,23 @@ function Map({ setLocation, roomsData }: mapType) {
             for (let i = 0; i < roomList.length; i++) {
               let imageSrc = '';
               if (roomList[i].category === '햄버거') {
-                imageSrc = '/image/hamburger.png'; // 마커이미지의 주소입니다
+                imageSrc = '/image/hamburger.png';
               } else if (roomList[i].category === '치킨') {
                 imageSrc = '/image/chicken.png';
               } else if (roomList[i].category === '피자') {
                 imageSrc = '/image/pizza.png';
+              } else if (roomList[i].category === '한식') {
+                imageSrc = '/image/rice.png';
+              } else if (roomList[i].category === '자장면') {
+                imageSrc = '/image/chNoodles.png';
+              } else if (roomList[i].category === '커피*디저트') {
+                imageSrc = '/image/coffee.png';
+              } else if (roomList[i].category === '도시락') {
+                imageSrc = '/image/lunchBox.png';
+              } else if (roomList[i].category === '일식') {
+                imageSrc = '/image/sushi.png';
+              } else if (roomList[i].category === '분식') {
+                imageSrc = '/image/tteokbokki.png';
               }
               const imageSize = new window.kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
                 imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.

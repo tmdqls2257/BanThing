@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import styles from '../../styles/main/Rate.module.css';
+import styles from '../../../styles/main/Rate.module.css';
+import buttonStyle from '../button.module.css';
 
 const Container = styled.div`
   display: flex;
@@ -14,22 +15,6 @@ const Container = styled.div`
   h1 {
     font-size: 1.5em;
     background-color: #0000000;
-  }
-  button {
-    margin: 0 auto;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: #ffffff;
-    width: 181px;
-    background-color: #ff8a3d;
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
   }
 `;
 interface makeRoomState {
@@ -47,7 +32,12 @@ export default function MakeRoomModal({ setMakeRoomModal }: makeRoomState) {
           <section className={styles.rate_title}>
             <h1 className={styles.rate_h1}>내용을 모두 입력해주세요</h1>
           </section>
-          <button onClick={onClick}>확인</button>
+
+          <section className={buttonStyle.button_container}>
+            <button className={buttonStyle.button} onClick={onClick}>
+              확인
+            </button>
+          </section>
         </form>
       </Container>
     </>

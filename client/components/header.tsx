@@ -4,6 +4,7 @@ import Login from './login';
 import React, { useState } from 'react';
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
 interface propsType {
   isLogin: boolean;
   setIsLogin: Function;
@@ -32,7 +33,6 @@ export default function Header(prop: propsType) {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
               },
-              withCredentials: true,
             },
           )
           .then((response) => {
@@ -46,9 +46,10 @@ export default function Header(prop: propsType) {
           });
       } else {
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`, {
-            withCredentials: true,
-          })
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
+            {},
+          )
           .then((response) => {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('auth');

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from './modal';
 
+axios.defaults.withCredentials = true;
 interface propsType {
   loginModal: boolean;
   setLoginModal: Function;
@@ -46,14 +47,10 @@ export default function Login(prop: propsType) {
       setLoginMessage('아이디와 비밀번호를 모두 입력해주세요.');
     } else {
       axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`,
-          {
-            user_id: userId,
-            password: password,
-          },
-          { withCredentials: true },
-        )
+        .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+          user_id: userId,
+          password: password,
+        })
         .then((response) => {
           const { auth } = response.data.data;
           const { accessToken } = response.data.data;

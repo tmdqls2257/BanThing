@@ -1,6 +1,7 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import styles from '../../styles/main/Rate.module.css';
+import styles from '../../../styles/main/Rate.module.css';
+import buttonStyle from '../button.module.css';
 
 const Container = styled.div`
   display: none;
@@ -47,29 +48,30 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
-      const kakaoToken = document.cookie.split('=')[1];
-      if (auth === 'banthing') {
-        const headers = {
-          Authorization: `Bearer ${accessToken}`,
-        };
-        axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-          {
-            headers,
-            withCredentials: true,
-          },
-        );
-      } else {
-        const headers = {
-          Authorization: `Bearer ${kakaoToken}`,
-        };
-        axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
-          {
-            headers,
-            withCredentials: true,
-          },
-        );
+      const innerCookie = document.cookie.split(';')[1];
+      const kakaoToken = innerCookie.split('=')[1];
+      if (accessToken || kakaoToken) {
+        if (auth === 'banthing') {
+          const headers = {
+            Authorization: `Bearer ${accessToken}`,
+          };
+          axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+            {
+              headers,
+            },
+          );
+        } else {
+          const headers = {
+            Authorization: `Bearer ${kakaoToken}`,
+          };
+          axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
+            {
+              headers,
+            },
+          );
+        }
       }
     }
   };
@@ -80,7 +82,11 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
           <section className={styles.rate_title}>
             <h1>정말 삭제하시겠습니까?</h1>
           </section>
-          <button onClick={onClick}>삭제하기</button>
+          <section className={buttonStyle.button_container}>
+            <button className={buttonStyle.button} onClick={onClick}>
+              참여하기
+            </button>
+          </section>
         </form>
       </Container>
     </>

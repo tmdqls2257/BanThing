@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import styles from '../styles/main/main.module.css';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -12,17 +11,7 @@ declare global {
     kakao: any;
   }
 }
-const Container = styled.div`
-  padding-top: 4.6vw;
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-  height: 100vh;
-`;
-const InsideContainer = styled.div`
-  overflow-y: auto;
-  display: flex;
-`;
+
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);

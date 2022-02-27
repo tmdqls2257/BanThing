@@ -4,6 +4,7 @@
   width: 30vw;
   min-width: 400px;
   min-height: 715px;
+  animation: fade 1s ease-in-out;
   height: auto;
 }
 .image {
@@ -56,5 +57,13 @@
 @media screen and (max-width: 768px) {
   .JoinRoom {
     width: 100vw;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

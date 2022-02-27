@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.second_container {
+  width: 100vw;
+  min-height: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.second_title_container {
+  display: flex;
+  width: 65vw;
+  min-height: 10vw;
+  margin-top: 4vw;
+  justify-content: center;
+  background-color: #ff8a3c;
+  align-items: center;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  background: #ff8a3c;
+  -webkit-box-shadow: 8px 8px 0px #ff8a3c, -8px -8px 0px #eaf2ff;
+  box-shadow: 10px 10px 0px #cc6e2f, -10px -10px 0px #ffac75;
+}
+
+.second_title {
+  display: flex;
+  width: 100vw;
+  color: #ffffff;
+  font-size: 4vw;
+  font-weight: 500;
+  justify-content: center;
+  font-family: 'BMDOHYEON', sans-serif;
+}
+
+.second_image {
+  display: flex;
+  width: 50vw;
+  margin-bottom: 4vw;
+}
+
+.second_description_container {
+  position: absolute;
+  width: 100vw;
+  min-height: 50vw;
+  font-size: 1.4vw;
+  font-family: 'GangwonEdu_OTFBoldA', sans-serif;
+}
+
+.second_description1 {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 14vw;
+  margin-left: 12vw;
+}
+
+.second_description2 {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: -1vw;
+  margin-left: 48vw;
+}
+
+.second_description3 {
+  position: absolute;
+  margin-top: 9vw;
+  margin-left: 75vw;
+}
+
+.second_description4 {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 24vw;
+  margin-left: 60vw;
+}
+
+.second_description_second_line {
+  padding-top: 0.5vw;
+  padding-left: 6vw;
+}
