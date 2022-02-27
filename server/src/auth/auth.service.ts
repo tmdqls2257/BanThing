@@ -63,8 +63,8 @@ export class AuthService {
   }
 
   //회원탈퇴
-  //! any 존재
-  async signOut(user: any, res: Response, req: Request): Promise<object> {
+
+  async signOut(user: any, res: Response): Promise<object> {
     const list = await this.postRepository.find({ host_user_id: user.user_id });
 
     if (list) {
@@ -103,8 +103,8 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     };
     await axios.post(_url, {}, { headers: _header });
-    res.cookie('inner', '', { maxAge: 1 });
 
+    res.cookie('inner', '', { maxAge: 1 });
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '회원탈퇴 완료' });
@@ -170,12 +170,14 @@ export class AuthService {
       };
       this.userService.snsSave(snsSignUp);
     }
-    res.cookie('accessToken', data.data['access_token']);
-    return res.cookie('inner', 'true').redirect('http://localhost:3000');
+    res.cookie('inner', 'true');
+    return res
+      .cookie('accessToken', data.data['access_token'])
+      .redirect('http://localhost:3000');
   }
 
   //로그아웃
-  async logOut(res: Response, user: any, req: Request): Promise<object> {
+  async logOut(res: Response): Promise<object> {
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '로그아웃' });
@@ -197,6 +199,32 @@ export class AuthService {
   async tokenValidateUser(payload: Payload): Promise<UserInfoDTO> {
     return await this.userService.findByFields({
       where: { id: payload.id },
+    });
+  }
+
+  //더미 로그인
+  async dummyLogin(loginDTO: LoginDTO, res: Response): Promise<object> {
+    const userFind: Users = await this.userService.findByFields({
+      where: { user_id: loginDTO.user_id },
+    });
+    if (!userFind) {
+      throw new UnauthorizedException('잘못된 인증 정보 입니다!');
+    }
+
+    //비밀번호 복호화 및 검증
+    const validatePassword = await bcrypt.compare(
+      loginDTO.password,
+      userFind.password,
+    );
+    if (!validatePassword) {
+      throw new UnauthorizedException('잘못된 인증 정보 입니다!');
+    }
+    const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
+    const token = this.jwtService.sign(payload);
+
+    return res.send({
+      data: { accessToken: token, auth: userFind.auth },
+      message: '로그인 완료',
     });
   }
 }
