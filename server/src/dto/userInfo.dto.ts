@@ -4,6 +4,4 @@ export class UserInfoDTO {
   nickname: string;
   user_image: string;
   auth: string;
-  rating_score: number;
-  rating_count: number;
 }

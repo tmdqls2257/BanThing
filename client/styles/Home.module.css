@@ -20,40 +20,22 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic-Bold';
+  src: url('../asset/NanumGothic/NanumGothic-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .home_container {
   padding: 0;
-}
-
-.main {
-  min-height: 55vw;
-  display: flex;
-  width: 40vw;
-  margin: 0 4.6% 0 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.title_container {
-  width: 95vw;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-}
-
-.title_image {
-  display: flex;
-  width: 48vw;
-  box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
-  margin-right: 5vw;
-}
-
-.title_title {
-  font-size: 6vw;
-  font-weight: 600;
-  font-family: 'BMDOHYEON', sans-serif;
 }
 
 .orange {
@@ -64,155 +46,110 @@
   color: #000000;
 }
 
-.title_description {
-  line-height: 1.4;
-  width: 35vw;
-  margin: 1.5vw auto 3vw auto;
-  font-size: 2vw;
-  font-weight: 400;
-  text-align: center;
-  font-family: 'BMDOHYEON', sans-serif;
-}
-
-.title_button {
-  padding-top: 0.3vw;
-  width: 12vw;
-  height: 5vw;
-  color: #ffffff;
-  font-size: 2vw;
-  font-weight: 700;
-  border-radius: 12px;
-  background-color: #ff8a3c;
-  border: solid;
-  border-width: 5px;
-  border-color: #ff8a3c;
-  transition: 0.3s ease;
-}
-
-.title_button_description {
-  font-family: 'BMDOHYEON', sans-serif;
-}
-
-.title_button:hover {
-  color: white;
-  background-color: #ff8a3c;
-  border-width: 5px;
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-
-.title_button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.3s;
-}
-
-.title_button span:after {
-  content: '\00bb';
-  position: absolute;
-  color: white;
-  font-size: 2.4vw;
-  opacity: 0;
-  top: -0.45vw;
-  left: 7.4vw;
-  transition: 0.3s ease;
-}
-
-.title_button:hover span {
-  padding-right: 1vw;
-}
-
-.title_button:hover span:after {
-  color: white;
-  opacity: 1;
-  right: 0;
-  transition: 0.3s ease;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
 /* --------------------introduction.tsx CSS-------------------- */
 
-.introduction_main_right {
-  min-height: 55vw;
-  display: flex;
-  width: 40vw;
-  margin: 0 8% 0 0;
-  flex-direction: column;
-  justify-content: center;
-  font-family: 'BMDOHYEON', sans-serif;
-}
-
-.introduction_main_left {
-  min-height: 55vw;
-  display: flex;
-  width: 40vw;
-  margin: 0 0 0 8%;
-  flex-direction: column;
-  justify-content: center;
-  font-family: 'BMDOHYEON', sans-serif;
-}
-
 .introduction_container_right {
-  width: 95vw;
+  width: 100vw;
+  min-height: 60vw;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-end;
-  margin: auto;
+  /* background-color: gray; */
 }
 
 .introduction_container_left {
-  width: 95vw;
+  width: 100vw;
+  min-height: 60vw;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  margin: auto;
+  /* background-color: rgb(46, 46, 46); */
+}
+
+.introduction_main_right {
+  display: flex;
+  width: 36vw;
+  margin-left: 5vw;
+  min-height: 35vw;
+  flex-direction: column;
+  background-color: #ff8a3c;
+  border-radius: 30px;
+  align-items: center;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.introduction_main_left {
+  display: flex;
+  width: 36vw;
+  margin-right: 5vw;
+  min-height: 35vw;
+  flex-direction: column;
+  background-color: #ff8a3c;
+  border-radius: 30px;
+  align-items: center;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.introduction_main_number {
+  color: white;
+  font-size: 1.7vw;
+  font-family: 'BMDOHYEON', sans-serif;
+  font-weight: 900;
+  margin-top: 5.5vw;
+  margin-bottom: 2vw;
 }
 
 .introduction_title_right {
   display: flex;
-  width: 40vw;
-  margin-left: -0.3vw;
+  color: #ffffff;
   font-size: 3.1vw;
   font-weight: 500;
   justify-content: flex-end;
+  font-family: 'BMDOHYEON', sans-serif;
 }
 
 .introduction_title_left {
   display: flex;
-  width: 40vw;
   font-size: 3.1vw;
   font-weight: 500;
+  color: #ffffff;
   justify-content: flex-start;
+  font-family: 'BMDOHYEON', sans-serif;
+}
+
+.introduction_main_line {
+  color: #ffffff;
+  font-family: 'NanumGothic-Bold', sans-serif;
+  font-size: 1.1vw;
+  margin-top: 1.9vw;
+  margin-bottom: 1.9vw;
 }
 
 .introduction_image {
   display: flex;
-  width: 40vw;
+  width: 50vw;
 }
 
 .introduction_description_right {
   line-height: 1.5;
-  width: 39.5vw;
-  margin: 3vw 0 0 0;
-  font-size: 1.8vw;
+  font-size: 1.4vw;
   text-align: end;
+  font-family: 'NanumGothic', sans-serif;
+  font-weight: 700;
+  color: white;
 }
 
 .introduction_description_left {
   line-height: 1.5;
-  width: 39.5vw;
-  margin: 3vw 0 0 0;
-  font-size: 1.8vw;
+  font-size: 1.4vw;
   text-align: start;
+  font-family: 'NanumGothic', sans-serif;
+  font-weight: 700;
+  color: white;
 }
 
 .introduction_space {
@@ -227,10 +164,11 @@
 .header {
   display: flex;
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 4.6vw;
   text-align: center;
-  padding: 0 2.2% 0 0.5%;
+  align-items: center;
+  padding: 0 2.3vw 0 1.3vw;
   background-color: #fafafa;
   opacity: 0.9;
   z-index: 2;
@@ -238,18 +176,16 @@
 
 .logo {
   display: flex;
-  height: 4.4vw;
-  width: 100%;
+  height: 3.7vw;
+  width: 50%;
   justify-content: flex-start;
-  padding: 0.4% 0 0.2% 0.7%;
 }
 
 .nav {
   display: flex;
-  width: 100%;
+  width: 50%;
   list-style-type: none;
   justify-content: flex-end;
-  padding-top: 1.2vw;
   font-size: 1.4vw;
   color: rgb(0 0 0 / 80%);
   font-family: 'Poppins', sans-serif;
@@ -277,7 +213,7 @@
 .nav_user_image_container {
   display: flex;
   align-items: center;
-  margin-left: 2vw;
+  margin-left: 2.4vw;
 }
 
 .nav_user_image {
@@ -308,20 +244,6 @@
   opacity: 0.9;
 }
 
-/* ------------------------------------------------------------ */
-
-/* ------------------------text.tsx CSS------------------------ */
-.text_container {
-  display: flex;
-  min-height: 40vw;
-  color: #ff8a3c;
-  font-size: 4vw;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.7;
-  font-family: 'BMDOHYEON', sans-serif;
-}
 /* ------------------------------------------------------------ */
 
 /* -----------------------caption.tsx CSS---------------------- */
@@ -383,7 +305,8 @@
 }
 
 .member_name {
-  font-size: 1.3vw;
+  font-size: 1.1vw;
+  font-family: 'NanumGothic', sans-serif;
 }
 
 .member_position {

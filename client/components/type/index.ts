@@ -1,8 +1,14 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface BasicButtonProp {
   children: string;
   containerName: string;
   rateNum?: number;
-  onClick?: string[];
+  onClick?: (string | number)[];
+  setChats?: any;
+  roomId?: number;
+  setMakeRoomId?: any;
+  removeRoomId?: number;
 }
 
 export interface RateButtonProp {

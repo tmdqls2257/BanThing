@@ -3,6 +3,8 @@ import styles from '../styles/Home.module.css';
 import Login from './login';
 import React, { useState } from 'react';
 import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 interface propsType {
   isLogin: boolean;
   setIsLogin: Function;
@@ -18,23 +20,47 @@ export default function Header(prop: propsType) {
   };
 
   const handleLogout = () => {
-    prop.setIsLogin(false);
-    prop.setAccessToken('');
-    console.log(prop.accessToken);
-    axios.post(
-      `http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${prop.accessToken}`,
-        },
-      },
-    );
-    //   .then((response) => {
-    //     console.log(response);
-    //     prop.setIsLogin(false);
-    //     prop.setAccessToken('');
-    //   });
+    if (typeof localStorage !== 'undefined') {
+      const auth = localStorage.getItem('auth'); //'banthing'
+      if (auth === 'banthing') {
+        const accessToken: any = localStorage.getItem('accessToken');
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('auth');
+            prop.setAccessToken('');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
+            {},
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('auth');
+            prop.setAccessToken('');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
   };
 
   return (
@@ -56,9 +82,11 @@ export default function Header(prop: propsType) {
               <a className={styles.nav_menu}>MAIN</a>
             </Link>
             <span className={styles.nav_divide}>|</span>
-            <a className={styles.nav_menu} onClick={handleLogout}>
-              LOGOUT
-            </a>
+            <Link href="/">
+              <a className={styles.nav_menu} onClick={handleLogout}>
+                LOGOUT
+              </a>
+            </Link>
           </nav>
           <div className={styles.nav_user_image_container}>
             <Link href="/mypage">

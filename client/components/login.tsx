@@ -1,8 +1,11 @@
 import styles from '../styles/Login.module.css';
 import SignUp from './signup';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ChangeEvent } from 'react';
+import Modal from './modal';
+
+axios.defaults.withCredentials = true;
 interface propsType {
   loginModal: boolean;
   setLoginModal: Function;
@@ -11,9 +14,15 @@ interface propsType {
 }
 
 export default function Login(prop: propsType) {
+  const router = useRouter();
+
   const [signUpModal, setSignUpModal] = useState(false);
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
+
+  const [loginMessage, setLoginMessage] = useState('');
+
+  const [kakaoModal, setKakaoModal] = useState(false);
 
   const openSignUpModal = () => {
     setSignUpModal(true);
@@ -27,21 +36,60 @@ export default function Login(prop: propsType) {
     setPassword(event.target.value);
   };
 
+  const handleLoginByKey = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   const handleLogin = () => {
-    axios
-      .post(`http://${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
-        user_id: userId,
-        password: password,
-      })
-      .then((response) => {
-        const { accessToken } = response.data.data;
-        localStorage.setItem('accessToken', accessToken);
-        console.log(accessToken);
-        prop.setAccessToken(accessToken);
-        prop.setIsLogin(true);
-        prop.setLoginModal(false);
-      })
-      .catch((error) => console.log(error));
+    if (userId === '' || password === '') {
+      setLoginMessage('아이디와 비밀번호를 모두 입력해주세요.');
+    } else {
+      axios
+        .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+          user_id: userId,
+          password: password,
+        })
+        .then((response) => {
+          const { auth } = response.data.data;
+          const { accessToken } = response.data.data;
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('auth', auth); //'banthing'
+          prop.setIsLogin(true);
+          prop.setLoginModal(false);
+        })
+        .catch((error) => {
+          if (error)
+            setLoginMessage('아이디 또는 비밀번호가 일치하지 않습니다.');
+        });
+    }
+  };
+
+  const handleKakaoModal = () => {
+    let inner;
+    const cookie = document.cookie;
+    if (cookie.includes('inner')) {
+      if (cookie.includes(';')) {
+        const cookieList = cookie.split(';');
+        const findInner = cookieList.filter((cookie: any) => {
+          return cookie.includes('inner');
+        });
+        inner = findInner[0].split('=')[1];
+      } else {
+        inner = cookie.split('=')[1];
+      }
+    } else {
+      inner = '';
+    }
+    if (inner === 'true') {
+      router.push(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
+      );
+      localStorage.setItem('auth', '');
+    } else {
+      setKakaoModal(true);
+    }
   };
 
   return (
@@ -61,16 +109,16 @@ export default function Login(prop: propsType) {
             className={styles.login_input_box}
             placeholder="아이디"
             onChange={handleUserId}
+            onKeyUp={handleLoginByKey}
           ></input>
           <input
             className={styles.login_input_box}
             type="password"
             placeholder="비밀번호"
             onChange={handlePassword}
+            onKeyUp={handleLoginByKey}
           ></input>
-          <span className={styles.login_error}>
-            아이디 또는 비밀번호가 일치하지 않습니다.
-          </span>
+          <span className={styles.login_error}>{loginMessage}</span>
           <button className={styles.login_button} onClick={handleLogin}>
             <img
               src="/login.png"
@@ -80,7 +128,10 @@ export default function Login(prop: propsType) {
             <span>로그인</span>
           </button>
 
-          <button className={styles.login_kakao_button}>
+          <button
+            className={styles.login_kakao_button}
+            onClick={handleKakaoModal}
+          >
             <div>
               <img
                 src="/kakao.png"
@@ -104,8 +155,18 @@ export default function Login(prop: propsType) {
 
         {signUpModal ? (
           <>
-            <SignUp signUpModal={signUpModal} setSignUpModal={setSignUpModal} />
+            <SignUp
+              signUpModal={signUpModal}
+              setSignUpModal={setSignUpModal}
+              setIsLogin={prop.setIsLogin}
+            />
           </>
+        ) : (
+          <></>
+        )}
+
+        {kakaoModal ? (
+          <Modal setIsModalOpen={setKakaoModal} type={'kakao_login'} />
         ) : (
           <></>
         )}

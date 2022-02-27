@@ -6,6 +6,9 @@ import {
   UseGuards,
   Delete,
   Req,
+  Get,
+  Query,
+  Header,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { AuthService } from './auth.service';
@@ -13,6 +16,7 @@ import { LoginDTO } from '../dto/login.dto';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { AuthGuard } from '../token/auth.guard';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
+import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
 
 @Controller('users')
 export class AuthController {
@@ -35,21 +39,44 @@ export class AuthController {
 
   @Delete('/signout') //회원탈퇴
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async signOut(@Req() req: Request): Promise<object> {
-    return await this.authService.signOut(req.user);
+  async signOut(@Req() req: Request, @Res() res: Response): Promise<object> {
+    return await this.authService.signOut(req.user, res, req);
+  }
+
+  @Delete('kakaoUnlink') //카카오 회원탈퇴
+  async kakaoUnlink(@Req() req: Request, @Res() res: Response) {
+    const token = req.cookies['accessToken'];
+    return this.authService.kakaoUnlink(token, res);
   }
 
   @Post('/login') //로그인
-  async logIn(
-    @Res() res: Response,
-    @Body() loginDTO: LoginDTO,
-  ): Promise<object> {
+  async logIn(@Res() res: Response, @Body() loginDTO: LoginDTO) {
     return await this.authService.logIn(loginDTO, res);
+  }
+
+  @Get('kakaoLogin') //카카오 로그인
+  kakaoLogin(@Res() res: Response) {
+    const _hostName = 'https://kauth.kakao.com';
+    const _restApiKey = process.env.KAKAO_ID;
+    const _redirectUrl = `http://localhost:${process.env.SERVER_PORT}/users/kakaoLoginRedirect`;
+    const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
+    return res.redirect(url);
+  }
+
+  @Get('kakaoLoginRedirect') //카카오 로그인
+  kakaoLoginRedirect(@Query() qs, @Res() res: Response) {
+    return this.authService.kakaoLogin(qs.code, res);
   }
 
   @Post('/logout') //로그아웃
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  async logOut(@Res() res: Response): Promise<object> {
-    return await this.authService.logOut(res);
+  logOut(@Res() res: Response, @Req() req: Request): Promise<object> {
+    return this.authService.logOut(res, req.user, req);
+  }
+
+  @Get('kakaoLogOut') //카카오 로그아웃
+  kakaoLogOut(@Res() res: Response, @Req() req: Request) {
+    const token = req.cookies['accessToken'];
+    return this.authService.kakaoLogOut(res, token);
   }
 }

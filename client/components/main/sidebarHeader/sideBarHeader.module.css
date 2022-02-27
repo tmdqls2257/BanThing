@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 50px;
+  background-color: #ff8a3d;
+  color: white;
+}
+.container_button {
+  font-size: 30px;
+  font-weight: 300;
+  height: 100%;
+  width: 60px;
+  size: var(--font-size-base);
+  border: none;
+  position: absolute;
+  left: 0;
+  transition: 0.2s;
+}
+
+.container_button:hover {
+  cursor: pointer;
+}
+.container_container {
+  display: flex;
+  text-align: center;
+}
+
+.container_container_h1 {
+  margin: auto;
+}

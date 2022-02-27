@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Title from '../components/home/title';
+import First from '../components/home/first/first';
 import Progress from '../components/home/progress';
+import Second from '../components/home/second/second';
 import Introduction from '../components/home/introduction';
-import Text from '../components/home/text';
+import Third from '../components/home/third/third';
 import Caption from '../components/home/caption';
 import Footer from '../components/home/footer';
 import styles from '../styles/Home.module.css';
@@ -28,24 +29,14 @@ const Home: NextPage = () => {
 
         <Progress />
 
-        <Title />
+        <First />
+
+        <Second />
+
+        <Third />
 
         <Introduction
           imagePosition={'left'}
-          image={'/worry.png'}
-          title={'망설여지는 배달음식'}
-          description={[
-            '1인분을 시키자니 최저금액을 맞춰야하고,',
-            '최저금액만 맞췄더니 배달비가 너무 비싸고,',
-            '2인분을 시키자니 양이 너무 많아서',
-            '배달음식을 시켜먹기가 망설여지신다구요?',
-          ]}
-        />
-
-        <Text />
-
-        <Introduction
-          imagePosition={'right'}
           image={'/foodmate.png'}
           title={'내 주변의 배달메이트'}
           description={[
@@ -56,10 +47,11 @@ const Home: NextPage = () => {
             '지금 바로 반띵에서 확인해보세요!',
           ]}
         />
+
         <Introduction
-          imagePosition={'left'}
+          imagePosition={'right'}
           image={'/chatting.png'}
-          title={'실시간 메뉴선정'}
+          title={'댓글을 통한 메뉴선정'}
           description={[
             '어떤 햄버거를 먹을지, 어떤 치킨을 먹을지',
             '배달메이트와 실시간으로 상의하여',
@@ -68,7 +60,7 @@ const Home: NextPage = () => {
             '마음이 잘 통한다면 주문하기만 하면 됩니다!',
           ]}
         />
-        <Introduction
+        {/* <Introduction
           imagePosition={'right'}
           image={'/rating.png'}
           title={'레이팅 시스템'}
@@ -79,7 +71,7 @@ const Home: NextPage = () => {
             '해당 점수는 배달메이트의 평점에 반영되며,',
             '평점은 다른 이용자들에게 노출됩니다.',
           ]}
-        />
+        /> */}
 
         <Caption />
 
