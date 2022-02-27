@@ -113,7 +113,7 @@ export class AuthService {
       .cookie('accessToken', token, {
         sameSite: 'none',
         secure: true,
-        maxAge: 24 * 60 * 60 * 100,
+        maxAge: 24 * 60 * 60 * 100, //! expires, maxAge가 명시되어야 쿠키가 창을 닫아도 유지됨
         domain: '.banthing.kr',
         httpOnly: true,
       })
