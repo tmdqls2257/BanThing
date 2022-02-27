@@ -112,6 +112,10 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
               setMakeRoomId(res.data.data.post_id);
             });
         }
+        setSelect('');
+        setTitle('');
+        setTextarea('');
+        setRadio('');
       }
     }
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
@@ -144,6 +148,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
           <input
             type="text"
             onChange={inputChange}
+            value={title}
             className={styles.section_flex_input}
           />
         </section>
@@ -152,6 +157,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
           <select
             id="choise-foods"
             onChange={selectChange}
+            value={select}
             className={styles.section_flex_select}
           >
             <option value=""></option>
@@ -172,6 +178,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             id="choise-foods"
             className={styles.host_roll_select}
             onChange={(event) => radioChange(event)}
+            value={radio}
           >
             <option value=""></option>
             <option value="1">받는 사람</option>
@@ -183,6 +190,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
           <textarea
             className={styles.content_textarea}
             onChange={textareaChange}
+            value={textarea}
           />
         </section>
       </main>

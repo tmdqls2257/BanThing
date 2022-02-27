@@ -37,6 +37,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
   };
+
   const onClick = () => {
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
@@ -75,20 +76,34 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       }
     }
   };
+  const backClick = () => {
+    const removeModal = document.querySelector('#removeModal')! as HTMLElement;
+
+    removeModal.style.display = 'none';
+  };
   return (
     <>
-      <Container id="removeModal">
+      <section className={styles.removeModal__section} id="removeModal">
         <form className={styles.rate_modal} onSubmit={onSubmit}>
           <section className={styles.rate_title}>
             <h1>정말 삭제하시겠습니까?</h1>
           </section>
-          <section className={buttonStyle.button_container}>
-            <button className={buttonStyle.button} onClick={onClick}>
-              참여하기
+          <section className={buttonStyle.button_removeModal_container}>
+            <button
+              className={buttonStyle.button_removeModal}
+              onClick={onClick}
+            >
+              삭제하기
+            </button>
+            <button
+              className={buttonStyle.button_removeModal}
+              onClick={backClick}
+            >
+              뒤로가기
             </button>
           </section>
         </form>
-      </Container>
+      </section>
     </>
   );
 }

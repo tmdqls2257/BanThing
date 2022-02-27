@@ -31,6 +31,7 @@
 .rate_title {
   display: flex;
   flex-direction: column;
+  font-size: var(--font-size-large);
   margin: 0 auto;
 }
 .rate_p {
@@ -41,6 +42,26 @@
 }
 .rate_h1 {
   background-color: none;
-  font-size: 1.5em;
+  font-size: var(--font-size-base);
   color: black;
+}
+.removeModal__section {
+  display: none;
+  width: 100vw;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+}
+.makeRoomModal__section {
+  display: flex;
+  width: 100vw;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  backdrop-filter: blur(2px);
 }
