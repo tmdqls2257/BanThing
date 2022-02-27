@@ -55,50 +55,49 @@ const ChatRoom = ({
 }: roomsIdTitleType) => {
   const [usernickname, setNickname] = useState('');
 
-  useEffect(() => {
-    console.log(1);
-    console.log(typeof window);
-    console.log(localStorage.getItem('accessToken'));
+  // useEffect(() => {
+  //   console.log(1);
+  //   console.log(typeof window);
+  //   console.log(localStorage.getItem('accessToken'));
+  //   if (typeof window !== 'undefined' && window.localStorage) {
+  //     const auth = localStorage.getItem('auth');
 
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const auth = localStorage.getItem('auth');
+  //     if (localStorage.getItem('accessToken')) {
+  //       const accessToken = localStorage.getItem('accessToken');
+  //       // const cookie = document.cookie.split(';')[1];
+  //       const kakaoToken = document.cookie.split('=')[1];
 
-      if (localStorage.getItem('accessToken')) {
-        const accessToken = localStorage.getItem('accessToken');
-        const cookie = document.cookie.split(';')[1];
-        const kakaoToken = cookie.split('=')[1];
+  //       if (auth === 'banthing') {
+  //         axios
+  //           .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+  //             headers: {
+  //               Authorization: `Bearer ${accessToken}`,
+  //               'Content-Type': 'application/json',
+  //             },
+  //             withCredentials: true,
+  //           })
+  //           .then((response) => {
+  //             const { userInfo } = response.data.data;
+  //             setNickname(userInfo.nickname);
+  //           });
+  //       } else {
+  //         axios
+  //           .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
+  //             headers: {
+  //               Authorization: `Bearer ${kakaoToken}`,
+  //               'Content-Type': 'application/json',
+  //             },
+  //             withCredentials: true,
+  //           })
+  //           .then((response) => {
+  //             const { userInfo } = response.data.data;
 
-        if (auth === 'banthing') {
-          axios
-            .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-              withCredentials: true,
-            })
-            .then((response) => {
-              const { userInfo } = response.data.data;
-              setNickname(userInfo.nickname);
-            });
-        } else {
-          axios
-            .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
-              headers: {
-                Authorization: `Bearer ${kakaoToken}`,
-                'Content-Type': 'application/json',
-              },
-              withCredentials: true,
-            })
-            .then((response) => {
-              const { userInfo } = response.data.data;
-
-              setNickname(userInfo.nickname);
-            });
-        }
-      }
-    }
-  }, []);
+  //             setNickname(userInfo.nickname);
+  //           });
+  //       }
+  //     }
+  //   }
+  // }, []);
 
   const onClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;

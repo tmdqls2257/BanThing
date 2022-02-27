@@ -56,11 +56,12 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
 
   const axiosPost = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
-      const auth = localStorage.getItem('auth');
       if (localStorage.getItem('accessToken')) {
+        const auth = localStorage.getItem('auth');
         const accessToken = localStorage.getItem('accessToken');
         const cookie = document.cookie.split(';')[1];
         const kakaoToken = cookie.split('=')[1];
+        console.log(accessToken);
 
         if (auth === 'banthing') {
           const headers = {

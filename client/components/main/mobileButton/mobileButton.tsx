@@ -28,10 +28,11 @@ const MobileButton = () => {
       '#sidebarContainer',
     )! as HTMLElement;
     if (mobile === 'down') {
-      sidebarContainer.style.top = '90vh';
+      sidebarContainer.style.animation = 'downSlide 1s ease-in-out forwards';
       setMobile('up');
     } else if (mobile === 'up') {
-      sidebarContainer.style.top = '10vh';
+      sidebarContainer.style.animation = 'upSlide 1s ease-in-out forwards';
+
       setMobile('down');
     }
   };
