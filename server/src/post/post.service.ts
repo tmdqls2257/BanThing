@@ -4,8 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from './post.repository';
 import { ReplyDTO } from 'src/dto/reply.dto';
 import { ReplyLogRepository } from './reply.repository';
-import { EvaluationDTO } from 'src/dto/evaluation.dto';
-import { getConnection } from 'typeorm';
 import { Users } from 'src/entity/users.entity';
 import { UserService } from 'src/auth/user.service';
 import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
@@ -102,40 +100,6 @@ export class PostService {
     }
     return { data: null, message: '글 삭제 완료' };
   }
-
-  //평가하기
-  // async evaluation(evaluationDTO: EvaluationDTO, user: any): Promise<object> {
-  //   //점수 반영
-  //   await this.userService
-  //     .findByFields({
-  //       where: { nickname: evaluationDTO.nickname },
-  //     })
-  //     .then((user) => {
-  //       getConnection()
-  //         .createQueryBuilder()
-  //         .update(Users)
-  //         .set({
-  //           rating_score: user.rating_score + evaluationDTO.rating_score,
-  //           rating_count: user.rating_count + 1,
-  //         })
-  //         .where(`nickname = '${evaluationDTO.nickname}'`)
-  //         .execute();
-  //     });
-
-  //   // 방 삭제, 채팅로그 삭제 (Case by host)
-  //   const id = evaluationDTO.rooms_id;
-  //   const room = await this.roomRepository.findOne(id);
-  //   if (room.host_user_id === user.user_id) {
-  //     //방 삭제
-  //     await this.roomRepository.delete({ id });
-
-  //     //채팅로그 삭제
-  //     const rooms_id = id;
-  //     await this.chatLogRepository.delete({ rooms_id });
-  //   }
-
-  //   return { data: null, message: '평가 완료' };
-  // }
 
   //토큰 유효성검사(카카오)
   async getInfoKakao(token: KakaoTokenDTO) {

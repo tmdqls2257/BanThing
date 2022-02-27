@@ -63,8 +63,8 @@ export class AuthService {
   }
 
   //회원탈퇴
-  //! any 존재
-  async signOut(user: any, res: Response, req: Request): Promise<object> {
+
+  async signOut(user: any, res: Response): Promise<object> {
     const list = await this.postRepository.find({ host_user_id: user.user_id });
 
     if (list) {
@@ -177,7 +177,7 @@ export class AuthService {
   }
 
   //로그아웃
-  async logOut(res: Response, user: any, req: Request): Promise<object> {
+  async logOut(res: Response): Promise<object> {
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '로그아웃' });
