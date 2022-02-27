@@ -212,7 +212,7 @@ const JoinRoom = ({
     joinRoom.style.display = 'none';
     chatRoom.style.display = 'flex';
   };
-  console.log(data);
+
   const rendering = () => {
     if (data) {
       const { category } = data.data.post;
@@ -222,6 +222,18 @@ const JoinRoom = ({
         return <img src="/image/chicken.png" alt="" />;
       } else if (category === '햄버거') {
         return <img src="/image/hamburger.png" alt="" />;
+      } else if (category === '한식') {
+        return <img src="/image/rice.png" alt="" />;
+      } else if (category === '자장면') {
+        return <img src="/image/chNoodles.png" alt="" />;
+      } else if (category === '커피*디저트') {
+        return <img src="/image/coffee.png" alt="" />;
+      } else if (category === '도시락') {
+        return <img src="/image/lunchBox.png" alt="" />;
+      } else if (category === '일식') {
+        return <img src="/image/sushi.png" alt="" />;
+      } else if (category === '분식') {
+        return <img src="/image/tteokbokki.png" alt="" />;
       }
     }
   };

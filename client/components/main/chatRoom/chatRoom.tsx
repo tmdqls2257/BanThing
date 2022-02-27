@@ -78,8 +78,13 @@ const ChatRoom = ({
   const [usernickname, setNickname] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
+    console.log(1);
+    console.log(typeof window);
+    console.log(localStorage.getItem('accessToken'));
+
+    if (typeof window !== 'undefined' && window.localStorage) {
       const auth = localStorage.getItem('auth');
+      console.log(1);
 
       const accessToken = localStorage.getItem('accessToken');
       const cookie = document.cookie.split(';')[1];
@@ -110,6 +115,7 @@ const ChatRoom = ({
             })
             .then((response) => {
               const { userInfo } = response.data.data;
+
               setNickname(userInfo.nickname);
             });
         }
@@ -159,6 +165,7 @@ const ChatRoom = ({
             addable={true}
           ></Chats>
         </main>
+        <ButtonContainer></ButtonContainer>
       </Container>
     </>
   );

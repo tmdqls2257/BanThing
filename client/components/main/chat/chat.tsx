@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -58,14 +59,11 @@ export interface chatType {
   owner: boolean;
   nickname: string;
   time: string;
-  userchat: string[];
 }
 
-const chat = ({ nickname, owner, chats, time, userchat }: chatType) => {
+const chat = ({ nickname, owner, chats, time }: chatType) => {
   const clock = new Date(Date.parse(time));
-
   let minute = String(clock.getMinutes());
-
   let hour = String(clock.getHours());
 
   if (clock.getMinutes() < 10) {

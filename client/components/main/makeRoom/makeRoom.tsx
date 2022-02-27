@@ -261,6 +261,12 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
             <option value="치킨">치킨</option>
             <option value="햄버거">햄버거</option>
             <option value="피자">피자</option>
+            <option value="자장면">자장면</option>
+            <option value="커피*디저트">커피*디저트</option>
+            <option value="도시락">도시락</option>
+            <option value="한식">한식</option>
+            <option value="일식">일식</option>
+            <option value="분식">분식</option>
           </select>
         </section>
         <section className="MakeRoom-main-section-radio">
