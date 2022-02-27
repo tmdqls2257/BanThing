@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { Payload } from '../token/payload';
 import { Users } from '../entity/users.entity';
 import { JwtService } from '@nestjs/jwt';
-import { Response, Request } from 'express';
+import { Response } from 'express';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { UserInfoDTO } from 'src/dto/userInfo.dto';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
@@ -63,7 +63,6 @@ export class AuthService {
   }
 
   //회원탈퇴
-  //! any 존재
   async signOut(user: any, res: Response): Promise<object> {
     const list = await this.postRepository.find({ host_user_id: user.user_id });
 
@@ -104,6 +103,7 @@ export class AuthService {
     };
     await axios.post(_url, {}, { headers: _header });
 
+    res.cookie('inner', '', { maxAge: 1 });
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '회원탈퇴 완료' });

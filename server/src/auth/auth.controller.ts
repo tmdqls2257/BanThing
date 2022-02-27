@@ -8,7 +8,6 @@ import {
   Req,
   Get,
   Query,
-  Header,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { AuthService } from './auth.service';
@@ -16,7 +15,6 @@ import { LoginDTO } from '../dto/login.dto';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { AuthGuard } from '../token/auth.guard';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
-import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
 
 @Controller('users')
 export class AuthController {
@@ -40,7 +38,7 @@ export class AuthController {
   @Delete('/signout') //회원탈퇴
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
   async signOut(@Req() req: Request, @Res() res: Response): Promise<object> {
-    return await this.authService.signOut(req.user, res, req);
+    return await this.authService.signOut(req.user, res);
   }
 
   @Delete('kakaoUnlink') //카카오 회원탈퇴
@@ -71,7 +69,7 @@ export class AuthController {
   @Post('/logout') //로그아웃
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
   logOut(@Res() res: Response, @Req() req: Request): Promise<object> {
-    return this.authService.logOut(res, req.user, req);
+    return this.authService.logOut(res);
   }
 
   @Get('kakaoLogOut') //카카오 로그아웃

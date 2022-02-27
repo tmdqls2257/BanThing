@@ -1,7 +1,7 @@
 import styles from '../styles/Login.module.css';
 import SignUp from './signup';
-import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from './modal';
 
@@ -71,7 +71,29 @@ export default function Login(prop: propsType) {
   };
 
   const handleKakaoModal = () => {
-    setKakaoModal(true);
+    let inner;
+    const cookie = document.cookie;
+    if (cookie.includes('inner')) {
+      if (cookie.includes(';')) {
+        const cookieList = cookie.split(';');
+        const findInner = cookieList.filter((cookie: any) => {
+          return cookie.includes('inner');
+        });
+        inner = findInner[0].split('=')[1];
+      } else {
+        inner = cookie.split('=')[1];
+      }
+    } else {
+      inner = '';
+    }
+    if (inner === 'true') {
+      router.push(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
+      );
+      localStorage.setItem('auth', '');
+    } else {
+      setKakaoModal(true);
+    }
   };
 
   return (
