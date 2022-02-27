@@ -114,6 +114,7 @@ export class AuthService {
         sameSite: 'none',
         secure: true,
         maxAge: 24 * 60 * 60 * 100,
+        domain: '.banthing.kr',
         httpOnly: true,
       })
       .send({
