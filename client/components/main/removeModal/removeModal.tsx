@@ -1,12 +1,7 @@
 import axios from 'axios';
 import styled from 'styled-components';
-<<<<<<< HEAD:client/components/main/removeModal.tsx
-import styles from '../../styles/main/Rate.module.css';
-axios.defaults.withCredentials = true;
-=======
 import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
->>>>>>> feature-css:client/components/main/removeModal/removeModal.tsx
 
 const Container = styled.div`
   display: none;
