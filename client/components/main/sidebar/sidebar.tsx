@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import styles from './sidebar.module.css';
 import ChatRoom from '../chatRoom/chatRoom';
 import CreateRoom from '../createRoom/createRoom';
 import JoinRoom from '../joinRoom/joinRoom';
@@ -58,9 +59,9 @@ const Sidebar = ({ location, roomsId }: locationType) => {
   }, [roomsId]);
 
   return (
-    <SidebarContainer id={'sidebarContainer'}>
+    <section className={styles.sidebar_container} id={'sidebarContainer'}>
       <MobileButton />
-      <Container>
+      <section className={styles.section}>
         <CreateRoom />
         <MakeRoom
           location={location}
@@ -78,8 +79,8 @@ const Sidebar = ({ location, roomsId }: locationType) => {
           roomsId={roomId}
           usersChats={usersChats}
         />
-      </Container>
-    </SidebarContainer>
+      </section>
+    </section>
   );
 };
 

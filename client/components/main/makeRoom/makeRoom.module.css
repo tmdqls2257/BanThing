@@ -6,6 +6,7 @@
   min-height: 715px;
   background-color: var(--chat-background-color);
   height: auto;
+  animation: fade 1s ease-in-out;
 }
 .main {
   position: relative;
@@ -86,5 +87,13 @@
 @media screen and (max-width: 768px) {
   .MakeRoom {
     width: 100vw;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
