@@ -1,8 +1,23 @@
 .chat_container {
   overflow-y: auto;
-  min-height: 515px;
-  max-height: 74vh;
+  min-height: 50px;
+  max-height: 70vh;
 }
 .chat_container ::-webkit-scrollbar {
   width: 0;
+}
+@media screen and (max-height: 480px) {
+  .chat_container {
+    max-height: 120vh;
+  }
+}
+@media screen and (max-height: 580px) {
+  .chat_container {
+    max-height: 100vh;
+  }
+}
+@media screen and (max-height: 680px) {
+  .chat_container {
+    max-height: 80vh;
+  }
 }

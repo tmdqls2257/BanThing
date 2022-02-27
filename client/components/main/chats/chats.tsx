@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import styles from './chats.module.css';
 import Chat from '../chat/chat';
 import styled from 'styled-components';
-import NewChat from '../newChat';
+import NewChat from '../newChat/newChat';
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -57,14 +58,14 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
 
   useEffect(() => {
     const chatContainer = document.querySelector(
-      '.chat-Container',
+      '#chat-Container',
     )! as HTMLElement;
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
   }, [userchat.length]);
 
   return (
     <>
-      <Container className="chat-Container">
+      <section className={styles.chat_container} id={'chat-Container'}>
         {usersChats?.data.replyLog ? (
           usersChats?.data.replyLog.map((chat) => (
             <Chat
@@ -78,7 +79,7 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
         ) : (
           <></>
         )}
-      </Container>
+      </section>
       {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
     </>
   );

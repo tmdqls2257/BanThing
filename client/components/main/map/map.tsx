@@ -1,6 +1,6 @@
 import styles from './map.module.css';
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import Loading from '../loading';
+import Loading from '../loading/loading';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 

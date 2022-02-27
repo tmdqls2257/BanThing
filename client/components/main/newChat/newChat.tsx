@@ -1,35 +1,7 @@
 import axios from 'axios';
+import styles from './newChat.module.css';
 import { useState } from 'react';
-import styled from 'styled-components';
-const Container = styled.div`
-  .reply__column {
-    display: flex;
-    position: relative;
-    padding: var(--padding-small);
-    background-color: var(--gary-color);
-  }
-  input {
-    height: 46px;
-    width: 100%;
-    border-radius: var(--border-radius-small);
-    outline: none;
-    border: none;
-  }
-  .input-button {
-    color: var(--white-color);
-    font-weight: var(--font-weight-bold);
-  }
-  .reply__column button {
-    position: absolute;
-    right: 0px;
-    background-color: var(--orange-color);
-    border: none;
-    width: 77px;
-    height: 46px;
-    border-radius: var(--border-radius-small);
-    padding: 0;
-  }
-`;
+
 interface newChatType {
   roomsId: number;
   onCreated: (chat: string) => void;
@@ -87,12 +59,17 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
     setChat(event.target.value);
   };
   return (
-    <Container>
-      <form className="reply__column" onSubmit={onSubmit}>
-        <input type="text" onChange={onChange} value={chat} />
-        <button className="input-button">Enter</button>
+    <>
+      <form className={styles.reply__column} onSubmit={onSubmit}>
+        <input
+          className={styles.input}
+          type="text"
+          onChange={onChange}
+          value={chat}
+        />
+        <button className={styles.input_button}>Enter</button>
       </form>
-    </Container>
+    </>
   );
 };
 

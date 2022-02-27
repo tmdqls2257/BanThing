@@ -1,6 +1,7 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import styles from '../../styles/main/Rate.module.css';
+import styles from '../../../styles/main/Rate.module.css';
+import buttonStyle from '../button.module.css';
 
 const Container = styled.div`
   display: none;
@@ -83,7 +84,11 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
           <section className={styles.rate_title}>
             <h1>정말 삭제하시겠습니까?</h1>
           </section>
-          <button onClick={onClick}>삭제하기</button>
+          <section className={buttonStyle.button_container}>
+            <button className={buttonStyle.button} onClick={onClick}>
+              참여하기
+            </button>
+          </section>
         </form>
       </Container>
     </>

@@ -4,7 +4,7 @@ import ChatRoom from '../chatRoom/chatRoom';
 import CreateRoom from '../createRoom/createRoom';
 import JoinRoom from '../joinRoom/joinRoom';
 import MakeRoom from '../makeRoom/makeRoom';
-import MobileButton from '../mobileButton';
+import MobileButton from '../mobileButton/mobileButton';
 
 const Container = styled.div`
   display: flex;
