@@ -58,6 +58,7 @@ export default function Login(prop: propsType) {
           localStorage.setItem('auth', auth); //'banthing'
           prop.setIsLogin(true);
           prop.setLoginModal(false);
+          // document.cookie = `accessToken=${accessToken}`; //! 녹두가 추가함
         })
         .catch((error) => {
           if (error)

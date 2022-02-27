@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { Payload } from '../token/payload';
 import { Users } from '../entity/users.entity';
 import { JwtService } from '@nestjs/jwt';
-import { Response, Request } from 'express';
+import { Response } from 'express';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { UserInfoDTO } from 'src/dto/userInfo.dto';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
@@ -63,8 +63,7 @@ export class AuthService {
   }
 
   //회원탈퇴
-  //! any 존재
-  async signOut(user: any, res: Response, req: Request): Promise<object> {
+  async signOut(user: any, res: Response): Promise<object> {
     const list = await this.postRepository.find({ host_user_id: user.user_id });
 
     if (list) {
@@ -103,8 +102,8 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     };
     await axios.post(_url, {}, { headers: _header });
-    res.cookie('inner', '', { maxAge: 1 });
 
+    res.cookie('inner', '', { maxAge: 1 });
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '회원탈퇴 완료' });
@@ -130,16 +129,22 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    return res.cookie('accessToken', token).send({
-      data: { accessToken: token, auth: userFind.auth },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', token, {
+        maxAge: 24 * 60 * 60 * 100, //! expires, maxAge가 명시되어야 쿠키가 창을 닫아도 유지됨
+        domain: '.banthing.kr', //! banthing.kr로 작성하면 api.banthing.kr과 같은 하위도메인은 안됨
+        httpOnly: true,
+      })
+      .send({
+        data: { accessToken: token, auth: userFind.auth },
+        message: '로그인 완료',
+      });
   }
 
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = `http://localhost:${process.env.SERVER_PORT}/users/kakaoLoginRedirect`;
+    const _redirect_url = `${process.env.CORSORIGIN}/users/kakaoLoginRedirect`;
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {
@@ -170,12 +175,15 @@ export class AuthService {
       };
       this.userService.snsSave(snsSignUp);
     }
-    res.cookie('accessToken', data.data['access_token']);
-    return res.cookie('inner', 'true').redirect('http://localhost:3000');
+    res.cookie('inner', 'true');
+    return res
+      .cookie('accessToken', data.data['access_token'])
+      .redirect(process.env.CORSORIGIN);
+    // .redirect('http://localhost:3000');
   }
 
   //로그아웃
-  async logOut(res: Response, user: any, req: Request): Promise<object> {
+  async logOut(res: Response): Promise<object> {
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '로그아웃' });

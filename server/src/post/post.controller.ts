@@ -12,7 +12,6 @@ import { AuthGuard } from 'src/token/auth.guard';
 import { CreatePostDTO } from 'src/dto/createPost.dto';
 import { Request } from 'express';
 import { ReplyDTO } from 'src/dto/reply.dto';
-import { EvaluationDTO } from 'src/dto/evaluation.dto';
 
 @Controller('post')
 export class PostController {
@@ -68,15 +67,6 @@ export class PostController {
     const token = req.cookies['accessToken'];
     return await this.postService.getReplyKakao(id, token);
   }
-
-  // @Post('/evaluation') //평가하기
-  // @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  // async evaluation(
-  //   @Body() evaluationDTO: EvaluationDTO,
-  //   @Req() req: Request,
-  // ): Promise<object> {
-  //   return await this.postService.evaluation(evaluationDTO, req.user);
-  // }
 
   @Get('/deletePost/:id') //글 삭제
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
