@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Chat from './chat';
-import NewChat from './newChat';
+import Chat from '../chat/chat';
 import styled from 'styled-components';
 import axios from 'axios';
+import NewChat from '../newChat';
 
 const Container = styled.div`
   overflow-y: auto;

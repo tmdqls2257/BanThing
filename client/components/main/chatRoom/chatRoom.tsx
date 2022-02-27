@@ -1,10 +1,10 @@
-import Button from './button';
-import SidebarHeader from './sidebarHeader/sidebarHeader';
 import styled from 'styled-components';
-import Modal from './removeModal';
-import Chats from './chats';
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SidebarHeader from '../sidebarHeader/sidebarHeader';
+import Chats from '../chats/chats';
+import Modal from '../removeModal';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -30,6 +30,22 @@ const ButtonContainer = styled.div`
   margin: var(--margine-base) auto;
   div {
     margin: 0 4px;
+  }
+  button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #ffffff;
+    width: 181px;
+    background-color: #ff8a3d;
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
   }
 `;
 interface usersChats {
@@ -62,22 +78,46 @@ const ChatRoom = ({
   const [usernickname, setNickname] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const auth = localStorage.getItem('auth');
       const accessToken = localStorage.getItem('accessToken');
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
+      const kakaoToken = document.cookie.split('=')[1];
+      if (auth === 'banthing') {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
             withCredentials: true,
-          },
-        })
-        .then((response) => {
-          const { userInfo } = response.data.data;
-          setNickname(userInfo.nickname);
-        });
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setNickname(userInfo.nickname);
+          });
+      } else {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage/kakao`, {
+            headers: {
+              Authorization: `Bearer ${kakaoToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setNickname(userInfo.nickname);
+          });
+      }
     }
   }, []);
+
+  const onClick = () => {
+    const removeModal = document.querySelector('#removeModal')! as HTMLElement;
+    removeModal.style.display = 'flex';
+  };
+  console.log(usernickname);
+  console.log(roomHostNickName);
 
   if (usernickname === roomHostNickName) {
     return (
@@ -95,9 +135,7 @@ const ChatRoom = ({
             ></Chats>
           </main>
           <ButtonContainer>
-            <div>
-              <Button containerName={'삭제하기'}>삭제하기</Button>
-            </div>
+            <button onClick={onClick}>삭제하기</button>
           </ButtonContainer>
           <Modal removeRoomId={roomsId} />
         </Container>

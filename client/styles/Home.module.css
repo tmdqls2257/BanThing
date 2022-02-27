@@ -147,25 +147,30 @@
 /* --------------------introduction.tsx CSS-------------------- */
 
 .introduction_main_right {
-  min-height: 55vw;
   display: flex;
-  width: 40vw;
-  margin: 0 8% 0 0;
+  width: 48vw;
+  margin-left: 2vw;
+  height: 60vh;
   flex-direction: column;
   justify-content: center;
+  background-color: #ff8a3c;
+  border-radius: 60px;
 }
 
 .introduction_main_left {
   min-height: 55vw;
   display: flex;
-  width: 40vw;
-  margin: 0 0 0 8%;
+  width: 48vw;
+  height: 60vh;
+  margin-left: 2vw;
   flex-direction: column;
   justify-content: center;
+  background-color: #ff8a3c;
 }
 
 .introduction_container_right {
   width: 95vw;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -186,6 +191,7 @@
   display: flex;
   width: 40vw;
   margin-left: -0.3vw;
+  color: #ffffff;
   font-size: 3.1vw;
   font-weight: 500;
   justify-content: flex-end;
@@ -197,13 +203,14 @@
   width: 40vw;
   font-size: 3.1vw;
   font-weight: 500;
+  color: #ffffff;
   justify-content: flex-start;
   font-family: 'BMDOHYEON', sans-serif;
 }
 
 .introduction_image {
   display: flex;
-  width: 40vw;
+  width: 50vw;
 }
 
 .introduction_description_right {

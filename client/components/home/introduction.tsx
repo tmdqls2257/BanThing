@@ -31,7 +31,7 @@ export default function Introduction(props: propsType): JSX.Element {
               duration={900}
             >
               <div className={styles.introduction_title_right}>
-                <span className={styles.orange}>{props.title}</span>
+                <span>{props.title}</span>
               </div>
             </Slide>
             <Fade triggerOnce={true} delay={900}>
@@ -65,7 +65,7 @@ export default function Introduction(props: propsType): JSX.Element {
               duration={900}
             >
               <div className={styles.introduction_title_left}>
-                <span className={styles.orange}>{props.title}</span>
+                <span>{props.title}</span>
               </div>
             </Slide>
             <Fade triggerOnce={true} delay={900}>

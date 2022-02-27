@@ -58,7 +58,7 @@ export default function Login(prop: propsType) {
           const { auth } = response.data.data;
           const { accessToken } = response.data.data;
           localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('auth', auth);
+          localStorage.setItem('auth', auth); //'banthing'
           prop.setIsLogin(true);
           prop.setLoginModal(false);
           // document.cookie = `accessToken=${accessToken}`; //! 녹두가 추가함

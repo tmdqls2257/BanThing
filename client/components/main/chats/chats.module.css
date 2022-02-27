@@ -1,0 +1,8 @@
+.chat_container {
+  overflow-y: auto;
+  min-height: 515px;
+  max-height: 74vh;
+}
+.chat_container ::-webkit-scrollbar {
+  width: 0;
+}

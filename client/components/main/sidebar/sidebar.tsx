@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ChatRoom from './chatRoom';
-import CreateRoom from './createRoom';
-import JoinRoom from './joinRoom';
-import MakeRoom from './makeRoom/makeRoom';
-import MobileButton from './mobileButton';
+import ChatRoom from '../chatRoom/chatRoom';
+import CreateRoom from '../createRoom/createRoom';
+import JoinRoom from '../joinRoom/joinRoom';
+import MakeRoom from '../makeRoom/makeRoom';
+import MobileButton from '../mobileButton';
 
 const Container = styled.div`
   display: flex;

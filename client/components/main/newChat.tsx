@@ -43,21 +43,43 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
     if (chat !== '') {
       if (
         typeof window !== 'undefined' &&
-        localStorage.getItem('accessToken')
+        typeof localStorage !== 'undefined'
       ) {
-        const headers = {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        };
-        axios.post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-          {
-            post_id: roomsId,
-            reply: chat,
-          },
-          {
-            headers,
-          },
-        );
+        const auth = localStorage.getItem('auth');
+        const accessToken = localStorage.getItem('accessToken');
+        const kakaoToken = document.cookie.split('=')[1];
+
+        if (auth === 'banthing') {
+          const headers = {
+            Authorization: `Bearer ${accessToken}`,
+          };
+          axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+            {
+              post_id: roomsId,
+              reply: chat,
+            },
+            {
+              headers,
+              withCredentials: true,
+            },
+          );
+        } else {
+          const headers = {
+            Authorization: `Bearer ${kakaoToken}`,
+          };
+          axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao`,
+            {
+              post_id: roomsId,
+              reply: chat,
+            },
+            {
+              headers,
+              withCredentials: true,
+            },
+          );
+        }
       }
       onCreated(chat);
     }

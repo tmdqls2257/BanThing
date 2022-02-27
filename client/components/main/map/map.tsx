@@ -1,19 +1,8 @@
-import styled from 'styled-components';
+import styles from './map.module.css';
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import Loading from './loading';
+import Loading from '../loading';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-
-const MapContainer = styled.div`
-  display: flex;
-  width: 70vw;
-  height: auto;
-  min-height: 715px;
-  @media screen and (max-width: 768px) {
-    width: 100vw;
-    height: auto;
-  }
-`;
 
 interface dataType {
   data: {
@@ -145,11 +134,22 @@ function Map({ setLocation, roomsData }: mapType) {
           const options = {
             center: new window.kakao.maps.LatLng(lat, lon),
           };
+          const circle = new window.kakao.maps.Circle({
+            center: new window.kakao.maps.LatLng(lat, lon), // 원의 중심좌표 입니다
+            radius: 200, // 미터 단위의 원의 반지름입니다
+            strokeWeight: 5, // 선의 두께입니다
+            strokeColor: '#FF8A3D', // 선의 색깔입니다
+            strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일 입니다
+            fillColor: '#FF8A3D', // 채우기 색깔입니다
+            fillOpacity: 0.3, // 채우기 불투명도 입니다
+          });
           const map = new window.kakao.maps.Map(container, options);
           const markerPosition = new window.kakao.maps.LatLng(lat, lon);
           let marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
+          circle.setMap(map);
           marker.setMap(map);
           if (data) {
             const roomList = data.data.postList;
@@ -219,10 +219,10 @@ function Map({ setLocation, roomsData }: mapType) {
   }, [data?.data.postList.length]);
 
   return (
-    <>
+    <main className={styles.main}>
       <Loading state={loading}></Loading>
-      <MapContainer id="map" />
-    </>
+      <section id="map" className={styles.map} />
+    </main>
   );
 }
 

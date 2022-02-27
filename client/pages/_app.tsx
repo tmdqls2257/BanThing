@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import Header from '../components/header';
 import type { AppProps } from 'next/app';
-import GlobalStyle from '../styles/GlobalStyle';
+// import GlobalStyle from '../styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 import { useState, useEffect } from 'react';
@@ -36,7 +36,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <GlobalStyle />
       <Header
         isLogin={isLogin}
         setIsLogin={setIsLogin}

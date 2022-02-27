@@ -1,7 +1,6 @@
-import Button from './button';
 import styled from 'styled-components';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -10,7 +9,6 @@ const Container = styled.div`
   width: 30vw;
   min-width: 400px;
   min-height: 715px;
-
   height: auto;
   img {
     width: var(--img-size);
@@ -70,7 +68,6 @@ const Container = styled.div`
     margin-top: var(--margine-base);
     margin-right: var(--margine-base);
   }
-
   @media screen and (max-width: 768px) {
     width: 100vw;
   }
@@ -78,6 +75,22 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div`
   margin: auto;
+  button {
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #ffffff;
+    width: 181px;
+    background-color: #ff8a3d;
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
+  }
 `;
 
 interface roomData {
@@ -148,7 +161,61 @@ const JoinRoom = ({
       setroomHostNickName(data.data.post.host_nickname);
     }
   }, [chats, data]);
-
+  const onClick = () => {
+    const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
+    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    const auth = localStorage.getItem('auth');
+    if (
+      typeof window !== 'undefined' &&
+      typeof localStorage !== 'undefined' &&
+      data
+    ) {
+      const auth = localStorage.getItem('auth');
+      const accessToken = localStorage.getItem('accessToken');
+      const kakaoToken = document.cookie.split('=')[1];
+      if (auth === 'banthing') {
+        const getPosts = async () => {
+          try {
+            const headers = {
+              Authorization: `Bearer ${accessToken}`,
+            };
+            const response: AxiosResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
+              {
+                headers,
+                withCredentials: true,
+              },
+            );
+            setChats(response.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getPosts();
+      } else {
+        const getPosts = async () => {
+          try {
+            const headers = {
+              Authorization: `Bearer ${kakaoToken}`,
+            };
+            const response: AxiosResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao/${data.data.post.id}`,
+              {
+                headers,
+                withCredentials: true,
+              },
+            );
+            setChats(response.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getPosts();
+      }
+    }
+    joinRoom.style.display = 'none';
+    chatRoom.style.display = 'flex';
+  };
   return (
     <Container id="JoinRoom">
       {data ? (
@@ -183,13 +250,7 @@ const JoinRoom = ({
             </section>
           </article>
           <ButtonContainer>
-            <Button
-              setChats={setChats}
-              roomId={data.data.post.id}
-              containerName={'JoinRoom'}
-            >
-              참여하기
-            </Button>
+            <button onClick={onClick}>참여하기</button>
           </ButtonContainer>
         </>
       ) : (
