@@ -64,7 +64,7 @@ export class AuthService {
 
   //회원탈퇴
   //! any 존재
-  async signOut(user: any, res: Response, req: Request): Promise<object> {
+  async signOut(user: any, res: Response): Promise<object> {
     const list = await this.postRepository.find({ host_user_id: user.user_id });
 
     if (list) {
