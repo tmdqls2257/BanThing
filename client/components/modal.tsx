@@ -29,7 +29,7 @@ export default function Modal(prop: propsType) {
             localStorage.removeItem('auth');
             prop.setIsModalOpen(false);
             router.push('/');
-            document.cookie = ``; //!녹두가 추가함
+            // document.cookie = ``; //!녹두가 추가함
           });
       } else {
         axios
