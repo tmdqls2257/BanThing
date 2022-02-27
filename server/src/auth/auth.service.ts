@@ -131,10 +131,8 @@ export class AuthService {
 
     return res
       .cookie('accessToken', token, {
-        sameSite: 'none',
-        secure: true,
         maxAge: 24 * 60 * 60 * 100, //! expires, maxAge가 명시되어야 쿠키가 창을 닫아도 유지됨
-        domain: '.banthing.kr',
+        domain: '.banthing.kr', //! banthing.kr로 작성하면 api.banthing.kr과 같은 하위도메인은 안됨
         httpOnly: true,
       })
       .send({
@@ -146,7 +144,7 @@ export class AuthService {
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = `http://localhost:${process.env.SERVER_PORT}/users/kakaoLoginRedirect`;
+    const _redirect_url = `${process.env.CORSORIGIN}/users/kakaoLoginRedirect`;
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {
@@ -180,11 +178,12 @@ export class AuthService {
     res.cookie('inner', 'true');
     return res
       .cookie('accessToken', data.data['access_token'])
-      .redirect('http://localhost:3000');
+      .redirect(process.env.CORSORIGIN);
+    // .redirect('http://localhost:3000');
   }
 
   //로그아웃
-  async logOut(res: Response, user: any, req: Request): Promise<object> {
+  async logOut(res: Response): Promise<object> {
     return res
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '로그아웃' });
