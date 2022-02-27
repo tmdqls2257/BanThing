@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-
+import styles from './chatRoom.module.css';
+import buttonStyle from '../button.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import Chats from '../chats/chats';
-import Modal from '../removeModal';
+import Modal from '../removeModal/removeModal';
 
 const Container = styled.div`
   /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
@@ -25,29 +26,6 @@ const Container = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  margin: var(--margine-base) auto;
-  div {
-    margin: 0 4px;
-  }
-  button {
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: #ffffff;
-    width: 181px;
-    background-color: #ff8a3d;
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
-  }
-`;
 interface usersChats {
   data: {
     replyLog: [
@@ -78,14 +56,18 @@ const ChatRoom = ({
   const [usernickname, setNickname] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && localStorage.getItem('accessToken')) {
+    console.log(1);
+    console.log(typeof window);
+    console.log(localStorage.getItem('accessToken'));
+
+    if (typeof window !== 'undefined' && window.localStorage) {
       const auth = localStorage.getItem('auth');
 
-      const accessToken = localStorage.getItem('accessToken');
-      const cookie = document.cookie.split(';')[1];
-      const kakaoToken = cookie.split('=')[1];
+      if (localStorage.getItem('accessToken')) {
+        const accessToken = localStorage.getItem('accessToken');
+        const cookie = document.cookie.split(';')[1];
+        const kakaoToken = cookie.split('=')[1];
 
-      if (accessToken || kakaoToken) {
         if (auth === 'banthing') {
           axios
             .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
@@ -110,6 +92,7 @@ const ChatRoom = ({
             })
             .then((response) => {
               const { userInfo } = response.data.data;
+
               setNickname(userInfo.nickname);
             });
         }
@@ -125,11 +108,11 @@ const ChatRoom = ({
   if (usernickname === roomHostNickName) {
     return (
       <>
-        <Container id="ChatRoom">
+        <section id="ChatRoom" className={styles.section}>
           <SidebarHeader containerName={'gotoJoinRoom'}>
             {roomTitle}
           </SidebarHeader>
-          <main>
+          <main className={styles.main}>
             <Chats
               usernickname={usernickname}
               usersChats={usersChats}
@@ -137,21 +120,23 @@ const ChatRoom = ({
               addable={true}
             ></Chats>
           </main>
-          <ButtonContainer>
-            <button onClick={onClick}>삭제하기</button>
-          </ButtonContainer>
+          <section className={buttonStyle.button_container}>
+            <button className={buttonStyle.button} onClick={onClick}>
+              삭제하기
+            </button>
+          </section>
           <Modal removeRoomId={roomsId} />
-        </Container>
+        </section>
       </>
     );
   }
   return (
     <>
-      <Container id="ChatRoom">
+      <section id="ChatRoom" className={styles.section}>
         <SidebarHeader containerName={'gotoJoinRoom'}>
           {roomTitle}
         </SidebarHeader>
-        <main>
+        <main className={styles.main}>
           <Chats
             usernickname={usernickname}
             usersChats={usersChats}
@@ -159,7 +144,8 @@ const ChatRoom = ({
             addable={true}
           ></Chats>
         </main>
-      </Container>
+        <section className={buttonStyle.button_container}></section>
+      </section>
     </>
   );
 };

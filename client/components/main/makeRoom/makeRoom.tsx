@@ -1,123 +1,9 @@
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
-import styled from 'styled-components';
+import buttonStyle from '../button.module.css';
+import styles from './makeRoom.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import MakeRoomModal from '../makeRoomModal';
-
-const Container = styled.div`
-  /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
-  display: none;
-  flex-direction: column;
-  width: 30vw;
-  min-width: 400px;
-  min-height: 715px;
-  background-color: var(--chat-background-color);
-  height: auto;
-  main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 332px;
-    justify-content: space-between;
-    margin: auto;
-  }
-  .MakeRoom-main-section-flex {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    input,
-    select {
-      padding-left: 10px;
-      display: flex;
-      width: 200px;
-      font-size: var(--font-size-base);
-      height: 37px;
-      border-radius: 5px;
-      border: none;
-      margin-left: 10px;
-      min-width: 60%;
-    }
-  }
-  .MakeRoom-main-section-radio {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-direction: flex-start;
-    input {
-      margin-right: var(--margine-base);
-    }
-    select {
-      padding-left: 10px;
-      display: flex;
-      width: 200px;
-      font-size: var(--font-size-base);
-      height: 37px;
-      border-radius: 5px;
-      border: none;
-      margin-left: 10px;
-      min-width: 60%;
-    }
-  }
-  .MakeRoom-main-section-content {
-    padding: 32px;
-    line-height: 1.5;
-    display: flex;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--gary-color);
-    width: var(--sidebar-content-width);
-    height: 30vh;
-    ::-webkit-scrollbar {
-      width: 0;
-    }
-  }
-  textarea {
-    resize: none;
-    /* border-radius: 5px; */
-  }
-  textarea:focus,
-  input,
-  select {
-    outline: none;
-  }
-  h1 {
-    font-size: 1rem;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    width: 100%;
-    background-color: var(--chat-by-me-color);
-  }
-  @media screen and (max-width: 768px) {
-    width: 100vw;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  margin: auto;
-  margin: var(--margine-base) auto;
-  div {
-    margin: var(--margine-small);
-  }
-  button {
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: #ffffff;
-    width: 181px;
-    background-color: #ff8a3d;
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
-  }
-`;
+import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 
 interface locationType {
   location: number[];
@@ -171,58 +57,60 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const axiosPost = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const auth = localStorage.getItem('auth');
-      const accessToken = localStorage.getItem('accessToken');
-      const cookie = document.cookie.split(';')[1];
-      const kakaoToken = cookie.split('=')[1];
+      if (localStorage.getItem('accessToken')) {
+        const accessToken = localStorage.getItem('accessToken');
+        const cookie = document.cookie.split(';')[1];
+        const kakaoToken = cookie.split('=')[1];
 
-      if (auth === 'banthing') {
-        const headers = {
-          Authorization: `Bearer ${accessToken}`,
-        };
+        if (auth === 'banthing') {
+          const headers = {
+            Authorization: `Bearer ${accessToken}`,
+          };
 
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-            {
-              title: data[0],
-              category: data[1],
-              content: data[2],
-              host_role: data[3],
-              location_latitude: data[4],
-              location_longitude: data[5],
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          )
-          .then((res) => {
-            setMakeRoomId(res.data.data.post_id);
-          });
-      } else {
-        const headers = {
-          Authorization: `Bearer ${kakaoToken}`,
-        };
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+              {
+                title: data[0],
+                category: data[1],
+                content: data[2],
+                host_role: data[3],
+                location_latitude: data[4],
+                location_longitude: data[5],
+              },
+              {
+                headers,
+                withCredentials: true,
+              },
+            )
+            .then((res) => {
+              setMakeRoomId(res.data.data.post_id);
+            });
+        } else {
+          const headers = {
+            Authorization: `Bearer ${kakaoToken}`,
+          };
 
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
-            {
-              title: data[0],
-              category: data[1],
-              content: data[2],
-              host_role: data[3],
-              location_latitude: data[4],
-              location_longitude: data[5],
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          )
-          .then((res) => {
-            setMakeRoomId(res.data.data.post_id);
-          });
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
+              {
+                title: data[0],
+                category: data[1],
+                content: data[2],
+                host_role: data[3],
+                location_latitude: data[4],
+                location_longitude: data[5],
+              },
+              {
+                headers,
+                withCredentials: true,
+              },
+            )
+            .then((res) => {
+              setMakeRoomId(res.data.data.post_id);
+            });
+        }
       }
     }
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
@@ -247,25 +135,43 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   };
 
   return (
-    <Container id="MakeRoom">
+    <section id="MakeRoom" className={styles.MakeRoom}>
       <SidebarHeader containerName={'gotoCreateRoom'}>방 만들기</SidebarHeader>
-      <main>
-        <section className="MakeRoom-main-section-flex">
-          <h1>제목</h1>
-          <input type="text" onChange={inputChange} />
+      <main className={styles.main}>
+        <section className={styles.section_flex}>
+          <h1 className={styles.h1}>제목</h1>
+          <input
+            type="text"
+            onChange={inputChange}
+            className={styles.section_flex_input}
+          />
         </section>
-        <section className="MakeRoom-main-section-flex">
-          <h1>카테고리</h1>
-          <select id="choise-foods" onChange={selectChange}>
+        <section className={styles.section_flex}>
+          <h1 className={styles.h1}>카테고리</h1>
+          <select
+            id="choise-foods"
+            onChange={selectChange}
+            className={styles.section_flex_select}
+          >
             <option value=""></option>
             <option value="치킨">치킨</option>
             <option value="햄버거">햄버거</option>
             <option value="피자">피자</option>
+            <option value="자장면">자장면</option>
+            <option value="커피*디저트">커피*디저트</option>
+            <option value="도시락">도시락</option>
+            <option value="한식">한식</option>
+            <option value="일식">일식</option>
+            <option value="분식">분식</option>
           </select>
         </section>
-        <section className="MakeRoom-main-section-radio">
-          <h1>역할</h1>
-          <select id="choise-foods" onChange={(event) => radioChange(event)}>
+        <section className={styles.host_roll}>
+          <h1 className={styles.h1}>역할</h1>
+          <select
+            id="choise-foods"
+            className={styles.host_roll_select}
+            onChange={(event) => radioChange(event)}
+          >
             <option value=""></option>
             <option value="1">받는 사람</option>
             <option value="2">가지러 가는 사람</option>
@@ -274,20 +180,22 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
         <section>
           <h1>내용</h1>
           <textarea
-            className="MakeRoom-main-section-content"
+            className={styles.content_textarea}
             onChange={textareaChange}
           />
         </section>
       </main>
-      <ButtonContainer>
-        <button onClick={onClick}>생성하기</button>
-      </ButtonContainer>
+      <section className={buttonStyle.button_container}>
+        <button className={buttonStyle.button} onClick={onClick}>
+          참여하기
+        </button>
+      </section>
       {makeRoomModal ? (
         <MakeRoomModal setMakeRoomModal={setMakeRoomModal} />
       ) : (
         <></>
       )}
-    </Container>
+    </section>
   );
 };
 

@@ -1,3 +1,13 @@
+.MakeRoom {
+  display: none;
+  flex-direction: column;
+  width: 30vw;
+  min-width: 400px;
+  min-height: 715px;
+  background-color: var(--chat-background-color);
+  height: auto;
+  animation: fade 1s ease-in-out;
+}
 .main {
   position: relative;
   display: flex;
@@ -6,7 +16,6 @@
   justify-content: space-between;
   margin: auto;
 }
-
 .container {
   outline: none;
   display: none;
@@ -76,7 +85,15 @@
   background-color: var(--chat-by-me-color);
 }
 @media screen and (max-width: 768px) {
-  .container {
+  .MakeRoom {
     width: 100vw;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
