@@ -28,27 +28,14 @@ const MyPage: NextPage = () => {
   const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
   const [isKakaoModalOpen, setIsKakaoModalOpen] = useState(false);
 
-  let cookie: string;
-  let accessToken: string;
-
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      cookie = document.cookie;
-
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
-        });
-        accessToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        accessToken = cookie.split('=')[1];
-      }
+    if (typeof localStorage !== 'undefined') {
+      const storageToken = localStorage.getItem('accessToken');
 
       axios
         .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${storageToken}`,
             'Content-Type': 'application/json',
           },
         })
@@ -91,27 +78,31 @@ const MyPage: NextPage = () => {
         setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
         setCorrectCheckPassword(false);
       } else if (correctChangePassword && correctCheckPassword) {
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-            {
-              password: changePassword,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
+        if (typeof localStorage !== 'undefined') {
+          const storageToken = localStorage.getItem('accessToken');
+
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+              {
+                password: changePassword,
               },
-            },
-          )
-          .then((response) => {
-            setChangePassword('');
-            setCheckPassword('');
-            setIsModifyModalOpen(true);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+              {
+                headers: {
+                  Authorization: `Bearer ${storageToken}`,
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
+            .then((response) => {
+              setChangePassword('');
+              setCheckPassword('');
+              setIsModifyModalOpen(true);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }
     }
   };

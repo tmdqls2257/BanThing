@@ -1,9 +1,9 @@
 import styles from '../styles/Login.module.css';
 import SignUp from './signup';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from './modal';
+import { useRouter } from 'next/router';
 
 axios.defaults.withCredentials = true;
 interface propsType {
@@ -51,6 +51,8 @@ export default function Login(prop: propsType) {
           password: password,
         })
         .then((response) => {
+          const { accessToken } = response.data.data;
+          localStorage.setItem('accessToken', accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
           // document.cookie = `accessToken=${accessToken}`; //! 녹두가 추가함
@@ -83,6 +85,26 @@ export default function Login(prop: propsType) {
       router.push(
         `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
       );
+      if (typeof document !== 'undefined') {
+        const cookie = document.cookie;
+        if (cookie.includes(';')) {
+          const cookieList = cookie.split(';');
+          const findToken = cookieList.filter((cookie) => {
+            return cookie.includes('accessToken');
+          });
+          const accessToken = findToken[0].split('=')[1];
+          localStorage.setItem('accessToken', accessToken);
+        } else {
+          const accessToken = cookie.split('=')[1];
+          localStorage.setItem('accessToken', accessToken);
+        }
+      }
+      // axios
+      //   .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`, {})
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => console.log(error));
     } else {
       setKakaoModal(true);
     }
@@ -165,6 +187,8 @@ export default function Login(prop: propsType) {
         ) : (
           <></>
         )}
+
+        <Modal setIsModalOpen={() => ''} type={''} />
       </div>
     </>
   );
