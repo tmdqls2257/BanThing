@@ -29,7 +29,7 @@
 }
 .button_owner_container,
 .button_not_owner_container {
-  height: 10vh;
+  height: 59px;
   display: flex;
   margin: auto;
 }
