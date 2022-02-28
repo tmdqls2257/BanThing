@@ -26,6 +26,8 @@ export default function Modal(prop: propsType) {
           return cookie.includes('accessToken');
         });
         accessToken = findAccessToken[0].split('=')[1];
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        accessToken = cookie.split('=')[1];
       }
 
       axios
