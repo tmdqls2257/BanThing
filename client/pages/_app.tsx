@@ -7,7 +7,7 @@ import type { AppProps } from 'next/app';
 import { useState, useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   let cookie: any;
 
@@ -21,12 +21,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      const storageToken = localStorage.getItem('accessToken');
-      if (storageToken === null) {
-        setIsLogin(false);
-      } else {
+    if (typeof document !== 'undefined') {
+      const cookie = document.cookie;
+      if (cookie.includes('accessToken')) {
         setIsLogin(true);
+      } else {
+        setIsLogin(false);
       }
     }
   }, [cookie]);
