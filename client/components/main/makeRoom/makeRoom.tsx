@@ -1,23 +1,28 @@
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import buttonStyle from '../button.module.css';
 import styles from './makeRoom.module.css';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 
 interface locationType {
   location: number[];
   setMakeRoom_MapRoomId: (value: number) => void;
+  setRelanering: Dispatch<SetStateAction<boolean>>;
 }
 
-const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
+const MakeRoom = ({
+  location,
+  setMakeRoom_MapRoomId,
+  setRelanering,
+}: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
   const [textarea, setTextarea] = useState('');
   const [radio, setRadio] = useState('');
   const [makeRoomId, setMakeRoomId] = useState(0);
   const [makeRoomModal, setMakeRoomModal] = useState(false);
-
+  const [relander, setRelander] = useState(false);
   useEffect(() => {
     if (makeRoomId !== 0) {
       setMakeRoom_MapRoomId(makeRoomId);
@@ -134,6 +139,11 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       setMakeRoomModal(true);
     } else {
       axiosPost();
+      {
+        relander ? setRelander(false) : setRelander(true);
+      }
+      console.log(relander);
+      setRelanering(relander);
     }
   };
 

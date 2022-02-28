@@ -1,23 +1,21 @@
 .sidebar_container {
   display: flex;
   z-index: 3;
-  animation: downSlide 1s;
 }
 .section {
   display: flex;
 }
+.downAnimation {
+  display: inline;
+}
+.upAnimation {
+  animation: none;
+}
 @media screen and (max-width: 768px) {
   .sidebar_container {
     flex-direction: column;
+    height: auto;
     position: absolute;
-    bottom: 0px;
-    animation: upSlide 1s ease-in-out forwards;
-  }
-  .downSlide {
-    animation: downSlide 1s ease-in-out forwards;
-  }
-  .upSlide {
-    animation: upSlide 1s ease-in-out forwards;
   }
   .section {
     display: flex;
@@ -26,20 +24,8 @@
     width: 100vw;
     height: 85vh;
   }
-  @keyframes downSlide {
-    from {
-      top: 10vh;
-    }
-    to {
-      top: 90vh;
-    }
-  }
-  @keyframes upSlide {
-    from {
-      top: 90vh;
-    }
-    to {
-      top: 10vh;
-    }
+  .upAnimation {
+    z-index: 3;
+    animation: none;
   }
 }

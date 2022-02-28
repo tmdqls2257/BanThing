@@ -15,6 +15,9 @@ declare global {
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);
+  const [maprelandering, setMaprelandering] = useState(false);
+  const [mapTomobileUp, setMapToMobileUp] = useState('');
+  console.log(mapTomobileUp);
 
   return (
     <>
@@ -29,9 +32,19 @@ const Main: NextPage = () => {
         crossOrigin="anonymous"
       ></Script>
       <section className={styles.section}>
-        <main className={styles.main}>
-          <Map roomsData={setRoomsData} setLocation={setLocation} />
-          <Sidebar location={location} roomsId={roomsId} />
+        <main className={styles.main} id={'mainPage'}>
+          <Map
+            roomsData={setRoomsData}
+            setLocation={setLocation}
+            maprelandering={maprelandering}
+            setMapToMobileUp={setMapToMobileUp}
+          />
+          <Sidebar
+            mapTomobileUp={mapTomobileUp}
+            setMaprelandering={setMaprelandering}
+            location={location}
+            roomsId={roomsId}
+          />
         </main>
       </section>
     </>

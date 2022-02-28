@@ -19,14 +19,20 @@ interface dataType {
 interface mapType {
   setLocation: Dispatch<SetStateAction<number[]>>;
   roomsData: Dispatch<SetStateAction<number>>;
+  maprelandering: boolean;
+  setMapToMobileUp: Dispatch<SetStateAction<string>>;
 }
-function Map({ setLocation, roomsData }: mapType) {
+function Map({
+  setLocation,
+  roomsData,
+  maprelandering,
+  setMapToMobileUp,
+}: mapType) {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<dataType>();
   const [dummyToken1, setDummyToken1] = useState('');
   const [dummyToken2, setDummyToken2] = useState('');
   const [dummyToken3, setDummyToken3] = useState('');
-
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -85,6 +91,7 @@ function Map({ setLocation, roomsData }: mapType) {
         if (roomId) {
           roomsData(roomId);
         }
+        setMapToMobileUp('up');
       });
       window.kakao.maps.event.addListener(map, 'click', function () {
         joinRoom.style.display = 'none';
@@ -226,9 +233,10 @@ function Map({ setLocation, roomsData }: mapType) {
       setLoading(true);
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
+    console.log(maprelandering);
 
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [data?.data.postList.length]);
+  }, [data?.data.postList.length, maprelandering]);
 
   return (
     <main className={styles.main}>
