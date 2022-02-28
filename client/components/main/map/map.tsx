@@ -228,7 +228,9 @@ function Map({
       });
       setLoading(true);
     };
-    onLoadKakaoMap();
+    mapScript.addEventListener('load', onLoadKakaoMap);
+
+    return () => mapScript.removeEventListener('load', onLoadKakaoMap);
   }, [data?.data.postList.length, maprelandering]);
 
   return (

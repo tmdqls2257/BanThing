@@ -5,9 +5,9 @@
   width: 100vw;
   height: 100vh;
 }
-.main::-webkit-scrollbar {
+/* .main::-webkit-scrollbar {
   width: 0;
-}
+} */
 .main {
   width: 100vw;
   overflow-y: auto;

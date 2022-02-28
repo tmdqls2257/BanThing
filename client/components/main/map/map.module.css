@@ -1,6 +1,5 @@
 .main {
   position: relative;
-  width: 100vw;
   min-height: var(--component-min-height);
   max-height: 100vh;
   display: flex;
@@ -12,8 +11,12 @@
   min-height: var(--component-min-height);
 }
 @media screen and (max-width: 768px) {
+  .main {
+    width: 100vw;
+    height: 100vh;
+  }
   .map {
     width: 100vw;
-    height: auto;
+    height: 100vh;
   }
 }
