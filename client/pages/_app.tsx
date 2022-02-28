@@ -27,12 +27,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    const accessToken: any = localStorage.getItem('accessToken');
+    const storageToken: any = localStorage.getItem('accessToken');
     if (cookieToken && cookie.includes('accessToken')) {
       setIsLogin(true);
       setAccessToken(cookieToken);
-      if (accessToken) {
-        setAccessToken(accessToken);
+      if (storageToken) {
+        setAccessToken(storageToken);
       }
     } else {
       setIsLogin(false);
