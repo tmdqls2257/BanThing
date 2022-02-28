@@ -24,16 +24,20 @@ export default function Introduction(props: propsType): JSX.Element {
           </Zoom>
 
           <main className={styles.introduction_main_right}>
+            <span className={styles.introduction_main_number}>01</span>
             <Slide
               triggerOnce={true}
               delay={200}
-              direction={'right'}
+              direction={'up'}
               duration={900}
             >
               <div className={styles.introduction_title_right}>
                 <span>{props.title}</span>
               </div>
             </Slide>
+            <span className={styles.introduction_main_line}>
+              ─────────── * ───────────
+            </span>
             <Fade triggerOnce={true} delay={900}>
               <div className={styles.introduction_description_right}>
                 {props.description.map((list, index) => {
@@ -58,16 +62,20 @@ export default function Introduction(props: propsType): JSX.Element {
       <>
         <div className={styles.introduction_container_left}>
           <main className={styles.introduction_main_left}>
+            <span className={styles.introduction_main_number}>02</span>
             <Slide
               triggerOnce={true}
               delay={200}
-              direction={'left'}
+              direction={'up'}
               duration={900}
             >
               <div className={styles.introduction_title_left}>
                 <span>{props.title}</span>
               </div>
             </Slide>
+            <span className={styles.introduction_main_line}>
+              ─────────── * ───────────
+            </span>
             <Fade triggerOnce={true} delay={900}>
               <div className={styles.introduction_description_left}>
                 {props.description.map((list, index) => {
