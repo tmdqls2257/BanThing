@@ -64,7 +64,6 @@ export default function Login(prop: propsType) {
   };
 
   const handleKakaoModal = () => {
-    let inner;
     const cookie = document.cookie;
     if (cookie.includes('inner')) {
       if (cookie.includes(';')) {
@@ -72,38 +71,24 @@ export default function Login(prop: propsType) {
         const findInner = cookieList.filter((cookie: any) => {
           return cookie.includes('inner');
         });
-        inner = findInner[0].split('=')[1];
-      } else {
-        inner = cookie.split('=')[1];
-      }
-    } else {
-      inner = '';
-    }
-
-    if (inner === 'true') {
-      router.push(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
-      );
-      if (typeof document !== 'undefined') {
-        const cookie = document.cookie;
-        if (cookie.includes(';')) {
-          const cookieList = cookie.split(';');
-          const findToken = cookieList.filter((cookie) => {
-            return cookie.includes('accessToken');
-          });
-          const accessToken = findToken[0].split('=')[1];
-          localStorage.setItem('accessToken', accessToken);
+        const inner = findInner[0].split('=')[1];
+        if (inner === 'true') {
+          router.push(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
+          );
         } else {
-          const accessToken = cookie.split('=')[1];
-          localStorage.setItem('accessToken', accessToken);
+          setKakaoModal(true);
+        }
+      } else {
+        const inner = cookie.split('=')[1];
+        if (inner === 'true') {
+          router.push(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
+          );
+        } else {
+          setKakaoModal(true);
         }
       }
-      // axios
-      //   .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`, {})
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => console.log(error));
     } else {
       setKakaoModal(true);
     }

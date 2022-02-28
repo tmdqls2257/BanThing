@@ -18,27 +18,54 @@ export default function Header(prop: propsType) {
   };
 
   const handleLogout = () => {
-    if (typeof localStorage !== 'undefined') {
-      const storageToken: any = localStorage.getItem('accessToken');
+    if (typeof document !== 'undefined') {
+      const cookie = document.cookie;
 
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${storageToken}`,
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-        .then((response) => {
-          localStorage.removeItem('accessToken');
-          prop.setIsLogin(false);
-        })
-        .catch((error) => {
-          console.log(error);
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        const cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: string) => {
+          return cookie.includes('accessToken');
         });
+        const accessToken = findAccessToken[0].split('=')[1];
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        const accessToken = cookie.split('=')[1];
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 

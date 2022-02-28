@@ -14,47 +14,52 @@ export default function Modal(prop: propsType) {
   const router = useRouter();
 
   const handleSignout = () => {
-    if (typeof localStorage !== 'undefined') {
-      const storageToken = localStorage.getItem('accessToken');
-
-      axios
-        .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
-          headers: {
-            Authorization: `Bearer ${storageToken}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then((response) => {
-          localStorage.removeItem('accessToken');
-          prop.setIsModalOpen(false);
-          router.push('/');
-        })
-        .catch((error) => {
-          console.log(error);
+    if (typeof document !== 'undefined') {
+      const cookie = document.cookie;
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        const cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: string) => {
+          return cookie.includes('accessToken');
         });
+        const accessToken = findAccessToken[0].split('=')[1];
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        const accessToken = cookie.split('=')[1];
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 
   const handleKakaoLogin = () => {
     router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
-    if (typeof document !== 'undefined') {
-      const cookie = document.cookie;
-      if (cookie.includes(';')) {
-        const cookieList = cookie.split(';');
-        const findToken = cookieList.filter((cookie) => {
-          return cookie.includes('accessToken');
-        });
-        const accessToken = findToken[0].split('=')[1];
-        localStorage.setItem('accessToken', accessToken);
-      } else {
-        const accessToken = cookie.split('=')[1];
-        localStorage.setItem('accessToken', accessToken);
-      }
-    }
-    // axios
-    //   .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`, {})
-    //   .then((response) => {})
-    //   .catch((error) => console.log(error));
   };
 
   const handleModal = () => {
