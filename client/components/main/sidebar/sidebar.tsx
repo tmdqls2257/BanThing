@@ -1,31 +1,10 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import styles from './sidebar.module.css';
 import ChatRoom from '../chatRoom/chatRoom';
 import CreateRoom from '../createRoom/createRoom';
 import JoinRoom from '../joinRoom/joinRoom';
 import MakeRoom from '../makeRoom/makeRoom';
 import MobileButton from '../mobileButton/mobileButton';
-
-const Container = styled.div`
-  display: flex;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    z-index: 1;
-    background-color: var(--white-color);
-    width: 100vw;
-    height: 85vh;
-  }
-`;
-
-const SidebarContainer = styled.div`
-  display: flex;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    position: absolute;
-    bottom: 0px;
-  }
-`;
 
 interface locationType {
   location: number[];
@@ -51,7 +30,7 @@ const Sidebar = ({ location, roomsId }: locationType) => {
   const [roomHostNickName, setroomHostNickName] = useState('');
   const [usersChats, setUsersChats] = useState<usersChats>();
   const [roomId, setMakeRoom_MapRoomId] = useState<number>(0);
-
+  const [slide, setSlide] = useState('down');
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
@@ -60,7 +39,7 @@ const Sidebar = ({ location, roomsId }: locationType) => {
 
   return (
     <section className={styles.sidebar_container} id={'sidebarContainer'}>
-      <MobileButton />
+      <MobileButton setSlide={setSlide} />
       <section className={styles.section}>
         <CreateRoom />
         <MakeRoom
