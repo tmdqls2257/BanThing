@@ -16,7 +16,6 @@ import { UserInfoDTO } from 'src/dto/userInfo.dto';
 import { SignUpValidateDTO } from 'src/dto/signupValidate.dto';
 import axios from 'axios';
 import { SnsSignUpDTO } from 'src/dto/snsSignUP.dto';
-import { KakaoTokenDTO } from 'src/dto/kakaoToken.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from '../post/post.repository';
 import { ReplyLogRepository } from '../post/reply.repository';
@@ -95,36 +94,6 @@ export class AuthService {
       .send({ data: null, message: '회원탈퇴 완료' });
   }
 
-  //카카오 회원탈퇴
-  // async kakaoUnlink(token: KakaoTokenDTO, res: Response): Promise<any> {
-  //   const info = await this.postService.getInfoKakao(token);
-  //   const list = await this.postRepository.find({
-  //     host_user_id: info.user_id,
-  //   });
-
-  //   if (list) {
-  //     for (const e of list) {
-  //       this.replyLogRepository.delete({ post_id: e.id });
-  //       this.postRepository.delete({ id: e.id });
-  //     }
-  //   }
-  //   await this.postRepository.delete({
-  //     host_user_id: info.user_id,
-  //   });
-  //   await this.userService.snsDelete(info.user_id);
-
-  //   const _url = 'https://kapi.kakao.com/v1/user/unlink';
-  //   const _header = {
-  //     Authorization: `Bearer ${token}`,
-  //   };
-  //   await axios.post(_url, {}, { headers: _header });
-
-  //   res.cookie('inner', '', { maxAge: 1 });
-  //   return res
-  //     .cookie('accessToken', '', { maxAge: 1 })
-  //     .send({ data: null, message: '회원탈퇴 완료' });
-  // }
-
   //로그인
   async logIn(loginDTO: LoginDTO, res: Response): Promise<object> {
     const userFind: Users = await this.userService.findByFields({
@@ -172,7 +141,7 @@ export class AuthService {
       { headers: _header },
     );
 
-    const userFind: Users = await this.userService.findByFields({
+    let userFind: Users = await this.userService.findByFields({
       where: { user_id: sign.data.kakao_account.email },
     });
 
@@ -183,7 +152,10 @@ export class AuthService {
         nickname: sign.data.properties.nickname,
         auth: 'kakao',
       };
-      this.userService.snsSave(snsSignUp);
+      await this.userService.snsSave(snsSignUp);
+      userFind = await this.userService.findByFields({
+        where: { user_id: sign.data.kakao_account.email },
+      });
     }
 
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
@@ -217,18 +189,6 @@ export class AuthService {
       .cookie('accessToken', '', { maxAge: 1 })
       .send({ data: null, message: '로그아웃' });
   }
-
-  //카카오 로그아웃
-  // async kakaoLogOut(res: Response, token: KakaoTokenDTO): Promise<any> {
-  //   const _url = 'https://kapi.kakao.com/v1/user/logout';
-  //   const _header = {
-  //     Authorization: `Bearer ${token}`,
-  //   };
-  //   await axios.post(_url, {}, { headers: _header });
-  //   return res
-  //     .cookie('accessToken', '', { maxAge: 1 })
-  //     .send({ data: null, message: '로그아웃' });
-  // }
 
   //토큰으로 사용자 정보 확인
   async tokenValidateUser(payload: Payload): Promise<UserInfoDTO> {

@@ -41,12 +41,6 @@ export class AuthController {
     return await this.authService.signOut(req.user, res, req);
   }
 
-  // @Delete('kakaoUnlink') //카카오 회원탈퇴
-  // async kakaoUnlink(@Req() req: Request, @Res() res: Response) {
-  //   const token = req.cookies['accessToken'];
-  //   return this.authService.kakaoUnlink(token, res);
-  // }
-
   @Post('/login') //로그인
   async logIn(@Res() res: Response, @Body() loginDTO: LoginDTO) {
     return await this.authService.logIn(loginDTO, res);
@@ -71,12 +65,6 @@ export class AuthController {
   logOut(@Res() res: Response, @Req() req: Request): Promise<object> {
     return this.authService.logOut(res, req, req.user);
   }
-
-  // @Get('kakaoLogOut') //카카오 로그아웃
-  // kakaoLogOut(@Res() res: Response, @Req() req: Request) {
-  //   const token = req.cookies['accessToken'];
-  //   return this.authService.kakaoLogOut(res, token);
-  // }
 
   @Post('dummy') //더미 로그인
   async dummyLogin(@Res() res: Response, @Body() loginDTO: LoginDTO) {
