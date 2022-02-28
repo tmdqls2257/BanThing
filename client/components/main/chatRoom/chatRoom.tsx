@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import styles from './chatRoom.module.css';
 import buttonStyle from '../button.module.css';
 import { useEffect, useState } from 'react';
@@ -6,25 +5,6 @@ import axios from 'axios';
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
-
-const Container = styled.div`
-  /* 컴포넌트를 보고 싶다면 display: flex; 바꿔주세요 */
-  display: none;
-  flex-direction: column;
-  min-height: 715px;
-  width: 30vw;
-  min-width: 400px;
-  main {
-    background-color: var(--chat-background-color);
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  @media screen and (max-width: 768px) {
-    width: 100vw;
-  }
-`;
 
 interface usersChats {
   data: {
@@ -60,6 +40,8 @@ const ChatRoom = ({
     let cookieToken: any;
     let cookieList: any;
     if (typeof window !== 'undefined') {
+      console.log(1);
+
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         cookieList = cookie.split(';');
@@ -70,18 +52,20 @@ const ChatRoom = ({
       } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
         cookieToken = cookie.split('=')[1];
       }
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-          headers: {
-            Authorization: `Bearer ${cookieToken}`,
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        })
-        .then((response) => {
-          const { userInfo } = response.data.data;
-          setNickname(userInfo.nickname);
-        });
+      if (cookieToken) {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${cookieToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setNickname(userInfo.nickname);
+          });
+      }
     }
   }, []);
 
@@ -105,7 +89,7 @@ const ChatRoom = ({
               addable={true}
             ></Chats>
           </main>
-          <section className={buttonStyle.button_container}>
+          <section className={buttonStyle.button_owner_container}>
             <button className={buttonStyle.button} onClick={onClick}>
               삭제하기
             </button>
@@ -129,7 +113,7 @@ const ChatRoom = ({
             addable={true}
           ></Chats>
         </main>
-        <section className={buttonStyle.button_container}></section>
+        <section className={buttonStyle.button_not_owner_container}></section>
       </section>
     </>
   );

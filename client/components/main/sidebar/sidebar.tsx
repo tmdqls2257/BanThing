@@ -48,110 +48,28 @@ const Sidebar = ({
   const [roomId, setMakeRoom_MapRoomId] = useState<number>(0);
   const [slide, setSlide] = useState('down');
   const [relandering, setRelandering] = useState(false);
-  const [mapToMobileValue, setMapToMobileValue] = useState('');
+  const [className, setClassName] = useState(styles.slideDown);
+
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
     }
   }, [roomsId]);
 
-  useCallback(() => {
+  useEffect(() => {
     setMaprelandering(relandering);
   }, [relandering]);
-  const downAnimation = keyframes`
-  
-  from {
-    transform: translate3d(0, 10vh, 0);
-  }
 
-  to {
-    transform: translate3d(0, 80vh, 0);
-  }
-`;
-  const upAnimation = keyframes`
-from {
-  transform: translate3d(0, 80vh, 0);
-}
-
-to {
-  transform: translate3d(0, 10vh, 0);
-}
-`;
-  const resetAnimation = keyframes`
-from {
-  transform: translate3d(0, 80vh, 0);
-}
-
-to {
-  transform: translate3d(0, -1100, 0);
-}
-`;
-
-  console.log(mapTomobileUp);
-  if (typeof window !== 'undefined')
-    if (window.innerWidth <= 768) {
-      return (
-        <section className={styles.sidebar_container} id={'sidebarContainer'}>
-          {slide === 'down' ? (
-            <Reveal className={styles.downAnimation} keyframes={downAnimation}>
-              <>
-                <MobileButton setSlide={setSlide} />
-                <section className={styles.section}>
-                  <CreateRoom />
-                  <MakeRoom
-                    setRelanering={setRelandering}
-                    location={location}
-                    setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
-                  />
-                  <JoinRoom
-                    setroomHostNickName={setroomHostNickName}
-                    setUsersChats={setUsersChats}
-                    setroomTitle={setRoomTitle}
-                    roomsId={roomId}
-                  />
-                  <ChatRoom
-                    roomHostNickName={roomHostNickName}
-                    roomTitle={roomTitle}
-                    roomsId={roomId}
-                    usersChats={usersChats}
-                  />
-                </section>
-              </>
-            </Reveal>
-          ) : (
-            <>
-              <Reveal className={styles.upAnimation} keyframes={upAnimation}>
-                <>
-                  <MobileButton setSlide={setSlide} />
-                  <section className={styles.section}>
-                    <CreateRoom />
-                    <MakeRoom
-                      setRelanering={setRelandering}
-                      location={location}
-                      setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
-                    />
-                    <JoinRoom
-                      setroomHostNickName={setroomHostNickName}
-                      setUsersChats={setUsersChats}
-                      setroomTitle={setRoomTitle}
-                      roomsId={roomId}
-                    />
-                    <ChatRoom
-                      roomHostNickName={roomHostNickName}
-                      roomTitle={roomTitle}
-                      roomsId={roomId}
-                      usersChats={usersChats}
-                    />
-                  </section>
-                </>
-              </Reveal>
-            </>
-          )}
-        </section>
-      );
+  useMemo(() => {
+    if (slide === 'down') {
+      setClassName(styles.down);
+    } else if (slide === 'up') {
+      setClassName(styles.up);
     }
+  }, [slide]);
+
   return (
-    <section className={styles.sidebar_container} id={'sidebarContainer'}>
+    <section className={className} id={'sidebarContainer'}>
       <MobileButton setSlide={setSlide} />
       <section className={styles.section}>
         <CreateRoom />

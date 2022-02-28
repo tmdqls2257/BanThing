@@ -67,41 +67,43 @@ const MakeRoom = ({
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: any) => {
+        const findAccessToken = cookieList.filter((cookie: string) => {
           return cookie.includes('accessToken');
         });
         cookieToken = findAccessToken[0].split('=')[1];
       } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
         cookieToken = cookie.split('=')[1];
       }
-      const headers = {
-        Authorization: `Bearer ${cookieToken}`,
-      };
+      if (cookieToken) {
+        const headers = {
+          Authorization: `Bearer ${cookieToken}`,
+        };
 
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-          {
-            title: data[0],
-            category: data[1],
-            content: data[2],
-            host_role: data[3],
-            location_latitude: data[4],
-            location_longitude: data[5],
-          },
-          {
-            headers,
-            withCredentials: true,
-          },
-        )
-        .then((res) => {
-          setMakeRoomId(res.data.data.post_id);
-        });
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+            {
+              title: data[0],
+              category: data[1],
+              content: data[2],
+              host_role: data[3],
+              location_latitude: data[4],
+              location_longitude: data[5],
+            },
+            {
+              headers,
+              withCredentials: true,
+            },
+          )
+          .then((res) => {
+            setMakeRoomId(res.data.data.post_id);
+          });
 
-      setSelect('');
-      setTitle('');
-      setTextarea('');
-      setRadio('');
+        setSelect('');
+        setTitle('');
+        setTextarea('');
+        setRadio('');
+      }
     } else {
       cookieToken = '';
     }
@@ -177,8 +179,8 @@ const MakeRoom = ({
             <option value="2">가지러 가는 사람</option>
           </select>
         </section>
-        <section>
-          <h1>내용</h1>
+        <section className={styles.section_content}>
+          <h1 className={styles.h1}>내용</h1>
           <textarea
             className={styles.content_textarea}
             onChange={textareaChange}
@@ -188,7 +190,7 @@ const MakeRoom = ({
       </main>
       <section className={buttonStyle.button_container}>
         <button className={buttonStyle.button} onClick={onClick}>
-          참여하기
+          만들기
         </button>
       </section>
       {makeRoomModal ? (

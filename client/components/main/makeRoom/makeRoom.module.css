@@ -2,11 +2,10 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: 300px;
-
-  min-height: 715px;
+  min-width: var(--min-sider-width);
+  min-height: var(--component-min-height);
   background-color: var(--chat-background-color);
-  height: auto;
+  flex: 1;
   animation: fade 1s ease-in-out;
 }
 .main {
@@ -22,13 +21,13 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: 400px;
-  min-height: 715px;
+  min-width: var(--min-sider-width);
+  min-height: var(--component-min-height);
   background-color: var(--chat-background-color);
   height: auto;
 }
 .section_flex {
-  margin-top: 16px;
+  margin-top: var(--margine-base);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -36,6 +35,7 @@
 }
 .section_flex_input,
 .section_flex_select {
+  outline: none;
   padding-left: 10px;
   display: flex;
   width: 200px;
@@ -46,6 +46,9 @@
   margin-left: 10px;
   min-width: 60%;
 }
+.section_content {
+  margin-top: var(--margine-base);
+}
 .host_roll {
   margin-top: 16px;
   display: flex;
@@ -54,6 +57,7 @@
   flex-direction: flex-start;
 }
 .host_roll_select {
+  outline: none;
   padding-left: 10px;
   display: flex;
   width: 200px;
@@ -65,6 +69,7 @@
   min-width: 60%;
 }
 .content_textarea {
+  outline: none;
   padding: 32px;
   line-height: 1.5;
   display: flex;
@@ -81,7 +86,7 @@
 
 .h1 {
   margin: 0;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   border-radius: 5px;
   color: white;
   padding: 10px;
@@ -94,6 +99,13 @@
     height: 120vh;
   }
 }
+
+@media screen and (max-height: 640px) {
+  .MakeRoom {
+    height: 100vh;
+  }
+}
+
 @keyframes fade {
   from {
     opacity: 0;

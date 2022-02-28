@@ -1,10 +1,10 @@
 .section {
   display: none;
   flex-direction: column;
-  min-height: 715px;
+  min-height: var(--component-min-height);
   width: 30vw;
   animation: fade 1s ease-in-out;
-  min-width: 400px;
+  min-width: var(--min-sider-width);
 }
 .main {
   background-color: var(--chat-background-color);

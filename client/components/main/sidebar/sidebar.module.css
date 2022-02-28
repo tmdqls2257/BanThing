@@ -1,16 +1,13 @@
-.sidebar_container {
-  display: flex;
-  z-index: 3;
-}
 .section {
   display: flex;
 }
-.downAnimation {
-  display: inline;
+.down,
+.up {
+  min-width: var(--min-sider-width);
+  display: flex;
+  z-index: 2;
 }
-.upAnimation {
-  animation: none;
-}
+
 @media screen and (max-width: 768px) {
   .sidebar_container {
     flex-direction: column;
@@ -22,10 +19,45 @@
     z-index: 1;
     background-color: var(--white-color);
     width: 100vw;
+    z-index: 3;
     height: 85vh;
   }
-  .upAnimation {
-    z-index: 3;
-    animation: none;
+  .down {
+    flex-direction: column;
+
+    z-index: 2;
+    height: var(--component-mediaquery-min-height);
+    min-width: var(--min-sider-width);
+    position: absolute;
+    animation: down 1s forwards;
+  }
+  .up {
+    display: flex;
+    flex-direction: column;
+    height: var(--component-mediaquery-min-height);
+
+    min-width: 360px;
+    position: absolute;
+    z-index: 2;
+    animation: up 1s forwards;
+  }
+}
+
+@keyframes down {
+  from {
+    transform: translate3d(0, 5vh, 0);
+  }
+
+  to {
+    transform: translate3d(0, 90vh, 0);
+  }
+}
+@keyframes up {
+  from {
+    transform: translate3d(0, 90vh, 0);
+  }
+
+  to {
+    transform: translate3d(0, 5vh, 0);
   }
 }

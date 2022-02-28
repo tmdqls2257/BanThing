@@ -20,27 +20,29 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
         cookie = document.cookie;
         if (cookie.includes(';') && cookie.includes('accessToken')) {
           cookieList = cookie.split(';');
-          const findAccessToken = cookieList.filter((cookie: any) => {
+          const findAccessToken = cookieList.filter((cookie: string) => {
             return cookie.includes('accessToken');
           });
           cookieToken = findAccessToken[0].split('=')[1];
         } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
           cookieToken = cookie.split('=')[1];
         }
-        const headers = {
-          Authorization: `Bearer ${cookieToken}`,
-        };
-        axios.post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-          {
-            post_id: roomsId,
-            reply: chat,
-          },
-          {
-            headers,
-            withCredentials: true,
-          },
-        );
+        if (cookieToken) {
+          const headers = {
+            Authorization: `Bearer ${cookieToken}`,
+          };
+          axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+            {
+              post_id: roomsId,
+              reply: chat,
+            },
+            {
+              headers,
+              withCredentials: true,
+            },
+          );
+        }
       }
       onCreated(chat);
     }

@@ -5,11 +5,10 @@
   justify-content: center;
   align-items: center;
   width: 30vw;
-  min-width: 300px;
-  height: auto;
+  min-width: var(--min-sider-width);
   margin: auto;
   animation: fade 1s ease-in-out;
-  min-height: 715px;
+  min-height: var(--component-min-height);
 }
 .image {
   width: 4.75rem;
@@ -24,7 +23,11 @@
   .button {
     width: 10rem;
   }
+  .createRoom {
+    height: var(--component-mediaquery-min-height);
+  }
 }
+
 @keyframes fade {
   from {
     opacity: 0;

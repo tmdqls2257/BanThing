@@ -2,8 +2,8 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: 400px;
-  min-height: 715px;
+  min-width: var(--min-sider-width);
+  min-height: var(--component-min-height);
   animation: fade 1s ease-in-out;
   height: auto;
 }
@@ -21,6 +21,10 @@
 .JoinRoom_title {
   display: flex;
 }
+.h1 {
+  margin: 0 auto;
+  font-size: var(--font-size-md);
+}
 .h3 {
   font-size: var(--font-size-base);
 }
@@ -35,7 +39,7 @@
   font-weight: var(--font-weight-bold);
 }
 .joinRoom_content_p {
-  padding: 32px;
+  padding: var(--padding-2rem);
   line-height: 1.5;
   display: flex;
   border: none;
@@ -59,6 +63,13 @@
     width: 100vw;
   }
 }
+
+@media screen and (max-height: 640px) {
+  .JoinRoom {
+    height: 100vh;
+  }
+}
+
 @keyframes fade {
   from {
     opacity: 0;

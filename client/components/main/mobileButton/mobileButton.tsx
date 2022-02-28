@@ -7,9 +7,12 @@ interface mobileType {
 const MobileButton = ({ setSlide }: mobileType) => {
   const [mobile, setMobile] = useState<Direction>('up');
   const handleClick = () => {
+    const sidebar = document.querySelector('#sidebarContainer')! as HTMLElement;
     if (mobile === 'down') {
+      sidebar.classList.add('down');
       setMobile('up');
     } else if (mobile === 'up') {
+      sidebar.classList.add('up');
       setMobile('down');
     }
     setSlide(mobile);

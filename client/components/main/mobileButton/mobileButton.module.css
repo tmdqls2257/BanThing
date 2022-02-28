@@ -1,6 +1,7 @@
 .button {
   width: 181px;
   height: 70px;
+
   border: none;
   border-radius: 20px 20px 0 0;
   background-color: var(--color-white);
@@ -8,6 +9,7 @@
 }
 .section {
   display: flex;
+  position: relative;
   justify-content: center;
 }
 @media screen and (min-width: 768px) {

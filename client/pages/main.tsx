@@ -17,7 +17,6 @@ const Main: NextPage = () => {
   const [roomsId, setRoomsData] = useState(0);
   const [maprelandering, setMaprelandering] = useState(false);
   const [mapTomobileUp, setMapToMobileUp] = useState('');
-  console.log(mapTomobileUp);
 
   return (
     <>

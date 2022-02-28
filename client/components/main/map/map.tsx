@@ -207,24 +207,20 @@ function Map({
               const headers = {
                 Authorization: `Bearer ${positions[i].token}`,
               };
-              axios
-                .post(
-                  `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-                  {
-                    title: positions[i].title,
-                    content: positions[i].content,
-                    location_latitude: positions[i].location_latitude,
-                    location_longitude: positions[i].location_longitude,
-                    host_role: positions[i].host_role,
-                    category: positions[i].category,
-                  },
-                  {
-                    headers,
-                  },
-                )
-                .then((response) => {
-                  console.log('1이라고 합니다.');
-                });
+              axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+                {
+                  title: positions[i].title,
+                  content: positions[i].content,
+                  location_latitude: positions[i].location_latitude,
+                  location_longitude: positions[i].location_longitude,
+                  host_role: positions[i].host_role,
+                  category: positions[i].category,
+                },
+                {
+                  headers,
+                },
+              );
             }
             clickEvent(marker, map);
           }
@@ -232,11 +228,8 @@ function Map({
       });
       setLoading(true);
     };
-    mapScript.addEventListener('load', onLoadKakaoMap);
-    console.log(maprelandering);
-
-    return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [data?.data.postList.length]);
+    onLoadKakaoMap();
+  }, [data?.data.postList.length, maprelandering]);
 
   return (
     <main className={styles.main}>
