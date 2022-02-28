@@ -1,0 +1,130 @@
+@font-face {
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-SemiBold';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff')
+    format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+.title_container {
+  display: flex;
+  width: 100vw;
+  max-width: 1500px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  /* background-color: gray; */
+}
+
+.main {
+  display: flex;
+  width: 35vw;
+  min-height: 55vw;
+  margin-right: 3vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title_image {
+  display: flex;
+  width: 40vw;
+  /* margin-left: 2.5vw; */
+  margin-right: 7vw;
+  box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
+}
+
+.title_title {
+  font-size: 5vw;
+  font-weight: 600;
+  font-family: 'BMDOHYEON', sans-serif;
+}
+
+.orange {
+  color: #ff8a3c;
+}
+
+.black {
+  color: #000000;
+}
+
+.title_description {
+  line-height: 1.4;
+  width: 35vw;
+  margin: 1.5vw auto 3vw auto;
+  font-size: 2.1vw;
+  font-weight: 400;
+  text-align: center;
+  font-family: 'BMDOHYEON', sans-serif;
+}
+
+.title_button {
+  width: 12vw;
+  height: 5vw;
+  color: #ffffff;
+  font-size: 2vw;
+  border-radius: 12px;
+  background-color: #ff8a3c;
+  border: solid;
+  border-width: 5px;
+  border-color: #ff8a3c;
+  transition: 0.3s ease;
+  font-family: 'Pretendard-SemiBold', sans-serif;
+}
+
+.title_button_description {
+  font-family: 'BMDOHYEON', sans-serif;
+}
+
+.title_button:hover {
+  color: white;
+  background-color: #ff8a3c;
+  border-width: 5px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.title_button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+.title_button span:after {
+  content: '\00bb';
+  position: absolute;
+  color: white;
+  font-size: 2.4vw;
+  opacity: 0;
+  top: -0.45vw;
+  left: 7.4vw;
+  transition: 0.3s ease;
+}
+
+.title_button:hover span {
+  padding-right: 1vw;
+}
+
+.title_button:hover span:after {
+  color: white;
+  opacity: 1;
+  right: 0;
+  transition: 0.3s ease;
+}
