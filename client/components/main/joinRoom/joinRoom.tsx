@@ -79,6 +79,8 @@ const JoinRoom = ({
     let cookieToken: any;
     let cookieList: any;
     if (typeof window !== 'undefined' && data) {
+      console.log(1);
+
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         cookieList = cookie.split(';');

@@ -82,12 +82,8 @@ const ChatRoom = ({
           const { userInfo } = response.data.data;
           setNickname(userInfo.nickname);
         });
-    } else {
-      cookieToken = '';
     }
   }, []);
-  console.log(usernickname);
-  console.log(roomHostNickName);
 
   const onClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;

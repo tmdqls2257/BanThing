@@ -10,7 +10,8 @@ interface newChatType {
 const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const [chat, setChat] = useState('');
 
-  const onSubmit = async () => {
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (chat !== '') {
       let cookie: any;
       let cookieToken: any;

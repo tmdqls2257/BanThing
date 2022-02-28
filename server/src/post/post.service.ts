@@ -50,7 +50,7 @@ export class PostService {
     return { data: null, message: 'reply 저장 완료' };
   }
 
-  //채팅 저장(카카오)
+  // 채팅 저장(카카오)
   // async replyKakao(replyDTO: ReplyDTO, token: KakaoTokenDTO): Promise<object> {
   //   const info = await this.getInfoKakao(token);
 
@@ -101,7 +101,7 @@ export class PostService {
   //   return { data: null, message: '글 삭제 완료' };
   // }
 
-  //토큰 유효성검사(카카오)
+  // 토큰 유효성검사(카카오)
   // async getInfoKakao(token: KakaoTokenDTO) {
   //   const header = {
   //     Authorization: `Bearer ${token}`,
