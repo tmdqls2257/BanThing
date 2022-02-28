@@ -1,14 +1,21 @@
 .sidebar_container {
   display: flex;
+  z-index: 3;
 }
 .section {
   display: flex;
 }
+.downAnimation {
+  display: inline;
+}
+.upAnimation {
+  animation: none;
+}
 @media screen and (max-width: 768px) {
   .sidebar_container {
     flex-direction: column;
+    height: auto;
     position: absolute;
-    bottom: 0px;
   }
   .section {
     display: flex;
@@ -16,5 +23,9 @@
     background-color: var(--white-color);
     width: 100vw;
     height: 85vh;
+  }
+  .upAnimation {
+    z-index: 3;
+    animation: none;
   }
 }

@@ -37,6 +37,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
   };
+
   const onClick = () => {
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
@@ -45,50 +46,60 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     chatRoom.style.display = 'none';
     removeModal.style.display = 'none';
     createElement.style.display = 'flex';
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      const auth = localStorage.getItem('auth');
-      const accessToken = localStorage.getItem('accessToken');
-      const innerCookie = document.cookie.split(';')[1];
-      const kakaoToken = innerCookie.split('=')[1];
-      if (accessToken || kakaoToken) {
-        if (auth === 'banthing') {
-          const headers = {
-            Authorization: `Bearer ${accessToken}`,
-          };
-          axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-            {
-              headers,
-            },
-          );
-        } else {
-          const headers = {
-            Authorization: `Bearer ${kakaoToken}`,
-          };
-          axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
-            {
-              headers,
-            },
-          );
-        }
+
+    let cookie: any;
+    let cookieToken: any;
+    let cookieList: any;
+    if (typeof window !== 'undefined') {
+      cookie = document.cookie;
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: any) => {
+          return cookie.includes('accessToken');
+        });
+        cookieToken = findAccessToken[0].split('=')[1];
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieToken = cookie.split('=')[1];
       }
+      const headers = {
+        Authorization: `Bearer ${cookieToken}`,
+      };
+      axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+        {
+          headers,
+        },
+      );
     }
+  };
+  const backClick = () => {
+    const removeModal = document.querySelector('#removeModal')! as HTMLElement;
+
+    removeModal.style.display = 'none';
   };
   return (
     <>
-      <Container id="removeModal">
+      <section className={styles.removeModal__section} id="removeModal">
         <form className={styles.rate_modal} onSubmit={onSubmit}>
           <section className={styles.rate_title}>
             <h1>정말 삭제하시겠습니까?</h1>
           </section>
-          <section className={buttonStyle.button_container}>
-            <button className={buttonStyle.button} onClick={onClick}>
-              참여하기
+          <section className={buttonStyle.button_removeModal_container}>
+            <button
+              className={buttonStyle.button_removeModal}
+              onClick={onClick}
+            >
+              삭제하기
+            </button>
+            <button
+              className={buttonStyle.button_removeModal}
+              onClick={backClick}
+            >
+              뒤로가기
             </button>
           </section>
         </form>
-      </Container>
+      </section>
     </>
   );
 }

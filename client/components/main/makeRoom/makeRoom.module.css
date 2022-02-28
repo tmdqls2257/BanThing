@@ -2,7 +2,8 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: 400px;
+  min-width: 300px;
+
   min-height: 715px;
   background-color: var(--chat-background-color);
   height: auto;
@@ -27,6 +28,7 @@
   height: auto;
 }
 .section_flex {
+  margin-top: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,6 +47,7 @@
   min-width: 60%;
 }
 .host_roll {
+  margin-top: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -77,6 +80,7 @@
 }
 
 .h1 {
+  margin: 0;
   font-size: 1rem;
   border-radius: 5px;
   color: white;
@@ -87,6 +91,7 @@
 @media screen and (max-width: 768px) {
   .MakeRoom {
     width: 100vw;
+    height: 120vh;
   }
 }
 @keyframes fade {
