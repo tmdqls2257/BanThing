@@ -75,48 +75,37 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-    if (typeof window !== 'undefined' && window.localStorage && data) {
-      const auth = localStorage.getItem('auth');
-      const accessToken = localStorage.getItem('accessToken');
-      const cookie = document.cookie.split(';')[1];
-      const kakaoToken = cookie.split('=')[1];
-      if (auth === 'banthing') {
-        const getPosts = async () => {
-          try {
-            const headers = {
-              Authorization: `Bearer ${accessToken}`,
-            };
-            const response: AxiosResponse = await axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
-              {
-                headers,
-              },
-            );
-            setChats(response.data);
-          } catch (e) {
-            console.log(e);
-          }
-        };
-        getPosts();
-      } else {
-        const getPosts = async () => {
-          try {
-            const headers = {
-              Authorization: `Bearer ${kakaoToken}`,
-            };
-            const response: AxiosResponse = await axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao/${data.data.post.id}`,
-              {
-                headers,
-              },
-            );
-            setChats(response.data);
-          } catch (e) {
-            console.log(e);
-          }
-        };
-        getPosts();
+    let cookie: any;
+    let cookieToken: any;
+    let cookieList: any;
+    if (typeof window !== 'undefined' && data) {
+      cookie = document.cookie;
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: any) => {
+          return cookie.includes('accessToken');
+        });
+        cookieToken = findAccessToken[0].split('=')[1];
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieToken = cookie.split('=')[1];
       }
+      const getPosts = async () => {
+        try {
+          const headers = {
+            Authorization: `Bearer ${cookieToken}`,
+          };
+          const response: AxiosResponse = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
+            {
+              headers,
+            },
+          );
+          setChats(response.data);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getPosts();
     }
     joinRoom.style.display = 'none';
     chatRoom.style.display = 'flex';

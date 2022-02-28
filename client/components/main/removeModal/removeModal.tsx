@@ -46,34 +46,30 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     chatRoom.style.display = 'none';
     removeModal.style.display = 'none';
     createElement.style.display = 'flex';
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      const auth = localStorage.getItem('auth');
-      const accessToken = localStorage.getItem('accessToken');
-      const innerCookie = document.cookie.split(';')[1];
-      const kakaoToken = innerCookie.split('=')[1];
-      if (accessToken || kakaoToken) {
-        if (auth === 'banthing') {
-          const headers = {
-            Authorization: `Bearer ${accessToken}`,
-          };
-          axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-            {
-              headers,
-            },
-          );
-        } else {
-          const headers = {
-            Authorization: `Bearer ${kakaoToken}`,
-          };
-          axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/kakao/${removeRoomId}`,
-            {
-              headers,
-            },
-          );
-        }
+
+    let cookie: any;
+    let cookieToken: any;
+    let cookieList: any;
+    if (typeof window !== 'undefined') {
+      cookie = document.cookie;
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: any) => {
+          return cookie.includes('accessToken');
+        });
+        cookieToken = findAccessToken[0].split('=')[1];
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieToken = cookie.split('=')[1];
       }
+      const headers = {
+        Authorization: `Bearer ${cookieToken}`,
+      };
+      axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+        {
+          headers,
+        },
+      );
     }
   };
   const backClick = () => {

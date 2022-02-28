@@ -236,7 +236,7 @@ function Map({
     console.log(maprelandering);
 
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [data?.data.postList.length, maprelandering]);
+  }, [data?.data.postList.length]);
 
   return (
     <main className={styles.main}>

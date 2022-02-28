@@ -32,7 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       setIsLogin(false);
     }
   }, [cookie]);
-  console.log(accessToken);
 
   return (
     <>

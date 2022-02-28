@@ -60,66 +60,50 @@ const MakeRoom = ({
   ];
 
   const axiosPost = () => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const auth = localStorage.getItem('auth');
-      const accessToken = localStorage.getItem('accessToken');
-      const cookie = document.cookie.split(';')[1];
-      const kakaoToken = cookie.split('=')[1];
-
-      if (auth === 'banthing') {
-        const headers = {
-          Authorization: `Bearer ${accessToken}`,
-        };
-
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-            {
-              title: data[0],
-              category: data[1],
-              content: data[2],
-              host_role: data[3],
-              location_latitude: data[4],
-              location_longitude: data[5],
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          )
-          .then((res) => {
-            setMakeRoomId(res.data.data.post_id);
-          });
-      } else {
-        const headers = {
-          Authorization: `Bearer ${kakaoToken}`,
-        };
-        console.log(kakaoToken);
-
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/kakao`,
-            {
-              title: data[0],
-              category: data[1],
-              content: data[2],
-              host_role: data[3],
-              location_latitude: data[4],
-              location_longitude: data[5],
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          )
-          .then((res) => {
-            setMakeRoomId(res.data.data.post_id);
-          });
+    let cookie: any;
+    let cookieToken: any;
+    let cookieList: any;
+    if (typeof window !== 'undefined') {
+      cookie = document.cookie;
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: any) => {
+          return cookie.includes('accessToken');
+        });
+        cookieToken = findAccessToken[0].split('=')[1];
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieToken = cookie.split('=')[1];
       }
+      const headers = {
+        Authorization: `Bearer ${cookieToken}`,
+      };
+
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+          {
+            title: data[0],
+            category: data[1],
+            content: data[2],
+            host_role: data[3],
+            location_latitude: data[4],
+            location_longitude: data[5],
+          },
+          {
+            headers,
+            withCredentials: true,
+          },
+        )
+        .then((res) => {
+          setMakeRoomId(res.data.data.post_id);
+        });
+
       setSelect('');
       setTitle('');
       setTextarea('');
       setRadio('');
+    } else {
+      cookieToken = '';
     }
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
