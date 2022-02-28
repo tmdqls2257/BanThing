@@ -56,7 +56,7 @@ export class AuthController {
   kakaoLogin(@Res() res: Response) {
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirectUrl = `/users/kakaoLoginRedirect`;
+    const _redirectUrl = `${process.env.SERVER_ENDPOINT}/users/kakaoLoginRedirect`;
     const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
     return res.redirect(url);
   }
@@ -68,7 +68,7 @@ export class AuthController {
 
   @Post('/logout') //로그아웃
   @UseGuards(AuthGuard) //토큰으로 유저 정보 확인
-  logOut(@Res() res: Response, @Req() req: Request): Promise<object> {
+  logOut(@Res() res: Response): Promise<object> {
     return this.authService.logOut(res);
   }
 
