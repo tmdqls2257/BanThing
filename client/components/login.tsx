@@ -151,9 +151,8 @@ export default function Login(prop: propsType) {
         {signUpModal ? (
           <>
             <SignUp
-              signUpModal={signUpModal}
               setSignUpModal={setSignUpModal}
-              setIsLogin={prop.setIsLogin}
+              setLoginMessage={setLoginMessage}
             />
           </>
         ) : (

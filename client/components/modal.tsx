@@ -6,6 +6,7 @@ axios.defaults.withCredentials = true;
 interface propsType {
   setIsModalOpen: Function;
   setSignUpModal?: Function;
+  setLoginMessage?: Function;
   type: string;
 }
 
@@ -49,6 +50,18 @@ export default function Modal(prop: propsType) {
   };
 
   const handleModal = () => {
+    if (!prop.setSignUpModal) {
+      prop.setIsModalOpen(false);
+    } else if (prop.setSignUpModal) {
+      prop.setIsModalOpen(false);
+      prop.setSignUpModal(false);
+    }
+  };
+
+  const handleSignUpModal = () => {
+    if (prop.setLoginMessage) {
+      prop.setLoginMessage('');
+    }
     if (!prop.setSignUpModal) {
       prop.setIsModalOpen(false);
     } else if (prop.setSignUpModal) {
@@ -171,7 +184,7 @@ export default function Modal(prop: propsType) {
             <div className={styles.signup_modal_button_container}>
               <button
                 className={styles.signup_modal_button}
-                onClick={handleModal}
+                onClick={handleSignUpModal}
               >
                 확인
               </button>
