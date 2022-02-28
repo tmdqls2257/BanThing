@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
-  const [accessToken, setAccessToken] = useState('');
 
   let cookie: any;
   let cookieToken: any;
@@ -23,33 +22,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       cookieToken = cookie.split('=')[1];
     }
   } else {
-    cookie = '';
+    cookieToken = '';
   }
 
   useEffect(() => {
-    const accessToken: any = localStorage.getItem('accessToken');
-    if (cookieToken && cookie.includes('accessToken')) {
+    if (cookieToken) {
       setIsLogin(true);
-      setAccessToken(cookieToken);
-      if (accessToken) {
-        setAccessToken(accessToken);
-      }
     } else {
       setIsLogin(false);
-      setAccessToken('');
     }
   }, [cookie]);
   console.log(accessToken);
 
   return (
     <>
-      <Header
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        accessToken={accessToken}
-        setAccessToken={setAccessToken}
-      />
-      <Component {...pageProps} accessToken={accessToken} />
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
+      <Component {...pageProps} />
     </>
   );
 }
