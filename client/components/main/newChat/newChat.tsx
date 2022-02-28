@@ -13,42 +13,34 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (chat !== '') {
-      if (typeof window !== 'undefined' && window.localStorage) {
-        const auth = localStorage.getItem('auth');
-        const accessToken = localStorage.getItem('accessToken');
-        const innerCookie = document.cookie.split(';')[1];
-        const kakaoToken = innerCookie.split('=')[1];
-        if (auth === 'banthing') {
-          const headers = {
-            Authorization: `Bearer ${accessToken}`,
-          };
-          axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-            {
-              post_id: roomsId,
-              reply: chat,
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          );
-        } else {
-          const headers = {
-            Authorization: `Bearer ${kakaoToken}`,
-          };
-          axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/kakao`,
-            {
-              post_id: roomsId,
-              reply: chat,
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          );
+      let cookie: any;
+      let cookieToken: any;
+      let cookieList: any;
+      if (typeof window !== 'undefined') {
+        cookie = document.cookie;
+        if (cookie.includes(';') && cookie.includes('accessToken')) {
+          cookieList = cookie.split(';');
+          const findAccessToken = cookieList.filter((cookie: any) => {
+            return cookie.includes('accessToken');
+          });
+          cookieToken = findAccessToken[0].split('=')[1];
+        } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+          cookieToken = cookie.split('=')[1];
         }
+        const headers = {
+          Authorization: `Bearer ${cookieToken}`,
+        };
+        axios.post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+          {
+            post_id: roomsId,
+            reply: chat,
+          },
+          {
+            headers,
+            withCredentials: true,
+          },
+        );
       }
       onCreated(chat);
     }

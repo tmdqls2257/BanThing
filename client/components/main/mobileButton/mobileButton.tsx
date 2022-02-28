@@ -5,7 +5,7 @@ interface mobileType {
   setSlide: Dispatch<SetStateAction<string>>;
 }
 const MobileButton = ({ setSlide }: mobileType) => {
-  const [mobile, setMobile] = useState<Direction>('down');
+  const [mobile, setMobile] = useState<Direction>('up');
   const handleClick = () => {
     if (mobile === 'down') {
       setMobile('up');

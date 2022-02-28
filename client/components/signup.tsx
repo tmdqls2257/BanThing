@@ -7,9 +7,8 @@ import Modal from './modal';
 axios.defaults.withCredentials = true;
 
 interface propsType {
-  signUpModal: boolean;
   setSignUpModal: Function;
-  setIsLogin?: Function;
+  setLoginMessage: Function;
 }
 
 export default function SignUp(prop: propsType) {
@@ -220,7 +219,9 @@ export default function SignUp(prop: propsType) {
         )
         .then((response) => {
           setIsModalOpen(true);
-          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   };
@@ -331,6 +332,7 @@ export default function SignUp(prop: propsType) {
         <Modal
           setIsModalOpen={setIsModalOpen}
           setSignUpModal={prop.setSignUpModal}
+          setLoginMessage={prop.setLoginMessage}
           type="signup"
         />
       ) : (

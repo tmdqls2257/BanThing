@@ -10,7 +10,6 @@ interface propsType {
   loginModal: boolean;
   setLoginModal: Function;
   setIsLogin: Function;
-  setAccessToken: Function;
 }
 
 export default function Login(prop: propsType) {
@@ -52,10 +51,6 @@ export default function Login(prop: propsType) {
           password: password,
         })
         .then((response) => {
-          const { auth } = response.data.data;
-          const { accessToken } = response.data.data;
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('auth', auth); //'banthing'
           prop.setIsLogin(true);
           prop.setLoginModal(false);
           // document.cookie = `accessToken=${accessToken}`; //! 녹두가 추가함
@@ -83,11 +78,11 @@ export default function Login(prop: propsType) {
     } else {
       inner = '';
     }
+
     if (inner === 'true') {
       router.push(
         `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
       );
-      localStorage.setItem('auth', '');
     } else {
       setKakaoModal(true);
     }
@@ -157,9 +152,8 @@ export default function Login(prop: propsType) {
         {signUpModal ? (
           <>
             <SignUp
-              signUpModal={signUpModal}
               setSignUpModal={setSignUpModal}
-              setIsLogin={prop.setIsLogin}
+              setLoginMessage={setLoginMessage}
             />
           </>
         ) : (

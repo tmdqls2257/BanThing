@@ -8,8 +8,6 @@ axios.defaults.withCredentials = true;
 interface propsType {
   isLogin: boolean;
   setIsLogin: Function;
-  accessToken: string;
-  setAccessToken: Function;
 }
 
 export default function Header(prop: propsType) {
@@ -19,47 +17,38 @@ export default function Header(prop: propsType) {
     setLoginModal(true);
   };
 
+  let cookie: string;
+  let accessToken: string;
+
   const handleLogout = () => {
-    if (typeof localStorage !== 'undefined') {
-      const auth = localStorage.getItem('auth'); //'banthing'
-      if (auth === 'banthing') {
-        const accessToken: any = localStorage.getItem('accessToken');
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('auth');
-            prop.setAccessToken('');
-            prop.setIsLogin(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        axios
-          .get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogOut`,
-            {},
-          )
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('auth');
-            prop.setAccessToken('');
-            prop.setIsLogin(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    if (typeof document !== 'undefined') {
+      cookie = document.cookie;
+
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        const cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: string) => {
+          return cookie.includes('accessToken');
+        });
+        accessToken = findAccessToken[0].split('=')[1];
       }
+
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+        .then((response) => {
+          prop.setIsLogin(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -128,7 +117,6 @@ export default function Header(prop: propsType) {
               loginModal={loginModal}
               setLoginModal={setLoginModal}
               setIsLogin={prop.setIsLogin}
-              setAccessToken={prop.setAccessToken}
             />
           ) : (
             <></>
