@@ -56,7 +56,7 @@ export class AuthController {
   kakaoLogin(@Res() res: Response) {
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirectUrl = `${process.env.CORSORIGIN}/users/kakaoLoginRedirect`;
+    const _redirectUrl = `/users/kakaoLoginRedirect`;
     const url = `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`;
     return res.redirect(url);
   }
