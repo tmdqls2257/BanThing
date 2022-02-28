@@ -22,12 +22,14 @@
 }
 
 .second_container {
-  width: 100vw;
+  width: 85vw;
   min-height: 60vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* background-color: rgb(92, 92, 92); */
+  margin: auto;
 }
 
 .second_title_container {
