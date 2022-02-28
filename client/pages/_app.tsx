@@ -4,32 +4,27 @@ import type { AppProps } from 'next/app';
 import { useState, useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   let cookie: any;
-  let cookieToken: any;
-  let cookieList: any;
 
-  if (typeof document !== 'undefined') {
+  if (
+    typeof document !== 'undefined' &&
+    document.cookie.includes('accessToken')
+  ) {
     cookie = document.cookie;
-    if (cookie.includes(';') && cookie.includes('accessToken')) {
-      cookieList = cookie.split(';');
-      const findAccessToken = cookieList.filter((cookie: any) => {
-        return cookie.includes('accessToken');
-      });
-      cookieToken = findAccessToken[0].split('=')[1];
-    } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-      cookieToken = cookie.split('=')[1];
-    }
   } else {
-    cookieToken = '';
+    cookie = '';
   }
 
   useEffect(() => {
-    if (cookieToken) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
+    if (typeof localStorage !== 'undefined') {
+      const storageToken = localStorage.getItem('accessToken');
+      if (storageToken === null) {
+        setIsLogin(false);
+      } else {
+        setIsLogin(true);
+      }
     }
   }, [cookie]);
 

@@ -141,7 +141,6 @@ export default function SignUp(prop: propsType) {
         )
         .then((response) => {
           setDoubleCheckUserId(true);
-          console.log(response);
         })
         .catch((error) => {
           setIdMessage('이미 존재하는 아이디입니다.');
@@ -168,7 +167,6 @@ export default function SignUp(prop: propsType) {
         )
         .then((response) => {
           setDoubleCheckNickname(true);
-          console.log(response);
         })
         .catch((error) => {
           setNicknameMessage('이미 존재하는 닉네임입니다.');

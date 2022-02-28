@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import Login from './login';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -17,22 +17,9 @@ export default function Header(prop: propsType) {
     setLoginModal(true);
   };
 
-  let cookie: string;
-  let accessToken: string;
-
   const handleLogout = () => {
-    if (typeof document !== 'undefined') {
-      cookie = document.cookie;
-
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
-        });
-        accessToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        accessToken = cookie.split('=')[1];
-      }
+    if (typeof localStorage !== 'undefined') {
+      const storageToken: any = localStorage.getItem('accessToken');
 
       axios
         .post(
@@ -40,12 +27,13 @@ export default function Header(prop: propsType) {
           {},
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${storageToken}`,
               'Content-Type': 'application/json',
             },
           },
         )
         .then((response) => {
+          localStorage.removeItem('accessToken');
           prop.setIsLogin(false);
         })
         .catch((error) => {
