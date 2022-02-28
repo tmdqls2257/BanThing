@@ -207,4 +207,30 @@ export class AuthService {
       where: { id: payload.id },
     });
   }
+
+  //더미 로그인
+  async dummyLogin(loginDTO: LoginDTO, res: Response): Promise<object> {
+    const userFind: Users = await this.userService.findByFields({
+      where: { user_id: loginDTO.user_id },
+    });
+    if (!userFind) {
+      throw new UnauthorizedException('잘못된 인증 정보 입니다!');
+    }
+
+    //비밀번호 복호화 및 검증
+    const validatePassword = await bcrypt.compare(
+      loginDTO.password,
+      userFind.password,
+    );
+    if (!validatePassword) {
+      throw new UnauthorizedException('잘못된 인증 정보 입니다!');
+    }
+    const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
+    const token = this.jwtService.sign(payload);
+
+    return res.send({
+      data: { accessToken: token, auth: userFind.auth },
+      message: '로그인 완료',
+    });
+  }
 }

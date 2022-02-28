@@ -59,14 +59,13 @@ const ChatRoom = ({
     console.log(1);
     console.log(typeof window);
     console.log(localStorage.getItem('accessToken'));
-
     if (typeof window !== 'undefined' && window.localStorage) {
       const auth = localStorage.getItem('auth');
 
       if (localStorage.getItem('accessToken')) {
         const accessToken = localStorage.getItem('accessToken');
-        const cookie = document.cookie.split(';')[1];
-        const kakaoToken = cookie.split('=')[1];
+        // const cookie = document.cookie.split(';')[1];
+        const kakaoToken = document.cookie.split('=')[1];
 
         if (auth === 'banthing') {
           axios

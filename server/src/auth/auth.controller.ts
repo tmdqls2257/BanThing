@@ -77,4 +77,9 @@ export class AuthController {
     const token = req.cookies['accessToken'];
     return this.authService.kakaoLogOut(res, token);
   }
+
+  @Post('dummy') //더미 로그인
+  async dummyLogin(@Res() res: Response, @Body() loginDTO: LoginDTO) {
+    return await this.authService.dummyLogin(loginDTO, res);
+  }
 }

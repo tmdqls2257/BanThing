@@ -42,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setAccessToken('');
     }
   }, [cookie]);
+  console.log(accessToken);
 
   return (
     <>

@@ -40,7 +40,7 @@ function Map({ setLocation, roomsData }: mapType) {
     };
     getPosts();
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/dummy`, {
         user_id: 'dummy',
         password: '1234',
       })
@@ -48,7 +48,7 @@ function Map({ setLocation, roomsData }: mapType) {
         setDummyToken1(res.data.data.accessToken);
       });
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/dummy`, {
         user_id: 'dummy2',
         password: '1234',
       })
@@ -56,7 +56,7 @@ function Map({ setLocation, roomsData }: mapType) {
         setDummyToken2(res.data.data.accessToken);
       });
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/login`, {
+      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/dummy`, {
         user_id: 'dummy3',
         password: '1234',
       })
