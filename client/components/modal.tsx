@@ -9,54 +9,43 @@ interface propsType {
   type: string;
 }
 
+let cookie: string;
+let accessToken: string;
+
 export default function Modal(prop: propsType) {
   const router = useRouter();
 
   const handleSignout = () => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const accessToken = localStorage.getItem('accessToken');
-      const auth = localStorage.getItem('auth');
-      if (auth === 'banthing') {
-        axios
-          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('auth');
-            prop.setIsModalOpen(false);
-            router.push('/');
-          });
-      } else {
-        axios
-          .delete(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoUnlink`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('auth');
-            prop.setIsModalOpen(false);
-            router.push('/');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    if (typeof document !== 'undefined') {
+      cookie = document.cookie;
+
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        const cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: string) => {
+          return cookie.includes('accessToken');
+        });
+        accessToken = findAccessToken[0].split('=')[1];
       }
+
+      axios
+        .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          prop.setIsModalOpen(false);
+          router.push('/');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
   const handleKakaoLogin = () => {
     router.push(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`);
-    localStorage.setItem('auth', '');
   };
 
   const handleModal = () => {

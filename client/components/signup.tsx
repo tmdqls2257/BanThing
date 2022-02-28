@@ -220,7 +220,9 @@ export default function SignUp(prop: propsType) {
         )
         .then((response) => {
           setIsModalOpen(true);
-          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   };
