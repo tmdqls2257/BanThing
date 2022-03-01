@@ -1,0 +1,28 @@
+.section {
+  display: none;
+  flex-direction: column;
+  min-height: 715px;
+  width: 30vw;
+  animation: fade 1s ease-in-out;
+  min-width: 400px;
+}
+.main {
+  background-color: var(--chat-background-color);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .section {
+    width: 100vw;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
