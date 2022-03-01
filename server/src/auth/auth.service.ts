@@ -82,15 +82,15 @@ export class AuthService {
       };
       await axios.post(_url, {}, { headers: _header });
 
-      res.cookie('inner', '', { maxAge: 1 });
-      res.cookie('kat', '', { maxAge: 1 });
+      res.cookie('inner', '', this.cookieSetting(1));
+      res.cookie('kat', '', this.cookieSetting(1));
       return res
-        .cookie('accessToken', '', { maxAge: 1 })
+        .cookie('accessToken', '', this.cookieSetting(1))
         .send({ data: null, message: '회원탈퇴 완료' });
     }
 
     return res
-      .cookie('accessToken', '', { maxAge: 1 })
+      .cookie('accessToken', '', this.cookieSetting(1))
       .send({ data: null, message: '회원탈퇴 완료' });
   }
 
@@ -114,7 +114,7 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    return res.cookie('accessToken', token).send({
+    return res.cookie('accessToken', token, this.cookieSetting()).send({
       data: { accessToken: token },
       message: '로그인 완료',
     });
@@ -161,10 +161,10 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    res.cookie('inner', 'true');
-    res.cookie('accessToken', token);
+    res.cookie('inner', 'true', this.cookieSetting());
+    res.cookie('accessToken', token, this.cookieSetting());
     return res
-      .cookie('kat', data.data['access_token'])
+      .cookie('kat', data.data['access_token'], this.cookieSetting())
       .redirect('http://localhost:3000');
   }
 
@@ -179,14 +179,14 @@ export class AuthService {
 
       await axios.post(_url, {}, { headers: _header });
 
-      res.cookie('kat', '', { maxAge: 1 });
+      res.cookie('kat', '', this.cookieSetting(1));
 
       return res
-        .cookie('accessToken', '', { maxAge: 1 })
+        .cookie('accessToken', '', this.cookieSetting(1))
         .send({ data: null, message: '로그아웃' });
     }
     return res
-      .cookie('accessToken', '', { maxAge: 1 })
+      .cookie('accessToken', '', this.cookieSetting(1))
       .send({ data: null, message: '로그아웃' });
   }
 
@@ -221,5 +221,20 @@ export class AuthService {
       data: { accessToken: token, auth: userFind.auth },
       message: '로그인 완료',
     });
+  }
+
+  cookieSetting(maxAge?: number) {
+    if (maxAge) {
+      return {
+        maxAge: 1,
+        domain: 'localhost',
+        httpOnly: true,
+      };
+    }
+    return {
+      maxAge: 24 * 60 * 60 * 100,
+      domain: 'localhost',
+      httpOnly: true,
+    };
   }
 }
