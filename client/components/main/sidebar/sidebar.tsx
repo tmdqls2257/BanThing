@@ -12,8 +12,6 @@ import CreateRoom from '../createRoom/createRoom';
 import JoinRoom from '../joinRoom/joinRoom';
 import MakeRoom from '../makeRoom/makeRoom';
 import MobileButton from '../mobileButton/mobileButton';
-import Reveal, { Slide } from 'react-awesome-reveal';
-import { keyframes } from '@emotion/react';
 
 interface locationType {
   location: number[];
@@ -49,7 +47,7 @@ const Sidebar = ({
   const [slide, setSlide] = useState('down');
   const [relandering, setRelandering] = useState(false);
   const [className, setClassName] = useState(styles.slideDown);
-
+  const [markerClick, setMarkerClick] = useState('down');
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
@@ -59,19 +57,31 @@ const Sidebar = ({
   useEffect(() => {
     setMaprelandering(relandering);
   }, [relandering]);
+  useEffect(() => {
+    if (mapTomobileUp === 'down') {
+      setMarkerClick(mapTomobileUp);
+    } else if (mapTomobileUp === 'up') {
+      setMarkerClick(mapTomobileUp);
+    }
+  }, [mapTomobileUp]);
+  console.log(mapTomobileUp);
+  console.log(1);
 
+  console.log(markerClick);
   useMemo(() => {
-    if (slide === 'down') {
+    if (markerClick === 'down' && slide === 'down') {
+      setClassName(styles.down);
+    } else if (slide === 'down') {
       setClassName(styles.down);
     } else if (slide === 'up') {
       setClassName(styles.up);
     }
-  }, [slide]);
+  }, [slide, markerClick]);
 
   return (
     <section className={className} id={'sidebarContainer'}>
       <MobileButton setSlide={setSlide} />
-      <section className={styles.section}>
+      <section className={styles.section} id={'sidebarContainer_section'}>
         <CreateRoom />
         <MakeRoom
           setRelanering={setRelandering}

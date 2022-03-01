@@ -96,12 +96,6 @@
 @media screen and (max-width: 768px) {
   .MakeRoom {
     width: 100vw;
-    height: 120vh;
-  }
-}
-
-@media screen and (max-height: 640px) {
-  .MakeRoom {
     height: 100vh;
   }
 }

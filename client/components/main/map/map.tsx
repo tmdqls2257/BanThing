@@ -33,6 +33,7 @@ function Map({
   const [dummyToken1, setDummyToken1] = useState('');
   const [dummyToken2, setDummyToken2] = useState('');
   const [dummyToken3, setDummyToken3] = useState('');
+  const [markerClick, setMarkerClick] = useState('down');
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -91,7 +92,12 @@ function Map({
         if (roomId) {
           roomsData(roomId);
         }
-        setMapToMobileUp('up');
+        if (markerClick === 'up') {
+          setMarkerClick('down');
+        } else if (markerClick === 'down') {
+          setMarkerClick('up');
+        }
+        setMapToMobileUp(markerClick);
       });
       window.kakao.maps.event.addListener(map, 'click', function () {
         joinRoom.style.display = 'none';
@@ -231,7 +237,7 @@ function Map({
     mapScript.addEventListener('load', onLoadKakaoMap);
 
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [data?.data.postList.length, maprelandering]);
+  }, [data?.data.postList.length, maprelandering, markerClick]);
 
   return (
     <main className={styles.main}>

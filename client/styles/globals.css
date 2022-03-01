@@ -50,7 +50,7 @@ a {
 
   --min-sider-width: 360px;
 
-  --component-min-height: 700px;
+  --component-min-height: 85vh;
 
   --component-mediaquery-min-height: 400px;
 }
