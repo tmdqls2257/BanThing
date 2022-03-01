@@ -54,6 +54,23 @@ export default function Modal(prop: propsType) {
           .catch((error) => {
             console.log(error);
           });
+      } else if (typeof localStorage !== 'undefined') {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     }
   };
