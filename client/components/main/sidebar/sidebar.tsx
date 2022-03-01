@@ -47,7 +47,7 @@ const Sidebar = ({
   const [slide, setSlide] = useState('down');
   const [relandering, setRelandering] = useState(false);
   const [className, setClassName] = useState(styles.slideDown);
-  const [markerClick, setMarkerClick] = useState('down');
+  const [markerClick, setMarkerClick] = useState('');
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
@@ -64,20 +64,26 @@ const Sidebar = ({
       setMarkerClick(mapTomobileUp);
     }
   }, [mapTomobileUp]);
-  console.log(mapTomobileUp);
-  console.log(1);
 
-  console.log(markerClick);
-  useMemo(() => {
-    if (markerClick === 'down' && slide === 'down') {
-      setClassName(styles.down);
-    } else if (slide === 'down') {
-      setClassName(styles.down);
-    } else if (slide === 'up') {
+  useEffect(() => {
+    if (markerClick && slide !== 'down') {
       setClassName(styles.up);
+      setSlide('down');
     }
-  }, [slide, markerClick]);
+    console.log(1);
 
+    console.log(slide);
+  }, [markerClick]);
+  useEffect(() => {
+    console.log(slide);
+
+    if (slide === 'down') {
+      setClassName(styles.up);
+    } else if (slide === 'up') {
+      setClassName(styles.down);
+    }
+    console.log(className);
+  }, [slide]);
   return (
     <section className={className} id={'sidebarContainer'}>
       <MobileButton setSlide={setSlide} />

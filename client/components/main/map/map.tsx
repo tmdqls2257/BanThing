@@ -30,9 +30,6 @@ function Map({
 }: mapType) {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<dataType>();
-  const [dummyToken1, setDummyToken1] = useState('');
-  const [dummyToken2, setDummyToken2] = useState('');
-  const [dummyToken3, setDummyToken3] = useState('');
   const [markerClick, setMarkerClick] = useState('down');
   useEffect(() => {
     const getPosts = async () => {
@@ -46,30 +43,6 @@ function Map({
       }
     };
     getPosts();
-    axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/dummy`, {
-        user_id: 'dummy',
-        password: '1234',
-      })
-      .then((res) => {
-        setDummyToken1(res.data.data.accessToken);
-      });
-    axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/dummy`, {
-        user_id: 'dummy2',
-        password: '1234',
-      })
-      .then((res) => {
-        setDummyToken2(res.data.data.accessToken);
-      });
-    axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/dummy`, {
-        user_id: 'dummy3',
-        password: '1234',
-      })
-      .then((res) => {
-        setDummyToken3(res.data.data.accessToken);
-      });
   }, []);
 
   useEffect(() => {
@@ -114,35 +87,6 @@ function Map({
           const lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
           setLocation([lat, lon]);
-          const positions = [
-            {
-              title: '피자 먹을 사람',
-              content: '특정 브랜드만 먹습니다.',
-              location_latitude: `${lat + 0.001}`,
-              location_longitude: `${lon + 0.001}`,
-              host_role: 1,
-              category: '피자',
-              token: dummyToken1,
-            },
-            {
-              title: '햄버거 먹을 사람',
-              content: '원하시는 브랜드 먹겠습니다.',
-              location_latitude: `${lat - 0.001}`,
-              location_longitude: `${lon + 0.001}`,
-              host_role: 2,
-              category: '햄버거',
-              token: dummyToken2,
-            },
-            {
-              title: '치킨 먹을 사람',
-              content: '원하시는 브랜드 먹겠습니다.',
-              location_latitude: `${lat - 0.002}`,
-              location_longitude: `${lon + 0.002}`,
-              host_role: 2,
-              category: '치킨',
-              token: dummyToken3,
-            },
-          ];
 
           const options = {
             center: new window.kakao.maps.LatLng(lat, lon),
@@ -206,29 +150,6 @@ function Map({
               });
               clickEvent(marker, map, roomList[i].id);
             }
-          }
-          // data로 변경 예정
-          for (let i = 0; i < positions.length; i++) {
-            if (typeof window !== 'undefined' && positions[i].token) {
-              const headers = {
-                Authorization: `Bearer ${positions[i].token}`,
-              };
-              axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-                {
-                  title: positions[i].title,
-                  content: positions[i].content,
-                  location_latitude: positions[i].location_latitude,
-                  location_longitude: positions[i].location_longitude,
-                  host_role: positions[i].host_role,
-                  category: positions[i].category,
-                },
-                {
-                  headers,
-                },
-              );
-            }
-            clickEvent(marker, map);
           }
         });
       });
