@@ -65,9 +65,4 @@ export class AuthController {
   logOut(@Res() res: Response, @Req() req: Request): Promise<object> {
     return this.authService.logOut(res, req, req.user);
   }
-
-  @Post('dummy') //더미 로그인
-  async dummyLogin(@Res() res: Response, @Body() loginDTO: LoginDTO) {
-    return await this.authService.dummyLogin(loginDTO, res);
-  }
 }
