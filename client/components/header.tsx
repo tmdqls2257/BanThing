@@ -65,6 +65,26 @@ export default function Header(prop: propsType) {
           .catch((error) => {
             console.log(error);
           });
+      } else if (typeof localStorage !== 'undefined') {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsLogin(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     }
   };
