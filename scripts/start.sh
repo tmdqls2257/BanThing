@@ -11,6 +11,7 @@ export JWT_SECRETKEY=$(aws ssm get-parameters --region ap-northeast-2 --names JW
 export KAKAO_ID=$(aws ssm get-parameters --region ap-northeast-2 --names KAKAO_ID --query Parameters[0].Value | sed 's/"//g')
 export SERVER_ENDPOINT=$(aws ssm get-parameters --region ap-northeast-2 --names SERVER_ENDPOINT --query Parameters[0].Value | sed 's/"//g')
 export SERVER_PORT=$(aws ssm get-parameters --region ap-northeast-2 --names SERVER_PORT --query Parameters[0].Value | sed 's/"//g')
+export FRONTEND_ENDPOINT=$(aws ssm get-parameters --region ap-northeast-2 --names FRONTEND_ENDPOINT --query Parameters[0].Value | sed 's/"//g')
 
 npm run build
 authbind --deep pm2 start dist/main.js --watch
