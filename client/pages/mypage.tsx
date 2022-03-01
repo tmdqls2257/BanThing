@@ -71,6 +71,24 @@ const MyPage: NextPage = () => {
           .catch((error) => {
             console.log(error);
           });
+      } else if (typeof localStorage !== 'undefined') {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setUserId(userInfo.user_id);
+            setNickname(userInfo.nickname);
+            setAuth(userInfo.auth);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     }
   }, []);
@@ -133,6 +151,29 @@ const MyPage: NextPage = () => {
               });
           } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
             const accessToken = cookie.split('=')[1];
+            axios
+              .post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+                {
+                  password: changePassword,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                  },
+                },
+              )
+              .then((response) => {
+                setChangePassword('');
+                setCheckPassword('');
+                setIsModifyModalOpen(true);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else if (typeof localStorage !== 'undefined') {
+            const accessToken = localStorage.getItem('accessToken');
             axios
               .post(
                 `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
