@@ -20,6 +20,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from '../post/post.repository';
 import { ReplyLogRepository } from '../post/reply.repository';
 import { PostService } from 'src/post/post.service';
+import { cookieSetting } from 'src/functions/cookiemaker.function'; //!녹두가 추가
 
 @Injectable()
 export class AuthService {
@@ -82,15 +83,15 @@ export class AuthService {
       };
       await axios.post(_url, {}, { headers: _header });
 
-      res.cookie('inner', '', { maxAge: 1 });
-      res.cookie('kat', '', { maxAge: 1 });
+      res.cookie('inner', '', { ...cookieSetting(-1) });
+      res.cookie('kat', '', { ...cookieSetting(-1) });
       return res
-        .cookie('accessToken', '', { maxAge: 1 })
+        .cookie('accessToken', '', { ...cookieSetting(-1) })
         .send({ data: null, message: '회원탈퇴 완료' });
     }
 
     return res
-      .cookie('accessToken', '', { maxAge: 1 })
+      .cookie('accessToken', '', { ...cookieSetting(-1) })
       .send({ data: null, message: '회원탈퇴 완료' });
   }
 
@@ -114,10 +115,12 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    return res.cookie('accessToken', token).send({
-      data: { accessToken: token },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', token, { ...cookieSetting(20 * 60 * 60 * 24) })
+      .send({
+        data: { accessToken: token },
+        message: '로그인 완료',
+      });
   }
 
   //카카오 로그인
@@ -161,10 +164,12 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    res.cookie('inner', 'true');
-    res.cookie('accessToken', token);
+    res.cookie('inner', 'true', { ...cookieSetting(20 * 60 * 60 * 24) });
+    res.cookie('accessToken', token, { ...cookieSetting(20 * 60 * 60 * 24) });
     return res
-      .cookie('kat', data.data['access_token'])
+      .cookie('kat', data.data['access_token'], {
+        ...cookieSetting(20 * 60 * 60 * 24),
+      })
       .redirect(process.env.CORSORIGIN);
   }
 
@@ -179,14 +184,14 @@ export class AuthService {
 
       await axios.post(_url, {}, { headers: _header });
 
-      res.cookie('kat', '', { maxAge: 1 });
+      res.cookie('kat', '', { ...cookieSetting(-1) });
 
       return res
-        .cookie('accessToken', '', { maxAge: 1 })
+        .cookie('accessToken', '', { ...cookieSetting(-1) })
         .send({ data: null, message: '로그아웃' });
     }
     return res
-      .cookie('accessToken', '', { maxAge: 1 })
+      .cookie('accessToken', '', { ...cookieSetting(-1) })
       .send({ data: null, message: '로그아웃' });
   }
 
