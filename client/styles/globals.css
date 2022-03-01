@@ -48,9 +48,11 @@ a {
   --font-weight-bold: 800;
   --font-weight-normal: 400;
 
-  --min-sider-width: 360px;
+  --min-sider-width: 30px;
 
   --component-min-height: 85vh;
 
   --component-mediaquery-min-height: 400px;
+
+  --mobile-sidebar-height: 80vh;
 }

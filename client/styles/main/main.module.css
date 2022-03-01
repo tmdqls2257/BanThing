@@ -17,4 +17,9 @@
   .section {
     height: 100vh;
   }
+  .main {
+    width: 100vw;
+    overflow-y: hidden;
+    display: flex;
+  }
 }

@@ -58,15 +58,14 @@
   margin-top: var(--margine-base);
   margin-right: var(--margine-base);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
+  .image {
+    width: 32px;
+  }
+
   .JoinRoom {
     width: 100vw;
-  }
-}
-
-@media screen and (max-height: 640px) {
-  .JoinRoom {
-    height: 100vh;
+    height: var(--mobile-sidebar-heigh);
   }
 }
 

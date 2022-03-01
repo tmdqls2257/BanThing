@@ -14,12 +14,32 @@
   width: 4.75rem;
 }
 .p {
+  flex-wrap: nowrap;
+  word-break: keep-all;
   font-size: var(--font-size-base);
   font-family: 'Nanum Gothic', sans-serif;
   color: #8e8e8e;
 }
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 320px) {
+  .createRoom {
+    width: 100vw;
+  }
+  .p {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 480px) {
+  .button {
+    width: 10rem;
+  }
+  .createRoom {
+    width: 100vw;
+  }
+  .p {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 1024px) {
   .button {
     width: 10rem;
   }

@@ -4,6 +4,7 @@ import styles from './makeRoom.module.css';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
+import Login from '../../login';
 
 interface locationType {
   location: number[];
@@ -23,6 +24,11 @@ const MakeRoom = ({
   const [makeRoomId, setMakeRoomId] = useState(0);
   const [makeRoomModal, setMakeRoomModal] = useState(false);
   const [relander, setRelander] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+
+  const openLoginModal = () => {
+    setLoginModal(true);
+  };
   useEffect(() => {
     if (makeRoomId !== 0) {
       setMakeRoom_MapRoomId(makeRoomId);
@@ -78,7 +84,6 @@ const MakeRoom = ({
         const headers = {
           Authorization: `Bearer ${cookieToken}`,
         };
-
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
@@ -105,7 +110,13 @@ const MakeRoom = ({
         setRadio('');
       }
     } else {
-      cookieToken = '';
+      // return (
+      //   <Login
+      //     loginModal={true}
+      //     setLoginModal={setLoginModal}
+      //     setIsLogin={undefined}
+      //   />
+      // );
     }
     const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;

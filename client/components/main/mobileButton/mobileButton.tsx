@@ -16,10 +16,7 @@ const MobileButton = ({ setSlide }: mobileType) => {
   };
   return (
     <section className={styles.section}>
-      <button className={styles.button} onClick={handleClick}>
-        <i className="fa-solid fa-arrow-up"></i>
-        <i className="fa-solid fa-arrow-down"></i>
-      </button>
+      <button className={styles.button} onClick={handleClick}></button>
     </section>
   );
 };
