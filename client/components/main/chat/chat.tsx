@@ -14,8 +14,8 @@ const Chat = ({ nickname, owner, chats, time }: chatType) => {
   const clock = new Date(Date.parse(time));
 
   useEffect(() => {
-    setHour(String(clock.getMinutes()));
-    setMinute(String(clock.getHours()));
+    setMinute(String(clock.getMinutes()));
+    setHour(String(clock.getHours()));
 
     if (clock.getMinutes() < 10) {
       setMinute('0' + minute);

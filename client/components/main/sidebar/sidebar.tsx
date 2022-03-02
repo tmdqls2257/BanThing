@@ -57,6 +57,7 @@ const Sidebar = ({
   useEffect(() => {
     setMaprelandering(relandering);
   }, [relandering]);
+
   useEffect(() => {
     if (mapTomobileUp === 'down') {
       setMarkerClick(mapTomobileUp);
@@ -66,24 +67,23 @@ const Sidebar = ({
   }, [mapTomobileUp]);
 
   useEffect(() => {
-    if (markerClick && slide !== 'down') {
+    if (markerClick) {
       setClassName(styles.up);
-      setSlide('down');
     }
-    console.log(1);
-
-    console.log(slide);
   }, [markerClick]);
+
   useEffect(() => {
     console.log(slide);
-
     if (slide === 'down') {
-      setClassName(styles.up);
-    } else if (slide === 'up') {
       setClassName(styles.down);
+    } else if (slide === 'up') {
+      setClassName(styles.up);
     }
+    console.log(1);
+    console.log(slide);
     console.log(className);
   }, [slide]);
+
   return (
     <section className={className} id={'sidebarContainer'}>
       <MobileButton setSlide={setSlide} />

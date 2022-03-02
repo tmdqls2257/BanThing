@@ -57,6 +57,7 @@ function Map({
     document.head.appendChild(mapScript);
 
     const clickEvent = (marker: any, map: any, roomId?: number) => {
+      // 마커 클릭 함수
       window.kakao.maps.event.addListener(marker, 'click', function () {
         createElement.style.display = 'none';
         chatRoom.style.display = 'none';
@@ -72,6 +73,7 @@ function Map({
         }
         setMapToMobileUp(markerClick);
       });
+      // 맵 클릭 함수
       window.kakao.maps.event.addListener(map, 'click', function () {
         joinRoom.style.display = 'none';
         makeRoom.style.display = 'none';

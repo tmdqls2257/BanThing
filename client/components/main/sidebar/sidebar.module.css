@@ -1,50 +1,84 @@
 .section {
   display: flex;
+  background-color: var(--white-color);
+  z-index: 2;
 }
 .down,
 .up {
-  min-width: var(--min-sider-width);
   display: flex;
   z-index: 2;
 }
-
-@media screen and (max-width: 768px) {
-  .sidebar_container {
-    flex-direction: column;
-    height: auto;
-    position: absolute;
-  }
+/* @media screen and (min-width: 768px) and (max-width: 1023px) {
   .section {
     display: flex;
-    z-index: 1;
-    background-color: var(--white-color);
-    width: 100vw;
+  }
+  .down,
+  .up {
+    flex-direction: column;
     z-index: 2;
-    height: 85vh;
+    min-width: var(--min-sider-width);
+    width: 400px;
+    position: absolute;
+    animation: down 1s forwards;
+  }
+} */
+
+@media screen and (min-width: 411px) and (max-width: 768px) {
+  .section {
+    width: 411px;
   }
   .down {
     flex-direction: column;
     z-index: 2;
-    height: var(--component-mediaquery-min-height);
+    min-width: var(--min-sider-width);
+
+    position: absolute;
+    bottom: 0;
+    animation: down 1s forwards;
+  }
+  .up {
+    display: flex;
+
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    animation: up 1s forwards;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 411px) {
+  .section {
+    background-color: var(--white-color);
+    height: 100vh;
+  }
+  .down {
+    flex-direction: column;
+    z-index: 2;
     min-width: var(--min-sider-width);
     position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 90vh;
     animation: down 1s forwards;
   }
   .up {
     display: flex;
     flex-direction: column;
-    height: var(--component-mediaquery-min-height);
     position: absolute;
     z-index: 2;
-    animation: up 1s forwards;
+    bottom: 0;
+    width: 100vw;
+    height: 90vh;
   }
 }
-
-@media screen and(max-width:320px) {
+@media screen and (max-width: 320px) {
+  .section {
+    background-color: var(--white-color);
+    height: 89vh;
+  }
   .down {
     flex-direction: column;
     z-index: 2;
-    height: 85vh;
     width: 100vw;
     position: absolute;
     animation: down 1s forwards;
@@ -53,29 +87,33 @@
     display: flex;
     flex-direction: column;
     min-height: var(--component-mediaquery-min-height);
-    width: 320px;
-    height: 85vh;
+    width: 100vw;
     position: absolute;
     z-index: 2;
     animation: up 1s forwards;
   }
 }
+@media screen and (min-height: 800px) and (min-height: 1000px) {
+  .section {
+    height: 70vh;
+  }
+}
 
 @keyframes down {
   from {
-    transform: translate3d(0, 0vh, 0);
+    transform: translate3d(0, 1vh, 0);
   }
 
   to {
-    transform: translate3d(0, 90vh, 0);
+    transform: translate3d(0, 85vh, 0);
   }
 }
 @keyframes up {
   from {
-    transform: translate3d(0, 90vh, 0);
+    transform: translate3d(0, 85vh, 0);
   }
 
   to {
-    transform: translate3d(0, 0vh, 0);
+    transform: translate3d(0, 1vh, 0);
   }
 }

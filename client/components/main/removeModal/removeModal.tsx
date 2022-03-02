@@ -1,34 +1,7 @@
 import axios from 'axios';
-import styled from 'styled-components';
 import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
 
-const Container = styled.div`
-  display: none;
-  width: 100vw;
-  position: fixed;
-  right: 0;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 1;
-  backdrop-filter: blur(2px);
-  button {
-    margin: 0 auto;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: #ffffff;
-    width: 181px;
-    background-color: #ff8a3d;
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
-  }
-`;
 interface removeRoomId {
   removeRoomId: number;
 }
