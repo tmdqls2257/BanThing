@@ -15,7 +15,7 @@
   align-items: center;
   text-align: center;
   flex-direction: column;
-  margin-top: 4.6vw;
+  margin-top: 85px;
 }
 
 .mypage_image {
@@ -168,4 +168,20 @@
 
 .mypage_space:hover {
   cursor: default;
+}
+
+@media screen and (max-width: 767px) {
+  .mypage_profile {
+    margin-top: 100px;
+  }
+
+  .mypage_image {
+    display: flex;
+    width: 160px;
+  }
+
+  .mypage_input_container {
+    margin-top: 20px;
+    margin-bottom: 14px;
+  }
 }
