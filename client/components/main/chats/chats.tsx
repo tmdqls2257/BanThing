@@ -1,26 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './chats.module.css';
 import Chat from '../chat/chat';
-import styled from 'styled-components';
 import NewChat from '../newChat/newChat';
-
-const Container = styled.div`
-  overflow-y: scroll;
-  min-height: 50px;
-  max-height: 70vh;
-  ::-webkit-scrollbar {
-    width: 0;
-  }
-  @media screen and (max-height: 480px) {
-    max-height: 120vh;
-  }
-  @media screen and (max-height: 580px) {
-    max-height: 100vh;
-  }
-  @media screen and (max-height: 680px) {
-    max-height: 80vh;
-  }
-`;
 
 interface usersChats {
   data: {

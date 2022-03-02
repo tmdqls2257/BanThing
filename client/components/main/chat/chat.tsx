@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styles from './chat.module.css';
 
 export interface chatType {
@@ -7,16 +8,22 @@ export interface chatType {
   time: string;
 }
 
-const chat = ({ nickname, owner, chats, time }: chatType) => {
+const Chat = ({ nickname, owner, chats, time }: chatType) => {
+  const [hour, setHour] = useState('');
+  const [minute, setMinute] = useState('');
   const clock = new Date(Date.parse(time));
-  let minute = String(clock.getMinutes());
-  let hour = String(clock.getHours());
 
-  if (clock.getMinutes() < 10) {
-    minute = '0' + minute;
-  } else if (clock.getHours() < 10) {
-    hour = '0' + hour;
-  }
+  useEffect(() => {
+    setMinute(String(clock.getMinutes()));
+    setHour(String(clock.getHours()));
+
+    if (clock.getMinutes() < 10) {
+      setMinute('0' + minute);
+    } else if (clock.getHours() < 10) {
+      setHour('0' + hour);
+    }
+  }, [clock.getMinutes(), clock.getHours()]);
+
   return (
     <ul className={styles.chatting_list}>
       {!owner ? (
@@ -50,4 +57,4 @@ const chat = ({ nickname, owner, chats, time }: chatType) => {
   );
 };
 
-export default chat;
+export default Chat;

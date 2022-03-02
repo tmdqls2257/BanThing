@@ -77,14 +77,11 @@ const JoinRoom = ({
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
     let cookie: any;
     let cookieToken: any;
-    let cookieList: any;
     if (typeof window !== 'undefined' && data) {
-      console.log(1);
-
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: any) => {
+        const cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: string) => {
           return cookie.includes('accessToken');
         });
         cookieToken = findAccessToken[0].split('=')[1];
@@ -152,7 +149,7 @@ const JoinRoom = ({
         <>
           <section className={styles.joinRoom_profile}>
             {rendering()}
-            <h1>{data.data.post.host_nickname}</h1>
+            <h1 className={styles.h1}>{data.data.post.host_nickname}</h1>
           </section>
           <article className={styles.article}>
             <section className={styles.JoinRoom_title}>
