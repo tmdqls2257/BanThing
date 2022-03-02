@@ -1,12 +1,12 @@
 .section {
   display: flex;
   background-color: var(--white-color);
-  z-index: 2;
+  z-index: 1;
 }
 .down,
 .up {
   display: flex;
-  z-index: 2;
+  z-index: 1;
 }
 /* @media screen and (min-width: 768px) and (max-width: 1023px) {
   .section {
@@ -15,7 +15,7 @@
   .down,
   .up {
     flex-direction: column;
-    z-index: 2;
+    z-index: 1;
     min-width: var(--min-sider-width);
     width: 400px;
     position: absolute;
@@ -29,7 +29,7 @@
   }
   .down {
     flex-direction: column;
-    z-index: 2;
+    z-index: 1;
     min-width: var(--min-sider-width);
 
     position: absolute;
@@ -42,7 +42,7 @@
     flex-direction: column;
     position: absolute;
     bottom: 0;
-    z-index: 2;
+    z-index: 1;
     animation: up 1s forwards;
   }
 }
@@ -53,7 +53,7 @@
   }
   .down {
     flex-direction: column;
-    z-index: 2;
+    z-index: 1;
     min-width: var(--min-sider-width);
     position: absolute;
     bottom: 0;
@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     bottom: 0;
     width: 100vw;
     height: 90vh;
@@ -78,7 +78,7 @@
   }
   .down {
     flex-direction: column;
-    z-index: 2;
+    z-index: 1;
     width: 100vw;
     position: absolute;
     animation: down 1s forwards;
@@ -89,7 +89,7 @@
     min-height: var(--component-mediaquery-min-height);
     width: 100vw;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     animation: up 1s forwards;
   }
 }
