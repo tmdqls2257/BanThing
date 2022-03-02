@@ -4,6 +4,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from './post.repository';
 import { ReplyDTO } from 'src/dto/reply.dto';
 import { ReplyLogRepository } from './reply.repository';
+import { getRepository } from 'typeorm';
+import { Reply } from 'src/entity/reply.entity';
+import { Post } from 'src/entity/post.entity';
 
 @Injectable()
 export class PostService {
@@ -31,9 +34,11 @@ export class PostService {
 
   //채팅 받기(방입장)
   async getReply(post_id: number): Promise<object> {
-    const list = await this.replyLogRepository.find({
-      where: { post_id: post_id },
-    });
+    const list = await getRepository(Reply)
+      .createQueryBuilder('reply')
+      .leftJoinAndSelect('reply.post_id', 'id')
+      .where('reply.post_id = :id', { id: post_id })
+      .getMany();
     return { data: { replyLog: list }, message: 'Reply 리스트' };
   }
 
