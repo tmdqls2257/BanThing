@@ -12,12 +12,16 @@ interface propsType {
 
 export default function Header(prop: propsType) {
   const [loginModal, setLoginModal] = useState(false);
+  const [hamburger, setHamburger] = useState(false);
 
   const openLoginModal = () => {
+    setHamburger(false);
     setLoginModal(true);
   };
 
   const handleLogout = () => {
+    setHamburger(false);
+
     if (typeof document !== 'undefined') {
       const cookie = document.cookie;
 
@@ -65,26 +69,6 @@ export default function Header(prop: propsType) {
           .catch((error) => {
             console.log(error);
           });
-      } else if (typeof localStorage !== 'undefined') {
-        const accessToken = localStorage.getItem('accessToken');
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            prop.setIsLogin(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
       }
     }
   };
@@ -92,38 +76,105 @@ export default function Header(prop: propsType) {
   return (
     <>
       {prop.isLogin ? (
-        <div className={styles.header}>
-          <Link href="/main">
-            <a className={styles.logo}>
-              <img src="/banthing.svg" alt="BanThing Logo" />
-            </a>
-          </Link>
-
-          <nav className={styles.nav}>
-            <Link href="/">
-              <a className={styles.nav_menu}>HOME</a>
-            </Link>
-            <span className={styles.nav_divide}>|</span>
+        <>
+          <div className={styles.header}>
             <Link href="/main">
-              <a className={styles.nav_menu}>MAIN</a>
-            </Link>
-            <span className={styles.nav_divide}>|</span>
-            <Link href="/">
-              <a className={styles.nav_menu} onClick={handleLogout}>
-                LOGOUT
+              <a className={styles.logo}>
+                <img src="/banthing.svg" alt="BanThing Logo" />
               </a>
             </Link>
-          </nav>
-          <div className={styles.nav_user_image_container}>
-            <Link href="/mypage">
-              <img
-                src="/user.png"
-                alt="user-image"
-                className={styles.nav_user_image}
-              />
-            </Link>
+
+            {hamburger ? (
+              <div className={styles.hamburger_container}>
+                <div
+                  className={styles.hamburger_box}
+                  onClick={() => setHamburger(false)}
+                >
+                  <span className={styles.hamburger_line1}></span>
+                  <span className={styles.hamburger_line2}></span>
+                  <span className={styles.hamburger_line3}></span>
+                </div>
+              </div>
+            ) : (
+              <div className={styles.hamburger_container}>
+                <div
+                  className={styles.hamburger_box}
+                  onClick={() => setHamburger(true)}
+                >
+                  <span className={styles.hamburger_line}></span>
+                  <span className={styles.hamburger_line}></span>
+                  <span className={styles.hamburger_line}></span>
+                </div>
+              </div>
+            )}
+
+            <nav className={styles.nav}>
+              <Link href="/">
+                <a className={styles.nav_menu}>HOME</a>
+              </Link>
+              <span className={styles.nav_divide}>|</span>
+              <Link href="/main">
+                <a className={styles.nav_menu}>MAIN</a>
+              </Link>
+              <span className={styles.nav_divide}>|</span>
+              <Link href="/">
+                <a className={styles.nav_menu} onClick={handleLogout}>
+                  LOGOUT
+                </a>
+              </Link>
+            </nav>
+            <div className={styles.nav_user_image_container}>
+              <Link href="/mypage">
+                <img
+                  src="/user.png"
+                  alt="user-image"
+                  className={styles.nav_user_image}
+                />
+              </Link>
+            </div>
           </div>
-        </div>
+
+          {hamburger ? (
+            <div className={styles.hamburger_nav_container}>
+              <nav className={styles.hamburger_nav_login_true}>
+                <Link href="/">
+                  <a
+                    className={styles.hamburger_nav_menu}
+                    onClick={() => setHamburger(!hamburger)}
+                  >
+                    HOME
+                  </a>
+                </Link>
+                <Link href="/main">
+                  <a
+                    className={styles.hamburger_nav_menu}
+                    onClick={() => setHamburger(!hamburger)}
+                  >
+                    MAIN
+                  </a>
+                </Link>
+                <Link href="/">
+                  <a
+                    className={styles.hamburger_nav_menu}
+                    onClick={handleLogout}
+                  >
+                    LOGOUT
+                  </a>
+                </Link>
+                <Link href="/mypage">
+                  <a
+                    className={styles.hamburger_nav_menu}
+                    onClick={() => setHamburger(!hamburger)}
+                  >
+                    MY PAGE
+                  </a>
+                </Link>
+              </nav>
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
       ) : (
         // ----------- ▲ 로그인이 되어있는 경우 -----------
         // --------- ▼ 로그인이 되어있지 않은 경우 ---------
@@ -134,6 +185,30 @@ export default function Header(prop: propsType) {
                 <img src="/banthing.svg" alt="BanThing Logo" />
               </a>
             </Link>
+
+            {hamburger ? (
+              <div className={styles.hamburger_container}>
+                <div
+                  className={styles.hamburger_box}
+                  onClick={() => setHamburger(false)}
+                >
+                  <span className={styles.hamburger_line1}></span>
+                  <span className={styles.hamburger_line2}></span>
+                  <span className={styles.hamburger_line3}></span>
+                </div>
+              </div>
+            ) : (
+              <div className={styles.hamburger_container}>
+                <div
+                  className={styles.hamburger_box}
+                  onClick={() => setHamburger(true)}
+                >
+                  <span className={styles.hamburger_line}></span>
+                  <span className={styles.hamburger_line}></span>
+                  <span className={styles.hamburger_line}></span>
+                </div>
+              </div>
+            )}
 
             <nav className={styles.nav}>
               <Link href="/">
@@ -149,12 +224,44 @@ export default function Header(prop: propsType) {
               </a>
             </nav>
           </div>
+
           {loginModal ? (
             <Login
               loginModal={loginModal}
               setLoginModal={setLoginModal}
               setIsLogin={prop.setIsLogin}
             />
+          ) : (
+            <></>
+          )}
+
+          {hamburger ? (
+            <div className={styles.hamburger_nav_container}>
+              <nav className={styles.hamburger_nav_login_false}>
+                <Link href="/">
+                  <a
+                    className={styles.hamburger_nav_menu}
+                    onClick={() => setHamburger(!hamburger)}
+                  >
+                    HOME
+                  </a>
+                </Link>
+                <Link href="/main">
+                  <a
+                    className={styles.hamburger_nav_menu}
+                    onClick={() => setHamburger(!hamburger)}
+                  >
+                    MAIN
+                  </a>
+                </Link>
+                <a
+                  className={styles.hamburger_nav_menu}
+                  onClick={openLoginModal}
+                >
+                  LOGIN
+                </a>
+              </nav>
+            </div>
           ) : (
             <></>
           )}

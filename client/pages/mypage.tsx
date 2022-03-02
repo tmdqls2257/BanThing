@@ -4,11 +4,10 @@ import styles from '../styles/MyPage.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from '../components/modal';
-import { stringify } from 'querystring';
 
 axios.defaults.withCredentials = true;
 
-const MyPage: NextPage = () => {
+const MyPage: NextPage = (props) => {
   const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
 
   const [changePassword, setChangePassword] = useState('');
