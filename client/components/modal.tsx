@@ -6,41 +6,72 @@ axios.defaults.withCredentials = true;
 interface propsType {
   setIsModalOpen: Function;
   setSignUpModal?: Function;
+  setLoginMessage?: Function;
   type: string;
 }
-
-let cookie: string;
-let accessToken: string;
 
 export default function Modal(prop: propsType) {
   const router = useRouter();
 
   const handleSignout = () => {
     if (typeof document !== 'undefined') {
-      cookie = document.cookie;
-
+      const cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         const cookieList = cookie.split(';');
         const findAccessToken = cookieList.filter((cookie: string) => {
           return cookie.includes('accessToken');
         });
-        accessToken = findAccessToken[0].split('=')[1];
+        const accessToken = findAccessToken[0].split('=')[1];
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        const accessToken = cookie.split('=')[1];
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (typeof localStorage !== 'undefined') {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            localStorage.removeItem('accessToken');
+            prop.setIsModalOpen(false);
+            router.push('/');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
-
-      axios
-        .delete(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/signout`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then((response) => {
-          prop.setIsModalOpen(false);
-          router.push('/');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
   };
 
@@ -49,6 +80,18 @@ export default function Modal(prop: propsType) {
   };
 
   const handleModal = () => {
+    if (!prop.setSignUpModal) {
+      prop.setIsModalOpen(false);
+    } else if (prop.setSignUpModal) {
+      prop.setIsModalOpen(false);
+      prop.setSignUpModal(false);
+    }
+  };
+
+  const handleSignUpModal = () => {
+    if (prop.setLoginMessage) {
+      prop.setLoginMessage('');
+    }
     if (!prop.setSignUpModal) {
       prop.setIsModalOpen(false);
     } else if (prop.setSignUpModal) {
@@ -171,7 +214,7 @@ export default function Modal(prop: propsType) {
             <div className={styles.signup_modal_button_container}>
               <button
                 className={styles.signup_modal_button}
-                onClick={handleModal}
+                onClick={handleSignUpModal}
               >
                 확인
               </button>

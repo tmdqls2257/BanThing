@@ -4,11 +4,10 @@ import styles from '../styles/MyPage.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from '../components/modal';
-import { stringify } from 'querystring';
 
 axios.defaults.withCredentials = true;
 
-const MyPage: NextPage = () => {
+const MyPage: NextPage = (props) => {
   const isSmallLetterAndNumber4to10 = /^[a-z0-9]{4,10}$/;
 
   const [changePassword, setChangePassword] = useState('');
@@ -28,37 +27,68 @@ const MyPage: NextPage = () => {
   const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
   const [isKakaoModalOpen, setIsKakaoModalOpen] = useState(false);
 
-  let cookie: string;
-  let accessToken: string;
-
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      cookie = document.cookie;
-
+      const cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         const cookieList = cookie.split(';');
         const findAccessToken = cookieList.filter((cookie: string) => {
           return cookie.includes('accessToken');
         });
-        accessToken = findAccessToken[0].split('=')[1];
+        const accessToken = findAccessToken[0].split('=')[1];
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setUserId(userInfo.user_id);
+            setNickname(userInfo.nickname);
+            setAuth(userInfo.auth);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        const accessToken = cookie.split('=')[1];
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setUserId(userInfo.user_id);
+            setNickname(userInfo.nickname);
+            setAuth(userInfo.auth);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (typeof localStorage !== 'undefined') {
+        const accessToken = localStorage.getItem('accessToken');
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            const { userInfo } = response.data.data;
+            setUserId(userInfo.user_id);
+            setNickname(userInfo.nickname);
+            setAuth(userInfo.auth);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
-
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then((response) => {
-          const { userInfo } = response.data.data;
-          setUserId(userInfo.user_id);
-          setNickname(userInfo.nickname);
-          setAuth(userInfo.auth);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
   }, []);
 
@@ -89,27 +119,83 @@ const MyPage: NextPage = () => {
         setCheckPasswordMessage('비밀번호가 일치하지 않습니다.');
         setCorrectCheckPassword(false);
       } else if (correctChangePassword && correctCheckPassword) {
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-            {
-              password: changePassword,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-          .then((response) => {
-            setChangePassword('');
-            setCheckPassword('');
-            setIsModifyModalOpen(true);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        if (typeof document !== 'undefined') {
+          const cookie = document.cookie;
+          if (cookie.includes(';') && cookie.includes('accessToken')) {
+            const cookieList = cookie.split(';');
+            const findAccessToken = cookieList.filter((cookie: string) => {
+              return cookie.includes('accessToken');
+            });
+            const accessToken = findAccessToken[0].split('=')[1];
+            axios
+              .post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+                {
+                  password: changePassword,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                  },
+                },
+              )
+              .then((response) => {
+                setChangePassword('');
+                setCheckPassword('');
+                setIsModifyModalOpen(true);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+            const accessToken = cookie.split('=')[1];
+            axios
+              .post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+                {
+                  password: changePassword,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                  },
+                },
+              )
+              .then((response) => {
+                setChangePassword('');
+                setCheckPassword('');
+                setIsModifyModalOpen(true);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else if (typeof localStorage !== 'undefined') {
+            const accessToken = localStorage.getItem('accessToken');
+            axios
+              .post(
+                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+                {
+                  password: changePassword,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                  },
+                },
+              )
+              .then((response) => {
+                setChangePassword('');
+                setCheckPassword('');
+                setIsModifyModalOpen(true);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        }
       }
     }
   };

@@ -7,9 +7,8 @@ import Modal from './modal';
 axios.defaults.withCredentials = true;
 
 interface propsType {
-  signUpModal: boolean;
   setSignUpModal: Function;
-  setIsLogin?: Function;
+  setLoginMessage: Function;
 }
 
 export default function SignUp(prop: propsType) {
@@ -142,7 +141,6 @@ export default function SignUp(prop: propsType) {
         )
         .then((response) => {
           setDoubleCheckUserId(true);
-          console.log(response);
         })
         .catch((error) => {
           setIdMessage('이미 존재하는 아이디입니다.');
@@ -169,7 +167,6 @@ export default function SignUp(prop: propsType) {
         )
         .then((response) => {
           setDoubleCheckNickname(true);
-          console.log(response);
         })
         .catch((error) => {
           setNicknameMessage('이미 존재하는 닉네임입니다.');
@@ -333,6 +330,7 @@ export default function SignUp(prop: propsType) {
         <Modal
           setIsModalOpen={setIsModalOpen}
           setSignUpModal={prop.setSignUpModal}
+          setLoginMessage={prop.setLoginMessage}
           type="signup"
         />
       ) : (

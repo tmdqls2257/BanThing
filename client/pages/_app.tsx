@@ -7,29 +7,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLogin, setIsLogin] = useState(false);
 
   let cookie: any;
-  let cookieToken: any;
-  let cookieList: any;
 
-  if (typeof document !== 'undefined') {
+  if (
+    typeof document !== 'undefined' &&
+    document.cookie.includes('accessToken')
+  ) {
     cookie = document.cookie;
-    if (cookie.includes(';') && cookie.includes('accessToken')) {
-      cookieList = cookie.split(';');
-      const findAccessToken = cookieList.filter((cookie: any) => {
-        return cookie.includes('accessToken');
-      });
-      cookieToken = findAccessToken[0].split('=')[1];
-    } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-      cookieToken = cookie.split('=')[1];
-    }
   } else {
-    cookieToken = '';
+    cookie = '';
   }
 
   useEffect(() => {
-    if (cookieToken) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
+    if (typeof document !== 'undefined') {
+      const cookie = document.cookie;
+      if (typeof localStorage !== 'undefined') {
+        const accessToken = localStorage.getItem('accessToken');
+        if (cookie.includes('accessToken') || accessToken) {
+          setIsLogin(true);
+        } else {
+          setIsLogin(false);
+        }
+      }
     }
   }, [cookie]);
 
