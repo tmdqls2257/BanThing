@@ -33,6 +33,7 @@ const ChatRoom = ({
   roomsId,
   roomHostNickName,
 }: roomsIdTitleType) => {
+  // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
 
   // 유저의 닉네임을 받아옵니다.

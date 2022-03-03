@@ -9,9 +9,9 @@ interface newChatType {
 
 const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const [chat, setChat] = useState('');
-
   // 방의 아이디와 덧글을 포함하여 post합니다.
-  const onSubmit = async () => {
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (chat !== '') {
       let cookie: any;
       let cookieToken: any;

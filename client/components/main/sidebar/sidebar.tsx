@@ -38,15 +38,12 @@ const Sidebar = ({ location, roomsId, mapTomobileUp }: locationType) => {
   const [slide, setSlide] = useState('down');
   const [className, setClassName] = useState(styles.slideDown);
   const [markerClick, setMarkerClick] = useState('');
+
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
     }
   }, [roomsId]);
-
-  // useEffect(() => {
-  //   setMaprelandering(relandering);
-  // }, [relandering]);
 
   useMemo(() => {
     if (mapTomobileUp === 'down') {

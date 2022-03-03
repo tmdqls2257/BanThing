@@ -63,8 +63,8 @@
   .makeRoomModal__section {
     position: fixed;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 0;
+    transform: translate(-50%);
   }
   .removeModal__section {
     position: fixed;
@@ -76,10 +76,9 @@
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .makeRoomModal__section {
     position: fixed;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
+    left: 50%;
     bottom: 0;
+    transform: translate(-50%);
   }
   .removeModal__section {
     position: fixed;

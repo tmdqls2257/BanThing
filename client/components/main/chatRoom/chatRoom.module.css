@@ -1,7 +1,8 @@
 .section {
   display: none;
   flex-direction: column;
-  width: 30vw;
+  width: 400px;
+
   animation: fade 1s ease-in-out;
 }
 .main {
@@ -14,6 +15,7 @@
 
 @media screen and (max-width: 1024px) {
   .section {
+    width: 400px;
   }
 }
 

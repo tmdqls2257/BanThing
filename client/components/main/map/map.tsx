@@ -22,9 +22,14 @@ interface mapType {
   setMapToMobileUp: Dispatch<SetStateAction<string>>;
 }
 function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
+  // 로딩의 상태
   const [loading, setLoading] = useState<boolean>(false);
+  // 데이터를 받아와 카테고리에 따라 다른 이미지를 사용합니다.
   const [data, setData] = useState<dataType>();
+  // 마커 클릭의 상태
   const [markerClick, setMarkerClick] = useState('down');
+
+  // 글의 리스트를 받아옵니다.
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -65,7 +70,7 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
         } else if (markerClick === 'down') {
           setMarkerClick('up');
         }
-        setMapToMobileUp(markerClick);
+        setMapToMobileUp(markerClick); // 모바일시 마커를 클릭 하면 사이드바를 나오게 합니다.
       });
       // 맵 클릭 함수
       window.kakao.maps.event.addListener(map, 'click', function () {
@@ -80,8 +85,8 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
         navigator.geolocation.getCurrentPosition(function (position) {
-          const lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
+          const lat = position.coords.latitude, // 사용자의 위도
+            lon = position.coords.longitude; // 사용자의 경도
           setLocation([lat, lon]);
 
           const options = {
@@ -102,8 +107,8 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
           let marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
-          circle.setMap(map);
-          marker.setMap(map);
+          circle.setMap(map); // 원을 맵에 그려줍니다.
+          marker.setMap(map); // 마커를 맵에 찍어줍니다.
           if (data) {
             const roomList = data.data.postList;
             for (let i = 0; i < roomList.length; i++) {
@@ -149,7 +154,7 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
           }
         });
       });
-      setLoading(true);
+      setLoading(true); // 로딩을 꺼줍니다.
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
 

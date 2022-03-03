@@ -10,8 +10,7 @@
   height: auto;
   max-height: 71vh;
 }
-.chat_container_ownerRoom {
-}
+
 .chat_container::-webkit-scrollbar,
 .chat_container_ownerRoom::-webkit-scrollbar {
   width: 0;

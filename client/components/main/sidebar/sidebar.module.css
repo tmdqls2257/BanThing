@@ -103,13 +103,22 @@
   }
 }
 
-@media screen and (max-height: 1024px) and (max-width: 768px) {
+@media screen and (max-height: 1080px) and (max-width: 768px) {
   .down {
-    animation: down1024 1s forwards;
+    animation: down1080 1s forwards;
   }
 
   .up {
-    animation: up1024 1s forwards;
+    animation: up1080 1s forwards;
+  }
+}
+@media screen and (max-height: 1000px) and (max-width: 768px) {
+  .down {
+    animation: down1000 1s forwards;
+  }
+
+  .up {
+    animation: up1000 1s forwards;
   }
 }
 
@@ -245,18 +254,37 @@
   }
 }
 
-@keyframes down1024 {
+@keyframes down1000 {
   from {
     transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translate3d(0, 70vh, 0);
+    transform: translate3d(0, 54vh, 0);
   }
 }
-@keyframes up1024 {
+@keyframes up1000 {
   from {
-    transform: translate3d(0, 70vh, 0);
+    transform: translate3d(0, 54vh, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes down1080 {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 69vh, 0);
+  }
+}
+@keyframes up1080 {
+  from {
+    transform: translate3d(0, 69vh, 0);
   }
 
   to {

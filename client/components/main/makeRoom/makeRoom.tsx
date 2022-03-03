@@ -4,6 +4,7 @@ import styles from './makeRoom.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
+import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 // import Login from '../../login';
 
 interface locationType {
@@ -18,18 +19,12 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   const [radio, setRadio] = useState('');
   const [makeRoomId, setMakeRoomId] = useState(0);
   const [makeRoomModal, setMakeRoomModal] = useState(false);
-  const [relander, setRelander] = useState(false);
-  // const [loginModal, setLoginModal] = useState(false);
-
-  // const openLoginModal = () => {
-  //   setLoginModal(true);
-  // };
+  const [isLogIn, setIsLogIn] = useState(true);
   useEffect(() => {
     if (makeRoomId !== 0) {
       setMakeRoom_MapRoomId(makeRoomId);
     }
   }, [makeRoomId]);
-
   // 카테고리를 선택합니다.
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
@@ -110,20 +105,14 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
         setTitle('');
         setTextarea('');
         setRadio('');
+        const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+        const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+        makeRoom.style.display = 'none';
+        joinRoom.style.display = 'flex';
+      } else {
+        setIsLogIn(false);
       }
-    } else {
-      // return (
-      //   <Login
-      //     loginModal={true}
-      //     setLoginModal={setLoginModal}
-      //     setIsLogin={undefined}
-      //   />
-      // );
     }
-    const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
-    const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-    makeRoom.style.display = 'none';
-    joinRoom.style.display = 'flex';
   };
 
   // 클릭시 방을 만드는 요청을 보내는 함수
@@ -140,10 +129,6 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       setMakeRoomModal(true);
     } else {
       axiosPost();
-      {
-        relander ? setRelander(false) : setRelander(true);
-      }
-      console.log(relander);
     }
   };
 
@@ -207,6 +192,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
           만들기
         </button>
       </section>
+      {isLogIn ? <></> : <PleaseLogIn setIsLogIn={setIsLogIn} />}
       {makeRoomModal ? (
         <MakeRoomModal setMakeRoomModal={setMakeRoomModal} />
       ) : (
