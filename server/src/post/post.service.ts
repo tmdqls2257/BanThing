@@ -6,7 +6,6 @@ import { ReplyDTO } from 'src/dto/reply.dto';
 import { ReplyLogRepository } from './reply.repository';
 import { getRepository } from 'typeorm';
 import { Reply } from 'src/entity/reply.entity';
-import { Post } from 'src/entity/post.entity';
 
 @Injectable()
 export class PostService {
