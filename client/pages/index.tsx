@@ -4,6 +4,7 @@ import First from '../components/home/first/first';
 import Progress from '../components/home/progress';
 import Second from '../components/home/second/second';
 import Introduction from '../components/home/introduction';
+import IntroductionMobile from '../components/home/fourth/IntroductionMobile';
 import Third from '../components/home/third/third';
 import Caption from '../components/home/caption';
 import Footer from '../components/home/footer';
@@ -64,6 +65,9 @@ const Home: NextPage = () => {
             '맘편히 배달음식을 기다리기만 하면 됩니다!',
           ]}
         />
+
+        <IntroductionMobile />
+
         {/* <Introduction
           imagePosition={'right'}
           image={'/rating.png'}
