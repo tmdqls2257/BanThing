@@ -47,8 +47,8 @@ export class PostService {
       where: { id: id },
     });
     if (post.host_user_id === user.user_id) {
-      await this.postRepository.delete({ id });
       await this.replyLogRepository.delete({ post_id: id });
+      await this.postRepository.delete({ id });
     }
     return { data: null, message: '글 삭제 완료' };
   }
