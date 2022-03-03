@@ -242,6 +242,16 @@
   font-size: 1.2vw;
 }
 
+/* @media screen and (max-width: 767px) {
+  .introduction_container_left {
+    flex-direction: column;
+  }
+
+  .introduction_container_right {
+    flex-direction: column;
+  }
+} */
+
 /* ------------------------------------------------------------ */
 
 /* -----------------------header.tsx CSS----------------------- */
@@ -473,7 +483,12 @@
     font-size: 12px;
   }
 
+  .member_position {
+    font-size: 10px;
+  }
+
   .copyright {
+    font-size: 10px;
     margin-bottom: 10px;
   }
 }
