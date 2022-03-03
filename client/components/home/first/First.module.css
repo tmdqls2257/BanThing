@@ -88,6 +88,21 @@
   font-family: 'Pretendard-SemiBold', sans-serif;
 }
 
+.title_button_mobile {
+  display: none;
+  width: 12vw;
+  height: 5vw;
+  color: #ffffff;
+  font-size: 2vw;
+  border-radius: 12px;
+  background-color: #ff8a3c;
+  border: solid;
+  border-width: 5px;
+  border-color: #ff8a3c;
+  transition: 0.3s ease;
+  font-family: 'Pretendard-SemiBold', sans-serif;
+}
+
 .title_button_description {
   font-family: 'BMDOHYEON', sans-serif;
 }
@@ -131,6 +146,45 @@
 
 @media screen and (max-width: 767px) {
   .title_container {
-    padding-top: 60px;
+    padding-top: 90px;
+    flex-direction: column;
+  }
+
+  .main {
+    width: 100vw;
+    margin-right: 0;
+  }
+
+  .title_title {
+    font-size: 15vw;
+  }
+
+  .title_description {
+    width: 100vw;
+    font-size: 5.8vw;
+    margin: 5vw auto 0 auto;
+  }
+
+  .title_button {
+    display: none;
+  }
+
+  .title_button_mobile {
+    display: flex;
+    width: 35vw;
+    height: 16vw;
+    font-size: 6vw;
+    margin-bottom: 40vw;
+    margin-top: -3vw;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title_image {
+    width: 80vw;
+    margin: 0;
+    margin-bottom: 15vw;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   }
 }

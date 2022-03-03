@@ -38,6 +38,13 @@ export default function First() {
             />
           </div>
         </Fade>
+        <Fade triggerOnce={true} delay={1600}>
+          <Link href="/main">
+            <button className={styles.title_button_mobile}>
+              <span>시작하기</span>
+            </button>
+          </Link>
+        </Fade>
       </div>
     </>
   );
