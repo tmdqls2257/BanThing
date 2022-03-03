@@ -10,8 +10,8 @@ interface newChatType {
 const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const [chat, setChat] = useState('');
 
-  const onSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  // 방의 아이디와 덧글을 포함하여 post합니다.
+  const onSubmit = async () => {
     if (chat !== '') {
       let cookie: any;
       let cookieToken: any;
@@ -44,8 +44,10 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
           );
         }
       }
+      // chats에 입력한 값을 전해줍니다.
       onCreated(chat);
     }
+    // input의 값을 초기화 합니다.
     setChat('');
   };
 

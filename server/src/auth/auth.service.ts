@@ -20,6 +20,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from '../post/post.repository';
 import { ReplyLogRepository } from '../post/reply.repository';
 import { PostService } from 'src/post/post.service';
+import { cookieSetting } from 'src/functions/cookiemaker.function'; //!녹두가 추가
 
 @Injectable()
 export class AuthService {
@@ -82,15 +83,15 @@ export class AuthService {
       };
       await axios.post(_url, {}, { headers: _header });
 
-      res.cookie('inner', '', { maxAge: 1 });
-      res.cookie('kat', '', { maxAge: 1 });
+      res.cookie('inner', '', { ...cookieSetting(-1) });
+      res.cookie('kat', '', { ...cookieSetting(-1) });
       return res
-        .cookie('accessToken', '', { maxAge: 1 })
+        .cookie('accessToken', '', { ...cookieSetting(-1) })
         .send({ data: null, message: '회원탈퇴 완료' });
     }
 
     return res
-      .cookie('accessToken', '', { maxAge: 1 })
+      .cookie('accessToken', '', { ...cookieSetting(-1) })
       .send({ data: null, message: '회원탈퇴 완료' });
   }
 
@@ -114,16 +115,18 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    return res.cookie('accessToken', token).send({
-      data: { accessToken: token },
-      message: '로그인 완료',
-    });
+    return res
+      .cookie('accessToken', token, { ...cookieSetting(20 * 60 * 60 * 24) })
+      .send({
+        data: { accessToken: token },
+        message: '로그인 완료',
+      });
   }
 
   //카카오 로그인
   async kakaoLogin(code: string, res: Response): Promise<any> {
     const _restApiKey = process.env.KAKAO_ID;
-    const _redirect_url = `http://localhost:${process.env.SERVER_PORT}/users/kakaoLoginRedirect`;
+    const _redirect_url = `${process.env.SERVER_ENDPOINT}/users/kakaoLoginRedirect`;
     const _hostName = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${_restApiKey}&redirect_url=${_redirect_url}&code=${code}`;
     const headers = {
       headers: {
@@ -161,11 +164,13 @@ export class AuthService {
     const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
     const token = this.jwtService.sign(payload);
 
-    res.cookie('inner', 'true');
-    res.cookie('accessToken', token);
+    res.cookie('inner', 'true', { ...cookieSetting(20 * 60 * 60 * 24) });
+    res.cookie('accessToken', token, { ...cookieSetting(20 * 60 * 60 * 24) });
     return res
-      .cookie('kat', data.data['access_token'])
-      .redirect('http://localhost:3000');
+      .cookie('kat', data.data['access_token'], {
+        ...cookieSetting(20 * 60 * 60 * 24),
+      })
+      .redirect(process.env.CORSORIGIN);
   }
 
   //로그아웃
@@ -179,14 +184,14 @@ export class AuthService {
 
       await axios.post(_url, {}, { headers: _header });
 
-      res.cookie('kat', '', { maxAge: 1 });
+      res.cookie('kat', '', { ...cookieSetting(-1) });
 
       return res
-        .cookie('accessToken', '', { maxAge: 1 })
+        .cookie('accessToken', '', { ...cookieSetting(-1) })
         .send({ data: null, message: '로그아웃' });
     }
     return res
-      .cookie('accessToken', '', { maxAge: 1 })
+      .cookie('accessToken', '', { ...cookieSetting(-1) })
       .send({ data: null, message: '로그아웃' });
   }
 
@@ -194,32 +199,6 @@ export class AuthService {
   async tokenValidateUser(payload: Payload): Promise<UserInfoDTO> {
     return await this.userService.findByFields({
       where: { id: payload.id },
-    });
-  }
-
-  //더미 로그인
-  async dummyLogin(loginDTO: LoginDTO, res: Response): Promise<object> {
-    const userFind: Users = await this.userService.findByFields({
-      where: { user_id: loginDTO.user_id },
-    });
-    if (!userFind) {
-      throw new UnauthorizedException('잘못된 인증 정보 입니다!');
-    }
-
-    //비밀번호 복호화 및 검증
-    const validatePassword = await bcrypt.compare(
-      loginDTO.password,
-      userFind.password,
-    );
-    if (!validatePassword) {
-      throw new UnauthorizedException('잘못된 인증 정보 입니다!');
-    }
-    const payload: Payload = { id: userFind.id, user_id: userFind.user_id };
-    const token = this.jwtService.sign(payload);
-
-    return res.send({
-      data: { accessToken: token, auth: userFind.auth },
-      message: '로그인 완료',
     });
   }
 }

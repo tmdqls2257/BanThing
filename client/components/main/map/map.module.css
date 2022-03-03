@@ -1,7 +1,6 @@
 .main {
   position: relative;
   display: flex;
-  min-height: 621.5px;
   overflow: hidden;
 }
 .map {

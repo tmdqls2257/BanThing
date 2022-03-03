@@ -11,6 +11,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     event.preventDefault();
   };
 
+  // 삭제하기 버튼을 눌렀을 때
   const onClick = () => {
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
@@ -23,6 +24,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     let cookie: any;
     let cookieToken: any;
     let cookieList: any;
+    // 방을 삭제하는 요청
     if (typeof window !== 'undefined') {
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
@@ -44,7 +46,10 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
         },
       );
     }
+    // 새로고침 기능
+    window.location.reload();
   };
+  // 뒤로 가기 버튼을 눌렀을 때
   const backClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;
 

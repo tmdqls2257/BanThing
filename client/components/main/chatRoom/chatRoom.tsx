@@ -35,13 +35,12 @@ const ChatRoom = ({
 }: roomsIdTitleType) => {
   const [usernickname, setNickname] = useState('');
 
+  // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
     let cookie: any;
     let cookieToken: any;
     let cookieList: any;
     if (typeof window !== 'undefined') {
-      console.log(1);
-
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         cookieList = cookie.split(';');
@@ -69,11 +68,13 @@ const ChatRoom = ({
     }
   }, []);
 
+  // 삭제하기 버튼 클릭시 모달을 띄어 줍니다.
   const onClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;
     removeModal.style.display = 'flex';
   };
 
+  // 유저의 닉네임과 호스트의 닉네임이 같을 경우 삭제하기 버튼을 띄어줍니다.
   if (usernickname === roomHostNickName) {
     return (
       <>

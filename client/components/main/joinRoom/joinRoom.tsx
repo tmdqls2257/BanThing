@@ -44,6 +44,7 @@ const JoinRoom = ({
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
 
+  // 글에 대한 정보를 불러와 JoinRoom에 반영합니다.
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -62,6 +63,8 @@ const JoinRoom = ({
     };
     getPosts();
   }, [roomsId]);
+
+  // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.
   useEffect(() => {
     if (chats) {
       setUsersChats(chats);
@@ -72,6 +75,8 @@ const JoinRoom = ({
       setroomHostNickName(data.data.post.host_nickname);
     }
   }, [chats, data]);
+
+  // 방 참가 버튼 클릭시 해당 post.id에 대한 덧글들을 불러옵니다.
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
@@ -110,6 +115,7 @@ const JoinRoom = ({
     chatRoom.style.display = 'flex';
   };
 
+  // map.tsx에서 받아온 정보중 카테고리만 불러와 이미지를 렌더링 합니다.
   const rendering = () => {
     if (data) {
       const { category } = data.data.post;

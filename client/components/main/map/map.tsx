@@ -19,15 +19,9 @@ interface dataType {
 interface mapType {
   setLocation: Dispatch<SetStateAction<number[]>>;
   roomsData: Dispatch<SetStateAction<number>>;
-  maprelandering: boolean;
   setMapToMobileUp: Dispatch<SetStateAction<string>>;
 }
-function Map({
-  setLocation,
-  roomsData,
-  maprelandering,
-  setMapToMobileUp,
-}: mapType) {
+function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<dataType>();
   const [markerClick, setMarkerClick] = useState('down');
@@ -160,7 +154,7 @@ function Map({
     mapScript.addEventListener('load', onLoadKakaoMap);
 
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [data?.data.postList.length, maprelandering, markerClick]);
+  }, [data?.data.postList.length, markerClick]);
 
   return (
     <main className={styles.main}>
