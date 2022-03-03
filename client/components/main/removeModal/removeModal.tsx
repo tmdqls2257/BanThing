@@ -37,12 +37,16 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       const headers = {
         Authorization: `Bearer ${cookieToken}`,
       };
-      axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-        {
-          headers,
-        },
-      );
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+          {
+            headers,
+          },
+        )
+        .then(() => {
+          location.reload();
+        });
     }
   };
   const backClick = () => {

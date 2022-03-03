@@ -1,22 +1,18 @@
 .main {
   position: relative;
-  min-height: var(--component-min-height);
-  max-height: 100vh;
   display: flex;
   overflow: hidden;
 }
 .map {
   display: flex;
+  height: 100vh;
   min-width: 70vw;
-  min-height: var(--component-min-height);
 }
 @media screen and (max-width: 768px) {
   .main {
     width: 100vw;
-    height: 100vh;
   }
   .map {
     width: 100vw;
-    height: 100vh;
   }
 }

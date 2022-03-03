@@ -1,9 +1,7 @@
 .MakeRoom {
   display: none;
   flex-direction: column;
-  width: 30vw;
-  min-width: var(--min-sider-width);
-  min-height: 621.5px;
+  min-width: 400px;
   background-color: var(--chat-background-color);
   flex: 1;
   animation: fade 1s ease-in-out;
@@ -13,6 +11,7 @@
   display: flex;
   flex-direction: column;
   width: 332px;
+  height: 500px;
   justify-content: space-between;
   margin: auto;
 }
@@ -31,7 +30,7 @@
   display: flex;
   width: 200px;
   font-size: var(--font-size-base);
-  height: 37px;
+  height: 44px;
   border-radius: 5px;
   border: none;
   margin-left: 10px;
@@ -53,7 +52,7 @@
   display: flex;
   width: 200px;
   font-size: var(--font-size-base);
-  height: 37px;
+  height: 44px;
   border-radius: 5px;
   border: none;
   margin-left: 10px;
@@ -69,7 +68,7 @@
   background-color: var(--gary-color);
   resize: none;
   width: 332px;
-  height: 30vw;
+  height: 30vh;
 }
 .content_textarea::-webkit-scrollbar {
   width: 0;
@@ -88,82 +87,88 @@
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .MakeRoom {
-    width: 300px;
-  }
-  .main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    justify-content: space-between;
-    margin: auto;
-  }
-  .content_textarea {
-    height: 30vh;
+    min-width: 400px;
+    min-height: 708px;
   }
 
-  .section_flex_input,
-  .section_flex_select {
-    outline: none;
-    padding-left: 10px;
-    display: flex;
-    width: 50vh;
-    font-size: var(--font-size-base);
-    height: 37px;
-    border-radius: 5px;
-    border: none;
-    margin-left: 10px;
-    min-width: 60%;
+  .content_textarea {
+    height: 20vh;
+
+    width: 332px;
   }
 }
-@media screen and (min-width: 501px) and (max-width) {
+@media screen and (min-width: 601px) and (max-width: 767px) {
   .MakeRoom {
-    height: 621.5px;
+    height: 500px;
     width: 400px;
+  }
+  .content_textarea {
+    height: 100px;
+    width: 332px;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 600px) {
+  .MakeRoom {
+    height: 500px;
+    width: 400px;
+  }
+  .content_textarea {
+    height: 100px;
+    width: 332px;
   }
 }
 @media screen and (min-width: 400px) and (max-width: 500px) {
   .MakeRoom {
     width: 400px;
-    height: 621.5px;
+    height: 500px;
   }
   .main {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 80vw;
+    width: 332px;
     justify-content: space-between;
     margin: auto;
   }
   .content_textarea {
-    width: 80vw;
+    height: 100px;
+    width: 332px;
   }
 }
 @media screen and (min-width: 330px) and (max-width: 400px) {
   .MakeRoom {
     width: 100vw;
-    height: 621.5px;
+    height: 500px;
   }
   .main {
     width: 80vw;
   }
   .content_textarea {
     width: 80vw;
+    height: 100px;
   }
 }
 @media screen and (max-width: 330px) {
   .MakeRoom {
     width: 100vw;
-    height: 621.5px;
+    height: 500px;
   }
   .content_textarea {
+    height: 100px;
     width: 80vw;
   }
   .main {
     width: 80vw;
   }
 }
-
+@media screen and (min-height: 1000px) {
+  .MakeRoom {
+    min-height: 700px;
+  }
+  .content_textarea {
+    height: 20vh;
+  }
+}
 @keyframes fade {
   from {
     opacity: 0;

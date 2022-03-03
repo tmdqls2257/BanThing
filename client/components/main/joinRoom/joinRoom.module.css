@@ -2,7 +2,8 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: var(--min-sider-width);
+  height: 500px;
+  width: 400px;
   animation: fade 1s ease-in-out;
   height: auto;
 }
@@ -45,8 +46,8 @@
   border: none;
   border-radius: var(--border-radius-base);
   background-color: var(--gary-color);
-  max-height: 30vh;
-  min-height: 20vh;
+  width: 300px;
+  height: 20vh;
 }
 .joinRoom_content_p::-webkit-scrollbar {
   width: 0;
@@ -57,15 +58,14 @@
   margin-right: var(--margine-base);
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+/* @media screen and (min-width: 767px) and (max-width: 1023px) {
   .JoinRoom {
     display: none;
     flex-direction: column;
     width: 300px;
-    min-width: var(--min-sider-width);
-    height: 80vh;
+    min-width: 400px;
+    height: 500px;
     animation: fade 1s ease-in-out;
-    height: auto;
   }
   .image {
     width: var(--img-size);
@@ -105,8 +105,7 @@
     border: none;
     border-radius: var(--border-radius-base);
     background-color: var(--gary-color);
-    max-height: 20vh;
-    height: 20vh;
+    width: 300px;
   }
   .joinRoom_content_p::-webkit-scrollbar {
     width: 0;
@@ -116,55 +115,69 @@
     margin-top: var(--margine-base);
     margin-right: var(--margine-base);
   }
-}
+} */
 
 /* @media screen and (min-width: 767px) and (max-width: 1023px) {
-  .JoinRoom {
-    width: 100vw;
-  }
   .image {
     width: 32px;
   }
   .joinRoom_content_p {
-    width: 80vw;
+    width: 300px;
   }
 } */
 
 @media screen and (min-width: 411px) and (max-width: 767px) {
   .JoinRoom {
     width: 100vw;
+    min-width: 400px;
+    height: 500px;
   }
   .image {
     width: 32px;
   }
+
   .joinRoom_content_p {
     margin: 0;
     max-width: 50vw;
+    width: 300px;
+    height: 10vh;
   }
 }
 @media screen and (min-width: 320px) and (max-width: 411px) {
   .JoinRoom {
     width: 100vw;
+    height: 500px;
   }
   .image {
     width: 32px;
   }
   .joinRoom_content_p {
-    width: 80vw;
+    height: 10vh;
+
+    width: 300px;
   }
 }
 @media screen and (max-width: 320px) {
   .JoinRoom {
     width: 100vw;
+    height: 500px;
   }
   .image {
     width: 32px;
   }
   .joinRoom_content_p {
     width: 80vw;
+    height: 10vh;
   }
 }
-
+@media screen and (min-height: 1000px) {
+  .JoinRoom {
+    min-height: 700px;
+  }
+  .joinRoom_content_p {
+    height: 30vh;
+  }
+}
 @keyframes fade {
   from {
     opacity: 0;
