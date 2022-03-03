@@ -2,7 +2,9 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: var(--min-sider-width);
+  min-height: 621.5px;
+  min-width: 400px;
+
   animation: fade 1s ease-in-out;
   height: auto;
 }
@@ -62,10 +64,10 @@
     display: none;
     flex-direction: column;
     width: 300px;
-    min-width: var(--min-sider-width);
-    height: 80vh;
+    min-width: 400px;
+
+    min-height: 621.5px;
     animation: fade 1s ease-in-out;
-    height: auto;
   }
   .image {
     width: var(--img-size);
@@ -133,6 +135,8 @@
 @media screen and (min-width: 411px) and (max-width: 767px) {
   .JoinRoom {
     width: 100vw;
+    min-width: 400px;
+    min-height: 621.5px;
   }
   .image {
     width: 32px;
@@ -145,6 +149,7 @@
 @media screen and (min-width: 320px) and (max-width: 411px) {
   .JoinRoom {
     width: 100vw;
+    min-height: 621.5px;
   }
   .image {
     width: 32px;
@@ -156,6 +161,7 @@
 @media screen and (max-width: 320px) {
   .JoinRoom {
     width: 100vw;
+    min-height: 621.5px;
   }
   .image {
     width: 32px;
@@ -164,7 +170,6 @@
     width: 80vw;
   }
 }
-
 @keyframes fade {
   from {
     opacity: 0;

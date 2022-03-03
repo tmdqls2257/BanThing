@@ -27,8 +27,7 @@
 .button_removeModal {
   margin-top: var(--margine-base);
 }
-.button_owner_container,
-.button_not_owner_container {
+.button_owner_container {
   height: 59px;
   display: flex;
   margin: auto;
