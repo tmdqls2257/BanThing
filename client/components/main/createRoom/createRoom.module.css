@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   width: 30vw;
-  min-width: var(--min-sider-width);
+  min-width: 400px;
+
   margin: auto;
   animation: fade 1s ease-in-out;
 }
@@ -22,12 +23,16 @@
 
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .createRoom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 621.5px;
-    width: 300px;
+    width: 400px;
   }
   .p {
     flex-wrap: nowrap;
-    word-break: keep-all;
+    word-break: normal;
     font-size: var(--font-size-base);
     font-family: 'Nanum Gothic', sans-serif;
     color: #8e8e8e;
@@ -40,11 +45,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     width: 500px;
     height: 621.5px;
-    min-width: var(--min-sider-width);
-    margin: auto;
     animation: fade 1s ease-in-out;
   }
   .p {
@@ -62,7 +64,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     width: 100vw;
     height: 621.5px;
     min-width: var(--min-sider-width);
@@ -84,7 +85,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     height: 621.5px;
     width: 100vw;
     min-width: var(--min-sider-width);
@@ -106,7 +106,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     height: 621.5px;
     width: 100vw;
     min-width: var(--min-sider-width);
@@ -114,8 +113,7 @@
     animation: fade 1s ease-in-out;
   }
   .p {
-    flex-wrap: nowrap;
-    word-break: keep-all;
+    text-align: center;
     font-size: var(--font-size-base);
     font-family: 'Nanum Gothic', sans-serif;
     color: #8e8e8e;

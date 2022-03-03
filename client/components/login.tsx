@@ -1,9 +1,9 @@
 import styles from '../styles/Login.module.css';
 import SignUp from './signup';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from './modal';
-import { useRouter } from 'next/router';
 
 axios.defaults.withCredentials = true;
 interface propsType {
@@ -51,8 +51,6 @@ export default function Login(prop: propsType) {
           password: password,
         })
         .then((response) => {
-          const { accessToken } = response.data.data;
-          localStorage.setItem('accessToken', accessToken);
           prop.setIsLogin(true);
           prop.setLoginModal(false);
         })
@@ -64,6 +62,7 @@ export default function Login(prop: propsType) {
   };
 
   const handleKakaoModal = () => {
+    let inner;
     const cookie = document.cookie;
     if (cookie.includes('inner')) {
       if (cookie.includes(';')) {
@@ -71,24 +70,18 @@ export default function Login(prop: propsType) {
         const findInner = cookieList.filter((cookie: any) => {
           return cookie.includes('inner');
         });
-        const inner = findInner[0].split('=')[1];
-        if (inner === 'true') {
-          router.push(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
-          );
-        } else {
-          setKakaoModal(true);
-        }
+        inner = findInner[0].split('=')[1];
       } else {
-        const inner = cookie.split('=')[1];
-        if (inner === 'true') {
-          router.push(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
-          );
-        } else {
-          setKakaoModal(true);
-        }
+        inner = cookie.split('=')[1];
       }
+    } else {
+      inner = '';
+    }
+
+    if (inner === 'true') {
+      router.push(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/kakaoLogin`,
+      );
     } else {
       setKakaoModal(true);
     }
@@ -158,8 +151,9 @@ export default function Login(prop: propsType) {
         {signUpModal ? (
           <>
             <SignUp
+              signUpModal={signUpModal}
               setSignUpModal={setSignUpModal}
-              setLoginMessage={setLoginMessage}
+              setIsLogin={prop.setIsLogin}
             />
           </>
         ) : (
@@ -171,8 +165,6 @@ export default function Login(prop: propsType) {
         ) : (
           <></>
         )}
-
-        <Modal setIsModalOpen={() => ''} type={''} />
       </div>
     </>
   );

@@ -83,6 +83,7 @@ const ChatRoom = ({
           </SidebarHeader>
           <main className={styles.main}>
             <Chats
+              roomHostNickName={true}
               usernickname={usernickname}
               usersChats={usersChats}
               roomsId={roomsId}
@@ -107,13 +108,13 @@ const ChatRoom = ({
         </SidebarHeader>
         <main className={styles.main}>
           <Chats
+            roomHostNickName={false}
             usernickname={usernickname}
             usersChats={usersChats}
             roomsId={roomsId}
             addable={true}
           ></Chats>
         </main>
-        <section className={buttonStyle.button_not_owner_container}></section>
       </section>
     </>
   );

@@ -2,7 +2,7 @@
   display: none;
   flex-direction: column;
   width: 30vw;
-  min-width: 300px;
+  min-width: 400px;
   min-height: 621.5px;
   animation: fade 1s ease-in-out;
 }
@@ -16,7 +16,6 @@
 
 @media screen and (max-width: 1024px) {
   .section {
-    height: 621.5px;
   }
 }
 @media screen and (max-width: 768px) {
