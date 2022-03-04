@@ -1,7 +1,20 @@
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic-Bold';
+  src: url('../../../asset/NanumGothic/NanumGothic-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .JoinRoom {
   display: none;
   flex-direction: column;
-  width: 30vw;
   height: 500px;
   width: 400px;
   animation: fade 1s ease-in-out;
@@ -13,6 +26,7 @@
 }
 .joinRoom_profile {
   display: flex;
+  font-family: 'NanumGothic-Bold';
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -23,9 +37,11 @@
 }
 .h1 {
   margin: 0 auto;
+  font-family: 'NanumGothic-Bold';
   font-size: var(--font-size-md);
 }
 .h3 {
+  font-family: 'NanumGothic';
   font-size: var(--font-size-base);
 }
 .article {
@@ -39,15 +55,16 @@
   font-weight: var(--font-weight-bold);
 }
 .joinRoom_content_p {
+  font-family: 'NanumGothic';
   word-break: keep-all;
   overflow-y: auto;
   padding: var(--padding-2rem);
   line-height: 1.5;
   border: none;
   border-radius: var(--border-radius-base);
-  background-color: var(--gary-color);
+  background-color: #efefef;
   width: 300px;
-  height: 20vh;
+  height: 30vh;
 }
 .joinRoom_content_p::-webkit-scrollbar {
   width: 0;
@@ -57,74 +74,6 @@
   margin-top: var(--margine-base);
   margin-right: var(--margine-base);
 }
-
-/* @media screen and (min-width: 767px) and (max-width: 1023px) {
-  .JoinRoom {
-    display: none;
-    flex-direction: column;
-    width: 300px;
-    min-width: 400px;
-    height: 500px;
-    animation: fade 1s ease-in-out;
-  }
-  .image {
-    width: var(--img-size);
-    margin: var(--margine-large);
-  }
-  .joinRoom_profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--orange-color);
-  }
-  .JoinRoom_title {
-    display: flex;
-  }
-  .h1 {
-    margin: 0 auto;
-    font-size: var(--font-size-md);
-  }
-  .h3 {
-    font-size: var(--font-size-base);
-  }
-  .article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-  }
-  .JoinRoom_profile_p {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-  }
-  .joinRoom_content_p {
-    padding: var(--padding-2rem);
-    line-height: 1.5;
-    display: flex;
-    border: none;
-    border-radius: var(--border-radius-base);
-    background-color: var(--gary-color);
-    width: 300px;
-  }
-  .joinRoom_content_p::-webkit-scrollbar {
-    width: 0;
-  }
-  .div {
-    display: inline-block;
-    margin-top: var(--margine-base);
-    margin-right: var(--margine-base);
-  }
-} */
-
-/* @media screen and (min-width: 767px) and (max-width: 1023px) {
-  .image {
-    width: 32px;
-  }
-  .joinRoom_content_p {
-    width: 300px;
-  }
-} */
 
 @media screen and (min-width: 411px) and (max-width: 767px) {
   .JoinRoom {

@@ -99,12 +99,16 @@
 }
 
 .login_title {
-  font-size: 47px;
-  font-weight: 700;
-  color: #ff8a3c;
-  margin-top: 55px;
-  margin-bottom: 30px;
-  font-family: 'BMDOHYEON', sans-serif;
+  display: flex;
+  width: 278px;
+  justify-content: center;
+  align-items: center;
+  margin: 42px auto 10px auto;
+}
+
+.login_title_logo {
+  display: flex;
+  width: 230px;
 }
 
 .login_input_box {
@@ -148,6 +152,10 @@
   cursor: pointer;
 }
 
+.login_button:focus {
+  outline-color: #ffc49d;
+}
+
 .login_icon {
   width: 12px;
   margin-right: 10px;
@@ -164,6 +172,11 @@
   background-color: #fee500;
   border-radius: 12px;
   font-family: 'NanumGothic', sans-serif;
+  text-decoration: none;
+}
+
+.login_kakao_button:focus {
+  outline-color: #ffc49d;
 }
 
 .login_kakao_logo {
@@ -183,7 +196,7 @@
   display: flex;
   flex-direction: column;
   font-size: 13px;
-  margin: 35px auto 35px auto;
+  margin: 40px auto 35px auto;
   font-family: 'NanumGothic', sans-serif;
 }
 

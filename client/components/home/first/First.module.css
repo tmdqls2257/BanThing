@@ -44,16 +44,24 @@
 
 .title_image {
   display: flex;
-  width: 40vw;
-  /* margin-left: 2.5vw; */
-  margin-right: 7vw;
-  box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
+  margin-top: 3vw;
+  width: 45vw;
+  margin-right: 4vw;
+  /* box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%); */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
 .title_title {
-  font-size: 5vw;
-  font-weight: 600;
-  font-family: 'BMDOHYEON', sans-serif;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.title_logo {
+  display: flex;
+  width: 32vw;
 }
 
 .orange {
@@ -67,7 +75,7 @@
 .title_description {
   line-height: 1.4;
   width: 35vw;
-  margin: 1.5vw auto 3vw auto;
+  margin: auto auto 3vw auto;
   font-size: 2.1vw;
   font-weight: 400;
   text-align: center;
@@ -146,7 +154,7 @@
 
 @media screen and (max-width: 767px) {
   .title_container {
-    padding-top: 90px;
+    padding-top: 80px;
     flex-direction: column;
   }
 
@@ -155,14 +163,15 @@
     margin-right: 0;
   }
 
-  .title_title {
-    font-size: 15vw;
+  .title_logo {
+    display: flex;
+    width: 75vw;
   }
 
   .title_description {
     width: 100vw;
     font-size: 5.8vw;
-    margin: 5vw auto 0 auto;
+    margin: 0 auto 4vw auto;
   }
 
   .title_button {

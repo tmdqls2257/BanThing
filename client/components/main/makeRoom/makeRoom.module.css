@@ -1,7 +1,20 @@
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic-Bold';
+  src: url('../../../asset/NanumGothic/NanumGothic-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
 .MakeRoom {
   display: none;
   flex-direction: column;
-  min-width: 400px;
+  width: 400px;
   background-color: var(--chat-background-color);
   flex: 1;
   animation: fade 1s ease-in-out;
@@ -11,7 +24,6 @@
   display: flex;
   flex-direction: column;
   width: 332px;
-  height: 500px;
   justify-content: space-between;
   margin: auto;
 }
@@ -34,6 +46,7 @@
   border-radius: 5px;
   border: none;
   margin-left: 10px;
+  background-color: var(--white-color);
   min-width: 60%;
 }
 .section_content {
@@ -52,6 +65,8 @@
   display: flex;
   width: 200px;
   font-size: var(--font-size-base);
+  background-color: var(--white-color);
+
   height: 44px;
   border-radius: 5px;
   border: none;
@@ -59,16 +74,17 @@
   min-width: 60%;
 }
 .content_textarea {
+  font-family: 'NanumGothic';
   outline: none;
   padding: 32px;
   line-height: 1.5;
   display: flex;
   border: none;
   border-radius: 5px;
-  background-color: var(--gary-color);
+  background-color: var(--white-color);
   resize: none;
   width: 332px;
-  height: 30vh;
+  height: 40vh;
 }
 .content_textarea::-webkit-scrollbar {
   width: 0;
@@ -76,6 +92,7 @@
 
 .h1 {
   margin: 0;
+  font-family: 'NanumGothic-Bold';
   font-size: var(--font-size-base);
   border-radius: 5px;
   color: white;
@@ -87,13 +104,12 @@
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .MakeRoom {
-    min-width: 400px;
+    width: 400px;
     min-height: 708px;
   }
 
   .content_textarea {
-    height: 20vh;
-
+    height: 40vh;
     width: 332px;
   }
 }
@@ -169,6 +185,16 @@
     height: 20vh;
   }
 }
+
+@media screen and (max-width: 1024px) and (min-height: 1000px) {
+  .MakeRoom {
+    min-height: 700px;
+  }
+  .content_textarea {
+    height: 50vh;
+  }
+}
+
 @keyframes fade {
   from {
     opacity: 0;

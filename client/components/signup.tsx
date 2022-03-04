@@ -237,7 +237,11 @@ export default function SignUp(prop: propsType) {
           &times;
         </span>
         <div className={styles.signup_title}>
-          Ban<span className={styles.black}>Thing</span>
+          <img
+            className={styles.signup_title_logo}
+            src="/banthing.png"
+            alt="BanThing Logo"
+          />
         </div>
         <div className={styles.signup_id_name_container}>
           <input

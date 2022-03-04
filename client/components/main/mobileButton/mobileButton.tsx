@@ -6,6 +6,7 @@ interface mobileType {
 }
 const MobileButton = ({ setSlide }: mobileType) => {
   const [mobile, setMobile] = useState<Direction>('up');
+  // 애니메이션의 방향
   const handleClick = () => {
     if (mobile === 'down') {
       setMobile('up');

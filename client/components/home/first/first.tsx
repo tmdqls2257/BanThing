@@ -9,8 +9,11 @@ export default function First() {
         <main className={styles.main}>
           <Zoom triggerOnce={true} delay={150}>
             <div className={styles.title_title}>
-              <span className={styles.orange}>Ban</span>
-              <span className={styles.black}>Thing</span>
+              <img
+                className={styles.title_logo}
+                src="/banthing.png"
+                alt="BanThing Logo"
+              />
             </div>
           </Zoom>
           <Fade triggerOnce={true} delay={1000}>

@@ -78,9 +78,9 @@ export default function Header(prop: propsType) {
       {prop.isLogin ? (
         <>
           <div className={styles.header}>
-            <Link href="/main">
+            <Link href="/">
               <a className={styles.logo}>
-                <img src="/banthing.svg" alt="BanThing Logo" />
+                <img src="/banthing.png" alt="BanThing Logo" />
               </a>
             </Link>
 
@@ -180,9 +180,9 @@ export default function Header(prop: propsType) {
         // --------- ▼ 로그인이 되어있지 않은 경우 ---------
         <>
           <div className={styles.header}>
-            <Link href="/main">
+            <Link href="/">
               <a className={styles.logo}>
-                <img src="/banthing.svg" alt="BanThing Logo" />
+                <img src="/banthing.png" alt="BanThing Logo" />
               </a>
             </Link>
 
