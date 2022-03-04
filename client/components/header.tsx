@@ -78,7 +78,7 @@ export default function Header(prop: propsType) {
       {prop.isLogin ? (
         <>
           <div className={styles.header}>
-            <Link href="/main">
+            <Link href="/">
               <a className={styles.logo}>
                 <img src="/banthing.png" alt="BanThing Logo" />
               </a>
