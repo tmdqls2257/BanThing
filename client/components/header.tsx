@@ -80,7 +80,7 @@ export default function Header(prop: propsType) {
           <div className={styles.header}>
             <Link href="/main">
               <a className={styles.logo}>
-                <img src="/banthing.svg" alt="BanThing Logo" />
+                <img src="/banthing.png" alt="BanThing Logo" />
               </a>
             </Link>
 
@@ -182,7 +182,7 @@ export default function Header(prop: propsType) {
           <div className={styles.header}>
             <Link href="/main">
               <a className={styles.logo}>
-                <img src="/banthing.svg" alt="BanThing Logo" />
+                <img src="/banthing.png" alt="BanThing Logo" />
               </a>
             </Link>
 

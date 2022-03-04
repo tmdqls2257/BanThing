@@ -255,7 +255,7 @@ const MyPage: NextPage = (props) => {
         <meta name="BanThing" content="Order with your foodmate" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <div className={styles.mypage_header}></div>
       <div className={styles.mypage_container}>
         <div className={styles.mypage_profile}>
           <img
@@ -269,14 +269,12 @@ const MyPage: NextPage = (props) => {
                 className={styles.mypage_id_name}
                 value={userId || ''}
                 placeholder={userId}
-                onChange={() => {}}
                 disabled
               />
               <input
                 className={styles.mypage_id_name}
                 value={nickname || ''}
                 placeholder={nickname}
-                onChange={() => {}}
                 disabled
               />
             </div>
