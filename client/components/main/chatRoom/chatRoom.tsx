@@ -33,15 +33,15 @@ const ChatRoom = ({
   roomsId,
   roomHostNickName,
 }: roomsIdTitleType) => {
+  // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
 
+  // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
     let cookie: any;
     let cookieToken: any;
     let cookieList: any;
     if (typeof window !== 'undefined') {
-      console.log(1);
-
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         cookieList = cookie.split(';');
@@ -69,40 +69,17 @@ const ChatRoom = ({
     }
   }, []);
 
+  // 삭제하기 버튼 클릭시 모달을 띄어 줍니다.
   const onClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;
     removeModal.style.display = 'flex';
   };
 
+  // 유저의 닉네임과 호스트의 닉네임이 같을 경우 삭제하기 버튼을 띄어줍니다.
   if (usernickname === roomHostNickName) {
     return (
-      <>
-        <section id="ChatRoom" className={styles.section}>
-          <SidebarHeader containerName={'gotoJoinRoom'}>
-            {roomTitle}
-          </SidebarHeader>
-          <main className={styles.main}>
-            <Chats
-              usernickname={usernickname}
-              usersChats={usersChats}
-              roomsId={roomsId}
-              addable={true}
-            ></Chats>
-          </main>
-          <section className={buttonStyle.button_owner_container}>
-            <button className={buttonStyle.button} onClick={onClick}>
-              삭제하기
-            </button>
-          </section>
-          <Modal removeRoomId={roomsId} />
-        </section>
-      </>
-    );
-  }
-  return (
-    <>
       <section id="ChatRoom" className={styles.section}>
-        <SidebarHeader containerName={'gotoJoinRoom'}>
+        <SidebarHeader isHost={true} containerName={'gotoJoinRoom'}>
           {roomTitle}
         </SidebarHeader>
         <main className={styles.main}>
@@ -113,9 +90,24 @@ const ChatRoom = ({
             addable={true}
           ></Chats>
         </main>
-        <section className={buttonStyle.button_not_owner_container}></section>
+        <Modal removeRoomId={roomsId} />
       </section>
-    </>
+    );
+  }
+  return (
+    <section id="ChatRoom" className={styles.section}>
+      <SidebarHeader isHost={false} containerName={'gotoJoinRoom'}>
+        {roomTitle}
+      </SidebarHeader>
+      <main className={styles.main}>
+        <Chats
+          usernickname={usernickname}
+          usersChats={usersChats}
+          roomsId={roomsId}
+          addable={true}
+        ></Chats>
+      </main>
+    </section>
   );
 };
 

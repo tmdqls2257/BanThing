@@ -13,6 +13,7 @@ const Chat = ({ nickname, owner, chats, time }: chatType) => {
   const [minute, setMinute] = useState('');
   const clock = new Date(Date.parse(time));
 
+  // 덧글을 입력할 떄 입력한 시간을 반영해줍니다.
   useEffect(() => {
     setMinute(String(clock.getMinutes()));
     setHour(String(clock.getHours()));

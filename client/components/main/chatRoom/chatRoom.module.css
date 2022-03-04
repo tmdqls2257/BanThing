@@ -1,8 +1,8 @@
 .section {
   display: none;
   flex-direction: column;
-  width: 30vw;
-  min-width: 300px;
+  width: 20vw;
+  width: 400px;
   animation: fade 1s ease-in-out;
 }
 .main {
@@ -15,11 +15,14 @@
 
 @media screen and (max-width: 1024px) {
   .section {
+    width: 400px;
   }
 }
+
 @media screen and (max-width: 768px) {
   .section {
     width: 100vw;
+    max-height: 500px;
   }
 }
 @media screen and (max-width: 480px) {
@@ -30,6 +33,11 @@
 @media screen and (max-width: 320px) {
   .section {
     height: 80vh;
+  }
+}
+@media screen and (min-height: 1000px) {
+  .section {
+    min-height: 700px;
   }
 }
 @keyframes fade {

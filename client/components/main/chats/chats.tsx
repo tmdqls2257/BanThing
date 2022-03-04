@@ -26,6 +26,7 @@ interface ChatsType {
 const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
   const [userchat, setChat] = useState<string[]>([]);
 
+  // joinRoom에서 받아온 방의 채팅과 유저가 보는 채팅을 push해줍니다.
   const onCreated = (chat: string) => {
     usersChats?.data.replyLog.push({
       id: usersChats?.data.replyLog.length + 1,
@@ -37,6 +38,7 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
     setChat((chats) => [...chats, chat]);
   };
 
+  // 최신 덧글을 포커스 하기 위한 useEffect입니다.
   useEffect(() => {
     const chatContainer = document.querySelector(
       '#chat-Container',

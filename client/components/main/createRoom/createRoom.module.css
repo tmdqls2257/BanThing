@@ -1,50 +1,59 @@
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .createRoom {
   font-family: 'Nanum Gothic', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30vw;
-  min-width: var(--min-sider-width);
-  margin: auto;
+  width: 20vw;
+  background-color: var(--chat-background-color);
+  min-width: 400px;
+
   animation: fade 1s ease-in-out;
 }
 .image {
   width: 4.75rem;
 }
 .p {
+  font-family: 'NanumGothic';
   flex-wrap: nowrap;
   word-break: keep-all;
   font-size: var(--font-size-base);
-  font-family: 'Nanum Gothic', sans-serif;
   color: #8e8e8e;
 }
 
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .createRoom {
-    height: 621.5px;
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
   }
   .p {
     flex-wrap: nowrap;
-    word-break: keep-all;
+    word-break: normal;
     font-size: var(--font-size-base);
     font-family: 'Nanum Gothic', sans-serif;
     color: #8e8e8e;
   }
 }
-@media screen and (min-width: 501px) and (max-width: 768px) {
+@media screen and (min-width: 501px) and (max-width: 767px) {
   .createRoom {
     font-family: 'Nanum Gothic', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     width: 500px;
-    height: 621.5px;
-    min-width: var(--min-sider-width);
-    margin: auto;
+    height: 500px;
+
     animation: fade 1s ease-in-out;
   }
   .p {
@@ -62,9 +71,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     width: 100vw;
-    height: 621.5px;
+    height: 500px;
+
     min-width: var(--min-sider-width);
     margin: auto;
     animation: fade 1s ease-in-out;
@@ -84,8 +93,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    height: 621.5px;
+    height: 500px;
+
     width: 100vw;
     min-width: var(--min-sider-width);
     margin: auto;
@@ -106,22 +115,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    height: 621.5px;
+    height: 500px;
+
     width: 100vw;
     min-width: var(--min-sider-width);
     margin: auto;
     animation: fade 1s ease-in-out;
   }
   .p {
-    flex-wrap: nowrap;
-    word-break: keep-all;
+    text-align: center;
     font-size: var(--font-size-base);
     font-family: 'Nanum Gothic', sans-serif;
     color: #8e8e8e;
   }
 }
-
+@media screen and (min-height: 1000px) {
+  .createRoom {
+    min-height: 700px;
+  }
+}
 @keyframes fade {
   from {
     opacity: 0;

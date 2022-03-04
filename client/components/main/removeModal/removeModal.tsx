@@ -11,6 +11,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
     event.preventDefault();
   };
 
+  // 삭제요청
   const onClick = () => {
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
@@ -37,14 +38,19 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       const headers = {
         Authorization: `Bearer ${cookieToken}`,
       };
-      axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-        {
-          headers,
-        },
-      );
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+          {
+            headers,
+          },
+        )
+        .then(() => {
+          location.reload();
+        });
     }
   };
+  // 뒤로가기 클릭
   const backClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;
 
@@ -55,6 +61,11 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       <section className={styles.removeModal__section} id="removeModal">
         <form className={styles.rate_modal} onSubmit={onSubmit}>
           <section className={styles.rate_title}>
+            <img
+              className={styles.remove_image}
+              src="/image/question_mark.png"
+              alt=""
+            />
             <h1>정말 삭제하시겠습니까?</h1>
           </section>
           <section className={buttonStyle.button_removeModal_container}>

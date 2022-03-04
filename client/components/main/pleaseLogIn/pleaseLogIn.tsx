@@ -3,24 +3,24 @@ import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
 
 interface makeRoomState {
-  setMakeRoomModal: Dispatch<SetStateAction<boolean>>;
+  setIsLogIn: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function MakeRoomModal({ setMakeRoomModal }: makeRoomState) {
+export default function PleaseLogIn({ setIsLogIn }: makeRoomState) {
   // 확인 버튼 클릭시 모달이 닫히게 하는 기능
   const onClick = () => {
-    setMakeRoomModal(false);
+    setIsLogIn(true);
   };
   return (
     <section className={styles.makeRoomModal__section} id="makeModal">
       <form className={styles.rate_modal}>
         <section className={styles.rate_title}>
           <img
-            className={styles.makeRoom_image}
-            src="/image/please_write.png"
+            className={styles.isLogin_image}
+            src="/image/yellow_light_bulb.png"
             alt=""
           />
-          <h1 className={styles.rate_h1}>내용을 모두 입력해주세요</h1>
+          <h1 className={styles.rate_h1}>로그인 해주세요</h1>
         </section>
 
         <section className={buttonStyle.button_container}>

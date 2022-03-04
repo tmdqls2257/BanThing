@@ -1,8 +1,20 @@
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumGothic-Bold';
+  src: url('../../../asset/NanumGothic/NanumGothic-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
 .MakeRoom {
   display: none;
   flex-direction: column;
-  width: 30vw;
-  min-width: var(--min-sider-width);
+  width: 400px;
   background-color: var(--chat-background-color);
   flex: 1;
   animation: fade 1s ease-in-out;
@@ -30,10 +42,11 @@
   display: flex;
   width: 200px;
   font-size: var(--font-size-base);
-  height: 37px;
+  height: 44px;
   border-radius: 5px;
   border: none;
   margin-left: 10px;
+  background-color: var(--white-color);
   min-width: 60%;
 }
 .section_content {
@@ -52,23 +65,26 @@
   display: flex;
   width: 200px;
   font-size: var(--font-size-base);
-  height: 37px;
+  background-color: var(--white-color);
+
+  height: 44px;
   border-radius: 5px;
   border: none;
   margin-left: 10px;
   min-width: 60%;
 }
 .content_textarea {
+  font-family: 'NanumGothic';
   outline: none;
   padding: 32px;
   line-height: 1.5;
   display: flex;
   border: none;
   border-radius: 5px;
-  background-color: var(--gary-color);
+  background-color: var(--white-color);
   resize: none;
   width: 332px;
-  height: 30vw;
+  height: 40vh;
 }
 .content_textarea::-webkit-scrollbar {
   width: 0;
@@ -76,6 +92,7 @@
 
 .h1 {
   margin: 0;
+  font-family: 'NanumGothic-Bold';
   font-size: var(--font-size-base);
   border-radius: 5px;
   color: white;
@@ -87,79 +104,94 @@
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .MakeRoom {
-    width: 300px;
-  }
-  .main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    justify-content: space-between;
-    margin: auto;
-  }
-  .content_textarea {
-    height: 30vh;
+    width: 400px;
+    min-height: 708px;
   }
 
-  .section_flex_input,
-  .section_flex_select {
-    outline: none;
-    padding-left: 10px;
-    display: flex;
-    width: 50vh;
-    font-size: var(--font-size-base);
-    height: 37px;
-    border-radius: 5px;
-    border: none;
-    margin-left: 10px;
-    min-width: 60%;
+  .content_textarea {
+    height: 40vh;
+    width: 332px;
   }
 }
-@media screen and (min-width: 501px) and (max-width) {
+@media screen and (min-width: 601px) and (max-width: 767px) {
   .MakeRoom {
-    height: 621.5px;
+    height: 500px;
     width: 400px;
+  }
+  .content_textarea {
+    height: 100px;
+    width: 332px;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 600px) {
+  .MakeRoom {
+    height: 500px;
+    width: 400px;
+  }
+  .content_textarea {
+    height: 100px;
+    width: 332px;
   }
 }
 @media screen and (min-width: 400px) and (max-width: 500px) {
   .MakeRoom {
     width: 400px;
-    height: 621.5px;
+    height: 500px;
   }
   .main {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 80vw;
+    width: 332px;
     justify-content: space-between;
     margin: auto;
   }
   .content_textarea {
-    width: 80vw;
+    height: 100px;
+    width: 332px;
   }
 }
 @media screen and (min-width: 330px) and (max-width: 400px) {
   .MakeRoom {
     width: 100vw;
-    height: 621.5px;
+    height: 500px;
   }
   .main {
     width: 80vw;
   }
   .content_textarea {
     width: 80vw;
+    height: 100px;
   }
 }
 @media screen and (max-width: 330px) {
   .MakeRoom {
     width: 100vw;
-    height: 621.5px;
+    height: 500px;
   }
   .content_textarea {
+    height: 100px;
     width: 80vw;
   }
   .main {
     width: 80vw;
+  }
+}
+@media screen and (min-height: 1000px) {
+  .MakeRoom {
+    min-height: 700px;
+  }
+  .content_textarea {
+    height: 20vh;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-height: 1000px) {
+  .MakeRoom {
+    min-height: 700px;
+  }
+  .content_textarea {
+    height: 50vh;
   }
 }
 
