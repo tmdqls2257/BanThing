@@ -105,7 +105,11 @@ export default function Login(prop: propsType) {
             &times;
           </span>
           <div className={styles.login_title}>
-            Ban<span className={styles.black}>Thing</span>
+            <img
+              className={styles.login_title_logo}
+              src="/banthing.png"
+              alt="BanThing Logo"
+            />
           </div>
           <input
             className={styles.login_input_box}
