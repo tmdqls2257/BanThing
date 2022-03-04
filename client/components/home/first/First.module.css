@@ -44,10 +44,12 @@
 
 .title_image {
   display: flex;
-  width: 40vw;
-  /* margin-left: 2.5vw; */
-  margin-right: 7vw;
-  box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%);
+  margin-top: 3vw;
+  width: 45vw;
+  margin-right: 4vw;
+  /* box-shadow: 0 10px 20px 10px rgb(0 0 0 / 10%); */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
 .title_title {
