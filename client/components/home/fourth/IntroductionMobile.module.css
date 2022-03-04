@@ -10,8 +10,8 @@
 
 .introduction_main_right {
   display: flex;
-  width: 80vw;
-  height: 80vw;
+  width: 85vw;
+  height: 100vw;
   flex-direction: column;
   justify-content: center;
   background-color: #ff8a3c;
@@ -24,16 +24,16 @@
 
 .introduction_main_number {
   color: white;
-  font-size: 4vw;
+  font-size: 5vw;
   font-family: 'BMDOHYEON', sans-serif;
   font-weight: 900;
-  margin-bottom: 2vw;
+  margin-bottom: 5vw;
 }
 
 .introduction_title_right {
   display: flex;
   color: #ffffff;
-  font-size: 7vw;
+  font-size: 7.2vw;
   font-weight: 500;
   justify-content: flex-end;
   font-family: 'BMDOHYEON', sans-serif;
@@ -53,9 +53,9 @@
 }
 
 .introduction_description_right {
-  width: 60vw;
+  width: 65vw;
   line-height: 1.5;
-  font-size: 3vw;
+  font-size: 3.2vw;
   text-align: start;
   font-family: 'NanumGothic', sans-serif;
   font-weight: 700;

@@ -1,5 +1,5 @@
 .section {
-  padding-top: 4.6vw;
+  padding-top: 4.6rem;
   display: flex;
   flex-direction: row;
   width: 100vw;
@@ -9,6 +9,7 @@
   width: 0;
 }
 .main {
+  position: relative;
   width: 100vw;
   overflow-y: auto;
   display: flex;
@@ -16,10 +17,16 @@
 @media screen and (min-width: 768px) {
   .section {
     height: 100vh;
-    overflow-y: hidden;
+    overflow-y: auto;
   }
   .main {
+    position: relative;
     width: 100vw;
     display: flex;
+  }
+}
+@media screen and (max-width: 768px) {
+  .section {
+    overflow-y: hidden;
   }
 }

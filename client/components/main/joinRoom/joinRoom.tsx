@@ -1,7 +1,8 @@
 import styles from './joinRoom.module.css';
 import buttonStyle from '../button.module.css';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
+import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 axios.defaults.withCredentials = true;
 
 interface roomData {
@@ -43,7 +44,9 @@ const JoinRoom = ({
 }: roomsIdType) => {
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
+  const [isLogIn, setIsLogIn] = useState(true);
 
+  // 글에 대한 정보를 불러와 JoinRoom에 반영합니다.
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -62,16 +65,22 @@ const JoinRoom = ({
     };
     getPosts();
   }, [roomsId]);
+
+  // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.
   useEffect(() => {
+    // 채팅이 있을 경우 부모 컴포넌트에 채팅들을 전해줍니다.
     if (chats) {
       setUsersChats(chats);
     }
 
+    // 데이터가 있을 경우 부모 컴포넌트에 title과 hostName을 전해줍니다.
     if (data) {
       setroomTitle(data.data.post.title);
       setroomHostNickName(data.data.post.host_nickname);
     }
   }, [chats, data]);
+
+  // 방 참가 버튼 클릭시 해당 post.id에 대한 덧글들을 불러옵니다.
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
@@ -88,28 +97,33 @@ const JoinRoom = ({
       } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
         cookieToken = cookie.split('=')[1];
       }
-      const getPosts = async () => {
-        try {
-          const headers = {
-            Authorization: `Bearer ${cookieToken}`,
-          };
-          const response: AxiosResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
-            {
-              headers,
-            },
-          );
-          setChats(response.data);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      getPosts();
+      if (cookieToken) {
+        const getPosts = async () => {
+          try {
+            const headers = {
+              Authorization: `Bearer ${cookieToken}`,
+            };
+            const response: AxiosResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
+              {
+                headers,
+              },
+            );
+            setChats(response.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getPosts();
+        joinRoom.style.display = 'none';
+        chatRoom.style.display = 'flex';
+      } else {
+        setIsLogIn(false);
+      }
     }
-    joinRoom.style.display = 'none';
-    chatRoom.style.display = 'flex';
   };
 
+  // map.tsx에서 받아온 정보중 카테고리만 불러와 이미지를 렌더링 합니다.
   const rendering = () => {
     if (data) {
       const { category } = data.data.post;
@@ -180,9 +194,10 @@ const JoinRoom = ({
               참여하기
             </button>
           </section>
+          {isLogIn ? <></> : <PleaseLogIn setIsLogIn={setIsLogIn} />}
         </>
       ) : (
-        <h1>로그인해주세요</h1>
+        <></>
       )}
     </section>
   );

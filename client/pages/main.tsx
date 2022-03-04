@@ -15,7 +15,6 @@ declare global {
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);
-  const [maprelandering, setMaprelandering] = useState(false);
   const [mapTomobileUp, setMapToMobileUp] = useState('');
 
   return (
@@ -35,12 +34,10 @@ const Main: NextPage = () => {
           <Map
             roomsData={setRoomsData}
             setLocation={setLocation}
-            maprelandering={maprelandering}
             setMapToMobileUp={setMapToMobileUp}
           />
           <Sidebar
             mapTomobileUp={mapTomobileUp}
-            setMaprelandering={setMaprelandering}
             location={location}
             roomsId={roomsId}
           />
