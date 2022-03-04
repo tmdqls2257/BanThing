@@ -78,47 +78,36 @@ const ChatRoom = ({
   // 유저의 닉네임과 호스트의 닉네임이 같을 경우 삭제하기 버튼을 띄어줍니다.
   if (usernickname === roomHostNickName) {
     return (
-      <>
-        <section id="ChatRoom" className={styles.section}>
-          <SidebarHeader containerName={'gotoJoinRoom'}>
-            {roomTitle}
-          </SidebarHeader>
-          <main className={styles.main}>
-            <Chats
-              roomHostNickName={true}
-              usernickname={usernickname}
-              usersChats={usersChats}
-              roomsId={roomsId}
-              addable={true}
-            ></Chats>
-          </main>
-          <section className={buttonStyle.button_owner_container}>
-            <button className={buttonStyle.button} onClick={onClick}>
-              삭제하기
-            </button>
-          </section>
-          <Modal removeRoomId={roomsId} />
-        </section>
-      </>
-    );
-  }
-  return (
-    <>
       <section id="ChatRoom" className={styles.section}>
-        <SidebarHeader containerName={'gotoJoinRoom'}>
+        <SidebarHeader isHost={true} containerName={'gotoJoinRoom'}>
           {roomTitle}
         </SidebarHeader>
         <main className={styles.main}>
           <Chats
-            roomHostNickName={false}
             usernickname={usernickname}
             usersChats={usersChats}
             roomsId={roomsId}
             addable={true}
           ></Chats>
         </main>
+        <Modal removeRoomId={roomsId} />
       </section>
-    </>
+    );
+  }
+  return (
+    <section id="ChatRoom" className={styles.section}>
+      <SidebarHeader isHost={false} containerName={'gotoJoinRoom'}>
+        {roomTitle}
+      </SidebarHeader>
+      <main className={styles.main}>
+        <Chats
+          usernickname={usernickname}
+          usersChats={usersChats}
+          roomsId={roomsId}
+          addable={true}
+        ></Chats>
+      </main>
+    </section>
   );
 };
 

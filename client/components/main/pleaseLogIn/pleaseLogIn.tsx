@@ -15,6 +15,11 @@ export default function PleaseLogIn({ setIsLogIn }: makeRoomState) {
     <section className={styles.makeRoomModal__section} id="makeModal">
       <form className={styles.rate_modal}>
         <section className={styles.rate_title}>
+          <img
+            className={styles.isLogin_image}
+            src="/image/yellow_light_bulb.png"
+            alt=""
+          />
           <h1 className={styles.rate_h1}>로그인 해주세요</h1>
         </section>
 

@@ -2,25 +2,20 @@
   overflow-y: auto;
   min-height: 50px;
   height: auto;
-  max-height: 80vh;
-}
-.chat_container_ownerRoom {
-  overflow-y: auto;
-  min-height: 50px;
-  height: auto;
-  max-height: 71vh;
+  max-height: 783px;
 }
 
-.chat_container::-webkit-scrollbar,
-.chat_container_ownerRoom::-webkit-scrollbar {
+.chat_container::-webkit-scrollbar {
   width: 0;
 }
 
 @media screen and (max-width: 768px) {
   .chat_container {
-    max-height: 60vh;
+    height: 388px;
   }
-  .chat_container_ownerRoom {
-    max-height: 53vh;
+}
+@media screen and (min-height: 1000px) {
+  .chat_container {
+    height: 588px;
   }
 }
