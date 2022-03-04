@@ -1,22 +1,30 @@
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../../../asset/NanumGothic/NanumGothic-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .createRoom {
   font-family: 'Nanum Gothic', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30vw;
+  width: 20vw;
+  background-color: var(--chat-background-color);
   min-width: 400px;
-  margin: auto;
+
   animation: fade 1s ease-in-out;
 }
 .image {
   width: 4.75rem;
 }
 .p {
+  font-family: 'NanumGothic';
   flex-wrap: nowrap;
   word-break: keep-all;
   font-size: var(--font-size-base);
-  font-family: 'Nanum Gothic', sans-serif;
   color: #8e8e8e;
 }
 
@@ -26,8 +34,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 708px;
-
     width: 400px;
   }
   .p {
@@ -46,7 +52,7 @@
     justify-content: center;
     align-items: center;
     width: 500px;
-    min-height: 500px;
+    height: 500px;
 
     animation: fade 1s ease-in-out;
   }
@@ -66,7 +72,7 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    min-height: 500px;
+    height: 500px;
 
     min-width: var(--min-sider-width);
     margin: auto;
@@ -87,7 +93,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 500px;
+    height: 500px;
 
     width: 100vw;
     min-width: var(--min-sider-width);
@@ -109,7 +115,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 500px;
+    height: 500px;
 
     width: 100vw;
     min-width: var(--min-sider-width);

@@ -21,18 +21,11 @@ interface ChatsType {
   roomsId: number;
   usersChats: usersChats | undefined;
   usernickname: string;
-  roomHostNickName: boolean;
 }
 
-const Chats = ({
-  usersChats,
-  roomsId,
-  addable,
-  usernickname,
-  roomHostNickName,
-}: ChatsType) => {
+const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
   const [userchat, setChat] = useState<string[]>([]);
-  const [chatsClassName, setChatsClassName] = useState<string>('');
+
   // joinRoom에서 받아온 방의 채팅과 유저가 보는 채팅을 push해줍니다.
   const onCreated = (chat: string) => {
     usersChats?.data.replyLog.push({
@@ -53,18 +46,9 @@ const Chats = ({
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
   }, [userchat.length]);
 
-  // 글쓴이 일 경우 className은 chat_container_ownerRoom 아닐 경우 chat_container
-  useEffect(() => {
-    if (roomHostNickName) {
-      setChatsClassName(styles.chat_container_ownerRoom);
-    } else {
-      setChatsClassName(styles.chat_container);
-    }
-  }, [roomHostNickName]);
-
   return (
     <>
-      <section className={chatsClassName} id={'chat-Container'}>
+      <section className={styles.chat_container} id={'chat-Container'}>
         {usersChats?.data.replyLog ? (
           usersChats?.data.replyLog.map((chat) => (
             <Chat

@@ -2,11 +2,11 @@
   display: flex;
   background-color: var(--white-color);
   z-index: 1;
-  min-height: 500px;
 }
 .down,
 .up {
   display: flex;
+  width: 400px;
   z-index: 1;
 }
 /* @media screen and (min-width: 768px) and (max-width: 1023px) {
