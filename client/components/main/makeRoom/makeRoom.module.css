@@ -38,7 +38,6 @@
 .section_flex_input,
 .section_flex_select {
   outline: none;
-  padding-left: 10px;
   display: flex;
   width: 200px;
   font-size: var(--font-size-base);
@@ -48,6 +47,12 @@
   margin-left: 10px;
   background-color: var(--white-color);
   min-width: 60%;
+}
+.section_flex_input {
+  padding-left: 14px;
+}
+.section_flex_select {
+  padding-left: 10px;
 }
 .section_content {
   margin-top: var(--margine-base);

@@ -63,7 +63,9 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
           <></>
         )}
       </section>
-      {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
+      <div className={styles.div}>
+        {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
+      </div>
     </>
   );
 };
