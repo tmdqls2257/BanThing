@@ -263,6 +263,7 @@ const MyPage: NextPage = (props) => {
             alt="user-image"
             className={styles.mypage_image}
           />
+          <button className={styles.mypage_admin_button}>ADMIN</button>
           <div className={styles.mypage_input_container}>
             <div className={styles.mypage_input_disabled}>
               <input
