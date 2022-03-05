@@ -9,7 +9,6 @@ import MobileButton from '../mobileButton/mobileButton';
 interface locationType {
   location: number[];
   roomsId: number;
-  mapTomobileUp: string;
 }
 
 interface usersChats {
@@ -26,7 +25,7 @@ interface usersChats {
   };
 }
 
-const Sidebar = ({ location, roomsId, mapTomobileUp }: locationType) => {
+const Sidebar = ({ location, roomsId }: locationType) => {
   // JoinRoom에서 받아온 roomTitle을 chatRoom으로 보내줍니다.
   const [roomTitle, setRoomTitle] = useState('');
   // JoinRoom에서 받아온 HostNickName을 chatRoom으로 보내줍니다.
@@ -40,8 +39,6 @@ const Sidebar = ({ location, roomsId, mapTomobileUp }: locationType) => {
   // 클릭 상태에 따라 달라지는 class
   const [className, setClassName] = useState(styles.slideDown);
 
-  const [markerClick, setMarkerClick] = useState('');
-
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
@@ -49,30 +46,11 @@ const Sidebar = ({ location, roomsId, mapTomobileUp }: locationType) => {
   }, [roomsId]);
 
   useMemo(() => {
-    if (mapTomobileUp === 'down') {
-      setMarkerClick(mapTomobileUp);
-    } else if (mapTomobileUp === 'up') {
-      setMarkerClick(mapTomobileUp);
-    }
-  }, [mapTomobileUp]);
-
-  useMemo(() => {
-    if (markerClick) {
-      setClassName(styles.up);
-    }
-    console.log(slide);
-  }, [markerClick]);
-
-  useMemo(() => {
-    console.log(slide);
     if (slide === 'down') {
       setClassName(styles.down);
     } else if (slide === 'up') {
       setClassName(styles.up);
     }
-    console.log(1);
-    console.log(slide);
-    console.log(className);
   }, [slide]);
 
   return (

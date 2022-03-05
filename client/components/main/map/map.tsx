@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import Loading from '../loading/loading';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { setgroups } from 'process';
 
 interface dataType {
   data: {
@@ -20,9 +19,8 @@ interface dataType {
 interface mapType {
   setLocation: Dispatch<SetStateAction<number[]>>;
   roomsData: Dispatch<SetStateAction<number>>;
-  setMapToMobileUp: Dispatch<SetStateAction<string>>;
 }
-function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
+function Map({ setLocation, roomsData }: mapType) {
   // 로딩의 상태
   const [loading, setLoading] = useState<boolean>(false);
   // 데이터를 받아와 카테고리에 따라 다른 이미지를 사용합니다.
@@ -55,7 +53,6 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
 
     mapScript.async = true;
     mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`;
-    document.head.appendChild(mapScript);
 
     const clickEvent = (marker: any, map: any, roomId?: number) => {
       // 마커 클릭 함수
@@ -69,7 +66,6 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
         }
         var pos = marker.getPosition();
         setPos(pos);
-        console.log(pos);
 
         map.panTo(pos);
       });

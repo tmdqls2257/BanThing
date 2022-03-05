@@ -107,6 +107,7 @@
     width: 100vw;
     min-width: 400px;
     height: 500px;
+    box-shadow: var(--box-shadow);
   }
 
   .image {

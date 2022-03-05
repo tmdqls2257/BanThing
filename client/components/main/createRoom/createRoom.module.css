@@ -53,6 +53,7 @@
     align-items: center;
     width: 500px;
     height: 500px;
+    box-shadow: var(--box-shadow);
 
     animation: fade 1s ease-in-out;
   }
