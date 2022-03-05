@@ -20,13 +20,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (typeof document !== 'undefined') {
       const cookie = document.cookie;
-      if (typeof localStorage !== 'undefined') {
-        const accessToken = localStorage.getItem('accessToken');
-        if (cookie.includes('accessToken') || accessToken) {
-          setIsLogin(true);
-        } else {
-          setIsLogin(false);
-        }
+      if (cookie.includes('accessToken')) {
+        setIsLogin(true);
+      } else {
+        setIsLogin(false);
       }
     }
   }, [cookie]);
