@@ -242,6 +242,16 @@
   font-size: 1.2vw;
 }
 
+@media screen and (max-width: 767px) {
+  .introduction_container_left {
+    display: none;
+  }
+
+  .introduction_container_right {
+    display: none;
+  }
+}
+
 /* ------------------------------------------------------------ */
 
 /* -----------------------header.tsx CSS----------------------- */
@@ -416,6 +426,86 @@
   font-family: 'BMDOHYEON', sans-serif;
 }
 
+.caption_button {
+  width: 12vw;
+  height: 5vw;
+  color: #ffffff;
+  font-size: 2vw;
+  font-weight: 700;
+  border-radius: 12px;
+  background-color: #ff8a3c;
+  border: solid;
+  border-width: 5px;
+  border-color: #ff8a3c;
+  transition: 0.3s ease;
+  font-family: 'Pretendard-SemiBold', sans-serif;
+}
+
+.caption_button_description {
+  font-family: 'BMDOHYEON', sans-serif;
+}
+
+.caption_button:hover {
+  color: white;
+  background-color: #ff8a3c;
+  border-width: 5px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.caption_button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+.caption_button span:after {
+  content: '\00bb';
+  position: absolute;
+  color: white;
+  font-size: 2.4vw;
+  opacity: 0;
+  top: -0.45vw;
+  left: 7.4vw;
+  transition: 0.3s ease;
+}
+
+.caption_button:hover span {
+  padding-right: 1vw;
+}
+
+.caption_button:hover span:after {
+  color: white;
+  opacity: 1;
+  right: 0;
+  transition: 0.3s ease;
+}
+
+@media screen and (max-width: 767px) {
+  .caption_image {
+    width: 55vw;
+  }
+
+  .caption_description {
+    width: 90vw;
+    font-size: 6vw;
+    margin-top: 12vw;
+    margin-bottom: 12vw;
+  }
+
+  .caption_button {
+    display: flex;
+    width: 35vw;
+    height: 16vw;
+    font-size: 6vw;
+    margin-bottom: 30vw;
+    margin-top: -3vw;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /* ------------------------------------------------------------ */
 
 /* -----------------------footer.tsx CSS----------------------- */
@@ -473,7 +563,12 @@
     font-size: 12px;
   }
 
+  .member_position {
+    font-size: 10px;
+  }
+
   .copyright {
+    font-size: 10px;
     margin-bottom: 10px;
   }
 }

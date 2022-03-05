@@ -29,66 +29,27 @@ const MyPage: NextPage = (props) => {
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      const cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
+      const cookieList = document.cookie.split(' ').filter((cookie) => {
+        return cookie.includes('accessToken');
+      });
+      const accessToken = cookieList[0].split('=')[1].replace(';', '');
+
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          const { userInfo } = response.data.data;
+          setUserId(userInfo.user_id);
+          setNickname(userInfo.nickname);
+          setAuth(userInfo.auth);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        const accessToken = findAccessToken[0].split('=')[1];
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setUserId(userInfo.user_id);
-            setNickname(userInfo.nickname);
-            setAuth(userInfo.auth);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        const accessToken = cookie.split('=')[1];
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setUserId(userInfo.user_id);
-            setNickname(userInfo.nickname);
-            setAuth(userInfo.auth);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (typeof localStorage !== 'undefined') {
-        const accessToken = localStorage.getItem('accessToken');
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setUserId(userInfo.user_id);
-            setNickname(userInfo.nickname);
-            setAuth(userInfo.auth);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
     }
   }, []);
 
@@ -120,81 +81,32 @@ const MyPage: NextPage = (props) => {
         setCorrectCheckPassword(false);
       } else if (correctChangePassword && correctCheckPassword) {
         if (typeof document !== 'undefined') {
-          const cookie = document.cookie;
-          if (cookie.includes(';') && cookie.includes('accessToken')) {
-            const cookieList = cookie.split(';');
-            const findAccessToken = cookieList.filter((cookie: string) => {
-              return cookie.includes('accessToken');
+          const cookieList = document.cookie.split(' ').filter((cookie) => {
+            return cookie.includes('accessToken');
+          });
+          const accessToken = cookieList[0].split('=')[1].replace(';', '');
+
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+              {
+                password: changePassword,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
+            .then((response) => {
+              setChangePassword('');
+              setCheckPassword('');
+              setIsModifyModalOpen(true);
+            })
+            .catch((error) => {
+              console.log(error);
             });
-            const accessToken = findAccessToken[0].split('=')[1];
-            axios
-              .post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-                {
-                  password: changePassword,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                  },
-                },
-              )
-              .then((response) => {
-                setChangePassword('');
-                setCheckPassword('');
-                setIsModifyModalOpen(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-            const accessToken = cookie.split('=')[1];
-            axios
-              .post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-                {
-                  password: changePassword,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                  },
-                },
-              )
-              .then((response) => {
-                setChangePassword('');
-                setCheckPassword('');
-                setIsModifyModalOpen(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else if (typeof localStorage !== 'undefined') {
-            const accessToken = localStorage.getItem('accessToken');
-            axios
-              .post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-                {
-                  password: changePassword,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                  },
-                },
-              )
-              .then((response) => {
-                setChangePassword('');
-                setCheckPassword('');
-                setIsModifyModalOpen(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
         }
       }
     }
@@ -251,7 +163,7 @@ const MyPage: NextPage = (props) => {
         <meta name="BanThing" content="Order with your foodmate" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <div className={styles.mypage_header}></div>
       <div className={styles.mypage_container}>
         <div className={styles.mypage_profile}>
           <img
@@ -259,21 +171,17 @@ const MyPage: NextPage = (props) => {
             alt="user-image"
             className={styles.mypage_image}
           />
-          {/* <div className={styles.mypage_score_container}>
-            <div className={styles.mypage_score_description}>나의 평점</div>
-            <div className={styles.mapage_score}>
-              9.6<span>{`(${12})`}</span>
-            </div>
-          </div> */}
           <div className={styles.mypage_input_container}>
             <div className={styles.mypage_input_disabled}>
               <input
                 className={styles.mypage_id_name}
+                value={userId || ''}
                 placeholder={userId}
                 disabled
               />
               <input
                 className={styles.mypage_id_name}
+                value={nickname || ''}
                 placeholder={nickname}
                 disabled
               />
@@ -291,6 +199,7 @@ const MyPage: NextPage = (props) => {
             ) : (
               <input
                 className={styles.mypage_password_change_check_kakao}
+                value={''}
                 placeholder="비밀번호를 변경할 수 없습니다."
                 disabled
               />
@@ -317,6 +226,7 @@ const MyPage: NextPage = (props) => {
             ) : (
               <input
                 className={styles.mypage_password_change_check_kakao}
+                value={''}
                 placeholder="비밀번호를 변경할 수 없습니다."
                 disabled
               />
