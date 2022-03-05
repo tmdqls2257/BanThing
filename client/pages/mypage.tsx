@@ -29,70 +29,27 @@ const MyPage: NextPage = (props) => {
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      const cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
+      const cookieList = document.cookie.split(' ').filter((cookie) => {
+        return cookie.includes('accessToken');
+      });
+      const accessToken = cookieList[0].split('=')[1].replace(';', '');
+
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          const { userInfo } = response.data.data;
+          setUserId(userInfo.user_id);
+          setNickname(userInfo.nickname);
+          setAuth(userInfo.auth);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        const accessToken = findAccessToken[0].split('=')[1];
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setUserId(userInfo.user_id);
-            setNickname(userInfo.nickname);
-            setAuth(userInfo.auth);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        const accessToken = cookie.split('=')[1];
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            if (userInfo) {
-              setUserId(userInfo.user_id);
-              setNickname(userInfo.nickname);
-              setAuth(userInfo.auth);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (typeof localStorage !== 'undefined') {
-        const accessToken = localStorage.getItem('accessToken');
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            if (userInfo) {
-              setUserId(userInfo.user_id);
-              setNickname(userInfo.nickname);
-              setAuth(userInfo.auth);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
     }
   }, []);
 
@@ -124,81 +81,32 @@ const MyPage: NextPage = (props) => {
         setCorrectCheckPassword(false);
       } else if (correctChangePassword && correctCheckPassword) {
         if (typeof document !== 'undefined') {
-          const cookie = document.cookie;
-          if (cookie.includes(';') && cookie.includes('accessToken')) {
-            const cookieList = cookie.split(';');
-            const findAccessToken = cookieList.filter((cookie: string) => {
-              return cookie.includes('accessToken');
+          const cookieList = document.cookie.split(' ').filter((cookie) => {
+            return cookie.includes('accessToken');
+          });
+          const accessToken = cookieList[0].split('=')[1].replace(';', '');
+
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
+              {
+                password: changePassword,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
+            .then((response) => {
+              setChangePassword('');
+              setCheckPassword('');
+              setIsModifyModalOpen(true);
+            })
+            .catch((error) => {
+              console.log(error);
             });
-            const accessToken = findAccessToken[0].split('=')[1];
-            axios
-              .post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-                {
-                  password: changePassword,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                  },
-                },
-              )
-              .then((response) => {
-                setChangePassword('');
-                setCheckPassword('');
-                setIsModifyModalOpen(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-            const accessToken = cookie.split('=')[1];
-            axios
-              .post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-                {
-                  password: changePassword,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                  },
-                },
-              )
-              .then((response) => {
-                setChangePassword('');
-                setCheckPassword('');
-                setIsModifyModalOpen(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else if (typeof localStorage !== 'undefined') {
-            const accessToken = localStorage.getItem('accessToken');
-            axios
-              .post(
-                `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`,
-                {
-                  password: changePassword,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                  },
-                },
-              )
-              .then((response) => {
-                setChangePassword('');
-                setCheckPassword('');
-                setIsModifyModalOpen(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
         }
       }
     }

@@ -23,53 +23,28 @@ export default function Header(prop: propsType) {
     setHamburger(false);
 
     if (typeof document !== 'undefined') {
-      const cookie = document.cookie;
+      const cookieList = document.cookie.split(' ').filter((cookie) => {
+        return cookie.includes('accessToken');
+      });
+      const accessToken = cookieList[0].split('=')[1].replace(';', '');
 
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+        .then((response) => {
+          prop.setIsLogin(false);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        const accessToken = findAccessToken[0].split('=')[1];
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            prop.setIsLogin(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        const accessToken = cookie.split('=')[1];
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/users/logout`,
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-          .then((response) => {
-            localStorage.removeItem('accessToken');
-            prop.setIsLogin(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
     }
   };
 
@@ -110,11 +85,21 @@ export default function Header(prop: propsType) {
 
             <nav className={styles.nav}>
               <Link href="/">
-                <a className={styles.nav_menu}>HOME</a>
+                <a
+                  className={styles.nav_menu}
+                  onClick={() => setHamburger(false)}
+                >
+                  HOME
+                </a>
               </Link>
               <span className={styles.nav_divide}>|</span>
               <Link href="/main">
-                <a className={styles.nav_menu}>MAIN</a>
+                <a
+                  className={styles.nav_menu}
+                  onClick={() => setHamburger(false)}
+                >
+                  MAIN
+                </a>
               </Link>
               <span className={styles.nav_divide}>|</span>
               <Link href="/">
@@ -140,7 +125,7 @@ export default function Header(prop: propsType) {
                 <Link href="/">
                   <a
                     className={styles.hamburger_nav_menu}
-                    onClick={() => setHamburger(!hamburger)}
+                    onClick={() => setHamburger(false)}
                   >
                     HOME
                   </a>
@@ -148,7 +133,7 @@ export default function Header(prop: propsType) {
                 <Link href="/main">
                   <a
                     className={styles.hamburger_nav_menu}
-                    onClick={() => setHamburger(!hamburger)}
+                    onClick={() => setHamburger(false)}
                   >
                     MAIN
                   </a>
@@ -164,7 +149,7 @@ export default function Header(prop: propsType) {
                 <Link href="/mypage">
                   <a
                     className={styles.hamburger_nav_menu}
-                    onClick={() => setHamburger(!hamburger)}
+                    onClick={() => setHamburger(false)}
                   >
                     MY PAGE
                   </a>
@@ -241,7 +226,7 @@ export default function Header(prop: propsType) {
                 <Link href="/">
                   <a
                     className={styles.hamburger_nav_menu}
-                    onClick={() => setHamburger(!hamburger)}
+                    onClick={() => setHamburger(false)}
                   >
                     HOME
                   </a>
@@ -249,7 +234,7 @@ export default function Header(prop: propsType) {
                 <Link href="/main">
                   <a
                     className={styles.hamburger_nav_menu}
-                    onClick={() => setHamburger(!hamburger)}
+                    onClick={() => setHamburger(false)}
                   >
                     MAIN
                   </a>
