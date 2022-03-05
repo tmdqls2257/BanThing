@@ -1,0 +1,20 @@
+.container {
+  /* position: fixed; */
+  position: relative;
+  background-color: var(--color-orange);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_container {
+  position: absolute;
+  background-color: white;
+  border-radius: 15px;
+  top: 100px;
+  width: 50%;
+  height: 80%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
