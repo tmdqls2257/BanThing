@@ -19,15 +19,12 @@ interface dataType {
 interface mapType {
   setLocation: Dispatch<SetStateAction<number[]>>;
   roomsData: Dispatch<SetStateAction<number>>;
-  setMapToMobileUp: Dispatch<SetStateAction<string>>;
 }
-function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
+function Map({ setLocation, roomsData }: mapType) {
   // 로딩의 상태
   const [loading, setLoading] = useState<boolean>(false);
   // 데이터를 받아와 카테고리에 따라 다른 이미지를 사용합니다.
   const [data, setData] = useState<dataType>();
-  // 마커 클릭의 상태
-  const [markerClick, setMarkerClick] = useState('down');
 
   // 글의 리스트를 받아옵니다.
   useEffect(() => {
