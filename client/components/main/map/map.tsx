@@ -45,14 +45,6 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
   }, []);
 
   useEffect(() => {
-    if (markerClick === 'up') {
-      setMarkerClick('down');
-    } else if (markerClick === 'down') {
-      setMarkerClick('up');
-    }
-  }, [markerClick]);
-
-  useEffect(() => {
     const mapScript = document.createElement('script');
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
