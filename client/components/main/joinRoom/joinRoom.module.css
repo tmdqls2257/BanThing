@@ -183,7 +183,7 @@
 }
 @media screen and (min-width: 768px) and (max-height: 800px) {
   .joinRoom_content_p {
-    height: 10vh;
+    height: 20vh;
   }
 }
 @keyframes fade {
