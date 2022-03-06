@@ -176,6 +176,16 @@
     height: 30vh;
   }
 }
+@media screen and (min-width: 768px) and (max-height: 900px) {
+  .joinRoom_content_p {
+    height: 20vh;
+  }
+}
+@media screen and (min-width: 768px) and (max-height: 800px) {
+  .joinRoom_content_p {
+    height: 10vh;
+  }
+}
 @keyframes fade {
   from {
     opacity: 0;

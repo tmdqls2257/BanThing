@@ -110,7 +110,6 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .MakeRoom {
     width: 400px;
-    min-height: 708px;
   }
 
   .content_textarea {
@@ -191,12 +190,9 @@
   }
 }
 
-@media screen and (max-width: 1024px) and (min-height: 1000px) {
-  .MakeRoom {
-    min-height: 700px;
-  }
+@media screen and (min-width: 768px) and (max-height: 700px) {
   .content_textarea {
-    height: 50vh;
+    max-height: 10vh;
   }
 }
 
