@@ -60,6 +60,18 @@
   }
 }
 
+.use_image_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vw;
+}
+
+.use_image {
+  display: flex;
+  width: 75vw;
+}
+
 .home_container {
   padding: 0;
 }
@@ -248,6 +260,10 @@
   }
 
   .introduction_container_right {
+    display: none;
+  }
+
+  .use_image_container {
     display: none;
   }
 }
