@@ -51,9 +51,9 @@ const Home: NextPage = () => {
           ]}
         />
 
-        <div className={styles.use_image_container}>
+        {/* <div className={styles.use_image_container}>
           <img src="/use2.gif" alt="using-image" className={styles.use_image} />
-        </div>
+        </div> */}
 
         <Introduction
           imagePosition={'right'}
