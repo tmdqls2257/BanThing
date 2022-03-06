@@ -44,7 +44,7 @@ const Admin: NextPage = () => {
       <Head>
         <title>BanThing</title>
         <meta name="BanThing" content="Order with your foodmate" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon.ico" />
       </Head>
       <div className={styles.container}>
         <div className={styles.container_container}>
@@ -61,7 +61,7 @@ const Admin: NextPage = () => {
                   >
                     BAN
                   </div>
-                  <div>{nickname}</div>
+                  <div className={styles.container_nickname}>{nickname}</div>
                 </li>
               );
             })}

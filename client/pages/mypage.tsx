@@ -179,7 +179,9 @@ const MyPage: NextPage = (props) => {
             <Link href="/admin">
               <button className={styles.mypage_admin_button}>ADMIN</button>
             </Link>
-          ) : null}
+          ) : (
+            <></>
+          )}
           <div className={styles.mypage_input_container}>
             <div className={styles.mypage_input_disabled}>
               <input
