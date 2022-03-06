@@ -8,7 +8,7 @@
 
 .third_container {
   display: flex;
-  min-height: 40vw;
+  min-height: 60vw;
   color: #ff8a3c;
   font-size: 4vw;
   flex-direction: column;

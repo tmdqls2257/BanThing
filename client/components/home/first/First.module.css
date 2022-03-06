@@ -29,13 +29,15 @@
   align-items: center;
   justify-content: center;
   margin: auto;
+  padding-top: 13vw;
+  margin-bottom: 22vw;
   /* background-color: gray; */
 }
 
 .main {
   display: flex;
   width: 35vw;
-  min-height: 50vw;
+  /* min-height: 30vw; */
   margin-right: 3vw;
   flex-direction: column;
   justify-content: center;
@@ -154,7 +156,7 @@
 
 @media screen and (max-width: 767px) {
   .title_container {
-    padding-top: 80px;
+    padding-top: 120px;
     flex-direction: column;
   }
 
