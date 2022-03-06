@@ -4,6 +4,7 @@ import styles from '../styles/MyPage.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from '../components/modal';
+import Link from 'next/link';
 
 axios.defaults.withCredentials = true;
 
@@ -22,6 +23,7 @@ const MyPage: NextPage = (props) => {
   const [userId, setUserId] = useState('');
   const [nickname, setNickname] = useState('');
   const [auth, setAuth] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
@@ -46,6 +48,7 @@ const MyPage: NextPage = (props) => {
           setUserId(userInfo.user_id);
           setNickname(userInfo.nickname);
           setAuth(userInfo.auth);
+          setIsAdmin(userInfo.isAdmin);
         })
         .catch((error) => {
           console.log(error);
@@ -171,6 +174,12 @@ const MyPage: NextPage = (props) => {
             alt="user-image"
             className={styles.mypage_image}
           />
+
+          {isAdmin ? (
+            <Link href="/admin">
+              <button className={styles.mypage_admin_button}>ADMIN</button>
+            </Link>
+          ) : null}
           <div className={styles.mypage_input_container}>
             <div className={styles.mypage_input_disabled}>
               <input
