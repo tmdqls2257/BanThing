@@ -35,7 +35,7 @@ export default function First() {
         <Fade triggerOnce={true} duration={1200}>
           <div className={styles.title_image_container}>
             <img
-              src="/title.png"
+              src="/use1.gif"
               alt="title-image"
               className={styles.title_image}
             />
