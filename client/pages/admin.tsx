@@ -9,7 +9,6 @@ axios.defaults.withCredentials = true;
 
 const Admin: NextPage = () => {
   const [userlist, setUserlist] = useState([]);
-  const [render, setRender] = useState({});
 
   // const getUserNickname = (e) => {
   //   console.log(e.target.textContent);
@@ -51,7 +50,7 @@ const Admin: NextPage = () => {
           <div className={styles.container_title}>가입한 유저 목록</div>
           <ul className={styles.container_ul}>
             {userlist.map((el) => {
-              const { nickname, isAdmin } = el;
+              const { nickname, auth, isAdmin } = el;
               if (isAdmin) return; // 어드민 계정은 렌더링하지 않음
               return (
                 <li key={nickname} className={styles.container_li}>
@@ -61,6 +60,11 @@ const Admin: NextPage = () => {
                   >
                     BAN
                   </div>
+                  <img
+                    className={styles.container_image}
+                    src={auth === 'kakao' ? '/kakaoicon.png' : '/icon.ico'}
+                    alt="auth"
+                  />
                   <div className={styles.container_nickname}>{nickname}</div>
                 </li>
               );

@@ -18,7 +18,7 @@ export default function MakeRoomModal({ setMakeRoomModal }: makeRoomState) {
           <img
             className={styles.makeRoom_image}
             src="/image/please_write.png"
-            alt=""
+            alt="please_write"
           />
           <h1 className={styles.rate_h1}>내용을 모두 입력해주세요</h1>
         </section>
