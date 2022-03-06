@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
-// import Login from '../../login';
 
 interface locationType {
   location: number[];

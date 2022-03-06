@@ -174,13 +174,14 @@ const JoinRoom = ({
                 <h3 className={styles.h3}>내용</h3>
               </div>
               <div className={styles.div}>
-                <p>{data.data.post.title}</p>
-                <p>{data.data.post.category}</p>
+                <p className={styles.p}>{data.data.post.title}</p>
+                <p className={styles.p}>{data.data.post.category}</p>
                 {data.data.post.host_role === 1 ? (
-                  <p>받는 사람</p>
+                  <p className={styles.p}>받는 사람</p>
                 ) : (
-                  <p>가지러 가는 사람</p>
+                  <p className={styles.p}>가지러 가는 사람</p>
                 )}
+                <p> </p>
               </div>
             </section>
             <section>

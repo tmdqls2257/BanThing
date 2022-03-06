@@ -45,6 +45,14 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
   }, []);
 
   useEffect(() => {
+    if (markerClick === 'up') {
+      setMarkerClick('down');
+    } else if (markerClick === 'down') {
+      setMarkerClick('up');
+    }
+  }, [markerClick]);
+
+  useEffect(() => {
     const mapScript = document.createElement('script');
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
@@ -65,12 +73,10 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
         if (roomId) {
           roomsData(roomId);
         }
-        if (markerClick === 'up') {
-          setMarkerClick('down');
-        } else if (markerClick === 'down') {
-          setMarkerClick('up');
-        }
-        setMapToMobileUp(markerClick); // 모바일시 마커를 클릭 하면 사이드바를 나오게 합니다.
+        // 모바일시 마커를 클릭 하면 사이드바를 나오게 합니다.
+        var pos = marker.getPosition();
+        console.log(pos);
+        map.panTo(pos);
       });
       // 맵 클릭 함수
       window.kakao.maps.event.addListener(map, 'click', function () {
@@ -87,11 +93,13 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
         navigator.geolocation.getCurrentPosition(function (position) {
           const lat = position.coords.latitude, // 사용자의 위도
             lon = position.coords.longitude; // 사용자의 경도
+
           setLocation([lat, lon]);
 
-          const options = {
+          let options = {
             center: new window.kakao.maps.LatLng(lat, lon),
           };
+
           const circle = new window.kakao.maps.Circle({
             center: new window.kakao.maps.LatLng(lat, lon), // 원의 중심좌표 입니다
             radius: 200, // 미터 단위의 원의 반지름입니다
@@ -102,7 +110,7 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
             fillColor: '#FF8A3D', // 채우기 색깔입니다
             fillOpacity: 0.3, // 채우기 불투명도 입니다
           });
-          const map = new window.kakao.maps.Map(container, options);
+          let map = new window.kakao.maps.Map(container, options);
           const markerPosition = new window.kakao.maps.LatLng(lat, lon);
           let marker = new window.kakao.maps.Marker({
             position: markerPosition,
@@ -159,7 +167,7 @@ function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
     mapScript.addEventListener('load', onLoadKakaoMap);
 
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [data?.data.postList.length, markerClick]);
+  }, [data?.data.postList.length]);
 
   return (
     <main className={styles.main}>

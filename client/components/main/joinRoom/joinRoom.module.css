@@ -17,6 +17,7 @@
   flex-direction: column;
   height: 500px;
   width: 400px;
+  background-color: var(--chat-background-color);
   animation: fade 1s ease-in-out;
   height: auto;
 }
@@ -40,9 +41,35 @@
   font-family: 'NanumGothic-Bold';
   font-size: var(--font-size-md);
 }
-.h3 {
+.h3,
+.p {
   font-family: 'NanumGothic';
   font-size: var(--font-size-base);
+}
+.h3 {
+  margin: 16px;
+  font-family: 'NanumGothic-Bold';
+  font-size: var(--font-size-base);
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  background-color: var(--chat-by-me-color);
+  word-break: keep-all;
+}
+.p {
+  padding-left: 14px;
+  outline: none;
+  display: flex;
+  width: 200px;
+  font-size: var(--font-size-base);
+  height: 39px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  background-color: var(--white-color);
+  min-width: 60%;
+  align-items: center;
 }
 .article {
   display: flex;
@@ -80,14 +107,19 @@
     width: 100vw;
     min-width: 400px;
     height: 500px;
-  }
-  .image {
-    width: 32px;
+    box-shadow: var(--box-shadow);
   }
 
+  .image {
+    position: absolute;
+    top: 0;
+    width: 32px;
+  }
+  .h1 {
+    margin: 16px 0 0 0;
+  }
   .joinRoom_content_p {
     margin: 0;
-    max-width: 50vw;
     width: 300px;
     height: 10vh;
   }
@@ -98,11 +130,19 @@
     height: 500px;
   }
   .image {
+    position: absolute;
+    top: 0;
     width: 32px;
+  }
+  .h1 {
+    margin: 16px 0 0 0;
+  }
+  .p {
+    width: 150px;
   }
   .joinRoom_content_p {
     height: 10vh;
-
+    margin: 0;
     width: 300px;
   }
 }
@@ -112,11 +152,20 @@
     height: 500px;
   }
   .image {
+    position: absolute;
+    top: 0;
     width: 32px;
+  }
+  .h1 {
+    margin: 16px 0 0 0;
+  }
+  .p {
+    width: 100px;
   }
   .joinRoom_content_p {
     width: 80vw;
     height: 10vh;
+    margin: auto 0;
   }
 }
 @media screen and (min-height: 1000px) {
