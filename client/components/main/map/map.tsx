@@ -64,7 +64,6 @@ function Map({ setLocation, roomsData }: mapType) {
         }
         // 모바일시 마커를 클릭 하면 사이드바를 나오게 합니다.
         var pos = marker.getPosition();
-        console.log(pos);
         map.panTo(pos);
       });
       // 맵 클릭 함수
