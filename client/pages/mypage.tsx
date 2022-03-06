@@ -161,7 +161,7 @@ const MyPage: NextPage = (props) => {
       <Head>
         <title>BanThing</title>
         <meta name="BanThing" content="Order with your foodmate" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon.ico" />
       </Head>
       <div className={styles.mypage_header}></div>
       <div className={styles.mypage_container}>
