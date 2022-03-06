@@ -9,7 +9,7 @@ axios.defaults.withCredentials = true;
 const Admin: NextPage = () => {
   const [userlist, setUserlist] = useState([]);
 
-  const handleDelete = (e) => {
+  const handleDelete = (e: any) => {
     const nicknameToDelte = e.target.parentNode.lastChild.textContent;
     axios
       .delete(
