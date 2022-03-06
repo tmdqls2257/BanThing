@@ -152,6 +152,11 @@ export default function Login(prop: propsType) {
           </div>
         </div>
 
+        <div
+          className={styles.login_background}
+          onClick={() => prop.setLoginModal(false)}
+        ></div>
+
         {signUpModal ? (
           <>
             <SignUp
