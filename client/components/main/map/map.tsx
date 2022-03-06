@@ -19,8 +19,9 @@ interface dataType {
 interface mapType {
   setLocation: Dispatch<SetStateAction<number[]>>;
   roomsData: Dispatch<SetStateAction<number>>;
+  setMapToMobileUp: Dispatch<SetStateAction<string>>;
 }
-function Map({ setLocation, roomsData }: mapType) {
+function Map({ setLocation, roomsData, setMapToMobileUp }: mapType) {
   // 로딩의 상태
   const [loading, setLoading] = useState<boolean>(false);
   // 데이터를 받아와 카테고리에 따라 다른 이미지를 사용합니다.
@@ -28,7 +29,6 @@ function Map({ setLocation, roomsData }: mapType) {
   // 마커 클릭의 상태
   const [markerClick, setMarkerClick] = useState('down');
 
-  const [pos, setPos] = useState<object>({});
   // 글의 리스트를 받아옵니다.
   useEffect(() => {
     const getPosts = async () => {
@@ -45,6 +45,14 @@ function Map({ setLocation, roomsData }: mapType) {
   }, []);
 
   useEffect(() => {
+    if (markerClick === 'up') {
+      setMarkerClick('down');
+    } else if (markerClick === 'down') {
+      setMarkerClick('up');
+    }
+  }, [markerClick]);
+
+  useEffect(() => {
     const mapScript = document.createElement('script');
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
@@ -53,6 +61,7 @@ function Map({ setLocation, roomsData }: mapType) {
 
     mapScript.async = true;
     mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`;
+    document.head.appendChild(mapScript);
 
     const clickEvent = (marker: any, map: any, roomId?: number) => {
       // 마커 클릭 함수
@@ -64,9 +73,9 @@ function Map({ setLocation, roomsData }: mapType) {
         if (roomId) {
           roomsData(roomId);
         }
+        // 모바일시 마커를 클릭 하면 사이드바를 나오게 합니다.
         var pos = marker.getPosition();
-        setPos(pos);
-
+        console.log(pos);
         map.panTo(pos);
       });
       // 맵 클릭 함수
