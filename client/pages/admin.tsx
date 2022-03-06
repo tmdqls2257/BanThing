@@ -1,4 +1,3 @@
-// admin.tsx
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
@@ -10,13 +9,8 @@ axios.defaults.withCredentials = true;
 const Admin: NextPage = () => {
   const [userlist, setUserlist] = useState([]);
 
-  // const getUserNickname = (e) => {
-  //   console.log(e.target.textContent);
-  // };
-
   const handleDelete = (e) => {
     const nicknameToDelte = e.target.parentNode.lastChild.textContent;
-    console.log(nicknameToDelte);
     axios
       .delete(
         `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin/${nicknameToDelte}`,
@@ -30,7 +24,6 @@ const Admin: NextPage = () => {
       .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/admin`)
       .then((data) => {
         setUserlist(() => data.data);
-        console.log(userlist);
       })
       .catch(console.log);
   };
