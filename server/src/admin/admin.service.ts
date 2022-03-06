@@ -17,7 +17,7 @@ export class AdminService {
     //? 아래의 코드는 getConnection을 사용해서 작성할 수도 있다.
     //참고링크 : https://itchallenger.tistory.com/230
     const result = await createQueryBuilder('Users')
-      .select(['Users.nickname', 'Users.auth'])
+      .select(['Users.nickname', 'Users.auth', 'Users.isAdmin'])
       .getMany();
     return result;
     //! execute()는 Insert, Update, Delete 와 같이 db가 변경될 때만 호출하는 함수이다.
