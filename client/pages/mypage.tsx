@@ -176,7 +176,13 @@ const MyPage: NextPage = (props) => {
           />
 
           {isAdmin ? (
-            <Link href="/admin">
+            <Link
+              href={{
+                pathname: 'admin',
+                query: { isAdmin: 'true' },
+              }}
+              as={'/admin'}
+            >
               <button className={styles.mypage_admin_button}>ADMIN</button>
             </Link>
           ) : (

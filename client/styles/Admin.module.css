@@ -110,3 +110,14 @@
   height: 35px;
   margin-right: 25px;
 }
+
+.question {
+  margin-top: 80px;
+  margin-bottom: 100px;
+  width: 120px;
+  height: auto;
+}
+
+.span {
+  font-size: 45px;
+}
