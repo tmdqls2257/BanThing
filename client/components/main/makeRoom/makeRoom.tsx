@@ -89,25 +89,29 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   };
 
   const axiosPost = (headers: { Authorization: string }) => {
-    axios
-      .post(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-        {
-          title: title,
-          category: select,
-          content: textarea,
-          host_role: Number(radio),
-          location_latitude: String(location[0]),
-          location_longitude: String(location[1]),
-        },
-        {
-          headers,
-          withCredentials: true,
-        },
-      )
-      .then((res) => {
-        setMakeRoomId(res.data.data.post_id);
-      });
+    try {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+          {
+            title: title,
+            category: select,
+            content: textarea,
+            host_role: Number(radio),
+            location_latitude: String(location[0]),
+            location_longitude: String(location[1]),
+          },
+          {
+            headers,
+            withCredentials: true,
+          },
+        )
+        .then((res) => {
+          setMakeRoomId(res.data.data.post_id);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // 클릭시 방을 만드는 요청을 보내는 함수

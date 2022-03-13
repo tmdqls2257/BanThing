@@ -17,12 +17,14 @@ interface roomData {
     };
   };
 }
+
 interface roomsIdType {
   roomsId: number;
   setroomTitle: Dispatch<SetStateAction<string>>;
   setUsersChats: Dispatch<SetStateAction<usersChats | undefined>>;
   setroomHostNickName: Dispatch<SetStateAction<string>>;
 }
+
 interface usersChats {
   data: {
     replyLog: [
@@ -36,6 +38,7 @@ interface usersChats {
     ];
   };
 }
+
 const JoinRoom = ({
   setUsersChats,
   roomsId,
@@ -87,6 +90,7 @@ const JoinRoom = ({
     let cookie: any;
     let cookieToken: any;
     if (typeof window !== 'undefined' && data) {
+      const { id } = data.data.post;
       cookie = document.cookie;
       if (cookie.includes(';') && cookie.includes('accessToken')) {
         const cookieList = cookie.split(';');
@@ -98,28 +102,30 @@ const JoinRoom = ({
         cookieToken = cookie.split('=')[1];
       }
       if (cookieToken) {
-        const getPosts = async () => {
-          try {
-            const headers = {
-              Authorization: `Bearer ${cookieToken}`,
-            };
-            const response: AxiosResponse = await axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
-              {
-                headers,
-              },
-            );
-            setChats(response.data);
-          } catch (e) {
-            console.log(e);
-          }
+        const headers = {
+          Authorization: `Bearer ${cookieToken}`,
         };
-        getPosts();
+
+        getPosts(headers, id);
         joinRoom.style.display = 'none';
         chatRoom.style.display = 'flex';
       } else {
         setIsLogIn(false);
       }
+    }
+  };
+
+  const getPosts = async (headers: { Authorization: string }, id: number) => {
+    try {
+      const response: AxiosResponse = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${id}`,
+        {
+          headers,
+        },
+      );
+      setChats(response.data);
+    } catch (e) {
+      console.log(e);
     }
   };
 
