@@ -49,17 +49,8 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     setRadio(event.target.value);
   };
 
-  const data = [
-    title,
-    select,
-    textarea,
-    Number(radio),
-    String(location[0]),
-    String(location[1]),
-  ];
-
   // 방을 만드는 요청
-  const axiosPost = () => {
+  const isToken = () => {
     let cookie: any;
     let cookieToken: any;
     let cookieList: any;
@@ -79,31 +70,14 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
         const headers = {
           Authorization: `Bearer ${cookieToken}`,
         };
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-            {
-              title: data[0],
-              category: data[1],
-              content: data[2],
-              host_role: data[3],
-              location_latitude: data[4],
-              location_longitude: data[5],
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          )
-          .then((res) => {
-            setMakeRoomId(res.data.data.post_id);
-          });
+        axiosPost(headers);
 
         // 방만들기의 값들을 초기화
         setSelect('');
         setTitle('');
         setTextarea('');
         setRadio('');
+
         const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
         const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
         makeRoom.style.display = 'none';
@@ -112,6 +86,28 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
         setIsLogIn(false);
       }
     }
+  };
+
+  const axiosPost = (headers: { Authorization: string }) => {
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+        {
+          title: title,
+          category: select,
+          content: textarea,
+          host_role: Number(radio),
+          location_latitude: String(location[0]),
+          location_longitude: String(location[1]),
+        },
+        {
+          headers,
+          withCredentials: true,
+        },
+      )
+      .then((res) => {
+        setMakeRoomId(res.data.data.post_id);
+      });
   };
 
   // 클릭시 방을 만드는 요청을 보내는 함수
@@ -127,7 +123,7 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
       // 유효성 검사를 통과 못할 경우 makeRoomModal이 켜집니다.
       setMakeRoomModal(true);
     } else {
-      axiosPost();
+      isToken();
     }
   };
 
