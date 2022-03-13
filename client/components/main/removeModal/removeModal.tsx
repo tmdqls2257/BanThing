@@ -38,17 +38,21 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       const headers = {
         Authorization: `Bearer ${cookieToken}`,
       };
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-          {
-            headers,
-          },
-        )
-        .then(() => {
-          location.reload();
-        });
+      axiosGet(headers);
     }
+  };
+
+  const axiosGet = async (headers: { Authorization: string }) => {
+    await axios
+      .get(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+        {
+          headers,
+        },
+      )
+      .then(() => {
+        location.reload();
+      });
   };
   // 뒤로가기 클릭
   const backClick = () => {

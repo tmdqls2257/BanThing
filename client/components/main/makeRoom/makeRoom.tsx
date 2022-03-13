@@ -88,9 +88,9 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
     }
   };
 
-  const axiosPost = (headers: { Authorization: string }) => {
+  const axiosPost = async (headers: { Authorization: string }) => {
     try {
-      axios
+      await axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
           {

@@ -13,42 +13,54 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (chat !== '') {
-      let cookie: any;
-      let cookieToken: any;
-      let cookieList: any;
-      if (typeof window !== 'undefined') {
-        cookie = document.cookie;
-        if (cookie.includes(';') && cookie.includes('accessToken')) {
-          cookieList = cookie.split(';');
-          const findAccessToken = cookieList.filter((cookie: string) => {
-            return cookie.includes('accessToken');
-          });
-          cookieToken = findAccessToken[0].split('=')[1];
-        } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-          cookieToken = cookie.split('=')[1];
-        }
-        if (cookieToken) {
-          const headers = {
-            Authorization: `Bearer ${cookieToken}`,
-          };
-          axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-            {
-              post_id: roomsId,
-              reply: chat,
-            },
-            {
-              headers,
-              withCredentials: true,
-            },
-          );
-        }
-      }
+      isCookie();
       // chats에 입력한 값을 전해줍니다.
       onCreated(chat);
     }
     // input의 값을 초기화 합니다.
     setChat('');
+  };
+
+  const isCookie = () => {
+    let cookie: any;
+    let cookieToken: any;
+    let cookieList: any;
+    if (typeof window !== 'undefined') {
+      cookie = document.cookie;
+      if (cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieList = cookie.split(';');
+        const findAccessToken = cookieList.filter((cookie: string) => {
+          return cookie.includes('accessToken');
+        });
+        cookieToken = findAccessToken[0].split('=')[1];
+      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
+        cookieToken = cookie.split('=')[1];
+      }
+      if (cookieToken) {
+        const headers = {
+          Authorization: `Bearer ${cookieToken}`,
+        };
+        axiosPost(headers);
+      }
+    }
+  };
+
+  const axiosPost = async (headers: { Authorization: string }) => {
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
+        {
+          post_id: roomsId,
+          reply: chat,
+        },
+        {
+          headers,
+          withCredentials: true,
+        },
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

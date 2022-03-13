@@ -53,26 +53,28 @@ const ChatRoom = ({
         cookieToken = cookie.split('=')[1];
       }
       if (cookieToken) {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${cookieToken}`,
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setNickname(userInfo.nickname);
-          });
+        axiosGet(cookieToken);
       }
     }
   }, []);
 
-  // 삭제하기 버튼 클릭시 모달을 띄어 줍니다.
-  const onClick = () => {
-    const removeModal = document.querySelector('#removeModal')! as HTMLElement;
-    removeModal.style.display = 'flex';
+  const axiosGet = async (cookieToken: string) => {
+    try {
+      await axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
+          headers: {
+            Authorization: `Bearer ${cookieToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          const { userInfo } = response.data.data;
+          setNickname(userInfo.nickname);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // 유저의 닉네임과 호스트의 닉네임이 같을 경우 삭제하기 버튼을 띄어줍니다.
