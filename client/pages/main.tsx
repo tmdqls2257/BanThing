@@ -6,7 +6,6 @@ import Map from '../components/main/map/map';
 import Sidebar from '../components/main/sidebar/sidebar';
 import { useState } from 'react';
 import AxiosClient from '../axios';
-import ChatService from '../chatService';
 
 declare global {
   interface Window {
@@ -17,8 +16,6 @@ declare global {
 const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT!;
 
 const httpClient = new AxiosClient(baseURL);
-
-const chatService = new ChatService(httpClient);
 
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
@@ -43,7 +40,11 @@ const Main: NextPage = () => {
             setLocation={setLocation}
             httpClient={httpClient}
           />
-          <Sidebar location={location} roomsId={roomsId} />
+          <Sidebar
+            location={location}
+            roomsId={roomsId}
+            httpClient={httpClient}
+          />
         </main>
       </section>
     </>

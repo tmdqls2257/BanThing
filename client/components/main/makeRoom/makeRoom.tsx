@@ -5,13 +5,19 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
+import AxiosClient from '../../../axios';
 
 interface locationType {
   location: number[];
   setMakeRoom_MapRoomId: (value: number) => void;
+  httpClient: AxiosClient;
 }
 
-const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
+const MakeRoom = ({
+  location,
+  setMakeRoom_MapRoomId,
+  httpClient,
+}: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
   const [textarea, setTextarea] = useState('');
@@ -89,29 +95,44 @@ const MakeRoom = ({ location, setMakeRoom_MapRoomId }: locationType) => {
   };
 
   const axiosPost = async (headers: { Authorization: string }) => {
-    try {
-      await axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
-          {
-            title: title,
-            category: select,
-            content: textarea,
-            host_role: Number(radio),
-            location_latitude: String(location[0]),
-            location_longitude: String(location[1]),
-          },
-          {
-            headers,
-            withCredentials: true,
-          },
-        )
-        .then((res) => {
-          setMakeRoomId(res.data.data.post_id);
-        });
-    } catch (err) {
-      console.log(err);
-    }
+    httpClient
+      .axios(`/post`, {
+        method: 'post',
+        data: {
+          title: title,
+          category: select,
+          content: textarea,
+          host_role: Number(radio),
+          location_latitude: String(location[0]),
+          location_longitude: String(location[1]),
+        },
+        headers,
+        withCredentials: true,
+      })
+      .then((res) => setMakeRoomId(res.data.post_id));
+    // try {
+    //   await axios
+    //     .post(
+    //       `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post`,
+    //       {
+    //         title: title,
+    //         category: select,
+    //         content: textarea,
+    //         host_role: Number(radio),
+    //         location_latitude: String(location[0]),
+    //         location_longitude: String(location[1]),
+    //       },
+    //       {
+    //         headers,
+    //         withCredentials: true,
+    //       },
+    //     )
+    //     .then((res) => {
+    //       setMakeRoomId(res.data.data.post_id);
+    //     });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   // 클릭시 방을 만드는 요청을 보내는 함수
