@@ -54,6 +54,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
         location.reload();
       });
   };
+
   // 뒤로가기 클릭
   const backClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;

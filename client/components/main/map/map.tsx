@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import Loading from '../loading/loading';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
+import AxiosClient from '../../../axios';
 
 interface dataType {
   data: {
@@ -19,8 +20,9 @@ interface dataType {
 interface mapType {
   setLocation: Dispatch<SetStateAction<number[]>>;
   roomsData: Dispatch<SetStateAction<number>>;
+  httpClient: AxiosClient;
 }
-function Map({ setLocation, roomsData }: mapType) {
+function Map({ setLocation, roomsData, httpClient }: mapType) {
   // 로딩의 상태
   const [loading, setLoading] = useState<boolean>(false);
   // 데이터를 받아와 카테고리에 따라 다른 이미지를 사용합니다.
@@ -28,17 +30,9 @@ function Map({ setLocation, roomsData }: mapType) {
 
   // 글의 리스트를 받아옵니다.
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const response: AxiosResponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`,
-        );
-        setData(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getPosts();
+    httpClient.axios('/main', 'get').then((res) => {
+      setData(res);
+    });
   }, []);
 
   useEffect(() => {

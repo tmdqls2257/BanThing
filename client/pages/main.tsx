@@ -5,12 +5,20 @@ import { NextPage } from 'next';
 import Map from '../components/main/map/map';
 import Sidebar from '../components/main/sidebar/sidebar';
 import { useState } from 'react';
+import AxiosClient from '../axios';
+import ChatService from '../chatService';
 
 declare global {
   interface Window {
     kakao: any;
   }
 }
+
+const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT!;
+
+const httpClient = new AxiosClient(baseURL);
+
+const chatService = new ChatService(httpClient);
 
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
@@ -30,7 +38,11 @@ const Main: NextPage = () => {
       ></Script>
       <section className={styles.section}>
         <main className={styles.main} id={'mainPage'}>
-          <Map roomsData={setRoomsData} setLocation={setLocation} />
+          <Map
+            roomsData={setRoomsData}
+            setLocation={setLocation}
+            httpClient={httpClient}
+          />
           <Sidebar location={location} roomsId={roomsId} />
         </main>
       </section>
