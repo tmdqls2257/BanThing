@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import ChatService from '../../../chatService';
+import { io } from 'socket.io-client';
 axios.defaults.withCredentials = true;
 
 interface roomData {
@@ -70,6 +71,8 @@ const JoinRoom = ({
       }
     };
     getPosts();
+    const socket = io('http://localhost:5000');
+    socket.emit('enterChatRoom', roomsId);
   }, [roomsId]);
 
   // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.

@@ -20,7 +20,6 @@ const httpClient = new AxiosClient(baseURL);
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);
-
   return (
     <>
       <Head>

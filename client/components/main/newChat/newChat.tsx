@@ -1,6 +1,7 @@
 import axios from 'axios';
 import styles from './newChat.module.css';
 import { useState } from 'react';
+import { io } from 'socket.io-client';
 
 interface newChatType {
   roomsId: number;
@@ -58,6 +59,8 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
           withCredentials: true,
         },
       );
+      const socket = io('http://localhost:5000');
+      socket.emit('sendMessage');
     } catch (err) {
       console.log(err);
     }

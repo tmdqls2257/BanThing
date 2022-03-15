@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { io } from 'socket.io-client';
 import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
 
@@ -51,6 +52,8 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
         },
       )
       .then(() => {
+        const socket = io('http://localhost:5000');
+        socket.emit('deleteChatRoom', removeRoomId);
         location.reload();
       });
   };

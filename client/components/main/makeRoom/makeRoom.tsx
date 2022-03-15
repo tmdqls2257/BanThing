@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import AxiosClient from '../../../axios';
+import { io } from 'socket.io-client';
 
 interface locationType {
   location: number[];
@@ -24,6 +25,7 @@ const MakeRoom = ({
   const [makeRoomId, setMakeRoomId] = useState(0);
   const [makeRoomModal, setMakeRoomModal] = useState(false);
   const [isLogIn, setIsLogIn] = useState(true);
+
   useEffect(() => {
     if (makeRoomId !== 0) {
       setMakeRoom_MapRoomId(makeRoomId);
@@ -109,6 +111,8 @@ const MakeRoom = ({
         withCredentials: true,
       })
       .then((res) => setMakeRoomId(res.data.post_id));
+    const socket = io('http://localhost:5000');
+    socket.emit('createChatRoom', makeRoomId);
   };
 
   // 클릭시 방을 만드는 요청을 보내는 함수

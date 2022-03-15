@@ -7,6 +7,7 @@ import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
 import ChatService from '../../../chatService';
 import AxiosClient from '../../../axios';
+import { io } from 'socket.io-client';
 
 interface usersChats {
   data: {
@@ -41,7 +42,13 @@ const ChatRoom = ({
 }: roomsIdTitleType) => {
   // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
+  const socket = io('http://localhost:5000');
+  socket.on('connect', function () {
+    console.log('Connected');
+    //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
 
+    socket.emit('setInit', { usernickname });
+  });
   // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
     let headers = chatService.getHeaders();
@@ -71,7 +78,11 @@ const ChatRoom = ({
   if (usernickname === roomHostNickName) {
     return (
       <section id="ChatRoom" className={styles.section}>
-        <SidebarHeader isHost={true} containerName={'gotoJoinRoom'}>
+        <SidebarHeader
+          roomsId={roomsId}
+          isHost={true}
+          containerName={'gotoJoinRoom'}
+        >
           {roomTitle}
         </SidebarHeader>
         <main className={styles.main}>
