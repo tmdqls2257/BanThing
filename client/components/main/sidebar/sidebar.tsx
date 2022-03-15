@@ -66,6 +66,7 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
         <MakeRoom
           location={location}
           setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
+          chatService={chatService}
           httpClient={httpClient}
         />
         <JoinRoom

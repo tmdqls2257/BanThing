@@ -1,7 +1,5 @@
 import styles from './chatRoom.module.css';
-import buttonStyle from '../button.module.css';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
@@ -76,6 +74,7 @@ const ChatRoom = ({
         </SidebarHeader>
         <main className={styles.main}>
           <Chats
+            chatService={chatService}
             usernickname={usernickname}
             usersChats={usersChats}
             roomsId={roomsId}
@@ -93,6 +92,7 @@ const ChatRoom = ({
       </SidebarHeader>
       <main className={styles.main}>
         <Chats
+          chatService={chatService}
           usernickname={usernickname}
           usersChats={usersChats}
           roomsId={roomsId}

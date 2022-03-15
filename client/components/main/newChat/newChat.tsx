@@ -1,13 +1,15 @@
 import axios from 'axios';
 import styles from './newChat.module.css';
 import { useState } from 'react';
+import ChatService from '../../../chatService';
 
 interface newChatType {
   roomsId: number;
   onCreated: (chat: string) => void;
+  chatService: ChatService;
 }
 
-const NewChat = ({ roomsId, onCreated }: newChatType) => {
+const NewChat = ({ roomsId, onCreated, chatService }: newChatType) => {
   const [chat, setChat] = useState('');
   // 방의 아이디와 덧글을 포함하여 post합니다.
   const onSubmit = async (event: React.FormEvent) => {
@@ -47,6 +49,7 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
 
   const axiosPost = async (headers: { Authorization: string }) => {
     try {
+      // chatService.postChats(roomsId, chat);
       await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
         {

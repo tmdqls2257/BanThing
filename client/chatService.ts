@@ -11,11 +11,15 @@ export default class ChatService {
     });
   }
 
-  async postChats(roomId: number) {
+  async postChats(post_id: number, reply: string) {
     return this.http.axios({
       method: 'post',
-      url: `/post/reply/${roomId}`,
+      url: `/post/reply/`,
       headers: this.getHeaders(),
+      data: {
+        post_id,
+        reply,
+      },
     });
   }
 

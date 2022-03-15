@@ -5,17 +5,20 @@ import { useEffect, useState } from 'react';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import AxiosClient from '../../../axios';
+import ChatService from '../../../chatService';
 
 interface locationType {
   location: number[];
   setMakeRoom_MapRoomId: (value: number) => void;
   httpClient: AxiosClient;
+  chatService: ChatService;
 }
 
 const MakeRoom = ({
   location,
   setMakeRoom_MapRoomId,
   httpClient,
+  chatService,
 }: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
@@ -56,44 +59,26 @@ const MakeRoom = ({
 
   // 방을 만드는 요청
   const isToken = () => {
-    let cookie: any;
-    let cookieToken: any;
-    let cookieList: any;
-    if (typeof window !== 'undefined') {
-      cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
-        });
-        cookieToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieToken = cookie.split('=')[1];
-      }
-      if (cookieToken) {
-        // 토큰이 있을 경우 요청을 보냅니다.
-        const headers = {
-          Authorization: `Bearer ${cookieToken}`,
-        };
-        axiosPost(headers);
+    let headers = chatService.getHeaders();
+    if (headers) {
+      axiosPost(headers);
 
-        // 방만들기의 값들을 초기화
-        setSelect('');
-        setTitle('');
-        setTextarea('');
-        setRadio('');
+      // 방만들기의 값들을 초기화
+      setSelect('');
+      setTitle('');
+      setTextarea('');
+      setRadio('');
 
-        const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
-        const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-        makeRoom.style.display = 'none';
-        joinRoom.style.display = 'flex';
-      } else {
-        setIsLogIn(false);
-      }
+      const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
+      const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+      makeRoom.style.display = 'none';
+      joinRoom.style.display = 'flex';
+    } else {
+      setIsLogIn(false);
     }
   };
 
-  const axiosPost = async (headers: { Authorization: string }) => {
+  const axiosPost = (headers: { Authorization: string }) => {
     httpClient
       .axios(`/post`, {
         method: 'post',

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './chats.module.css';
 import Chat from '../chat/chat';
 import NewChat from '../newChat/newChat';
+import ChatService from '../../../chatService';
 
 interface usersChats {
   data: {
@@ -21,9 +22,16 @@ interface ChatsType {
   roomsId: number;
   usersChats: usersChats | undefined;
   usernickname: string;
+  chatService: ChatService;
 }
 
-const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
+const Chats = ({
+  usersChats,
+  roomsId,
+  addable,
+  usernickname,
+  chatService,
+}: ChatsType) => {
   const [userchat, setChat] = useState<string[]>([]);
 
   // joinRoom에서 받아온 방의 채팅과 유저가 보는 채팅을 push해줍니다.
@@ -64,7 +72,13 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
         )}
       </section>
       <div className={styles.div}>
-        {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
+        {addable && (
+          <NewChat
+            chatService={chatService}
+            onCreated={onCreated}
+            roomsId={roomsId}
+          />
+        )}
       </div>
     </>
   );
