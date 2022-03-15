@@ -112,6 +112,7 @@ const MakeRoom = ({
       })
       .then((res) => setMakeRoomId(res.data.post_id));
     const socket = io('http://localhost:5000');
+
     socket.emit('createChatRoom', makeRoomId);
   };
 

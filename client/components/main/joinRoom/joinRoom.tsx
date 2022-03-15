@@ -72,6 +72,7 @@ const JoinRoom = ({
     };
     getPosts();
     const socket = io('http://localhost:5000');
+
     socket.emit('enterChatRoom', roomsId);
   }, [roomsId]);
 

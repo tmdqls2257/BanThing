@@ -42,13 +42,14 @@ const ChatRoom = ({
 }: roomsIdTitleType) => {
   // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
-  const socket = io('http://localhost:5000');
-  socket.on('connect', function () {
-    console.log('Connected');
-    //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
-
-    socket.emit('setInit', { usernickname });
-  });
+  useEffect(() => {
+    const socket = io('http://localhost:5000');
+    socket.on('connect', function () {
+      console.log('Connected');
+      //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
+      socket.emit('setInit', { usernickname });
+    });
+  }, []);
   // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
     let headers = chatService.getHeaders();

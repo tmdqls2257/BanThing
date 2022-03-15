@@ -60,6 +60,7 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
         },
       );
       const socket = io('http://localhost:5000');
+
       socket.emit('sendMessage');
     } catch (err) {
       console.log(err);

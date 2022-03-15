@@ -53,6 +53,7 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       )
       .then(() => {
         const socket = io('http://localhost:5000');
+
         socket.emit('deleteChatRoom', removeRoomId);
         location.reload();
       });

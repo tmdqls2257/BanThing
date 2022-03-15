@@ -55,15 +55,15 @@ export class ChatRoomService {
     });
   }
 
-  getChatRoom(roomId: string): chatRoomListDTO {
-    return this.chatRoomList[roomId];
+  getChatRoom(post_id: string): chatRoomListDTO {
+    return this.chatRoomList[post_id];
   }
 
   getChatRoomList(): Record<string, chatRoomListDTO> {
     return this.chatRoomList;
   }
 
-  deleteChatRoom(client: Socket, roomId: string) {
-    delete this.chatRoomList[roomId];
+  deleteChatRoom(client: Socket, post_id: string) {
+    delete this.chatRoomList[post_id];
   }
 }
