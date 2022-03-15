@@ -1,8 +1,10 @@
 import styles from './joinRoom.module.css';
 import buttonStyle from '../button.module.css';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
+import ChatService from '../../../chatService';
+import { io } from 'socket.io-client';
 axios.defaults.withCredentials = true;
 
 interface roomData {
@@ -17,12 +19,15 @@ interface roomData {
     };
   };
 }
+
 interface roomsIdType {
   roomsId: number;
   setroomTitle: Dispatch<SetStateAction<string>>;
   setUsersChats: Dispatch<SetStateAction<usersChats | undefined>>;
   setroomHostNickName: Dispatch<SetStateAction<string>>;
+  chatService: ChatService;
 }
+
 interface usersChats {
   data: {
     replyLog: [
@@ -36,11 +41,13 @@ interface usersChats {
     ];
   };
 }
+
 const JoinRoom = ({
   setUsersChats,
   roomsId,
   setroomTitle,
   setroomHostNickName,
+  chatService,
 }: roomsIdType) => {
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
@@ -64,6 +71,8 @@ const JoinRoom = ({
       }
     };
     getPosts();
+    const socket = io('http://localhost:5000');
+    socket.emit('enterChatRoom', roomsId);
   }, [roomsId]);
 
   // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.
@@ -84,42 +93,22 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-    let cookie: any;
-    let cookieToken: any;
-    if (typeof window !== 'undefined' && data) {
-      cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
-        });
-        cookieToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieToken = cookie.split('=')[1];
-      }
-      if (cookieToken) {
-        const getPosts = async () => {
-          try {
-            const headers = {
-              Authorization: `Bearer ${cookieToken}`,
-            };
-            const response: AxiosResponse = await axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${data.data.post.id}`,
-              {
-                headers,
-              },
-            );
-            setChats(response.data);
-          } catch (e) {
-            console.log(e);
-          }
-        };
-        getPosts();
-        joinRoom.style.display = 'none';
-        chatRoom.style.display = 'flex';
-      } else {
-        setIsLogIn(false);
-      }
+
+    if (data) {
+      const { id } = data.data.post;
+      joinRoom.style.display = 'none';
+      chatRoom.style.display = 'flex';
+      axiosGet(id);
+    } else {
+      setIsLogIn(false);
+    }
+  };
+
+  const axiosGet = (id: number) => {
+    try {
+      chatService.getChats(id).then((chats) => setChats(chats));
+    } catch (e) {
+      console.log(e);
     }
   };
 

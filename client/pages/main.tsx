@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import Map from '../components/main/map/map';
 import Sidebar from '../components/main/sidebar/sidebar';
 import { useState } from 'react';
+import AxiosClient from '../axios';
 
 declare global {
   interface Window {
@@ -12,10 +13,13 @@ declare global {
   }
 }
 
+const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT!;
+
+const httpClient = new AxiosClient(baseURL);
+
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);
-
   return (
     <>
       <Head>
@@ -30,14 +34,19 @@ const Main: NextPage = () => {
       ></Script>
       <section className={styles.section}>
         <main className={styles.main} id={'mainPage'}>
-          <Map roomsData={setRoomsData} setLocation={setLocation} />
-          <Sidebar location={location} roomsId={roomsId} />
+          <Map
+            roomsData={setRoomsData}
+            setLocation={setLocation}
+            httpClient={httpClient}
+          />
+          <Sidebar
+            location={location}
+            roomsId={roomsId}
+            httpClient={httpClient}
+          />
         </main>
       </section>
     </>
   );
 };
 export default Main;
-function useMemot(arg0: () => any) {
-  throw new Error('Function not implemented.');
-}

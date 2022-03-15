@@ -5,6 +5,9 @@ import axios from 'axios';
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
+import ChatService from '../../../chatService';
+import AxiosClient from '../../../axios';
+import { io } from 'socket.io-client';
 
 interface usersChats {
   data: {
@@ -25,6 +28,8 @@ interface roomsIdTitleType {
   roomTitle: string;
   usersChats: usersChats | undefined;
   roomHostNickName: string;
+  chatService: ChatService;
+  httpClient: AxiosClient;
 }
 
 const ChatRoom = ({
@@ -32,54 +37,52 @@ const ChatRoom = ({
   roomTitle,
   roomsId,
   roomHostNickName,
+  chatService,
+  httpClient,
 }: roomsIdTitleType) => {
   // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
+  const socket = io('http://localhost:5000');
+  socket.on('connect', function () {
+    console.log('Connected');
+    //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
 
+    socket.emit('setInit', { usernickname });
+  });
   // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
-    let cookie: any;
-    let cookieToken: any;
-    let cookieList: any;
-    if (typeof window !== 'undefined') {
-      cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: any) => {
-          return cookie.includes('accessToken');
-        });
-        cookieToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieToken = cookie.split('=')[1];
-      }
-      if (cookieToken) {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-            headers: {
-              Authorization: `Bearer ${cookieToken}`,
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-          })
-          .then((response) => {
-            const { userInfo } = response.data.data;
-            setNickname(userInfo.nickname);
-          });
-      }
+    let headers = chatService.getHeaders();
+    if (headers) {
+      axiosGet(headers);
     }
   }, []);
 
-  // 삭제하기 버튼 클릭시 모달을 띄어 줍니다.
-  const onClick = () => {
-    const removeModal = document.querySelector('#removeModal')! as HTMLElement;
-    removeModal.style.display = 'flex';
+  const axiosGet = (headers: { Authorization: string }) => {
+    try {
+      httpClient
+        .axios(`/mypage`, {
+          method: 'get',
+          headers,
+          withCredentials: true,
+        })
+        .then((res) => {
+          const { userInfo } = res.data;
+          setNickname(userInfo.nickname);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // 유저의 닉네임과 호스트의 닉네임이 같을 경우 삭제하기 버튼을 띄어줍니다.
   if (usernickname === roomHostNickName) {
     return (
       <section id="ChatRoom" className={styles.section}>
-        <SidebarHeader isHost={true} containerName={'gotoJoinRoom'}>
+        <SidebarHeader
+          roomsId={roomsId}
+          isHost={true}
+          containerName={'gotoJoinRoom'}
+        >
           {roomTitle}
         </SidebarHeader>
         <main className={styles.main}>

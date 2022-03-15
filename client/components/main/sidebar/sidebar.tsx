@@ -5,10 +5,13 @@ import CreateRoom from '../createRoom/createRoom';
 import JoinRoom from '../joinRoom/joinRoom';
 import MakeRoom from '../makeRoom/makeRoom';
 import MobileButton from '../mobileButton/mobileButton';
+import ChatService from '../../../chatService';
+import AxiosClient from '../../../axios';
 
 interface locationType {
   location: number[];
   roomsId: number;
+  httpClient: AxiosClient;
 }
 
 interface usersChats {
@@ -25,7 +28,7 @@ interface usersChats {
   };
 }
 
-const Sidebar = ({ location, roomsId }: locationType) => {
+const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
   // JoinRoom에서 받아온 roomTitle을 chatRoom으로 보내줍니다.
   const [roomTitle, setRoomTitle] = useState('');
   // JoinRoom에서 받아온 HostNickName을 chatRoom으로 보내줍니다.
@@ -38,6 +41,8 @@ const Sidebar = ({ location, roomsId }: locationType) => {
   const [slide, setSlide] = useState('down');
   // 클릭 상태에 따라 달라지는 class
   const [className, setClassName] = useState(styles.slideDown);
+
+  const chatService = new ChatService(httpClient);
 
   useEffect(() => {
     if (roomsId !== 0) {
@@ -61,18 +66,22 @@ const Sidebar = ({ location, roomsId }: locationType) => {
         <MakeRoom
           location={location}
           setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
+          httpClient={httpClient}
         />
         <JoinRoom
           setroomHostNickName={setroomHostNickName}
           setUsersChats={setUsersChats}
           setroomTitle={setRoomTitle}
           roomsId={roomId}
+          chatService={chatService}
         />
         <ChatRoom
           roomHostNickName={roomHostNickName}
           roomTitle={roomTitle}
           roomsId={roomId}
           usersChats={usersChats}
+          chatService={chatService}
+          httpClient={httpClient}
         />
       </section>
     </section>

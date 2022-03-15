@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { io } from 'socket.io-client';
 import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
 
@@ -38,18 +39,25 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
       const headers = {
         Authorization: `Bearer ${cookieToken}`,
       };
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-          {
-            headers,
-          },
-        )
-        .then(() => {
-          location.reload();
-        });
+      axiosGet(headers);
     }
   };
+
+  const axiosGet = async (headers: { Authorization: string }) => {
+    await axios
+      .get(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
+        {
+          headers,
+        },
+      )
+      .then(() => {
+        const socket = io('http://localhost:5000');
+        socket.emit('deleteChatRoom', removeRoomId);
+        location.reload();
+      });
+  };
+
   // 뒤로가기 클릭
   const backClick = () => {
     const removeModal = document.querySelector('#removeModal')! as HTMLElement;
