@@ -42,6 +42,8 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
   // 클릭 상태에 따라 달라지는 class
   const [className, setClassName] = useState(styles.slideDown);
 
+  const chatService = new ChatService(httpClient);
+
   useEffect(() => {
     if (roomsId !== 0) {
       setMakeRoom_MapRoomId(roomsId);
@@ -71,6 +73,7 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
           setUsersChats={setUsersChats}
           setroomTitle={setRoomTitle}
           roomsId={roomId}
+          chatService={chatService}
         />
         <ChatRoom
           roomHostNickName={roomHostNickName}

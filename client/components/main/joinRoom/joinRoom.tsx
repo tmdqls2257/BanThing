@@ -3,6 +3,7 @@ import buttonStyle from '../button.module.css';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
+import ChatService from '../../../chatService';
 axios.defaults.withCredentials = true;
 
 interface roomData {
@@ -23,6 +24,7 @@ interface roomsIdType {
   setroomTitle: Dispatch<SetStateAction<string>>;
   setUsersChats: Dispatch<SetStateAction<usersChats | undefined>>;
   setroomHostNickName: Dispatch<SetStateAction<string>>;
+  chatService: ChatService;
 }
 
 interface usersChats {
@@ -44,6 +46,7 @@ const JoinRoom = ({
   roomsId,
   setroomTitle,
   setroomHostNickName,
+  chatService,
 }: roomsIdType) => {
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
@@ -87,43 +90,20 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-    let cookie: any;
-    let cookieToken: any;
-    if (typeof window !== 'undefined' && data) {
-      const { id } = data.data.post;
-      cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        const cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
-        });
-        cookieToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieToken = cookie.split('=')[1];
-      }
-      if (cookieToken) {
-        const headers = {
-          Authorization: `Bearer ${cookieToken}`,
-        };
 
-        getPosts(headers, id);
-        joinRoom.style.display = 'none';
-        chatRoom.style.display = 'flex';
-      } else {
-        setIsLogIn(false);
-      }
+    if (data) {
+      const { id } = data.data.post;
+      joinRoom.style.display = 'none';
+      chatRoom.style.display = 'flex';
+      getPosts(id);
+    } else {
+      setIsLogIn(false);
     }
   };
 
-  const getPosts = async (headers: { Authorization: string }, id: number) => {
+  const getPosts = async (id: number) => {
     try {
-      const response: AxiosResponse = await axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply/${id}`,
-        {
-          headers,
-        },
-      );
-      setChats(response.data);
+      chatService.getChats(id).then((chats) => setChats(chats));
     } catch (e) {
       console.log(e);
     }

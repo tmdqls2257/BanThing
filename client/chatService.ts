@@ -5,16 +5,15 @@ export default class ChatService {
   }
 
   async getChats(roomId: number) {
-    return this.http.axios({
+    return this.http.axios(`/post/reply/${roomId}`, {
       method: 'get',
-      url: `/post/reply/${roomId}`,
       headers: this.getHeaders(),
     });
   }
 
   async postChats(roomId: number) {
     return this.http.axios({
-      method: 'get',
+      method: 'post',
       url: `/post/reply/${roomId}`,
       headers: this.getHeaders(),
     });
@@ -23,6 +22,7 @@ export default class ChatService {
   getHeaders() {
     let cookie = document.cookie;
     let cookieToken;
+    let headers;
     if (cookie.includes(';') && cookie.includes('accessToken')) {
       const cookieList = cookie.split(';');
       const findAccessToken = cookieList.filter((cookie: string) => {
@@ -33,7 +33,7 @@ export default class ChatService {
       cookieToken = cookie.split('=')[1];
     }
     if (cookieToken) {
-      const headers = {
+      headers = {
         Authorization: `Bearer ${cookieToken}`,
       };
       return headers;
