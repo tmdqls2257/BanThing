@@ -2,7 +2,6 @@ import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import buttonStyle from '../button.module.css';
 import styles from './makeRoom.module.css';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import AxiosClient from '../../../axios';

@@ -5,6 +5,8 @@ import axios from 'axios';
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
+import ChatService from '../../../chatService';
+import AxiosClient from '../../../axios';
 
 interface usersChats {
   data: {
@@ -25,6 +27,8 @@ interface roomsIdTitleType {
   roomTitle: string;
   usersChats: usersChats | undefined;
   roomHostNickName: string;
+  chatService: ChatService;
+  httpClient: AxiosClient;
 }
 
 const ChatRoom = ({
@@ -32,44 +36,30 @@ const ChatRoom = ({
   roomTitle,
   roomsId,
   roomHostNickName,
+  chatService,
+  httpClient,
 }: roomsIdTitleType) => {
   // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
 
   // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
-    let cookie: any;
-    let cookieToken: any;
-    let cookieList: any;
-    if (typeof window !== 'undefined') {
-      cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: any) => {
-          return cookie.includes('accessToken');
-        });
-        cookieToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieToken = cookie.split('=')[1];
-      }
-      if (cookieToken) {
-        axiosGet(cookieToken);
-      }
+    let headers = chatService.getHeaders();
+    if (headers) {
+      axiosGet(headers);
     }
   }, []);
 
-  const axiosGet = async (cookieToken: string) => {
+  const axiosGet = (headers: { Authorization: string }) => {
     try {
-      await axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/mypage`, {
-          headers: {
-            Authorization: `Bearer ${cookieToken}`,
-            'Content-Type': 'application/json',
-          },
+      httpClient
+        .axios(`/mypage`, {
+          method: 'get',
+          headers,
           withCredentials: true,
         })
-        .then((response) => {
-          const { userInfo } = response.data.data;
+        .then((res) => {
+          const { userInfo } = res.data;
           setNickname(userInfo.nickname);
         });
     } catch (err) {

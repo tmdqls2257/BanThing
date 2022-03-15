@@ -80,6 +80,8 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
           roomTitle={roomTitle}
           roomsId={roomId}
           usersChats={usersChats}
+          chatService={chatService}
+          httpClient={httpClient}
         />
       </section>
     </section>

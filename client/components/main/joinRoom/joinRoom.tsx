@@ -1,7 +1,7 @@
 import styles from './joinRoom.module.css';
 import buttonStyle from '../button.module.css';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import ChatService from '../../../chatService';
 axios.defaults.withCredentials = true;
@@ -95,13 +95,13 @@ const JoinRoom = ({
       const { id } = data.data.post;
       joinRoom.style.display = 'none';
       chatRoom.style.display = 'flex';
-      getPosts(id);
+      axiosGet(id);
     } else {
       setIsLogIn(false);
     }
   };
 
-  const getPosts = async (id: number) => {
+  const axiosGet = (id: number) => {
     try {
       chatService.getChats(id).then((chats) => setChats(chats));
     } catch (e) {
