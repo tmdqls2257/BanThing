@@ -12,6 +12,7 @@ import { MypageModule } from './mypage/mypage.module';
 import { MainPageModule } from './main-page/main-page.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { AdminModule } from './admin/admin.module';
+import { ChatBackEndModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { AdminModule } from './admin/admin.module';
     MypageModule,
     MainPageModule,
     AdminModule,
+    ChatBackEndModule,
     //* 루트모듈인 app.module.ts에서는 우리가 작성한 모든 모듈을 imports 배열에 명시해주어야 한다.
     //* 데이터베이스 연결하려면 app.module.ts에서 TypeOrmModule을 imports에 명시해야 한다.
   ],

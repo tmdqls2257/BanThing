@@ -11,7 +11,7 @@ import { setInitDTO } from '../dto/socket.dto';
 
 @WebSocketGateway(5000, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: '*',
   },
 })
 export class ChatBackEndGateway
@@ -110,7 +110,7 @@ export class ChatBackEndGateway
     this.ChatRoomService.createChatRoom(client, post_id);
     return {
       roomId: client.data.roomId,
-      roomName: this.ChatRoomService.getChatRoom(client.data.roomId).roomName,
+      //roomName: this.ChatRoomService.getChatRoom(client.data.roomId).roomName,
     };
   }
 
@@ -131,7 +131,7 @@ export class ChatBackEndGateway
     this.ChatRoomService.enterChatRoom(client, roomId);
     return {
       roomId: roomId,
-      roomName: this.ChatRoomService.getChatRoom(roomId).roomName,
+      //roomName: this.ChatRoomService.getChatRoom(roomId).roomName,
     };
   }
 
@@ -141,7 +141,7 @@ export class ChatBackEndGateway
     this.ChatRoomService.exitChatRoom(client, roomId);
     return {
       roomId: roomId,
-      roomName: this.ChatRoomService.getChatRoom(roomId).roomName,
+      //roomName: this.ChatRoomService.getChatRoom(roomId).roomName,
     };
   }
 
@@ -151,7 +151,7 @@ export class ChatBackEndGateway
     this.ChatRoomService.deleteChatRoom(client, roomId);
     return {
       roomId: roomId,
-      roomName: this.ChatRoomService.getChatRoom(roomId).roomName,
+      //roomName: this.ChatRoomService.getChatRoom(roomId).roomName,
     };
   }
 }

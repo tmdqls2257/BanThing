@@ -35,11 +35,11 @@ export class ChatRoomService {
     client.rooms.clear();
     client.join(`room:${post_id}`);
     const { nickname } = client.data;
-    const { roomName } = this.getChatRoom(`room:${post_id}`);
+    //const { roomName } = this.getChatRoom(`room:${post_id}`);
     client.to(`room:${post_id}`).emit('getMessage', {
       id: null,
       nickname: '안내',
-      message: `"${nickname}"님이 "${roomName}"방에 접속하셨습니다.`,
+      message: `"${nickname}"님이 접속하셨습니다.`,
     });
   }
 
@@ -55,15 +55,15 @@ export class ChatRoomService {
     });
   }
 
-  getChatRoom(roomId: string): chatRoomListDTO {
-    return this.chatRoomList[roomId];
+  getChatRoom(post_id: string): chatRoomListDTO {
+    return this.chatRoomList[`room:${post_id}`];
   }
 
   getChatRoomList(): Record<string, chatRoomListDTO> {
     return this.chatRoomList;
   }
 
-  deleteChatRoom(client: Socket, roomId: string) {
-    delete this.chatRoomList[roomId];
+  deleteChatRoom(client: Socket, post_id: string) {
+    delete this.chatRoomList[`room:${post_id}`];
   }
 }
