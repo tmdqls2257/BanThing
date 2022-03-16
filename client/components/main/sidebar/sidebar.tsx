@@ -12,6 +12,7 @@ interface locationType {
   location: number[];
   roomsId: number;
   httpClient: AxiosClient;
+  socket: any;
 }
 
 interface usersChats {
@@ -28,7 +29,7 @@ interface usersChats {
   };
 }
 
-const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
+const Sidebar = ({ location, roomsId, httpClient, socket }: locationType) => {
   // JoinRoom에서 받아온 roomTitle을 chatRoom으로 보내줍니다.
   const [roomTitle, setRoomTitle] = useState('');
   // JoinRoom에서 받아온 HostNickName을 chatRoom으로 보내줍니다.
@@ -42,6 +43,7 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
   // 클릭 상태에 따라 달라지는 class
   const [className, setClassName] = useState(styles.slideDown);
 
+  const [nickname, setNickname] = useState('');
   const chatService = new ChatService(httpClient);
 
   useEffect(() => {
@@ -64,11 +66,14 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
       <section className={styles.section} id={'sidebarContainer_section'}>
         <CreateRoom />
         <MakeRoom
+          socket={socket}
           location={location}
           setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
           httpClient={httpClient}
         />
         <JoinRoom
+          nickname={nickname}
+          socket={socket}
           setroomHostNickName={setroomHostNickName}
           setUsersChats={setUsersChats}
           setroomTitle={setRoomTitle}
@@ -76,6 +81,8 @@ const Sidebar = ({ location, roomsId, httpClient }: locationType) => {
           chatService={chatService}
         />
         <ChatRoom
+          setUserNickname={setNickname}
+          socket={socket}
           roomHostNickName={roomHostNickName}
           roomTitle={roomTitle}
           roomsId={roomId}

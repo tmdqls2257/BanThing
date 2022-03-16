@@ -5,18 +5,20 @@ import { useEffect, useState } from 'react';
 import MakeRoomModal from '../makeRoomModal/makeRoomModal';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import AxiosClient from '../../../axios';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 interface locationType {
   location: number[];
   setMakeRoom_MapRoomId: (value: number) => void;
   httpClient: AxiosClient;
+  socket: any;
 }
 
 const MakeRoom = ({
   location,
   setMakeRoom_MapRoomId,
   httpClient,
+  socket,
 }: locationType) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('');
@@ -111,8 +113,6 @@ const MakeRoom = ({
         withCredentials: true,
       })
       .then((res) => setMakeRoomId(res.data.post_id));
-    const socket = io('http://localhost:5000');
-
     socket.emit('createChatRoom', makeRoomId);
   };
 

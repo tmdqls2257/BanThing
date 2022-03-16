@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
 
 interface removeRoomId {
   removeRoomId: number;
+  socket: any;
 }
 
-export default function RemoveModal({ removeRoomId }: removeRoomId) {
+export default function RemoveModal({ removeRoomId, socket }: removeRoomId) {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
   };
@@ -52,8 +53,6 @@ export default function RemoveModal({ removeRoomId }: removeRoomId) {
         },
       )
       .then(() => {
-        const socket = io('http://localhost:5000');
-
         socket.emit('deleteChatRoom', removeRoomId);
         location.reload();
       });

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 import styles from './sideBarHeader.module.css';
 
 type SidebarHeaderType = {
@@ -7,6 +7,7 @@ type SidebarHeaderType = {
   containerName: string;
   isHost?: boolean;
   roomsId?: number;
+  socket?: Socket;
 };
 
 const SidebarHeader = ({
@@ -14,6 +15,7 @@ const SidebarHeader = ({
   children,
   isHost,
   roomsId,
+  socket,
 }: SidebarHeaderType) => {
   const [hamburger, setHamburger] = useState<boolean>(false);
 
@@ -35,8 +37,9 @@ const SidebarHeader = ({
     if (button.value === 'gotoJoinRoom') {
       joinRoom.style.display = 'flex';
       chatRoom.style.display = 'none';
-      const socket = io('http://localhost:5000');
-      socket.emit('exitChatRoom', roomsId);
+      if (socket) {
+        socket.emit('exitChatRoom', roomsId);
+      }
     } else if (button.value === 'gotoCreateRoom') {
       createElement.style.display = 'flex';
       makeRoom.style.display = 'none';

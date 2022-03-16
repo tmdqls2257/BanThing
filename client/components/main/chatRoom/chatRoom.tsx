@@ -1,13 +1,10 @@
 import styles from './chatRoom.module.css';
-import buttonStyle from '../button.module.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import SidebarHeader from '../sidebarHeader/sidebarHeader';
 import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
 import ChatService from '../../../chatService';
 import AxiosClient from '../../../axios';
-import { io } from 'socket.io-client';
 
 interface usersChats {
   data: {
@@ -30,6 +27,8 @@ interface roomsIdTitleType {
   roomHostNickName: string;
   chatService: ChatService;
   httpClient: AxiosClient;
+  socket: any;
+  setUserNickname: Dispatch<SetStateAction<string>>;
 }
 
 const ChatRoom = ({
@@ -39,17 +38,11 @@ const ChatRoom = ({
   roomHostNickName,
   chatService,
   httpClient,
+  socket,
+  setUserNickname,
 }: roomsIdTitleType) => {
   // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
-  useEffect(() => {
-    const socket = io('http://localhost:5000');
-    socket.on('connect', function () {
-      console.log('Connected');
-      //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
-      socket.emit('setInit', { usernickname });
-    });
-  }, []);
   // 유저의 닉네임을 받아옵니다.
   useEffect(() => {
     let headers = chatService.getHeaders();
@@ -69,17 +62,23 @@ const ChatRoom = ({
         .then((res) => {
           const { userInfo } = res.data;
           setNickname(userInfo.nickname);
+          setUserNickname(userInfo.nickname);
         });
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    socket.on('connect', function () {});
+  }, []);
+
   // 유저의 닉네임과 호스트의 닉네임이 같을 경우 삭제하기 버튼을 띄어줍니다.
   if (usernickname === roomHostNickName) {
     return (
       <section id="ChatRoom" className={styles.section}>
         <SidebarHeader
+          socket={socket}
           roomsId={roomsId}
           isHost={true}
           containerName={'gotoJoinRoom'}
@@ -88,23 +87,29 @@ const ChatRoom = ({
         </SidebarHeader>
         <main className={styles.main}>
           <Chats
+            socket={socket}
             usernickname={usernickname}
             usersChats={usersChats}
             roomsId={roomsId}
             addable={true}
           ></Chats>
         </main>
-        <Modal removeRoomId={roomsId} />
+        <Modal socket={socket} removeRoomId={roomsId} />
       </section>
     );
   }
   return (
     <section id="ChatRoom" className={styles.section}>
-      <SidebarHeader isHost={false} containerName={'gotoJoinRoom'}>
+      <SidebarHeader
+        socket={socket}
+        isHost={false}
+        containerName={'gotoJoinRoom'}
+      >
         {roomTitle}
       </SidebarHeader>
       <main className={styles.main}>
         <Chats
+          socket={socket}
           usernickname={usernickname}
           usersChats={usersChats}
           roomsId={roomsId}

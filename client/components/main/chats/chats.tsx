@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './chats.module.css';
 import Chat from '../chat/chat';
 import NewChat from '../newChat/newChat';
@@ -21,11 +21,23 @@ interface ChatsType {
   roomsId: number;
   usersChats: usersChats | undefined;
   usernickname: string;
+  socket: any;
 }
 
-const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
+const Chats = ({
+  usersChats,
+  roomsId,
+  addable,
+  usernickname,
+  socket,
+}: ChatsType) => {
   const [userchat, setChat] = useState<string[]>([]);
-
+  useMemo(() => {
+    socket.on('getMessage', function (data: any) {
+      usernickname = data.nickname;
+      onCreated(data.message);
+    });
+  }, [usersChats?.data.replyLog]);
   // joinRoom에서 받아온 방의 채팅과 유저가 보는 채팅을 push해줍니다.
   const onCreated = (chat: string) => {
     usersChats?.data.replyLog.push({
@@ -64,7 +76,7 @@ const Chats = ({ usersChats, roomsId, addable, usernickname }: ChatsType) => {
         )}
       </section>
       <div className={styles.div}>
-        {addable && <NewChat onCreated={onCreated} roomsId={roomsId} />}
+        {addable && <NewChat socket={socket} roomsId={roomsId} />}
       </div>
     </>
   );

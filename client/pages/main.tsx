@@ -6,6 +6,7 @@ import Map from '../components/main/map/map';
 import Sidebar from '../components/main/sidebar/sidebar';
 import { useState } from 'react';
 import AxiosClient from '../axios';
+import { io } from 'socket.io-client';
 
 declare global {
   interface Window {
@@ -14,12 +15,13 @@ declare global {
 }
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT!;
-
+const socket = io('http://localhost:5000');
 const httpClient = new AxiosClient(baseURL);
 
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);
+
   return (
     <>
       <Head>
@@ -40,6 +42,7 @@ const Main: NextPage = () => {
             httpClient={httpClient}
           />
           <Sidebar
+            socket={socket}
             location={location}
             roomsId={roomsId}
             httpClient={httpClient}

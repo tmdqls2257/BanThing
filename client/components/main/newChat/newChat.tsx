@@ -1,14 +1,15 @@
 import axios from 'axios';
 import styles from './newChat.module.css';
 import { useState } from 'react';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 interface newChatType {
   roomsId: number;
-  onCreated: (chat: string) => void;
+
+  socket: any;
 }
 
-const NewChat = ({ roomsId, onCreated }: newChatType) => {
+const NewChat = ({ roomsId, socket }: newChatType) => {
   const [chat, setChat] = useState('');
   // 방의 아이디와 덧글을 포함하여 post합니다.
   const onSubmit = async (event: React.FormEvent) => {
@@ -16,7 +17,6 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
     if (chat !== '') {
       isCookie();
       // chats에 입력한 값을 전해줍니다.
-      onCreated(chat);
     }
     // input의 값을 초기화 합니다.
     setChat('');
@@ -59,9 +59,7 @@ const NewChat = ({ roomsId, onCreated }: newChatType) => {
           withCredentials: true,
         },
       );
-      const socket = io('http://localhost:5000');
-
-      socket.emit('sendMessage');
+      socket.emit('sendMessage', chat);
     } catch (err) {
       console.log(err);
     }

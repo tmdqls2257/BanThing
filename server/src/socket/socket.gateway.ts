@@ -23,7 +23,6 @@ export class ChatBackEndGateway
 
   //소켓 연결시 유저목록에 추가
   public handleConnection(client: Socket): void {
-    console.log('connected', client.id);
     client.leave(client.id);
     client.data.roomId = `room:lobby`;
     client.join('room:lobby');
@@ -36,13 +35,12 @@ export class ChatBackEndGateway
       roomId != 'room:lobby' &&
       !this.server.sockets.adapter.rooms.get(roomId)
     ) {
-      // this.ChatRoomService.deleteChatRoom(roomId);
+      this.ChatRoomService.deleteChatRoom(client, roomId);
       this.server.emit(
         'getChatRoomList',
         this.ChatRoomService.getChatRoomList(),
       );
     }
-    console.log('disonnected', client.id);
   }
 
   //메시지가 전송되면 모든 유저에게 메시지 전송
@@ -64,7 +62,6 @@ export class ChatBackEndGateway
     if (client.data.isInit) {
       return;
     }
-
     client.data.nickname = data.nickname;
 
     client.data.isInit = true;
@@ -79,16 +76,16 @@ export class ChatBackEndGateway
   }
 
   //닉네임 변경
-  // @SubscribeMessage('setNickname')
-  // setNickname(client: Socket, nickname: string): void {
-  //   const { roomId } = client.data;
-  //   client.to(roomId).emit('getMessage', {
-  //     id: null,
-  //     nickname: '안내',
-  //     message: `"${client.data.nickname}"님이 "${nickname}"으로 닉네임을 변경하셨습니다.`,
-  //   });
-  //   client.data.nickname = nickname;
-  // }
+  @SubscribeMessage('setNickname')
+  setNickname(client: Socket, nickname: string): void {
+    const { roomId } = client.data;
+    // client.to(roomId).emit('getMessage', {
+    //   id: null,
+    //   nickname: '안내',
+    //   message: `"${client.data.nickname}"님이 "${nickname}"으로 닉네임을 변경하셨습니다.`,
+    // });
+    client.data.nickname = nickname;
+  }
 
   //채팅방 목록 가져오기
   // @SubscribeMessage('getChatRoomList')
@@ -121,6 +118,7 @@ export class ChatBackEndGateway
     if (client.rooms.has(roomId)) {
       return;
     }
+    console.log(client.id);
     //이전 방이 만약 나 혼자있던 방이면 제거
     // if (
     //   client.data.roomId != 'room:lobby' &&

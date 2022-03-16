@@ -1,10 +1,10 @@
 import styles from './joinRoom.module.css';
 import buttonStyle from '../button.module.css';
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import axios from 'axios';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import ChatService from '../../../chatService';
-import { io } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 axios.defaults.withCredentials = true;
 
 interface roomData {
@@ -26,6 +26,8 @@ interface roomsIdType {
   setUsersChats: Dispatch<SetStateAction<usersChats | undefined>>;
   setroomHostNickName: Dispatch<SetStateAction<string>>;
   chatService: ChatService;
+  socket: Socket;
+  nickname: string;
 }
 
 interface usersChats {
@@ -47,7 +49,9 @@ const JoinRoom = ({
   roomsId,
   setroomTitle,
   setroomHostNickName,
+  socket,
   chatService,
+  nickname,
 }: roomsIdType) => {
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
@@ -71,9 +75,6 @@ const JoinRoom = ({
       }
     };
     getPosts();
-    const socket = io('http://localhost:5000');
-
-    socket.emit('enterChatRoom', roomsId);
   }, [roomsId]);
 
   // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.
@@ -94,7 +95,8 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
-
+    socket.emit('setInit', { nickname });
+    socket.emit('enterChatRoom', roomsId);
     if (data) {
       const { id } = data.data.post;
       joinRoom.style.display = 'none';
