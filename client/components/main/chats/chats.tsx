@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import styles from './chats.module.css';
 import Chat from '../chat/chat';
 import NewChat from '../newChat/newChat';
+import ChatService from '../../../chatService';
 
 interface usersChats {
   data: {
@@ -22,6 +23,9 @@ interface ChatsType {
   usersChats: usersChats | undefined;
   usernickname: string;
   socket: any;
+  setAlarmNumber: Dispatch<SetStateAction<number>>;
+  alarmNumber: number;
+  chatService: ChatService;
 }
 
 const Chats = ({
@@ -29,7 +33,10 @@ const Chats = ({
   roomsId,
   addable,
   usernickname,
+  setAlarmNumber,
   socket,
+  chatService,
+  alarmNumber,
 }: ChatsType) => {
   const [userchat, setChat] = useState<string[]>([]);
   useMemo(() => {
@@ -76,7 +83,15 @@ const Chats = ({
         )}
       </section>
       <div className={styles.div}>
-        {addable && <NewChat socket={socket} roomsId={roomsId} />}
+        {addable && (
+          <NewChat
+            chatService={chatService}
+            alarmNumber={alarmNumber}
+            setAlarmNumber={setAlarmNumber}
+            socket={socket}
+            roomsId={roomsId}
+          />
+        )}
       </div>
     </>
   );

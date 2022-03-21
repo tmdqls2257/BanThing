@@ -1,0 +1,21 @@
+.notification {
+  position: absolute;
+  background-color: #f90d3c;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-weight: 600;
+  right: 0;
+}
+.bellContainer {
+  position: relative;
+  width: 34px;
+}
+.alarmContainer {
+  position: absolute;
+  z-index: 2;
+}

@@ -1,65 +1,41 @@
 import axios from 'axios';
 import styles from './newChat.module.css';
-import { useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { Dispatch, SetStateAction, useState } from 'react';
+import ChatService from '../../../chatService';
 
 interface newChatType {
   roomsId: number;
-
   socket: any;
+  setAlarmNumber: Dispatch<SetStateAction<number>>;
+  alarmNumber: number;
+  chatService: ChatService;
 }
 
-const NewChat = ({ roomsId, socket }: newChatType) => {
+const NewChat = ({
+  roomsId,
+  socket,
+  setAlarmNumber,
+  alarmNumber,
+  chatService,
+}: newChatType) => {
   const [chat, setChat] = useState('');
   // 방의 아이디와 덧글을 포함하여 post합니다.
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (chat !== '') {
-      isCookie();
+      axiosPost();
       // chats에 입력한 값을 전해줍니다.
     }
     // input의 값을 초기화 합니다.
     setChat('');
   };
 
-  const isCookie = () => {
-    let cookie: any;
-    let cookieToken: any;
-    let cookieList: any;
-    if (typeof window !== 'undefined') {
-      cookie = document.cookie;
-      if (cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieList = cookie.split(';');
-        const findAccessToken = cookieList.filter((cookie: string) => {
-          return cookie.includes('accessToken');
-        });
-        cookieToken = findAccessToken[0].split('=')[1];
-      } else if (!cookie.includes(';') && cookie.includes('accessToken')) {
-        cookieToken = cookie.split('=')[1];
-      }
-      if (cookieToken) {
-        const headers = {
-          Authorization: `Bearer ${cookieToken}`,
-        };
-        axiosPost(headers);
-      }
-    }
-  };
-
-  const axiosPost = async (headers: { Authorization: string }) => {
+  const axiosPost = () => {
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/reply`,
-        {
-          post_id: roomsId,
-          reply: chat,
-        },
-        {
-          headers,
-          withCredentials: true,
-        },
-      );
+      chatService.postChats(roomsId, chat);
       socket.emit('sendMessage', chat);
+      // setAlarmNumber(alarmNumber + 1);
+      new Notification('타이틀', { body: chat });
     } catch (err) {
       console.log(err);
     }

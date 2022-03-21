@@ -5,6 +5,7 @@ import Chats from '../chats/chats';
 import Modal from '../removeModal/removeModal';
 import ChatService from '../../../chatService';
 import AxiosClient from '../../../axios';
+import { setStateType } from '../../type';
 
 interface usersChats {
   data: {
@@ -29,6 +30,8 @@ interface roomsIdTitleType {
   httpClient: AxiosClient;
   socket: any;
   setUserNickname: Dispatch<SetStateAction<string>>;
+  setAlarmNumber: Dispatch<SetStateAction<number>>;
+  alarmNumber: number;
 }
 
 const ChatRoom = ({
@@ -40,6 +43,8 @@ const ChatRoom = ({
   httpClient,
   socket,
   setUserNickname,
+  setAlarmNumber,
+  alarmNumber,
 }: roomsIdTitleType) => {
   // 유저의 닉네임
   const [usernickname, setNickname] = useState('');
@@ -87,6 +92,9 @@ const ChatRoom = ({
         </SidebarHeader>
         <main className={styles.main}>
           <Chats
+            chatService={chatService}
+            alarmNumber={alarmNumber}
+            setAlarmNumber={setAlarmNumber}
             socket={socket}
             usernickname={usernickname}
             usersChats={usersChats}
@@ -109,6 +117,9 @@ const ChatRoom = ({
       </SidebarHeader>
       <main className={styles.main}>
         <Chats
+          chatService={chatService}
+          alarmNumber={alarmNumber}
+          setAlarmNumber={setAlarmNumber}
           socket={socket}
           usernickname={usernickname}
           usersChats={usersChats}

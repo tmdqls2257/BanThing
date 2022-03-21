@@ -11,11 +11,15 @@ export default class ChatService {
     });
   }
 
-  async postChats(roomId: number) {
-    return this.http.axios({
+  async postChats(roomId: number, chat: string) {
+    return this.http.axios(`/post/reply/`, {
       method: 'post',
-      url: `/post/reply/${roomId}`,
+      data: {
+        post_id: roomId,
+        reply: chat,
+      },
       headers: this.getHeaders(),
+      withCredentials: true,
     });
   }
 
@@ -36,6 +40,7 @@ export default class ChatService {
       headers = {
         Authorization: `Bearer ${cookieToken}`,
       };
+
       return headers;
     }
   }

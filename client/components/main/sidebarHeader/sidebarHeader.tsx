@@ -18,7 +18,6 @@ const SidebarHeader = ({
   socket,
 }: SidebarHeaderType) => {
   const [hamburger, setHamburger] = useState<boolean>(false);
-
   // 삭제하기 버튼 클릭시 모달을 띄어 줍니다.
   const onClick = () => {
     setHamburger(false);
@@ -37,6 +36,7 @@ const SidebarHeader = ({
     if (button.value === 'gotoJoinRoom') {
       joinRoom.style.display = 'flex';
       chatRoom.style.display = 'none';
+      // setChatAlarm(true)
       if (socket) {
         socket.emit('exitChatRoom', roomsId);
       }

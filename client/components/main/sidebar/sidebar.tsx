@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import styles from './sidebar.module.css';
 import ChatRoom from '../chatRoom/chatRoom';
 import CreateRoom from '../createRoom/createRoom';
@@ -9,10 +9,12 @@ import ChatService from '../../../chatService';
 import AxiosClient from '../../../axios';
 
 interface locationType {
+  alarmNumber: number;
   location: number[];
   roomsId: number;
   httpClient: AxiosClient;
   socket: any;
+  setAlarmNumber: Dispatch<SetStateAction<number>>;
 }
 
 interface usersChats {
@@ -29,7 +31,14 @@ interface usersChats {
   };
 }
 
-const Sidebar = ({ location, roomsId, httpClient, socket }: locationType) => {
+const Sidebar = ({
+  location,
+  roomsId,
+  httpClient,
+  socket,
+  setAlarmNumber,
+  alarmNumber,
+}: locationType) => {
   // JoinRoom에서 받아온 roomTitle을 chatRoom으로 보내줍니다.
   const [roomTitle, setRoomTitle] = useState('');
   // JoinRoom에서 받아온 HostNickName을 chatRoom으로 보내줍니다.
@@ -81,6 +90,8 @@ const Sidebar = ({ location, roomsId, httpClient, socket }: locationType) => {
           chatService={chatService}
         />
         <ChatRoom
+          alarmNumber={alarmNumber}
+          setAlarmNumber={setAlarmNumber}
           setUserNickname={setNickname}
           socket={socket}
           roomHostNickName={roomHostNickName}

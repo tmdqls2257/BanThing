@@ -4,9 +4,11 @@ import Script from 'next/script';
 import { NextPage } from 'next';
 import Map from '../components/main/map/map';
 import Sidebar from '../components/main/sidebar/sidebar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AxiosClient from '../axios';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
+import Alarm from '../components/main/alarm/alarm';
+import '@firebase/messaging';
 
 declare global {
   interface Window {
@@ -15,12 +17,21 @@ declare global {
 }
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_ENDPOINT!;
-const socket = io('http://localhost:5000');
+const socket: Socket = io('http://localhost:5000');
 const httpClient = new AxiosClient(baseURL);
 
+try {
+  Notification.requestPermission();
+} catch (err) {
+  console.log(err);
+}
 const Main: NextPage = () => {
   const [location, setLocation] = useState<number[]>([]);
   const [roomsId, setRoomsData] = useState(0);
+  const [alarmNumber, setAlarmNumber] = useState(0);
+  useEffect(() => {
+    console.log(alarmNumber);
+  }, [alarmNumber]);
 
   return (
     <>
@@ -36,12 +47,15 @@ const Main: NextPage = () => {
       ></Script>
       <section className={styles.section}>
         <main className={styles.main} id={'mainPage'}>
+          <Alarm />
           <Map
             roomsData={setRoomsData}
             setLocation={setLocation}
             httpClient={httpClient}
           />
           <Sidebar
+            alarmNumber={alarmNumber}
+            setAlarmNumber={setAlarmNumber}
             socket={socket}
             location={location}
             roomsId={roomsId}
