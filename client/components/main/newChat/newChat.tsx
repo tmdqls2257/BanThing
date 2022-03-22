@@ -1,4 +1,3 @@
-import axios from 'axios';
 import styles from './newChat.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
 import ChatService from '../../../chatService';

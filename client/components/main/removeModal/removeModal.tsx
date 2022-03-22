@@ -1,14 +1,19 @@
 import axios from 'axios';
-import { io, Socket } from 'socket.io-client';
+import AxiosClient from '../../../axios';
 import styles from '../../../styles/main/Rate.module.css';
 import buttonStyle from '../button.module.css';
 
 interface removeRoomId {
   removeRoomId: number;
   socket: any;
+  httpClient: AxiosClient;
 }
 
-export default function RemoveModal({ removeRoomId, socket }: removeRoomId) {
+export default function RemoveModal({
+  removeRoomId,
+  socket,
+  httpClient,
+}: removeRoomId) {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
   };
@@ -45,13 +50,10 @@ export default function RemoveModal({ removeRoomId, socket }: removeRoomId) {
   };
 
   const axiosGet = async (headers: { Authorization: string }) => {
-    await axios
-      .get(
-        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/post/deletePost/${removeRoomId}`,
-        {
-          headers,
-        },
-      )
+    httpClient
+      .axios(`/post/deletePost/${removeRoomId}`, {
+        headers,
+      })
       .then(() => {
         socket.emit('deleteChatRoom', removeRoomId);
         location.reload();

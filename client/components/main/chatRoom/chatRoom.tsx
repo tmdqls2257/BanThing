@@ -102,7 +102,7 @@ const ChatRoom = ({
             addable={true}
           ></Chats>
         </main>
-        <Modal socket={socket} removeRoomId={roomsId} />
+        <Modal httpClient={httpClient} socket={socket} removeRoomId={roomsId} />
       </section>
     );
   }
