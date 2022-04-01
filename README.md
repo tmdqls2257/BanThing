@@ -85,5 +85,11 @@ BanThing 의 자세한 Work Log 를 확인해보고 싶으시다면 아래 링�
 |팀원|홍승빈|Front-End|[![github](https://img.shields.io/badge/tmdqls2257-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/tmdqls2257)|
 |팀원|이민호|Back-End|[![github](https://img.shields.io/badge/minho0513-181717?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/minho0513)|
 
+# After project
+### 팀 프로젝트 종료 후 배포에는 적용되지 않은 기능 및 개인적인 리팩토링 사항 안내
+
+# 실시간 채팅
+
+![ezgif com-gif-maker (13)](https://user-images.githubusercontent.com/54207332/161300786-14f88939-b6cf-4c55-a3bb-8c8f35111d06.gif)
 
 &nbsp;
