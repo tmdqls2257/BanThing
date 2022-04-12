@@ -34,7 +34,7 @@ const NewChat = ({
       chatService.postChats(roomsId, chat);
       socket.emit('sendMessage', chat);
       // setAlarmNumber(alarmNumber + 1);
-      new Notification('타이틀', { body: chat });
+      // new Notification('타이틀', { body: chat });
     } catch (err) {
       console.log(err);
     }

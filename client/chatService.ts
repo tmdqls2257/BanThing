@@ -1,9 +1,11 @@
+// axios class를 이용하여 chating을 보내줄 수 있는
 export default class ChatService {
   protected http: any;
   constructor(http: any) {
     this.http = http;
   }
 
+  // 채팅을 받아옵니다.
   async getChats(roomId: number) {
     return this.http.axios(`/post/reply/${roomId}`, {
       method: 'get',
@@ -11,6 +13,7 @@ export default class ChatService {
     });
   }
 
+  // 채팅을 보냅니다.
   async postChats(roomId: number, chat: string) {
     return this.http.axios(`/post/reply/`, {
       method: 'post',
@@ -23,6 +26,7 @@ export default class ChatService {
     });
   }
 
+  // cookie의 accessToken을 받아옵니다.
   getHeaders() {
     let cookie = document.cookie;
     let cookieToken;

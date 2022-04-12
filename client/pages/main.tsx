@@ -47,7 +47,7 @@ const Main: NextPage = () => {
       ></Script>
       <section className={styles.section}>
         <main className={styles.main} id={'mainPage'}>
-          <Alarm />
+          {/* <Alarm /> */}
           <Map
             roomsData={setRoomsData}
             setLocation={setLocation}

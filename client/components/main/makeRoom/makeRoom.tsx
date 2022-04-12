@@ -97,6 +97,7 @@ const MakeRoom = ({
     }
   };
 
+  // 방을 만드는 요청을 보내줍니다.
   const axiosPost = async (headers: { Authorization: string }) => {
     httpClient
       .axios(`/post`, {

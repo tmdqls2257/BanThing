@@ -95,6 +95,7 @@ const JoinRoom = ({
   const onClick = () => {
     const chatRoom = document.querySelector('#ChatRoom')! as HTMLElement;
     const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
+    // nickname과 roomsId를 소켓에 보내줍니다.
     socket.emit('setInit', { nickname });
     socket.emit('enterChatRoom', roomsId);
     if (data) {
@@ -107,6 +108,7 @@ const JoinRoom = ({
     }
   };
 
+  // 방들의 댓글을 받아옵니다.
   const axiosGet = (id: number) => {
     try {
       chatService.getChats(id).then((chats) => setChats(chats));
@@ -119,32 +121,37 @@ const JoinRoom = ({
   const rendering = () => {
     if (data) {
       const { category } = data.data.post;
-      if (category === '피자') {
-        return <img src="/image/pizza.png" alt="" className={styles.image} />;
-      } else if (category === '치킨') {
-        return <img src="/image/chicken.png" alt="" className={styles.image} />;
-      } else if (category === '햄버거') {
-        return (
-          <img src="/image/hamburger.png" alt="" className={styles.image} />
-        );
-      } else if (category === '한식') {
-        return <img src="/image/rice.png" alt="" className={styles.image} />;
-      } else if (category === '자장면') {
-        return (
-          <img src="/image/chNoodles.png" alt="" className={styles.image} />
-        );
-      } else if (category === '커피*디저트') {
-        return <img src="/image/coffee.png" alt="" className={styles.image} />;
-      } else if (category === '도시락') {
-        return (
-          <img src="/image/lunchBox.png" alt="" className={styles.image} />
-        );
-      } else if (category === '일식') {
-        return <img src="/image/sushi.png" alt="" className={styles.image} />;
-      } else if (category === '분식') {
-        return (
-          <img src="/image/tteokbokki.png" alt="" className={styles.image} />
-        );
+      switch (category) {
+        case '햄버거':
+          return (
+            <img src="/image/hamburger.png" alt="" className={styles.image} />
+          );
+        case '치킨':
+          return (
+            <img src="/image/chicken.png" alt="" className={styles.image} />
+          );
+        case '피자':
+          return <img src="/image/pizza.png" alt="" className={styles.image} />;
+        case '한식':
+          return <img src="/image/rice.png" alt="" className={styles.image} />;
+        case '자장면':
+          return (
+            <img src="/image/chNoodles.png" alt="" className={styles.image} />
+          );
+        case '커피*디저트':
+          return (
+            <img src="/image/coffee.png" alt="" className={styles.image} />
+          );
+        case '도시락':
+          return (
+            <img src="/image/lunchBox.png" alt="" className={styles.image} />
+          );
+        case '일식':
+          return <img src="/image/sushi.png" alt="" className={styles.image} />;
+        case '분식':
+          return (
+            <img src="/image/tteokbokki.png" alt="" className={styles.image} />
+          );
       }
     }
   };

@@ -125,25 +125,36 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
 
     const imageList = (category: string) => {
       let imageSrc = '';
-      if (category === '햄버거') {
-        imageSrc = '/image/hamburger.png';
-      } else if (category === '치킨') {
-        imageSrc = '/image/chicken.png';
-      } else if (category === '피자') {
-        imageSrc = '/image/pizza.png';
-      } else if (category === '한식') {
-        imageSrc = '/image/rice.png';
-      } else if (category === '자장면') {
-        imageSrc = '/image/chNoodles.png';
-      } else if (category === '커피*디저트') {
-        imageSrc = '/image/coffee.png';
-      } else if (category === '도시락') {
-        imageSrc = '/image/lunchBox.png';
-      } else if (category === '일식') {
-        imageSrc = '/image/sushi.png';
-      } else if (category === '분식') {
-        imageSrc = '/image/tteokbokki.png';
+      switch (category) {
+        case '햄버거':
+          imageSrc = '/image/hamburger.png';
+          break;
+        case '치킨':
+          imageSrc = '/image/chicken.png';
+          break;
+        case '피자':
+          imageSrc = '/image/pizza.png';
+          break;
+        case '한식':
+          imageSrc = '/image/rice.png';
+          break;
+        case '자장면':
+          imageSrc = '/image/chNoodles.png';
+          break;
+        case '커피*디저트':
+          imageSrc = '/image/coffee.png';
+          break;
+        case '도시락':
+          imageSrc = '/image/lunchBox.png';
+          break;
+        case '일식':
+          imageSrc = '/image/sushi.png';
+          break;
+        case '분식':
+          imageSrc = '/image/tteokbokki.png';
+          break;
       }
+
       return imageSrc;
     };
 
