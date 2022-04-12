@@ -2,7 +2,6 @@ import styles from './map.module.css';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import Loading from '../loading/loading';
 import { useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
 import AxiosClient from '../../../axios';
 
 interface dataType {
@@ -30,9 +29,11 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
 
   // 글의 리스트를 받아옵니다.
   useEffect(() => {
-    httpClient.axios('/main', 'get').then((res) => {
-      setData(res);
-    });
+    httpClient
+      .axios('/main', 'get')
+      .then((res: SetStateAction<dataType | undefined>) => {
+        setData(res);
+      });
   }, []);
 
   useEffect(() => {
@@ -123,6 +124,7 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
       }
     };
 
+    // category에 값에 따라 imageSrc를 다르게 적용합니다.
     const imageList = (category: string) => {
       let imageSrc = '';
       switch (category) {
@@ -154,7 +156,6 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
           imageSrc = '/image/tteokbokki.png';
           break;
       }
-
       return imageSrc;
     };
 
