@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 // axios를 사용할 수 있게 객체 지향형으로 제작을 해주었습니다.
 export default class AxiosClient {
   protected baseURL: string;
@@ -6,17 +6,14 @@ export default class AxiosClient {
     this.baseURL = baseURL;
   }
 
-  async axios(url: string, options: any) {
+  async axios(url: string, options: AxiosRequestConfig) {
     try {
-      const res: AxiosResponse<any, any> = await axios(
-        `${this.baseURL}${url}`,
-        {
-          ...options,
-          headers: {
-            ...options.headers,
-          },
+      const res: AxiosResponse = await axios(`${this.baseURL}${url}`, {
+        ...options,
+        headers: {
+          ...options.headers,
         },
-      );
+      });
 
       // 요청의 status가 200번때가 아닐 경우
       // data.message를 보내주고

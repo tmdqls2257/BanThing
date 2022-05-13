@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import buttonStyles from '../button.module.css';
 import styles from './createRoom.module.css';
 
-const CreateRoom = () => {
+const CreateRoom = memo(() => {
   // CreateRoom component를 끄고 makeRoom component를 flex시킵니다.
   const onClick = () => {
     const createElement = document.querySelector('#CreateRoom')! as HTMLElement;
@@ -24,6 +25,5 @@ const CreateRoom = () => {
       </div>
     </section>
   );
-};
-
+});
 export default CreateRoom;

@@ -5,6 +5,7 @@ import axios from 'axios';
 import PleaseLogIn from '../pleaseLogIn/pleaseLogIn';
 import ChatService from '../../../chatService';
 import { Socket } from 'socket.io-client';
+import AxiosClient from '../../../axios';
 axios.defaults.withCredentials = true;
 
 interface roomData {
@@ -28,6 +29,7 @@ interface roomsIdType {
   chatService: ChatService;
   socket: Socket;
   nickname: string;
+  httpClient: AxiosClient;
 }
 
 interface usersChats {
@@ -52,6 +54,7 @@ const JoinRoom = ({
   socket,
   chatService,
   nickname,
+  httpClient,
 }: roomsIdType) => {
   const [data, setData] = useState<roomData>();
   const [chats, setChats] = useState<usersChats>();
@@ -59,22 +62,14 @@ const JoinRoom = ({
 
   // 글에 대한 정보를 불러와 JoinRoom에 반영합니다.
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        if (roomsId !== 0) {
-          axios
-            .post(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`, {
-              id: roomsId,
-            })
-            .then((response) => {
-              setData(response.data);
-            });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getPosts();
+    httpClient
+      .axios(`${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/main`, {
+        method: 'post',
+        data: {
+          id: roomsId,
+        },
+      })
+      .then((res) => setData(res.data));
   }, [roomsId]);
 
   // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.

@@ -1,7 +1,9 @@
+import AxiosClient from './axios';
+
 // axios class를 이용하여 chating을 보내줄 수 있는
 export default class ChatService {
-  protected http: any;
-  constructor(http: any) {
+  protected http: AxiosClient;
+  constructor(http: AxiosClient) {
     this.http = http;
   }
 
