@@ -9,14 +9,14 @@ import { io, Socket } from 'socket.io-client';
 
 interface locationType {
   location: number[];
-  setMakeRoom_MapRoomId: (value: number) => void;
+  setMakeRoomMapRoomId: (value: number) => void;
   httpClient: AxiosClient;
   socket: any;
 }
 
 const MakeRoom = ({
   location,
-  setMakeRoom_MapRoomId,
+  setMakeRoomMapRoomId,
   httpClient,
   socket,
 }: locationType) => {
@@ -30,7 +30,7 @@ const MakeRoom = ({
 
   useEffect(() => {
     if (makeRoomId !== 0) {
-      setMakeRoom_MapRoomId(makeRoomId);
+      setMakeRoomMapRoomId(makeRoomId);
     }
   }, [makeRoomId]);
   // 카테고리를 선택합니다.
@@ -41,19 +41,19 @@ const MakeRoom = ({
   };
 
   // 제목을 입력하는 함수
-  const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const inputTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setTitle(event.target.value);
   };
 
   // 내용을 입력하는 함수
-  const textareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const inputContext = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault();
     setTextarea(event.target.value);
   };
 
   // 음식을 고르는 카테고리
-  const radioChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const category = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     setRadio(event.target.value);
   };
@@ -80,12 +80,7 @@ const MakeRoom = ({
           Authorization: `Bearer ${cookieToken}`,
         };
         axiosPost(headers);
-
-        // 방만들기의 값들을 초기화
-        setSelect('');
-        setTitle('');
-        setTextarea('');
-        setRadio('');
+        initializing();
 
         const makeRoom = document.querySelector('#MakeRoom')! as HTMLElement;
         const joinRoom = document.querySelector('#JoinRoom')! as HTMLElement;
@@ -95,6 +90,14 @@ const MakeRoom = ({
         setIsLogIn(false);
       }
     }
+  };
+
+  const initializing = () => {
+    // 방만들기의 값들을 초기화
+    setSelect('');
+    setTitle('');
+    setTextarea('');
+    setRadio('');
   };
 
   // 방을 만드는 요청을 보내줍니다.
@@ -142,7 +145,7 @@ const MakeRoom = ({
           <h1 className={styles.h1}>제목</h1>
           <input
             type="text"
-            onChange={inputChange}
+            onChange={inputTitle}
             value={title}
             className={styles.section_flex_input}
           />
@@ -172,7 +175,7 @@ const MakeRoom = ({
           <select
             id="choise-foods"
             className={styles.host_roll_select}
-            onChange={(event) => radioChange(event)}
+            onChange={(event) => category(event)}
             value={radio}
           >
             <option value=""></option>
@@ -184,7 +187,7 @@ const MakeRoom = ({
           <h1 className={styles.h1}>내용</h1>
           <textarea
             className={styles.content_textarea}
-            onChange={textareaChange}
+            onChange={inputContext}
             value={textarea}
           />
         </section>

@@ -46,7 +46,7 @@ const Sidebar = ({
   // JoinRoom에서 받아온 특정 방의 덧글을 받아옵니다.
   const [usersChats, setUsersChats] = useState<usersChats>();
   // makeRoom에서 room의 ID를 JoinRoom과 ChatRoom으로 보내줍니다.
-  const [roomId, setMakeRoom_MapRoomId] = useState<number>(0);
+  const [roomId, setMakeRoomMapRoomId] = useState<number>(0);
   // 모바일 버튼 클릭시 애니메이션의 상태
   const [slide, setSlide] = useState('down');
   // 클릭 상태에 따라 달라지는 class
@@ -57,7 +57,7 @@ const Sidebar = ({
 
   useEffect(() => {
     if (roomsId !== 0) {
-      setMakeRoom_MapRoomId(roomsId);
+      setMakeRoomMapRoomId(roomsId);
     }
   }, [roomsId]);
 
@@ -77,7 +77,7 @@ const Sidebar = ({
         <MakeRoom
           socket={socket}
           location={location}
-          setMakeRoom_MapRoomId={setMakeRoom_MapRoomId}
+          setMakeRoomMapRoomId={setMakeRoomMapRoomId}
           httpClient={httpClient}
         />
         <JoinRoom
@@ -88,6 +88,7 @@ const Sidebar = ({
           setroomTitle={setRoomTitle}
           roomsId={roomId}
           chatService={chatService}
+          httpClient={httpClient}
         />
         <ChatRoom
           alarmNumber={alarmNumber}

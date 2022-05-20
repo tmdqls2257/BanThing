@@ -7,7 +7,6 @@ import Sidebar from '../components/main/sidebar/sidebar';
 import { useEffect, useState } from 'react';
 import AxiosClient from '../axios';
 import { io, Socket } from 'socket.io-client';
-import Alarm from '../components/main/alarm/alarm';
 import '@firebase/messaging';
 
 declare global {
