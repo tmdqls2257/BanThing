@@ -30,7 +30,7 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
   // 글의 리스트를 받아옵니다.
   useEffect(() => {
     httpClient
-      .axios('/main', 'get')
+      .axios('/main', { method: 'get' })
       .then((res: SetStateAction<dataType | undefined>) => {
         setData(res);
       });
@@ -47,7 +47,11 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
     mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`;
     document.head.appendChild(mapScript);
 
-    const clickEvent = (marker: any, map: any, roomId?: number) => {
+    const clickEvent = (
+      marker: kakao.maps.Marker,
+      map: kakao.maps.Map,
+      roomId?: number,
+    ) => {
       // 마커 클릭 함수
       window.kakao.maps.event.addListener(marker, 'click', function () {
         createElement.style.display = 'none';
@@ -69,8 +73,8 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
         chatRoom.style.display = 'none';
       });
     };
-    const circle = (map: any, lat: number, lon: number) => {
-      const circle = new window.kakao.maps.Circle({
+    const within200mRange = (map: kakao.maps.Map, lat: number, lon: number) => {
+      const drawRange = new window.kakao.maps.Circle({
         center: new window.kakao.maps.LatLng(lat, lon), // 원의 중심좌표 입니다
         radius: 200, // 미터 단위의 원의 반지름입니다
         strokeWeight: 5, // 선의 두께입니다
@@ -80,19 +84,18 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
         fillColor: '#FF8A3D', // 채우기 색깔입니다
         fillOpacity: 0.3, // 채우기 불투명도 입니다
       });
-      circle.setMap(map); // 원을 맵에 그려줍니다.
+      drawRange.setMap(map); // 원을 맵에 그려줍니다.
     };
 
-    const marker = (map: any, lat: number, lon: number) => {
+    const userMarker = (map: kakao.maps.Map, lat: number, lon: number) => {
       const markerPosition = new window.kakao.maps.LatLng(lat, lon);
-      let marker = new window.kakao.maps.Marker({
-        position: markerPosition,
-      });
+      const marker = marking(map, markerPosition);
       marker.setMap(map); // 마커를 맵에 찍어줍니다.
-      imageRendering(marker, map);
+
+      clickEvent(marker, map);
     };
 
-    const imageRendering = (marker: any, map: any) => {
+    const imageRendering = (map: kakao.maps.Map) => {
       if (data) {
         const roomList = data.data.postList;
         roomList.map((roomList) => {
@@ -109,19 +112,29 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
             imageSize,
             imageOption,
           );
+          const position = new window.kakao.maps.LatLng(
+            location_latitude,
+            location_longitude,
+          );
 
-          // 마커를 생성합니다
-          marker = new window.kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: new window.kakao.maps.LatLng(
-              location_latitude,
-              location_longitude,
-            ), // 마커의 위치
-            image: markerImage,
-          });
-          clickEvent(marker, map, id);
+          const foodMarker = marking(map, position, markerImage);
+
+          clickEvent(foodMarker, map, id);
         });
       }
+    };
+
+    const marking = (
+      map: kakao.maps.Map,
+      position: kakao.maps.LatLng,
+      image?: kakao.maps.MarkerImage,
+    ) => {
+      const marker = new window.kakao.maps.Marker({
+        map,
+        position,
+        image,
+      });
+      return marker;
     };
 
     // category에 값에 따라 imageSrc를 다르게 적용합니다.
@@ -172,10 +185,14 @@ function Map({ setLocation, roomsData, httpClient }: mapType) {
             center: new window.kakao.maps.LatLng(lat, lon),
           };
 
-          let map = new window.kakao.maps.Map(container, options);
+          let map: kakao.maps.Map = new window.kakao.maps.Map(
+            container,
+            options,
+          );
 
-          circle(map, lat, lon);
-          marker(map, lat, lon);
+          within200mRange(map, lat, lon);
+          userMarker(map, lat, lon);
+          imageRendering(map);
         });
       });
       setLoading(true); // 로딩을 꺼줍니다.

@@ -7,13 +7,14 @@ import MakeRoom from '../makeRoom/makeRoom';
 import MobileButton from '../mobileButton/mobileButton';
 import ChatService from '../../../chatService';
 import AxiosClient from '../../../axios';
+import { Socket } from 'socket.io-client';
 
 interface locationType {
   alarmNumber: number;
   location: number[];
   roomsId: number;
   httpClient: AxiosClient;
-  socket: any;
+  socket: Socket;
   setAlarmNumber: Dispatch<SetStateAction<number>>;
 }
 

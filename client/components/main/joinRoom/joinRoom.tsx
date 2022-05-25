@@ -69,7 +69,7 @@ const JoinRoom = ({
           id: roomsId,
         },
       })
-      .then((res) => setData(res.data));
+      .then((res) => res && setData(res.data));
   }, [roomsId]);
 
   // 유저의 채팅과 글의 제목, 방을 만든 사람의 닉네임을 반영합니다.
